@@ -475,3 +475,19 @@ Bank connections, accounts and passwords, native apps, push notifications, dark 
 ## First message that started the build
 
 > Read ENOUGH_BRIEF.md fully before writing code. We are building V1 of Enough exactly as described there. Start with milestone M1 only. Set up Vite + React + TypeScript, create /src/engine with the data model from section 5 and the rules from section 7, and write unit tests for every rule. Then build the manual audit flow (quick picks, cash entry, usage cards, result, full cut list) with a fake unlock button, matching the design tokens in section 12 and the design canvas. Stop when the M1 gate passes and summarize what you built and what you decided in DECISIONS.md.
+
+
+## Addendum, 2026-09-27 · Global coverage (applies to section 6)
+
+Enough is global from day one. The interface stays English in V1, but statements from any country must be read. Parsing works on patterns, not on a list of banks.
+
+- Digits. Convert Arabic-Indic (٠–٩), Persian (۰–۹), Devanagari (०–९), Thai (๐–๙) and full-width (０–９) digits to 0–9 before anything else, plus the Arabic decimal ٫ and thousands ٬ signs.
+- Number formats. 1,234.56 · 1.234,56 · 1 234,56 (space or narrow space) · 1'234.56 (Swiss) · 12,34,567.89 (Indian grouping) · currency symbols or codes inside the cell (R$, TL, ₹, ¥, د.إ) · minus before or after the symbol · amounts in parentheses as negative.
+- Calendars. Gregorian in every order and separator, month names in any language (Intl month names for the detected locale), Hijri (Umm al-Qura), Persian Solar Hijri, Thai Buddhist Era (year − 543). Convert to ISO before detection.
+- Headers. The multilingual header list covers at least English, Bosnian/Serbian/Croatian (Latin and Cyrillic), German, French, Spanish, Portuguese, Italian, Dutch, Polish, Turkish, Russian, Ukrainian, Greek, Arabic, Persian, Hindi, Chinese, Japanese, Korean, Thai, Indonesian and Vietnamese. When no header matches, detect the date and amount columns from their values.
+- Encodings. Auto-detect UTF-8 (with or without BOM), UTF-16, Windows-1250/1251/1252/1256, ISO-8859-x, Shift_JIS, GBK and Big5 with TextDecoder.
+- Right-to-left text. Arabic and Hebrew descriptions are stored as is, only the extracted merchant is normalized.
+- OCR. Detect the script of an image first, then lazy-load only that tesseract language pack (Latin and Cyrillic bundled, Arabic, CJK, Thai and Devanagari on demand).
+- Currencies. rates.ts covers at least the 40 most traded currencies. An unknown currency is shown unconverted with a note, never guessed.
+
+Test files: /fixtures/csv/global (AED with Arabic digits, SAR with Hijri dates, JPY, INR, CHF, TRY, BRL, THB with Buddhist Era), expected results in /fixtures/expected. Add them to fixtures.test.ts with forbiddenAfterRedaction from each expected file.

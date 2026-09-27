@@ -1,0 +1,105 @@
+{
+  "currency": "JPY",
+  "period": "2026-04-01..2026-09-30",
+  "formatNote": "YYYY/MM/DD, Japanese headers, yen has no decimals. Real Japanese bank exports are often Shift_JIS encoded, this one is UTF-8",
+  "recurring": [
+    {
+      "merchantKey": "netflix",
+      "analysis": "digital",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "spotify",
+      "analysis": "digital",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "disney+",
+      "analysis": "digital",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "dropbox",
+      "analysis": "digital",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "apple",
+      "analysis": "digital",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "youtube premium",
+      "analysis": "digital",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "chatgpt",
+      "analysis": "digital",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "fit zone gym",
+      "analysis": "membership",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "mobile postpaid bill",
+      "analysis": "bill",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "electricity bill",
+      "analysis": "bill",
+      "frequency": "monthly",
+      "price": "converted from the EUR persona, see note"
+    },
+    {
+      "merchantKey": "swim club dolphin",
+      "analysis": "membership",
+      "frequency": "quarterly",
+      "price": "converted from the EUR persona, see note"
+    }
+  ],
+  "priceIncrease": [
+    {
+      "merchantKey": "spotify",
+      "note": "up about 9% in August, must stay one item"
+    }
+  ],
+  "habits": [
+    {
+      "merchantKey": "wolt"
+    }
+  ],
+  "yearlySeenOnce": [
+    {
+      "merchantKey": "duolingo"
+    },
+    {
+      "merchantKey": "insurance annual premium"
+    }
+  ],
+  "mustAsk": [
+    {
+      "merchantKey": "transfer to maja maric"
+    }
+  ],
+  "mustIgnore": [
+    "carrefour market"
+  ],
+  "forbiddenAfterRedaction": [
+    "Test Holder",
+    "AE07"
+  ],
+  "keyNote": "merchantKey values for unknown merchants follow normalizeMerchant(); adjust if normalization changes"
+}

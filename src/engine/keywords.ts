@@ -79,10 +79,13 @@ export function isIgnoredMerchant(normalizedMerchant: string): boolean {
 /** A transfer to a private person — never auto-classified, always ask. */
 export function isPrivateTransfer(normalizedMerchant: string): boolean {
   const s = normalizedMerchant.toLowerCase().trim();
-  // "... to Firstname Lastname" ending, with or without a leading transfer verb.
-  if (/^(transfer\s+)?to\s+[a-z]+(\s+[a-z]+){1,2}$/.test(s)) return true;
-  // A transfer verb (any language) followed by a person's name at the end.
-  const verb = /^(transfer|sent money|sent|payment|wire|standing order|prijenos|prenos|uplata|nalog|placanje|ueberweisung|uberweisung|virement)\b/;
-  if (verb.test(s) && /\bto\s+[a-z]+(\s+[a-z]+){1,2}$/.test(s)) return true;
+  // English/German: "... to Firstname Lastname", with an optional transfer verb.
+  if (/^(transfer|sent money|sent|payment|wire|standing order|outgoing transfer|ueberweisung|uberweisung|virement)?\s*to\s+[a-z]+(\s+[a-z]+){1,2}$/.test(s)) {
+    return true;
+  }
+  // Balkan payment-order phrasing: "nalog za prenos <name>", "prenos <name>", …
+  if (/^(nalog za (prenos|placanje|isplatu)|interni prenos|trajni nalog|prenos|prijenos|placanje prema|uplata za)\b/.test(s)) {
+    return true;
+  }
   return false;
 }

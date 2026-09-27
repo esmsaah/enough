@@ -56,12 +56,19 @@ export function foldHeader(s: string): string {
     .trim();
 }
 
+/** Whole-word (Unicode-aware) match, so "promet" ≠ "prometa" and Cyrillic
+ *  headers keep their word boundaries. */
+function wordIn(haystack: string, word: string): boolean {
+  const esc = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`(?<![\\p{L}\\p{N}])${esc}(?![\\p{L}\\p{N}])`, 'u').test(haystack);
+}
+
 export function classifyHeader(raw: string): ColumnRole {
   const h = foldHeader(raw);
   if (!h) return 'other';
   for (const [role, words] of HEADER_KEYWORDS) {
     for (const w of words) {
-      if (h === w || h.includes(w)) return role;
+      if (h === w || wordIn(h, w)) return role;
     }
   }
   return 'other';

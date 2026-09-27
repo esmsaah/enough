@@ -19,10 +19,33 @@ export function decodeBytes(bytes: Uint8Array, encoding?: string): string {
   }
 }
 
-/** Parse CSV text into rows of cells. Delimiter auto-detected. */
+/**
+ * Sniff the delimiter. Papa's own guesser is fooled by comma-decimal amounts
+ * (1.234,56), so we pick the delimiter that splits the most lines into the most
+ * columns, preferring ";" and tab over "," on a tie.
+ */
+export function sniffDelimiter(text: string): string {
+  const lines = text.split(/\r?\n/).filter((l) => l.trim()).slice(0, 20);
+  const candidates = [';', '\t', '|', ','];
+  let best = ',';
+  let bestScore = -1;
+  for (const d of candidates) {
+    const counts = lines.map((l) => l.split(d).length);
+    const multi = counts.filter((c) => c > 1).length; // lines this delimiter actually splits
+    const maxCols = Math.max(1, ...counts);
+    const score = multi * 100 + maxCols;
+    if (score > bestScore) {
+      bestScore = score;
+      best = d;
+    }
+  }
+  return best;
+}
+
+/** Parse CSV text into rows of cells. Delimiter sniffed (decimal-comma safe). */
 export function parseCsvText(text: string): string[][] {
   const res = Papa.parse<string[]>(text, {
-    delimiter: '', // auto-detect (comma/semicolon/tab)
+    delimiter: sniffDelimiter(text),
     skipEmptyLines: 'greedy',
     dynamicTyping: false,
   });
