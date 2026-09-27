@@ -17,7 +17,8 @@ type Expected = {
   habits: Array<{ merchantKey: string }>;
   mustAsk: Array<{ merchantKey: string }>;
   mustIgnore: string[];
-  mustRedact: string[];
+  mustRedact?: string[];
+  forbiddenAfterRedaction?: string[];
 };
 
 // Per-file encoding (from the manifest notes). Everything else is UTF-8.
@@ -42,16 +43,22 @@ const PERSONA_FILES = [
   'hr_modeled.csv',
 ];
 
-// Literal personal values that appear in the fixtures and must NEVER survive.
+// Literal personal values that appear in the persona fixtures and must NEVER survive.
 const FORBIDDEN = ['Ana', 'Testić', 'Testic', 'Тестић', 'BA39', 'RS35', 'Primjera', '4111'];
+
+// Global format fixtures (§6 addendum): non-Latin digits, calendars, formats.
+const GLOBAL_FILES = [
+  'ae_arabic_digits.csv', 'sa_hijri.csv', 'jp_yen.csv', 'in_inr.csv',
+  'ch_chf.csv', 'tr_try.csv', 'br_brl.csv', 'th_buddhist.csv',
+];
 
 function loadExpected(name: string): Expected {
   const base = name.replace(/\.csv$/, '');
   return JSON.parse(readFileSync(join(FIXTURES, 'expected', `${base}.json`), 'utf-8'));
 }
 
-function runFile(name: string) {
-  const bytes = readFileSync(join(FIXTURES, 'csv', name));
+function runFile(name: string, subdir = 'csv') {
+  const bytes = readFileSync(join(FIXTURES, subdir, name));
   const rows = parseCsvBytes(new Uint8Array(bytes), ENCODING[name]);
   const exp = loadExpected(name);
   const { transactions, meta } = transactionsFromRows(rows, exp.currency);
@@ -113,6 +120,52 @@ describe('fixtures — detection over the shared persona', () => {
         const asked = result.mustAsk.some((a) => a.merchantKey.includes('maja maric'));
         expect(asked, `private transfer not flagged in ${name}`).toBe(true);
         expect([...byKey.keys()].some((k) => k.includes('maja maric'))).toBe(false);
+      });
+    });
+  }
+});
+
+describe('fixtures — global formats (digits, calendars, number formats)', () => {
+  for (const name of GLOBAL_FILES) {
+    describe(name, () => {
+      const { transactions, result, exp } = runFile(name, 'csv/global');
+      const all: DetectedItem[] = [...result.recurring, ...result.habits];
+      const byKey = new Map(all.map((i) => [i.merchantKey, i]));
+
+      it('parses non-Latin digits and calendars into transactions', () => {
+        expect(transactions.length).toBeGreaterThan(20);
+        // every stored date is a valid Gregorian ISO date in the persona window
+        for (const t of transactions) {
+          expect(t.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+          expect(Number(t.date.slice(0, 4))).toBeGreaterThan(2020);
+        }
+      });
+
+      it('never lets personal data survive redaction (forbiddenAfterRedaction)', () => {
+        const dump = JSON.stringify(transactions);
+        for (const bad of exp.forbiddenAfterRedaction ?? []) {
+          expect(dump, `"${bad}" leaked into stored data in ${name}`).not.toContain(bad);
+        }
+      });
+
+      it('finds expected recurring items with the right frequency and analysis type', () => {
+        for (const want of exp.recurring) {
+          const got = byKey.get(want.merchantKey);
+          expect(got, `missing recurring ${want.merchantKey} in ${name}`).toBeDefined();
+          if (!got) continue;
+          expect(got.frequency, `${want.merchantKey} frequency`).toBe(want.frequency);
+          expect(got.category, `${want.merchantKey} analysis`).toBe(want.analysis);
+        }
+      });
+
+      it('classifies habits, ignores supermarkets, flags the transfer', () => {
+        for (const want of exp.habits) {
+          expect(result.habits.find((h) => h.merchantKey === want.merchantKey), `missing habit ${want.merchantKey}`).toBeDefined();
+        }
+        for (const key of exp.mustIgnore) {
+          expect(byKey.has(key.split(' (')[0]!), `${key} should be ignored`).toBe(false);
+        }
+        expect(result.mustAsk.some((a) => a.merchantKey.includes('maja maric')), `transfer not flagged in ${name}`).toBe(true);
       });
     });
   }

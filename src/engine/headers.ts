@@ -20,29 +20,48 @@ export type ColumnRole =
  *  the generic ones so "datum valute" is not mistaken for "datum". */
 const HEADER_KEYWORDS: Array<[ColumnRole, string[]]> = [
   ['valueDate', ['datum valute', 'value date', 'valuta', 'valutadatum', 'datum knjizenja', 'wertstellung']],
-  ['balance', ['balance', 'saldo', 'stanje', 'kontostand', 'running balance', 'balans', 'стање', 'салдо']],
-  ['debit', ['debit', 'isplata', 'zaduzenje', 'soll', 'paid out', 'withdrawal', 'duguje', 'terecenje', 'задужење', 'исплата', 'дуговање']],
-  ['credit', ['credit', 'uplata', 'odobrenje', 'haben', 'paid in', 'deposit', 'potrazuje', 'priliv', 'одобрење', 'уплата', 'потраживање']],
-  ['currency', ['currency', 'valuta iso', 'waehrung', 'wahrung', 'ccy', 'devpos', 'валута']],
+  ['balance', [
+    'balance', 'saldo', 'stanje', 'kontostand', 'running balance', 'balans', 'bakiye',
+    'стање', 'салдо', 'الرصيد', '残高', 'คงเหลือ', 'solde',
+  ]],
+  ['debit', [
+    'debit', 'isplata', 'zaduzenje', 'soll', 'paid out', 'withdrawal', 'duguje', 'terecenje',
+    'belastung', 'abbuchung', 'borc', 'debito',
+    'задужење', 'исплата', 'дуговање', 'مدين', '出金額', 'ถอน',
+  ]],
+  ['credit', [
+    'credit', 'uplata', 'odobrenje', 'haben', 'paid in', 'deposit', 'potrazuje', 'priliv',
+    'gutschrift', 'alacak', 'credito',
+    'одобрење', 'уплата', 'потраживање', 'دائن', '入金額', 'ฝาก',
+  ]],
+  ['currency', ['currency', 'valuta iso', 'waehrung', 'wahrung', 'ccy', 'devpos', 'валута', 'العملة', 'para birimi']],
   // Personal names — dropped, never used as the merchant. Tested before merchant
   // so "Card Holder Full Name" is not mistaken for a payee.
-  ['holder', ['card holder', 'holder', 'vlasnik', 'klijent', 'account holder', 'kontoinhaber', 'karteninhaber', 'payer name', 'payee name', 'payer', 'payee', 'klijent racuna']],
+  ['holder', [
+    'card holder', 'holder', 'vlasnik', 'klijent', 'account holder', 'kontoinhaber',
+    'karteninhaber', 'payer name', 'payee name', 'payer', 'payee', 'klijent racuna',
+    'اسم العميل', 'رقم الحساب',
+  ]],
   // Clean payee/merchant column — preferred over a verbose description.
   ['merchant', ['merchant', 'beneficiary', 'beguenstigter', 'primatelj', 'partner name', 'recipient', 'empfaenger', 'naziv primatelja', 'name']],
   ['description', [
     'description', 'opis', 'opis transakcije', 'opis promjene', 'opis promene',
     'verwendungszweck', 'buchungstext', 'reference', 'namjena', 'memo', 'narrative',
-    'concepto', 'libelle', 'name / description',
-    'опис', 'опис промета', 'sadrzaj', 'sadrzaj naloga', 'purpose',
+    'concepto', 'libelle', 'name / description', 'purpose',
+    'опис', 'опис промета', 'sadrzaj', 'sadrzaj naloga',
+    'aciklama', 'descricao', 'descrizione', 'omschrijving', 'libelle',
+    'الوصف', '摘要', 'รายการ', '取引内容',
   ]],
   ['amount', [
     'amount', 'iznos', 'betrag', 'importe', 'montant', 'suma', 'value', 'promet',
-    'znos', 'umsatz', 'износ',
+    'znos', 'umsatz', 'износ', 'tutar', 'valor', 'importo', 'bedrag', 'kwota',
+    'المبلغ', '金額', 'จำนวนเงิน',
   ]],
   ['date', [
     'date', 'datum', 'fecha', 'data', 'started date', 'completed date',
-    'datum prometa', 'transaction date', 'booking date', 'buchungstag',
-    'datum transakcije', 'датум', 'датум промета', 'buchungstag',
+    'datum prometa', 'transaction date', 'txn date', 'booking date', 'booking day',
+    'buchungstag', 'datum transakcije', 'tarih', 'fecha', 'data valuta',
+    'датум', 'датум промета', 'التاريخ', 'التاريخ الهجري', '取引日', '日付', 'วันที่',
   ]],
 ];
 
@@ -52,7 +71,8 @@ export function foldHeader(s: string): string {
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .toLowerCase()
-    .replace(/[."'’]+/g, '')
+    .replace(/ı/g, 'i') // Turkish dotless i → i (Açıklama → aciklama)
+    .replace(/[."'’﻿]+/g, '')
     .trim();
 }
 

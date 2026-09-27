@@ -3,6 +3,23 @@
 
 export type DateFormat = 'iso' | 'dmy' | 'mdy' | 'ambiguous';
 
+/**
+ * Convert non-Latin digits and separators to ASCII. Runs before any date or
+ * amount parsing (§6 addendum): Arabic-Indic, Persian, Devanagari, Thai and
+ * full-width digits, plus the Arabic decimal (٫) and thousands (٬) signs.
+ */
+export function normalizeDigits(input: string): string {
+  if (input == null) return '';
+  return String(input)
+    .replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 0x0660)) // Arabic-Indic
+    .replace(/[۰-۹]/g, (d) => String(d.charCodeAt(0) - 0x06f0)) // Persian
+    .replace(/[०-९]/g, (d) => String(d.charCodeAt(0) - 0x0966)) // Devanagari
+    .replace(/[๐-๙]/g, (d) => String(d.charCodeAt(0) - 0x0e50)) // Thai
+    .replace(/[０-９]/g, (d) => String(d.charCodeAt(0) - 0xff10)) // full-width
+    .replace(/٫/g, '.') // Arabic decimal separator
+    .replace(/٬/g, ','); // Arabic thousands separator
+}
+
 const MONTHS: Record<string, number> = {
   jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9,
   oct: 10, nov: 11, dec: 12,
@@ -13,7 +30,7 @@ const MONTHS: Record<string, number> = {
 
 /** Split a raw date into [a, b, year] numbers, or null if not a numeric date. */
 function numericParts(raw: string): { a: number; b: number; year: number; yearFirst: boolean } | null {
-  const s = raw.trim().replace(/\.$/, ''); // trailing dot (RS: 27.09.2026.)
+  const s = normalizeDigits(raw).trim().replace(/\.$/, ''); // trailing dot (RS: 27.09.2026.)
   const datePart = s.split(/[ T]/)[0] ?? s; // drop any time component
   const m = datePart.match(/^(\d{1,4})[./-](\d{1,2})[./-](\d{2,4})$/);
   if (!m) return null;
@@ -85,7 +102,37 @@ export function parseDate(raw: string, format: DateFormat): string | null {
 
 function iso(year: number, month: number, day: number): string | null {
   if (month < 1 || month > 12 || day < 1 || day > 31) return null;
-  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  const g = toGregorian(year, month, day);
+  return `${g.year}-${String(g.month).padStart(2, '0')}-${String(g.day).padStart(2, '0')}`;
+}
+
+/**
+ * Convert a non-Gregorian year to Gregorian before detection (§6 addendum).
+ * Heuristic by year range: 1300–1500 → Hijri (Umm al-Qura, arithmetic
+ * approximation, ±1–2 days); ≥ 2400 → Thai Buddhist Era (year − 543). No real
+ * statement is dated in those Gregorian ranges, so the ranges are unambiguous.
+ */
+function toGregorian(year: number, month: number, day: number): { year: number; month: number; day: number } {
+  if (year >= 1300 && year <= 1500) return hijriToGregorian(year, month, day);
+  if (year >= 2400) return { year: year - 543, month, day };
+  return { year, month, day };
+}
+
+/** Tabular Islamic (civil) calendar → Gregorian via Julian Day Number. */
+function hijriToGregorian(y: number, m: number, d: number): { year: number; month: number; day: number } {
+  const jd =
+    Math.floor((11 * y + 3) / 30) + 354 * y + 30 * m - Math.floor((m - 1) / 2) + d + 1948440 - 386;
+  let l = jd + 68569;
+  const n = Math.floor((4 * l) / 146097);
+  l = l - Math.floor((146097 * n + 3) / 4);
+  const i = Math.floor((4000 * (l + 1)) / 1461001);
+  l = l - Math.floor((1461 * i) / 4) + 31;
+  const j = Math.floor((80 * l) / 2447);
+  const day = l - Math.floor((2447 * j) / 80);
+  l = Math.floor(j / 11);
+  const month = j + 2 - 12 * l;
+  const year = 100 * (n - 49) + i + l;
+  return { year, month, day };
 }
 
 /**
@@ -95,30 +142,45 @@ function iso(year: number, month: number, day: number): string | null {
  */
 export function parseAmount(raw: string): number | null {
   if (raw == null) return null;
-  let s = String(raw).trim();
+  let s = normalizeDigits(raw).trim();
   if (!s) return null;
 
-  const negative = /^\(.*\)$/.test(s) || /-\s*$/.test(s) || /^-/.test(s) || /\bDR\b/i.test(s);
-  s = s.replace(/[()]/g, '');
-  // strip currency symbols, ISO codes and spaces
-  s = s.replace(/[€$£]/g, '').replace(/\b[A-Z]{3}\b/g, '').replace(/[A-Za-z]/g, '').trim();
-  s = s.replace(/\s/g, '');
-  s = s.replace(/^[+-]/, '').replace(/[+-]$/, '');
+  // Negative if parenthesised or a minus appears anywhere (before OR after the
+  // currency symbol: "R$ -17,94", "-119,60 TL", "(30.00)", "30.00-").
+  const negative = /\(.*\)/.test(s) || s.includes('-') || /\bDR\b/i.test(s);
+
+  // Drop currency symbols, letters (R$, TL, ₹, ¥, €, $, £, kr, zł, ISO codes)
+  // and Swiss apostrophe thousands. Keep digits, . , spaces.
+  s = s
+    .replace(/[()]/g, '')
+    .replace(/[\p{L}\p{Sc}]/gu, '')
+    .replace(/['’]/g, '')
+    .replace(/[+\-]/g, '')
+    .replace(/\s/g, '')
+    .trim();
 
   const hasDot = s.includes('.');
   const hasComma = s.includes(',');
   if (hasDot && hasComma) {
-    // rightmost separator is the decimal point
+    // The rightmost separator is the decimal point; the other groups thousands.
     if (s.lastIndexOf(',') > s.lastIndexOf('.')) {
       s = s.replace(/\./g, '').replace(',', '.');
     } else {
       s = s.replace(/,/g, '');
     }
-  } else if (hasComma) {
-    // multiple commas → thousands; single comma → decimal
-    s = (s.match(/,/g)?.length ?? 0) > 1 ? s.replace(/,/g, '') : s.replace(',', '.');
-  } else if (hasDot) {
-    if ((s.match(/\./g)?.length ?? 0) > 1) s = s.replace(/\./g, '');
+  } else if (hasDot || hasComma) {
+    const sep = hasComma ? ',' : '.';
+    const parts = s.split(sep);
+    if (parts.length > 2) {
+      // Repeated separator → grouping (Indian "5,19,730", Swiss handled above).
+      s = parts.join('');
+    } else {
+      const after = parts[1]?.length ?? 0;
+      // A single group of exactly 3 digits is thousands (JPY "899,516");
+      // 1–2 or 4+ digits after the separator is a decimal.
+      if (after === 3) s = parts.join('');
+      else s = `${parts[0]}.${parts[1] ?? ''}`;
+    }
   }
 
   const n = Number(s);

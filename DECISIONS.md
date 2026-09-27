@@ -23,6 +23,24 @@ Ambiguities resolved while building, per the brief's instruction to pick the sim
 12. **Vite + React + TS scaffolded by hand** (no `create-vite`) to avoid an interactive generator. Vitest runs the engine tests in the `node` environment (engine is pure, no DOM).
 13. **Fixtures copied to `/fixtures`** from the founder-supplied `enough-fixtures.zip` (modeled + synthetic set, with `expected/*.json`). Real bank exports are still pending per §14.
 
+## Review fixes (2026-09-27)
+
+14. **Whole-word matching everywhere.** `merchants.ts`, `keywords.ts` and `headers.ts` now match aliases/keywords as whole words (Unicode-aware), not substrings. This fixed real false positives: NYT↔"ANYTIME", Calm↔"CALMAR", Uber↔"HUBER", Canva↔"CANVAS", Apple↔"APPLEBEES", Claude↔"Claude Dupont", and ignore-words Ina↔"MARINA/PLATINA", Spar↔"SPARKASSE", Market↔"MARKETING", plus the header bug promet↔"prometa" (Datum prometa was read as an amount column). Tests assert each non-match.
+15. **Paywall threshold is €10 converted into the display currency** via `rates.ts` (`paywallThreshold(currency)`), not a bare 10. Tested in RSD and BAM.
+16. **Rule 8 yearly price is EUR in the map, converted to the item currency** before comparison and marked `approx`. Tested in BAM.
+17. **Outbound name guard** (`report.ts`): items from private transfers are sent to the server as "Transfer to a person"; the real name stays on device. `toReportSummary` whitelists fields and is the only path to the server.
+18. **Delimiter sniffer** (`csv.ts`): Papa's guesser is fooled by decimal commas, so we pick the delimiter that splits the most lines into the most columns (`;`/tab preferred over `,`).
+19. **Merchant column preference**: a clean Merchant/beneficiary column beats a verbose description; payee/payer *name* columns are treated as personal (dropped). Card fragments ("KARTE 1111", "KARTICA …") are stripped in normalization.
+
+## Global coverage (§6 addendum, 2026-09-27)
+
+20. **Digit normalization** (`parse.ts` `normalizeDigits`): Arabic-Indic, Persian, Devanagari, Thai and full-width digits → ASCII, plus the Arabic decimal (٫) and thousands (٬) signs. Applied before any date/amount parsing and before the date `\d` guard in `detect.ts`.
+21. **Number formats**: `parseAmount` handles `1,234.56`, `1.234,56`, space/narrow-space thousands, Swiss apostrophe (`1'234.56`), Indian lakh grouping (`12,34,567.89`), currency symbols/letters anywhere (R$, TL, ₹, ¥, ISO codes), and minus before or after the symbol or parentheses. A single 3-digit group is treated as thousands (JPY `899,516`); 1–2 or 4+ digits after a lone separator is a decimal. (Edge: 3-decimal currencies like KWD/BHD would misread a bare `1,234` — none in scope; noted.)
+22. **Calendars**: Thai Buddhist Era (year − 543) and Hijri (arithmetic tabular Islamic → Gregorian via JDN, ±1–2 days of Umm al-Qura) are converted to ISO before detection, chosen by year range (2400+ → Buddhist, 1300–1500 → Hijri). Exact Umm al-Qura tables are a later refinement; the approximation is enough for frequency detection and reminder dates in V1.
+23. **Multilingual headers** added for Arabic, Japanese, Thai, Turkish, Portuguese, Italian, Dutch, Polish and German (Belastung/Gutschrift), with Turkish dotless-ı folding. When no header matches, value-based column detection remains the fallback (partially implemented; not needed by the current fixtures).
+24. **rates.ts** extended to ~40 of the most-traded currencies plus BAM/RSD/BGN/UAH; unknown currencies are shown unconverted, never guessed.
+25. **Encodings**: known legacy fixtures decode via an explicit map (windows-1250, iso-8859-1); global fixtures are UTF-8. Full auto-detection of Shift_JIS/GBK/Big5/UTF-16 is stubbed via `decodeBytes` and deferred (no fixture needs it yet).
+
 ## Open / not yet built
 
 - Section 6 (import, redaction, recurring detection) — not started. This is where the `/fixtures` `expected/*.json` contract gets exercised, and where the "never leaves the device" redaction test lives. Planned next.

@@ -52,8 +52,8 @@ const KEYWORD_RULES: KeywordRule[] = [
 
 // Supermarkets and fuel — ignored as habits unless the person adds them (rule 5).
 const IGNORE_WORDS = [
-  'konzum', 'mercator', 'lidl', 'spar', 'aldi', 'kaufland', 'bingo',
-  'supermarket', 'market', 'grocery', 'hipermarket', 'tommy', 'plodine',
+  'konzum', 'mercator', 'lidl', 'spar', 'aldi', 'kaufland', 'bingo', 'carrefour',
+  'supermarket', 'market', 'grocery', 'hipermarket', 'tommy', 'plodine', 'migros',
   'ina', 'omv', 'petrol', 'shell', 'gas station', 'benzin', 'crodux', 'eurotank',
 ];
 

@@ -6,7 +6,7 @@
 import { classifyHeader, foldHeader, looksLikeHeaderRow, type ColumnRole } from './headers';
 import { classifyByKeyword, isIgnoredMerchant, isPrivateTransfer } from './keywords';
 import { matchMerchant, normalizeMerchant } from './merchants';
-import { detectDateFormat, parseAmount, parseDate, type DateFormat } from './parse';
+import { detectDateFormat, normalizeDigits, parseAmount, parseDate, type DateFormat } from './parse';
 import { redactDescription } from './redact';
 import type { Category, DisplayCategory, Frequency, OverlapGroup, Transaction } from './types';
 
@@ -107,7 +107,7 @@ export function transactionsFromRows(
   for (let i = headerIdx + 1; i < rows.length; i++) {
     const r = rows[i]!;
     if (dateCol === -1 || !r[dateCol]) continue;
-    const rawDate = (r[dateCol] ?? '').trim();
+    const rawDate = normalizeDigits((r[dateCol] ?? '').trim()); // Arabic/Thai digits → ASCII
     if (!/\d/.test(rawDate)) continue; // footer/blank lines
     // Prefer the clean merchant column; fall back to the description when the
     // merchant cell is empty (e.g. Wise transfers have no Merchant value).
