@@ -1,0 +1,122 @@
+TransferWise ID,Date,Amount,Currency,Description,Payment Reference,Running Balance,Exchange From,Exchange To,Exchange Rate,Payer Name,Payee Name,Payee Account Number,Merchant,Card Last Four Digits,Card Holder Full Name,Attachment,Note,Total fees
+CARD-100000,01-04-2026,-2.99,EUR,"Card transaction of 2.99 EUR issued by Apple.Com/Bill",,1797.01,,,,,,,"Apple.Com/Bill",1111,Ana Testić,,,0.00
+CARD-100001,02-04-2026,-8.48,EUR,"Card transaction of 8.48 EUR issued by Wolt *Order",,1788.53,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100002,02-04-2026,-30.24,EUR,"Card transaction of 30.24 EUR issued by Konzum Market 0412",,1758.29,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100003,03-04-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Spotify P2F8A9C1D2",,1747.30,,,,,,,"Spotify P2F8A9C1D2",1111,Ana Testić,,,0.00
+CARD-100004,03-04-2026,-13.99,EUR,"Card transaction of 13.99 EUR issued by Google*Youtubepremium",,1733.31,,,,,,,"Google*Youtubepremium",1111,Ana Testić,,,0.00
+CARD-100005,03-04-2026,-17.45,EUR,"Card transaction of 17.45 EUR issued by Wolt *Order",,1715.86,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100006,05-04-2026,-11.99,EUR,"Card transaction of 11.99 EUR issued by Dropbox*Plus 7Q2K",,1703.87,,,,,,,"Dropbox*Plus 7Q2K",1111,Ana Testić,,,0.00
+CARD-100007,06-04-2026,-90.00,EUR,"Card transaction of 90.00 EUR issued by Plivacki Klub Delfin",,1613.87,,,,,,,"Plivacki Klub Delfin",1111,Ana Testić,,,0.00
+CARD-100008,08-04-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Disneyplus",,1602.88,,,,,,,"Disneyplus",1111,Ana Testić,,,0.00
+CARD-100009,08-04-2026,-11.57,EUR,"Card transaction of 11.57 EUR issued by Wolt *Order",,1591.31,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100010,09-04-2026,-46.30,EUR,"Card transaction of 46.30 EUR issued by Konzum Market 0412",,1545.01,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100011,10-04-2026,-40.00,EUR,"Card transaction of 40.00 EUR issued by Fit Zone Doo Sarajevo",,1505.01,,,,,,,"Fit Zone Doo Sarajevo",1111,Ana Testić,,,0.00
+CARD-100012,12-04-2026,-15.99,EUR,"Card transaction of 15.99 EUR issued by Netflix.Com",,1489.02,,,,,,,"Netflix.Com",1111,Ana Testić,,,0.00
+CARD-100013,15-04-2026,-38.58,EUR,"Card transaction of 38.58 EUR issued by Elektro Distribucija Racun",,1450.44,,,,,,,"Elektro Distribucija Racun",1111,Ana Testić,,,0.00
+CARD-100014,16-04-2026,-19.49,EUR,"Card transaction of 19.49 EUR issued by Konzum Market 0412",,1430.95,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100015,20-04-2026,-26.47,EUR,"Card transaction of 26.47 EUR issued by Telekom Mobile Postpaid",,1404.48,,,,,,,"Telekom Mobile Postpaid",1111,Ana Testić,,,0.00
+CARD-100016,21-04-2026,-18.49,EUR,"Card transaction of 18.49 EUR issued by Openai *Chatgpt Subscr",,1385.99,,,,,,,"Openai *Chatgpt Subscr",1111,Ana Testić,,,0.00
+CARD-100017,23-04-2026,-29.13,EUR,"Card transaction of 29.13 EUR issued by Konzum Market 0412",,1356.86,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100018,24-04-2026,-9.64,EUR,"Card transaction of 9.64 EUR issued by Wolt *Order",,1347.22,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100019,24-04-2026,-22.27,EUR,"Card transaction of 22.27 EUR issued by Wolt *Order",,1324.95,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100020,25-04-2026,-50.00,EUR,"Sent money to Maja Maric",,1274.95,,,,,Maja Maric,,"",1111,Ana Testić,,,0.00
+CARD-100021,01-05-2026,-2.99,EUR,"Card transaction of 2.99 EUR issued by Apple.Com/Bill",,1271.96,,,,,,,"Apple.Com/Bill",1111,Ana Testić,,,0.00
+CARD-100022,02-05-2026,-33.56,EUR,"Card transaction of 33.56 EUR issued by Konzum Market 0412",,1238.40,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100023,03-05-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Spotify P2F8A9C1D2",,1227.41,,,,,,,"Spotify P2F8A9C1D2",1111,Ana Testić,,,0.00
+CARD-100024,03-05-2026,-13.99,EUR,"Card transaction of 13.99 EUR issued by Google*Youtubepremium",,1213.42,,,,,,,"Google*Youtubepremium",1111,Ana Testić,,,0.00
+CARD-100025,05-05-2026,-11.99,EUR,"Card transaction of 11.99 EUR issued by Dropbox*Plus 7Q2K",,1201.43,,,,,,,"Dropbox*Plus 7Q2K",1111,Ana Testić,,,0.00
+CARD-100026,08-05-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Disneyplus",,1190.44,,,,,,,"Disneyplus",1111,Ana Testić,,,0.00
+CARD-100027,09-05-2026,-30.06,EUR,"Card transaction of 30.06 EUR issued by Konzum Market 0412",,1160.38,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100028,10-05-2026,-40.00,EUR,"Card transaction of 40.00 EUR issued by Fit Zone Doo Sarajevo",,1120.38,,,,,,,"Fit Zone Doo Sarajevo",1111,Ana Testić,,,0.00
+CARD-100029,12-05-2026,-15.99,EUR,"Card transaction of 15.99 EUR issued by Netflix.Com",,1104.39,,,,,,,"Netflix.Com",1111,Ana Testić,,,0.00
+CARD-100030,14-05-2026,-84.99,EUR,"Card transaction of 84.99 EUR issued by Duolingo Plus Annual",,1019.40,,,,,,,"Duolingo Plus Annual",1111,Ana Testić,,,0.00
+CARD-100031,15-05-2026,-50.53,EUR,"Card transaction of 50.53 EUR issued by Elektro Distribucija Racun",,968.87,,,,,,,"Elektro Distribucija Racun",1111,Ana Testić,,,0.00
+CARD-100032,15-05-2026,-17.43,EUR,"Card transaction of 17.43 EUR issued by Wolt *Order",,951.44,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100033,16-05-2026,-60.76,EUR,"Card transaction of 60.76 EUR issued by Konzum Market 0412",,890.68,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100034,20-05-2026,-26.50,EUR,"Card transaction of 26.50 EUR issued by Telekom Mobile Postpaid",,864.18,,,,,,,"Telekom Mobile Postpaid",1111,Ana Testić,,,0.00
+CARD-100035,21-05-2026,-18.49,EUR,"Card transaction of 18.49 EUR issued by Openai *Chatgpt Subscr",,845.69,,,,,,,"Openai *Chatgpt Subscr",1111,Ana Testić,,,0.00
+CARD-100036,23-05-2026,-14.76,EUR,"Card transaction of 14.76 EUR issued by Wolt *Order",,830.93,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100037,23-05-2026,-23.72,EUR,"Card transaction of 23.72 EUR issued by Konzum Market 0412",,807.21,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100038,25-05-2026,-50.00,EUR,"Sent money to Maja Maric",,757.21,,,,,Maja Maric,,"",1111,Ana Testić,,,0.00
+CARD-100039,25-05-2026,-20.89,EUR,"Card transaction of 20.89 EUR issued by Wolt *Order",,736.32,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100040,26-05-2026,-21.91,EUR,"Card transaction of 21.91 EUR issued by Wolt *Order",,714.41,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100041,01-06-2026,-2.99,EUR,"Card transaction of 2.99 EUR issued by Apple.Com/Bill",,711.42,,,,,,,"Apple.Com/Bill",1111,Ana Testić,,,0.00
+CARD-100042,02-06-2026,-19.68,EUR,"Card transaction of 19.68 EUR issued by Wolt *Order",,691.74,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100043,02-06-2026,-52.64,EUR,"Card transaction of 52.64 EUR issued by Konzum Market 0412",,639.10,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100044,03-06-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Spotify P2F8A9C1D2",,628.11,,,,,,,"Spotify P2F8A9C1D2",1111,Ana Testić,,,0.00
+CARD-100045,03-06-2026,-13.99,EUR,"Card transaction of 13.99 EUR issued by Google*Youtubepremium",,614.12,,,,,,,"Google*Youtubepremium",1111,Ana Testić,,,0.00
+CARD-100046,05-06-2026,-11.99,EUR,"Card transaction of 11.99 EUR issued by Dropbox*Plus 7Q2K",,602.13,,,,,,,"Dropbox*Plus 7Q2K",1111,Ana Testić,,,0.00
+CARD-100047,08-06-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Disneyplus",,591.14,,,,,,,"Disneyplus",1111,Ana Testić,,,0.00
+CARD-100048,09-06-2026,-66.26,EUR,"Card transaction of 66.26 EUR issued by Konzum Market 0412",,524.88,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100049,10-06-2026,-40.00,EUR,"Card transaction of 40.00 EUR issued by Fit Zone Doo Sarajevo",,484.88,,,,,,,"Fit Zone Doo Sarajevo",1111,Ana Testić,,,0.00
+CARD-100050,10-06-2026,-21.27,EUR,"Card transaction of 21.27 EUR issued by Wolt *Order",,463.61,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100051,12-06-2026,-15.99,EUR,"Card transaction of 15.99 EUR issued by Netflix.Com",,447.62,,,,,,,"Netflix.Com",1111,Ana Testić,,,0.00
+CARD-100052,13-06-2026,-9.26,EUR,"Card transaction of 9.26 EUR issued by Wolt *Order",,438.36,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100053,15-06-2026,-46.26,EUR,"Card transaction of 46.26 EUR issued by Elektro Distribucija Racun",,392.10,,,,,,,"Elektro Distribucija Racun",1111,Ana Testić,,,0.00
+CARD-100054,16-06-2026,-50.33,EUR,"Card transaction of 50.33 EUR issued by Konzum Market 0412",,341.77,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100055,18-06-2026,-10.00,EUR,"Card transaction of 10.00 EUR issued by Wolt *Order",,331.77,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100056,20-06-2026,-25.51,EUR,"Card transaction of 25.51 EUR issued by Telekom Mobile Postpaid",,306.26,,,,,,,"Telekom Mobile Postpaid",1111,Ana Testić,,,0.00
+CARD-100057,20-06-2026,-12.23,EUR,"Card transaction of 12.23 EUR issued by Wolt *Order",,294.03,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100058,21-06-2026,-18.49,EUR,"Card transaction of 18.49 EUR issued by Openai *Chatgpt Subscr",,275.54,,,,,,,"Openai *Chatgpt Subscr",1111,Ana Testić,,,0.00
+CARD-100059,23-06-2026,-57.46,EUR,"Card transaction of 57.46 EUR issued by Konzum Market 0412",,218.08,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100060,25-06-2026,-50.00,EUR,"Sent money to Maja Maric",,168.08,,,,,Maja Maric,,"",1111,Ana Testić,,,0.00
+CARD-100061,01-07-2026,-2.99,EUR,"Card transaction of 2.99 EUR issued by Apple.Com/Bill",,165.09,,,,,,,"Apple.Com/Bill",1111,Ana Testić,,,0.00
+CARD-100062,02-07-2026,-55.53,EUR,"Card transaction of 55.53 EUR issued by Konzum Market 0412",,109.56,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100063,02-07-2026,-186.00,EUR,"Card transaction of 186.00 EUR issued by Uniqa Osiguranje Godisnja",,-76.44,,,,,,,"Uniqa Osiguranje Godisnja",1111,Ana Testić,,,0.00
+CARD-100064,03-07-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Spotify P2F8A9C1D2",,-87.43,,,,,,,"Spotify P2F8A9C1D2",1111,Ana Testić,,,0.00
+CARD-100065,03-07-2026,-13.99,EUR,"Card transaction of 13.99 EUR issued by Google*Youtubepremium",,-101.42,,,,,,,"Google*Youtubepremium",1111,Ana Testić,,,0.00
+CARD-100066,03-07-2026,-21.69,EUR,"Card transaction of 21.69 EUR issued by Wolt *Order",,-123.11,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100067,05-07-2026,-11.99,EUR,"Card transaction of 11.99 EUR issued by Dropbox*Plus 7Q2K",,-135.10,,,,,,,"Dropbox*Plus 7Q2K",1111,Ana Testić,,,0.00
+CARD-100068,06-07-2026,-90.00,EUR,"Card transaction of 90.00 EUR issued by Plivacki Klub Delfin",,-225.10,,,,,,,"Plivacki Klub Delfin",1111,Ana Testić,,,0.00
+CARD-100069,08-07-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Disneyplus",,-236.09,,,,,,,"Disneyplus",1111,Ana Testić,,,0.00
+CARD-100070,09-07-2026,-15.25,EUR,"Card transaction of 15.25 EUR issued by Wolt *Order",,-251.34,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100071,09-07-2026,-57.30,EUR,"Card transaction of 57.30 EUR issued by Konzum Market 0412",,-308.64,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100072,10-07-2026,-40.00,EUR,"Card transaction of 40.00 EUR issued by Fit Zone Doo Sarajevo",,-348.64,,,,,,,"Fit Zone Doo Sarajevo",1111,Ana Testić,,,0.00
+CARD-100073,12-07-2026,-15.99,EUR,"Card transaction of 15.99 EUR issued by Netflix.Com",,-364.63,,,,,,,"Netflix.Com",1111,Ana Testić,,,0.00
+CARD-100074,12-07-2026,-13.68,EUR,"Card transaction of 13.68 EUR issued by Wolt *Order",,-378.31,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100075,15-07-2026,-43.24,EUR,"Card transaction of 43.24 EUR issued by Elektro Distribucija Racun",,-421.55,,,,,,,"Elektro Distribucija Racun",1111,Ana Testić,,,0.00
+CARD-100076,16-07-2026,-56.28,EUR,"Card transaction of 56.28 EUR issued by Konzum Market 0412",,-477.83,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100077,20-07-2026,-24.27,EUR,"Card transaction of 24.27 EUR issued by Telekom Mobile Postpaid",,-502.10,,,,,,,"Telekom Mobile Postpaid",1111,Ana Testić,,,0.00
+CARD-100078,21-07-2026,-18.49,EUR,"Card transaction of 18.49 EUR issued by Openai *Chatgpt Subscr",,-520.59,,,,,,,"Openai *Chatgpt Subscr",1111,Ana Testić,,,0.00
+CARD-100079,23-07-2026,-22.00,EUR,"Card transaction of 22.00 EUR issued by Konzum Market 0412",,-542.59,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100080,25-07-2026,-50.00,EUR,"Sent money to Maja Maric",,-592.59,,,,,Maja Maric,,"",1111,Ana Testić,,,0.00
+CARD-100081,27-07-2026,-13.84,EUR,"Card transaction of 13.84 EUR issued by Wolt *Order",,-606.43,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100082,28-07-2026,-9.62,EUR,"Card transaction of 9.62 EUR issued by Wolt *Order",,-616.05,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100083,01-08-2026,-2.99,EUR,"Card transaction of 2.99 EUR issued by Apple.Com/Bill",,-619.04,,,,,,,"Apple.Com/Bill",1111,Ana Testić,,,0.00
+CARD-100084,02-08-2026,-65.20,EUR,"Card transaction of 65.20 EUR issued by Konzum Market 0412",,-684.24,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100085,03-08-2026,-11.99,EUR,"Card transaction of 11.99 EUR issued by Spotify P2F8A9C1D2",,-696.23,,,,,,,"Spotify P2F8A9C1D2",1111,Ana Testić,,,0.00
+CARD-100086,03-08-2026,-13.99,EUR,"Card transaction of 13.99 EUR issued by Google*Youtubepremium",,-710.22,,,,,,,"Google*Youtubepremium",1111,Ana Testić,,,0.00
+CARD-100087,05-08-2026,-11.99,EUR,"Card transaction of 11.99 EUR issued by Dropbox*Plus 7Q2K",,-722.21,,,,,,,"Dropbox*Plus 7Q2K",1111,Ana Testić,,,0.00
+CARD-100088,06-08-2026,-15.40,EUR,"Card transaction of 15.40 EUR issued by Wolt *Order",,-737.61,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100089,08-08-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Disneyplus",,-748.60,,,,,,,"Disneyplus",1111,Ana Testić,,,0.00
+CARD-100090,08-08-2026,-18.95,EUR,"Card transaction of 18.95 EUR issued by Wolt *Order",,-767.55,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100091,09-08-2026,-23.83,EUR,"Card transaction of 23.83 EUR issued by Wolt *Order",,-791.38,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100092,09-08-2026,-61.46,EUR,"Card transaction of 61.46 EUR issued by Konzum Market 0412",,-852.84,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100093,10-08-2026,-40.00,EUR,"Card transaction of 40.00 EUR issued by Fit Zone Doo Sarajevo",,-892.84,,,,,,,"Fit Zone Doo Sarajevo",1111,Ana Testić,,,0.00
+CARD-100094,12-08-2026,-15.99,EUR,"Card transaction of 15.99 EUR issued by Netflix.Com",,-908.83,,,,,,,"Netflix.Com",1111,Ana Testić,,,0.00
+CARD-100095,15-08-2026,-50.29,EUR,"Card transaction of 50.29 EUR issued by Elektro Distribucija Racun",,-959.12,,,,,,,"Elektro Distribucija Racun",1111,Ana Testić,,,0.00
+CARD-100096,16-08-2026,-30.83,EUR,"Card transaction of 30.83 EUR issued by Konzum Market 0412",,-989.95,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100097,20-08-2026,-26.45,EUR,"Card transaction of 26.45 EUR issued by Telekom Mobile Postpaid",,-1016.40,,,,,,,"Telekom Mobile Postpaid",1111,Ana Testić,,,0.00
+CARD-100098,21-08-2026,-18.49,EUR,"Card transaction of 18.49 EUR issued by Openai *Chatgpt Subscr",,-1034.89,,,,,,,"Openai *Chatgpt Subscr",1111,Ana Testić,,,0.00
+CARD-100099,21-08-2026,-19.01,EUR,"Card transaction of 19.01 EUR issued by Wolt *Order",,-1053.90,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100100,23-08-2026,-19.80,EUR,"Card transaction of 19.80 EUR issued by Konzum Market 0412",,-1073.70,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100101,25-08-2026,-50.00,EUR,"Sent money to Maja Maric",,-1123.70,,,,,Maja Maric,,"",1111,Ana Testić,,,0.00
+CARD-100102,01-09-2026,-2.99,EUR,"Card transaction of 2.99 EUR issued by Apple.Com/Bill",,-1126.69,,,,,,,"Apple.Com/Bill",1111,Ana Testić,,,0.00
+CARD-100103,02-09-2026,-32.83,EUR,"Card transaction of 32.83 EUR issued by Konzum Market 0412",,-1159.52,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100104,03-09-2026,-11.99,EUR,"Card transaction of 11.99 EUR issued by Spotify P2F8A9C1D2",,-1171.51,,,,,,,"Spotify P2F8A9C1D2",1111,Ana Testić,,,0.00
+CARD-100105,03-09-2026,-13.99,EUR,"Card transaction of 13.99 EUR issued by Google*Youtubepremium",,-1185.50,,,,,,,"Google*Youtubepremium",1111,Ana Testić,,,0.00
+CARD-100106,05-09-2026,-11.99,EUR,"Card transaction of 11.99 EUR issued by Dropbox*Plus 7Q2K",,-1197.49,,,,,,,"Dropbox*Plus 7Q2K",1111,Ana Testić,,,0.00
+CARD-100107,08-09-2026,-10.99,EUR,"Card transaction of 10.99 EUR issued by Disneyplus",,-1208.48,,,,,,,"Disneyplus",1111,Ana Testić,,,0.00
+CARD-100108,09-09-2026,-31.81,EUR,"Card transaction of 31.81 EUR issued by Konzum Market 0412",,-1240.29,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100109,10-09-2026,-40.00,EUR,"Card transaction of 40.00 EUR issued by Fit Zone Doo Sarajevo",,-1280.29,,,,,,,"Fit Zone Doo Sarajevo",1111,Ana Testić,,,0.00
+CARD-100110,11-09-2026,-11.40,EUR,"Card transaction of 11.40 EUR issued by Wolt *Order",,-1291.69,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100111,12-09-2026,-15.99,EUR,"Card transaction of 15.99 EUR issued by Netflix.Com",,-1307.68,,,,,,,"Netflix.Com",1111,Ana Testić,,,0.00
+CARD-100112,15-09-2026,-44.16,EUR,"Card transaction of 44.16 EUR issued by Elektro Distribucija Racun",,-1351.84,,,,,,,"Elektro Distribucija Racun",1111,Ana Testić,,,0.00
+CARD-100113,16-09-2026,-14.33,EUR,"Card transaction of 14.33 EUR issued by Wolt *Order",,-1366.17,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100114,16-09-2026,-49.44,EUR,"Card transaction of 49.44 EUR issued by Konzum Market 0412",,-1415.61,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100115,19-09-2026,-22.02,EUR,"Card transaction of 22.02 EUR issued by Wolt *Order",,-1437.63,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100116,20-09-2026,-25.27,EUR,"Card transaction of 25.27 EUR issued by Telekom Mobile Postpaid",,-1462.90,,,,,,,"Telekom Mobile Postpaid",1111,Ana Testić,,,0.00
+CARD-100117,21-09-2026,-18.49,EUR,"Card transaction of 18.49 EUR issued by Openai *Chatgpt Subscr",,-1481.39,,,,,,,"Openai *Chatgpt Subscr",1111,Ana Testić,,,0.00
+CARD-100118,21-09-2026,-15.34,EUR,"Card transaction of 15.34 EUR issued by Wolt *Order",,-1496.73,,,,,,,"Wolt *Order",1111,Ana Testić,,,0.00
+CARD-100119,23-09-2026,-32.71,EUR,"Card transaction of 32.71 EUR issued by Konzum Market 0412",,-1529.44,,,,,,,"Konzum Market 0412",1111,Ana Testić,,,0.00
+CARD-100120,25-09-2026,-50.00,EUR,"Sent money to Maja Maric",,-1579.44,,,,,Maja Maric,,"",1111,Ana Testić,,,0.00

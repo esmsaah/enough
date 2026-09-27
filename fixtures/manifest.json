@@ -1,0 +1,192 @@
+[
+  {
+    "file": "csv/revolut_en.csv",
+    "format": "CSV",
+    "country": "global",
+    "bank_style": "Revolut",
+    "status": "header verified",
+    "source": "github.com/brucify/revolutax (example header)",
+    "currency": "EUR",
+    "notes": "comma delimiter, dot decimals, negative = money out, YYYY-MM-DD HH:MM:SS. Newer exports may add Fiat amount columns, parser must match headers by name"
+  },
+  {
+    "file": "csv/wise.csv",
+    "format": "CSV",
+    "country": "global",
+    "bank_style": "Wise",
+    "status": "header verified, date format assumed",
+    "source": "dativery.com/en/apps/wise-csv",
+    "currency": "EUR",
+    "notes": "Card Holder Full Name and Payee Account Number must be redacted. Date assumed DD-MM-YYYY, verify with a real export"
+  },
+  {
+    "file": "csv/n26_en.csv",
+    "format": "CSV",
+    "country": "DE and EU",
+    "bank_style": "N26 (English export)",
+    "status": "headers verified",
+    "source": "github.com/daniel1v/bankimport",
+    "currency": "EUR",
+    "notes": "YYYY-MM-DD, dot decimals. N26 also exports in other languages with translated headers"
+  },
+  {
+    "file": "csv/de_sparkasse_style.csv",
+    "format": "CSV",
+    "country": "DE",
+    "bank_style": "Sparkasse / Haspa style",
+    "status": "partly verified (Buchungstag, Verwendungszweck, Betrag, DD.MM.YY)",
+    "source": "github.com/daniel1v/bankimport",
+    "currency": "EUR",
+    "notes": "semicolon, comma decimals, two-digit year, ISO-8859-1 encoding"
+  },
+  {
+    "file": "csv/uk_monzo_style.csv",
+    "format": "CSV",
+    "country": "GB",
+    "bank_style": "Monzo-like",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "GBP",
+    "notes": "DD/MM/YYYY, tests the dd/mm vs mm/dd rule"
+  },
+  {
+    "file": "csv/us_generic.csv",
+    "format": "CSV",
+    "country": "US",
+    "bank_style": "large US bank style",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "USD",
+    "notes": "MM/DD/YYYY, must NOT be read as DD/MM"
+  },
+  {
+    "file": "csv/ba_modeled.csv",
+    "format": "CSV",
+    "country": "BA",
+    "bank_style": "generic BiH bank",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "BAM",
+    "notes": "junk header with name, address and IBAN, separate Isplata/Uplata columns, windows-1250, full card number inside description, footer balance. All must be redacted"
+  },
+  {
+    "file": "csv/rs_latin_modeled.csv",
+    "format": "CSV",
+    "country": "RS",
+    "bank_style": "generic Serbian bank, Latin",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "RSD",
+    "notes": "date with trailing dot (27.09.2026.), whole-dinar amounts, running balance column must be dropped"
+  },
+  {
+    "file": "csv/rs_cyrillic_modeled.csv",
+    "format": "CSV",
+    "country": "RS",
+    "bank_style": "generic Serbian bank, Cyrillic headers",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "RSD",
+    "notes": "UTF-8 with BOM, Cyrillic headers must match the multilingual header list"
+  },
+  {
+    "file": "csv/hr_modeled.csv",
+    "format": "CSV",
+    "country": "HR",
+    "bank_style": "generic Croatian bank",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "EUR",
+    "notes": "single signed amount column with comma decimals"
+  },
+  {
+    "file": "csv/edge/overlap_part1.csv + overlap_part2.csv",
+    "format": "CSV",
+    "country": "any",
+    "bank_style": "edge case",
+    "status": "synthetic",
+    "source": "",
+    "currency": "EUR",
+    "notes": "two exports overlap by 30 rows, merge must remove duplicates and match the single-file result"
+  },
+  {
+    "file": "csv/edge/one_month_only.csv",
+    "format": "CSV",
+    "country": "any",
+    "bank_style": "edge case",
+    "status": "synthetic",
+    "source": "",
+    "currency": "EUR",
+    "notes": "only September, must show 'add another month to find more' and still list what is found"
+  },
+  {
+    "file": "csv/edge/mixed_currency.csv",
+    "format": "CSV",
+    "country": "any",
+    "bank_style": "edge case",
+    "status": "synthetic",
+    "source": "",
+    "currency": "EUR + USD",
+    "notes": "ChatGPT charged in USD, must convert with the rate table and mark approx."
+  },
+  {
+    "file": "csv/edge/ambiguous_dates.csv",
+    "format": "CSV",
+    "country": "any",
+    "bank_style": "edge case",
+    "status": "synthetic",
+    "source": "",
+    "currency": "EUR",
+    "notes": "every day is 12 or lower, dd/mm vs mm/dd cannot be settled from values, app must ask once"
+  },
+  {
+    "file": "xlsx/ba_modeled.xlsx",
+    "format": "Excel",
+    "country": "BA",
+    "bank_style": "generic BiH bank",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "BAM",
+    "notes": "table starts on row 6, real Excel dates, balance column must be dropped"
+  },
+  {
+    "file": "pdf/ba_modeled_text.pdf",
+    "format": "text PDF",
+    "country": "BA",
+    "bank_style": "generic BiH bank",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "BAM",
+    "notes": "multi-page, header repeats on every page, footer and closing balance lines must be dropped"
+  },
+  {
+    "file": "pdf/de_modeled_text.pdf",
+    "format": "text PDF",
+    "country": "DE",
+    "bank_style": "generic German bank",
+    "status": "modeled, not verified",
+    "source": "",
+    "currency": "EUR",
+    "notes": "German labels, multi-page"
+  },
+  {
+    "file": "images/phone_subscriptions_*_like.png",
+    "format": "image",
+    "country": "global",
+    "bank_style": "iOS / Google Play subscription list look-alike",
+    "status": "synthetic look-alike, not a real screenshot",
+    "source": "",
+    "currency": "EUR + USD",
+    "notes": "5 items with price, period and renewal date. Replace with real screenshots from 2 iPhones and 2 Androids before launch"
+  },
+  {
+    "file": "images/bank_app_screenshot_bs_like.png",
+    "format": "image",
+    "country": "BA",
+    "bank_style": "banking app list look-alike",
+    "status": "synthetic",
+    "source": "",
+    "currency": "BAM",
+    "notes": "dates grouped as headers, not per row, merchant names cut to 24 characters, name and IBAN at the top must be redacted"
+  }
+]

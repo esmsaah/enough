@@ -1,0 +1,132 @@
+{
+  "currency": "EUR",
+  "period": "2026-04-01..2026-09-30",
+  "recurring": [
+    {
+      "merchantKey": "netflix",
+      "analysis": "digital",
+      "display": "Entertainment",
+      "frequency": "monthly",
+      "price": 15.99,
+      "nextCharge": "2026-10-12"
+    },
+    {
+      "merchantKey": "spotify",
+      "analysis": "digital",
+      "display": "Entertainment",
+      "frequency": "monthly",
+      "price": 11.99,
+      "nextCharge": "2026-10-03",
+      "note": "price increase in August from 10.99, must still group as one item"
+    },
+    {
+      "merchantKey": "disney+",
+      "analysis": "digital",
+      "display": "Entertainment",
+      "frequency": "monthly",
+      "price": 10.99,
+      "nextCharge": "2026-10-08"
+    },
+    {
+      "merchantKey": "dropbox",
+      "analysis": "digital",
+      "display": "Cloud & Storage",
+      "frequency": "monthly",
+      "price": 11.99,
+      "nextCharge": "2026-10-05"
+    },
+    {
+      "merchantKey": "apple",
+      "analysis": "digital",
+      "display": "Cloud & Storage",
+      "frequency": "monthly",
+      "price": 2.99,
+      "nextCharge": "2026-10-01",
+      "note": "APPLE.COM/BILL is ambiguous, ask via category chip"
+    },
+    {
+      "merchantKey": "youtube premium",
+      "analysis": "digital",
+      "display": "Entertainment",
+      "frequency": "monthly",
+      "price": 13.99,
+      "nextCharge": "2026-10-03",
+      "note": "overlaps Spotify (music)"
+    },
+    {
+      "merchantKey": "chatgpt",
+      "analysis": "digital",
+      "display": "AI & Software",
+      "frequency": "monthly",
+      "price": 18.49,
+      "nextCharge": "2026-10-21",
+      "note": "original currency USD 20.00 where the format shows it"
+    },
+    {
+      "merchantKey": "fit zone",
+      "analysis": "membership",
+      "display": "Fitness & Health",
+      "frequency": "monthly",
+      "price": 40.0,
+      "nextCharge": "2026-10-10"
+    },
+    {
+      "merchantKey": "telekom",
+      "analysis": "bill",
+      "display": "Bills & Utilities",
+      "frequency": "monthly",
+      "price": "average, varies 24.10-27.80 EUR equivalent"
+    },
+    {
+      "merchantKey": "elektro distribucija",
+      "analysis": "bill",
+      "display": "Bills & Utilities",
+      "frequency": "monthly",
+      "price": "average, varies 38-61 EUR equivalent"
+    },
+    {
+      "merchantKey": "plivacki klub delfin",
+      "analysis": "membership",
+      "display": "Kids & Family",
+      "frequency": "quarterly",
+      "price": 90.0,
+      "nextCharge": "2026-10-06"
+    }
+  ],
+  "habits": [
+    {
+      "merchantKey": "wolt",
+      "analysis": "habit",
+      "display": "Shopping & Delivery",
+      "frequency": "monthly average"
+    }
+  ],
+  "yearlySeenOnce": [
+    {
+      "merchantKey": "duolingo",
+      "price": 84.99,
+      "note": "seen once, cannot be confirmed as yearly from 6 months, should surface via the yearly question or as 'possible yearly'"
+    },
+    {
+      "merchantKey": "uniqa osiguranje",
+      "price": 186.0,
+      "note": "same as above"
+    }
+  ],
+  "mustAsk": [
+    {
+      "merchantKey": "transfer to maja maric",
+      "reason": "transfer to a private person, never auto-classified"
+    }
+  ],
+  "mustIgnore": [
+    "konzum market (supermarket)"
+  ],
+  "mustRedact": [
+    "account holder name",
+    "IBAN",
+    "address",
+    "balance",
+    "card number"
+  ]
+}
