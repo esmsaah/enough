@@ -77,8 +77,9 @@ export function CutList() {
         );
       })}
 
-      <div style={{ marginTop: 20 }}>
-        <Button full onClick={() => dispatch({ type: 'goto', step: 'result' })}>Back to summary</Button>
+      <div className="stack" style={{ marginTop: 20 }}>
+        <Button full onClick={() => dispatch({ type: 'goto', step: 'emailShare' })}>Email and share</Button>
+        <Button variant="secondary" full onClick={() => dispatch({ type: 'goto', step: 'result' })}>Back to summary</Button>
       </div>
 
       <button
@@ -98,7 +99,7 @@ function ItemCard({ rec }: { rec: Recommendation }) {
   const { state, dispatch } = useStore();
   const item = state.items.find((i) => i.id === rec.itemId);
   if (!item) return null;
-  const cur = item.currency;
+  const cur = rec.currency ?? state.currency;
   return (
     <div className="card">
       <div className="row">
@@ -129,9 +130,9 @@ function ItemCard({ rec }: { rec: Recommendation }) {
             Done
           </label>
         )}
-        <label className="chip" style={{ cursor: 'pointer' }}>
-          <input type="checkbox" checked={!!item.flaggedForReminder} onChange={() => dispatch({ type: 'toggleReminder', id: item.id })} style={{ marginRight: 6 }} />
-          Remind me before it renews
+        <label className="chip" style={{ cursor: item.nextCharge ? 'pointer' : 'default', opacity: item.nextCharge ? 1 : 0.55 }}>
+          <input type="checkbox" checked={!!item.flaggedForReminder} disabled={!item.nextCharge} onChange={() => dispatch({ type: 'toggleReminder', id: item.id })} style={{ marginRight: 6 }} />
+          {item.nextCharge ? 'Remind me before it renews' : 'No renewal date'}
         </label>
       </div>
     </div>

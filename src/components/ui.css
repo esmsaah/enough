@@ -89,3 +89,5 @@
 .usage-btns { display: flex; gap: 8px; flex-wrap: wrap; }
 .usage-btns .chip { flex: 1; min-width: 92px; justify-content: center; }
 .delete-all { display: block; margin: 24px auto 8px; color: var(--coral-text); background: none; border: none; text-decoration: underline; cursor: pointer; font-size: 14px; }
+.possible-recurring-row { display: grid; gap: 10px; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--dash); }
+.possible-recurring-row:first-of-type { border-top: 0; }

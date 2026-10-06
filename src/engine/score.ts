@@ -31,6 +31,7 @@ const YEARLY_MULTIPLIER: Record<Item['frequency'], number> = {
   monthly: 12,
   quarterly: 4,
   yearly: 1,
+  oneTime: 0,
 };
 
 export function yearlyCost(item: Pick<Item, 'price' | 'frequency'>): number {
@@ -161,18 +162,34 @@ function fmt(n: number, currency: string): string {
 /** Decide the single recommendation for one item, given cross-item context. */
 export function scoreItem(item: Item, ctx: Context): Recommendation {
   const yc = yearlyCost(item);
+  if (item.billingModel === 'usage' || item.billingModel === 'oneTime' || item.frequency === 'oneTime') {
+    return { itemId: item.id, verdict: 'keep', action: 'keep', reason: 'This is a one-time or pay-as-you-go cost, not a recurring plan.', yearlyCost: 0, potentialYearlySaving: 0 };
+  }
   const currency = item.currency;
+  if (item.possibleDuplicateCharge && item.possibleDuplicateCharge.amount > 0) {
+    return {
+      itemId: item.id,
+      verdict: 'lookAgain',
+      action: 'checkRefund',
+      reason: 'Check for a refund of the duplicate charge.',
+      yearlyCost: yc,
+      potentialYearlySaving: item.possibleDuplicateCharge.amount,
+      currency,
+      ...(item.approxConverted ? { approx: true } : {}),
+    };
+  }
   const rec = (
     action: ActionType,
     saving: number,
     reason: string,
-    approx = false,
+    approx = item.approxConverted ?? false,
   ): Recommendation => ({
     itemId: item.id,
     verdict: verdictFor(action, saving > 0),
     action,
     reason,
     yearlyCost: yc,
+    currency,
     potentialYearlySaving: round2(Math.max(0, saving)),
     ...(approx ? { approx: true } : {}),
   });
@@ -255,7 +272,7 @@ export function scoreItem(item: Item, ctx: Context): Recommendation {
           isEur
             ? 'Paying yearly is cheaper than paying monthly.'
             : 'Paying yearly is cheaper than paying monthly (approx.).',
-          !isEur,
+          !isEur || item.approxConverted === true,
         );
       }
     }
@@ -269,23 +286,34 @@ export function runAudit(
   items: Item[],
   opts: { unlocked?: boolean; createdAt?: string; displayCurrency?: string } = {},
 ): Audit {
-  const ctx = buildContext(items);
-  const recommendations = items.map((i) => scoreItem(i, ctx));
+  const currency = opts.displayCurrency ?? mostCommonCurrency(items) ?? 'EUR';
+  const convertedItems = items.map((item) => {
+    if (item.currency.toUpperCase() === currency.toUpperCase()) return { ...item, currency };
+    const price = convert(item.price, item.currency, currency);
+    return price === undefined
+      ? { ...item, currency }
+      : { ...item, price, currency, approxConverted: true };
+  });
+  const habits = convertedItems.filter((item) => item.category === 'habit' || item.billingModel === 'usage' || item.billingModel === 'oneTime' || item.frequency === 'oneTime');
+  const recurringItems = convertedItems.filter((item) => !habits.includes(item));
+  const ctx = buildContext(recurringItems);
+  const recommendations = recurringItems.map((i) => scoreItem(i, ctx));
 
-  const yearlyTotal = round2(items.reduce((s, i) => s + yearlyCost(i), 0));
+  const yearlyTotal = round2(recurringItems.reduce((s, i) => s + yearlyCost(i), 0));
+  const habitYearlyTotal = round2(habits.reduce((s, i) => s + yearlyCost(i), 0));
   const potentialYearlySaving = round2(
     recommendations.reduce((s, r) => s + r.potentialYearlySaving, 0),
   );
-
-  const currency = opts.displayCurrency ?? mostCommonCurrency(items) ?? 'EUR';
 
   const hasActionable = recommendations.some((r) => r.verdict !== 'keep');
   const paywall = hasActionable && potentialYearlySaving >= paywallThreshold(currency);
 
   return {
-    items,
+    items: recurringItems,
+    habits,
     recommendations,
     yearlyTotal,
+    habitYearlyTotal,
     potentialYearlySaving,
     paywall,
     goodShape: !paywall,

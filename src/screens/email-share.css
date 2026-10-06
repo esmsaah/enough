@@ -1,0 +1,14 @@
+.email-share-screen > .btn { margin-top: 12px; }
+.share-card-section { margin: 18px 0 24px; }
+.share-card-canvas { display: block; width: 100%; height: auto; border-radius: var(--radius-card); }
+.share-card-note { margin: 6px 2px 10px; font-size: 12px; }
+.email-share-form { display: grid; gap: 12px; margin: 22px 0; }
+.email-share-label { font-size: 14px; font-weight: 700; }
+.email-share-input { width: 100%; font-size: 16px; }
+.consent-card { display: flex; align-items: flex-start; gap: 12px; min-height: 62px; padding: 13px; border: 1.5px solid var(--line); border-radius: var(--radius-card); background: var(--paper); cursor: pointer; }
+.consent-card input { flex: 0 0 20px; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--indigo); }
+.consent-card span { display: grid; gap: 4px; }
+.consent-card strong { font-size: 14px; line-height: 1.25; }
+.consent-card small { color: var(--muted); font-size: 12px; line-height: 1.35; }
+.consent-card--muted { cursor: default; opacity: .7; }
+.email-share-success { padding: 12px; border: 1px solid var(--indigo); border-radius: var(--radius); color: var(--indigo-dark); background: var(--paper); font-size: 14px; }

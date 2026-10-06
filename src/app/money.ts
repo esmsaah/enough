@@ -11,11 +11,12 @@ export function formatMoney(amount: number, currency: string, opts: { round?: bo
 }
 
 /** Per-year cost of an item, by frequency. */
-export const YEARLY: Record<'weekly' | 'monthly' | 'quarterly' | 'yearly', number> = {
+export const YEARLY: Record<'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'oneTime', number> = {
   weekly: 52,
   monthly: 12,
   quarterly: 4,
   yearly: 1,
+  oneTime: 0,
 };
 
 export function yearlyCost(item: { price: number; frequency: keyof typeof YEARLY }): number {

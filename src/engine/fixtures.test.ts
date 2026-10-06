@@ -112,6 +112,7 @@ describe('fixtures — detection over the shared persona', () => {
         for (const key of exp.mustIgnore) {
           const short = key.split(' (')[0]!; // "konzum market (supermarket)" → "konzum market"
           expect(byKey.has(short), `${short} should be ignored`).toBe(false);
+          expect(result.ignored.some((entry) => entry.merchantKey === short && entry.merchantKey.trim().length > 0), `${short} should have a non-empty ignored key`).toBe(true);
         }
       });
 
@@ -163,7 +164,9 @@ describe('fixtures — global formats (digits, calendars, number formats)', () =
           expect(result.habits.find((h) => h.merchantKey === want.merchantKey), `missing habit ${want.merchantKey}`).toBeDefined();
         }
         for (const key of exp.mustIgnore) {
-          expect(byKey.has(key.split(' (')[0]!), `${key} should be ignored`).toBe(false);
+          const short = key.split(' (')[0]!;
+          expect(byKey.has(short), `${key} should be ignored`).toBe(false);
+          expect(result.ignored.some((entry) => entry.merchantKey === short && entry.merchantKey.trim().length > 0), `${key} should have a non-empty ignored key`).toBe(true);
         }
         expect(result.mustAsk.some((a) => a.merchantKey.includes('maja maric')), `transfer not flagged in ${name}`).toBe(true);
       });

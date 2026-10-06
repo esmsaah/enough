@@ -44,6 +44,49 @@ describe('yearly cost by frequency', () => {
   });
 });
 
+describe('usage and one-time billing models', () => {
+  it('never counts pay-as-you-go or one-time spending as savings', () => {
+    const usage = item({ billingModel: 'usage', category: 'habit', frequency: 'monthly', usage: 'almostNever' });
+    const oneTime = item({ billingModel: 'oneTime', category: 'habit', frequency: 'oneTime', usage: 'almostNever' });
+    const audit = runAudit([usage, oneTime]);
+    expect(audit.potentialYearlySaving).toBe(0);
+    expect(audit.recommendations.every((recommendation) => recommendation.action === 'keep')).toBe(true);
+    expect(audit.recommendations.some((recommendation) => recommendation.itemId === oneTime.id)).toBe(false);
+    expect(audit.habits.some((habit) => habit.id === oneTime.id)).toBe(true);
+  });
+
+  it('keeps habits out of recommendations and the recurring total', () => {
+    const habit = item({ id: 'coffee', category: 'habit', frequency: 'monthly', price: 40 });
+    const subscription = item({ id: 'streaming', category: 'digital', frequency: 'monthly', price: 10 });
+    const audit = runAudit([habit, subscription]);
+    expect(audit.items.map((entry) => entry.id)).toEqual(['streaming']);
+    expect(audit.habits.map((entry) => entry.id)).toEqual(['coffee']);
+    expect(audit.yearlyTotal).toBe(120);
+    expect(audit.habitYearlyTotal).toBe(480);
+    expect(audit.recommendations.map((entry) => entry.itemId)).toEqual(['streaming']);
+  });
+
+  it('converts every priced item to display currency and marks it approximate', () => {
+    const usd = item({ id: 'usd', price: 10, currency: 'USD', category: 'digital', frequency: 'monthly' });
+    const eur = item({ id: 'eur', price: 10, currency: 'EUR', category: 'digital', frequency: 'monthly' });
+    const audit = runAudit([usd, eur], { displayCurrency: 'EUR' });
+    expect(audit.items.find((entry) => entry.id === 'usd')).toMatchObject({ currency: 'EUR', price: 9.26, approxConverted: true });
+    expect(audit.yearlyTotal).toBe(231.12);
+    expect(audit.recommendations.find((entry) => entry.itemId === 'usd')?.currency).toBe('EUR');
+    expect(audit.recommendations.find((entry) => entry.itemId === 'usd')?.approx).toBe(true);
+  });
+
+  it('turns a detected possible duplicate into a refund action with that amount saved', () => {
+    const itemWithDuplicate = item({
+      possibleDuplicateCharge: { amount: 16.8, firstCharge: '2026-09-01', secondCharge: '2026-09-03' },
+    });
+    const recommendation = runAudit([itemWithDuplicate]).recommendations[0]!;
+    expect(recommendation).toMatchObject({
+      action: 'checkRefund', verdict: 'lookAgain', reason: 'Check for a refund of the duplicate charge.', potentialYearlySaving: 16.8,
+    });
+  });
+});
+
 describe('rule 1 — clearly unused → cancel, saving = full yearly cost', () => {
   it('cuts a digital item used almost never', () => {
     const r = scoreOne({ category: 'digital', usage: 'almostNever', price: 10.99, frequency: 'monthly' });

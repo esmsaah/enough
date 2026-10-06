@@ -2,7 +2,7 @@
 // A small reducer over the engine's Item[]. The audit itself is derived by
 // runAudit; this only holds the inputs and where the person is in the flow.
 
-import type { Item, Usage } from '../engine/types';
+import type { BillingModel, Frequency, Item, Usage } from '../engine/types';
 import type { DetectionResult } from '../engine/detect';
 import type { QuickPick } from './catalog';
 
@@ -16,7 +16,8 @@ export type Step =
   | 'usage'
   | 'result'
   | 'goodShape'
-  | 'cutlist';
+  | 'cutlist'
+  | 'emailShare';
 
 export type State = {
   step: Step;
@@ -24,6 +25,10 @@ export type State = {
   unlocked: boolean;
   currency: string;
   statement?: DetectionResult;
+  reportEmail: string;
+  sendReport: boolean;
+  enableReminders: boolean;
+  newsConsent: boolean;
 };
 
 export const initialState: State = {
@@ -31,6 +36,10 @@ export const initialState: State = {
   items: [],
   unlocked: false,
   currency: 'EUR',
+  reportEmail: '',
+  sendReport: false,
+  enableReminders: false,
+  newsConsent: false,
 };
 
 export type Action =
@@ -38,7 +47,7 @@ export type Action =
   | { type: 'statementParsed'; result: DetectionResult }
   | { type: 'statementDateFormat'; result: DetectionResult }
   | { type: 'acceptStatement' }
-  | { type: 'confirmPossible'; merchantKey: string }
+  | { type: 'confirmPossible'; merchantKey: string; frequency: 'monthly' | 'yearly' | 'oneTime' }
   | { type: 'toggleQuickPick'; pick: QuickPick }
   | { type: 'addManual'; item: Omit<Item, 'id'> }
   | { type: 'removeItem'; id: string }
@@ -52,6 +61,9 @@ export type Action =
   | { type: 'setCompareState'; id: string; compareState: Item['compareState'] }
   | { type: 'toggleReminder'; id: string }
   | { type: 'toggleDone'; id: string }
+  | { type: 'setReportEmail'; email: string }
+  | { type: 'setCurrency'; currency: string }
+  | { type: 'setEmailConsent'; key: 'sendReport' | 'enableReminders' | 'newsConsent'; value: boolean }
   | { type: 'unlock' }
   | { type: 'reset' }
   | { type: 'hydrate'; state: State };
@@ -89,7 +101,20 @@ export function reducer(state: State, action: Action): State {
     case 'confirmPossible': {
       const found = state.statement?.possibleRecurring.find((candidate) => candidate.merchantKey === action.merchantKey);
       if (!found || state.items.some((item) => item.merchantKey === found.merchantKey)) return state;
-      return { ...state, items: [...state.items, { id: newId(), ...detectedItemToInput(found) }] };
+      if (action.frequency !== 'monthly' && action.frequency !== 'yearly' && action.frequency !== 'oneTime') return state;
+      const oneTime = action.frequency === 'oneTime';
+      const billingModel: BillingModel = oneTime ? 'oneTime' : (found.billingModel ?? action.frequency);
+      const frequency: Frequency = action.frequency;
+      const nextCharge = oneTime ? undefined : addChargeDate(found.lastCharge, frequency);
+      const item = detectedItemToInput(found, frequency);
+      return {
+        ...state,
+        items: [...state.items, {
+          id: newId(), ...item, frequency, billingModel,
+          ...(oneTime ? { category: 'habit' as const, displayCategory: 'Other' as const } : {}),
+          ...(nextCharge ? { nextCharge } : {}),
+        }],
+      };
     }
 
     case 'toggleQuickPick': {
@@ -148,12 +173,21 @@ export function reducer(state: State, action: Action): State {
         items: state.items.map((i) => (i.id === action.id ? { ...i, done: !i.done } : i)),
       };
 
+    case 'setReportEmail':
+      return { ...state, reportEmail: action.email };
+
+    case 'setCurrency':
+      return { ...state, currency: action.currency.toUpperCase() };
+
+    case 'setEmailConsent':
+      return { ...state, [action.key]: action.value };
+
     case 'unlock':
       return { ...state, unlocked: true, step: 'cutlist' };
     case 'reset':
       return { ...initialState };
     case 'hydrate':
-      return action.state;
+      return { ...initialState, ...action.state };
 
     default:
       return state;
@@ -162,24 +196,37 @@ export function reducer(state: State, action: Action): State {
 
 function actionItems(result?: DetectionResult): Item[] {
   if (!result) return [];
-  return [...result.recurring, ...result.habits].map((found) => ({ id: newId(), ...detectedItemToInput(found) }));
+  return [...result.recurring, ...result.habits]
+    .filter((found) => found.frequency !== 'unknown')
+    .map((found) => ({ id: newId(), ...detectedItemToInput(found) }));
 }
 
-function detectedItemToInput(found: DetectionResult['recurring'][number]): Omit<Item, 'id'> {
+function addChargeDate(lastCharge: string, frequency: Frequency): string {
+  const days: Record<Frequency, number> = { weekly: 7, monthly: 30, quarterly: 91, yearly: 365, oneTime: 0 };
+  const date = new Date(Date.parse(lastCharge) + days[frequency] * 86_400_000);
+  return date.toISOString().slice(0, 10);
+}
+
+function detectedItemToInput(found: DetectionResult['possibleRecurring'][number], frequency?: Frequency): Omit<Item, 'id'> {
   return {
     name: found.name,
     merchantKey: found.merchantKey,
     category: found.category,
     displayCategory: found.displayCategory,
     overlapGroup: found.overlapGroup,
+    billingModel: found.billingModel,
+    confidence: found.confidence,
+    bankCategoryHint: found.bankCategoryHint,
+    possibleDuplicateCharge: found.possibleDuplicateCharge,
     price: found.price,
-    frequency: found.frequency,
+    frequency: frequency ?? (found.frequency === 'unknown' ? 'monthly' : found.frequency),
     source: 'statement',
-    estimate: false,
+    estimate: found.estimate,
     lastCharge: found.lastCharge,
     nextCharge: found.nextCharge,
     currency: found.currency,
     approxConverted: found.approxConverted,
+    cancelUrl: found.cancelUrl,
   };
 }
 

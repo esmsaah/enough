@@ -6,11 +6,16 @@
 export type Transaction = {
   date: string; // ISO yyyy-mm-dd
   merchantRaw: string; // as printed, after redaction
+  billingModelHint?: BillingModel; // derived enum from description/category; no raw bank metadata
+  bankCategoryHint?: BankCategoryHint;
   amount: number; // positive = money out, in account currency
   currency: string; // ISO code, e.g. EUR
 };
 
-export type Frequency = 'weekly' | 'monthly' | 'quarterly' | 'yearly';
+export type Frequency = 'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'oneTime';
+export type DetectedFrequency = Frequency | 'unknown';
+export type BillingModel = 'monthly' | 'yearly' | 'usage' | 'oneTime';
+export type BankCategoryHint = 'bill' | 'shopping' | 'eatingOut' | 'other';
 
 /** Analysis type — how the engine reasons about an item. */
 export type Category =
@@ -46,6 +51,9 @@ export type Item = {
   displayCategory: DisplayCategory; // shown to the person, see section 7
   price: number; // per period
   frequency: Frequency;
+  billingModel?: BillingModel;
+  bankCategoryHint?: BankCategoryHint;
+  confidence?: number; // 0–1 confidence in the inferred billing pattern
   source: Source;
   estimate: boolean; // true for cash and manual guesses
   lastCharge?: string; // ISO date, from statement
@@ -66,6 +74,7 @@ export type Item = {
   cancelUrl?: string; // known cancel page (merchant map) for "Cancel now"
   currency: string; // ISO code
   approxConverted?: boolean;
+  possibleDuplicateCharge?: { amount: number; firstCharge: string; secondCharge: string };
 };
 
 export type ActionType =
@@ -76,7 +85,8 @@ export type ActionType =
   | 'payPerVisit'
   | 'removeOverlap'
   | 'familyPlan'
-  | 'compareOffers';
+  | 'compareOffers'
+  | 'checkRefund';
 
 export type Verdict = 'keep' | 'lookAgain' | 'cut';
 
@@ -86,14 +96,17 @@ export type Recommendation = {
   action: ActionType;
   reason: string; // one plain sentence
   yearlyCost: number;
+  currency?: string;
   potentialYearlySaving: number; // 0 for keep
   approx?: boolean; // saving relies on a converted (approximate) figure
 };
 
 export type Audit = {
   items: Item[];
+  habits: Item[];
   recommendations: Recommendation[];
   yearlyTotal: number;
+  habitYearlyTotal: number;
   potentialYearlySaving: number;
   paywall: boolean; // section 7: shown only if a cut/lookAgain exists AND saving >= threshold
   goodShape: boolean; // nothing worth paying for

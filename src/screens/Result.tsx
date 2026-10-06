@@ -6,6 +6,7 @@ import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { Button, VerdictBadge } from '../components/ui';
 import { Receipt } from '../components/Receipt';
+import { RATES_PER_EUR } from '../engine/rates';
 
 export function Result() {
   const { state, audit, dispatch } = useStore();
@@ -23,6 +24,13 @@ export function Result() {
       <p className="muted mono">YOUR AUDIT</p>
       <h1 style={{ marginBottom: 4 }}>{formatMoney(audit.yearlyTotal, cur, { round: true })}<span style={{ fontSize: 18 }}> a year</span></h1>
       <p className="muted">{formatMoney(monthly, cur, { round: true })} a month · {audit.items.length} items</p>
+      {audit.habitYearlyTotal > 0 && <p className="muted">Habits and one-time spending: {formatMoney(audit.habitYearlyTotal, cur, { round: true })}/yr (shown separately)</p>}
+      <label className="muted" style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 12 }}>
+        Display currency
+        <select aria-label="Display currency" value={cur} onChange={(event) => dispatch({ type: 'setCurrency', currency: event.target.value })}>
+          {Object.keys(RATES_PER_EUR).sort().map((currency) => <option key={currency} value={currency}>{currency}</option>)}
+        </select>
+      </label>
 
       <div style={{ margin: '22px 0' }}>
         <p style={{ fontSize: 18, margin: 0 }}>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useStore } from '../app/store';
 import { formatMoney, yearlyCost } from '../app/money';
 import { Button, ProgressBar } from '../components/ui';
@@ -19,6 +20,7 @@ const CATEGORIES: Array<{ label: DisplayCategory; type: Category }> = [
 
 export function FoundItems() {
   const { state, dispatch } = useStore();
+  const [frequencyChoices, setFrequencyChoices] = useState<Record<string, 'monthly' | 'yearly' | 'oneTime'>>({});
   const statementItems = state.items.filter((item) => item.source === 'statement');
   const possibleRecurring = state.statement?.possibleRecurring.filter((candidate) => !state.items.some((item) => item.merchantKey === candidate.merchantKey)) ?? [];
   const ended = state.statement?.ended ?? [];
@@ -47,8 +49,8 @@ export function FoundItems() {
               <div className="row" style={{ alignItems: 'flex-start' }}>
                 <div>
                   <div className="row__name">{item.name}</div>
-                  <div className="row__meta muted">{item.frequency} · {formatMoney(item.price, item.currency)} per period</div>
-                  <div className="found-item__year mono">{formatMoney(yearlyCost(item), item.currency)} / year</div>
+                  <div className="row__meta muted">{item.frequency === 'oneTime' ? 'One-time · not recurring' : `${item.frequency} · ${formatMoney(item.price, item.currency)} per period`}</div>
+                  <div className="found-item__year mono">{item.frequency === 'oneTime' ? 'Not annualized' : `${formatMoney(yearlyCost(item), item.currency)} / year`}</div>
                 </div>
                 <Button variant="ghost" onClick={() => dispatch({ type: 'removeItem', id: item.id })}>Remove</Button>
               </div>
@@ -70,15 +72,41 @@ export function FoundItems() {
           <section className="card" aria-label="Possible recurring costs">
             <h2 style={{ marginTop: 0 }}>Possible recurring</h2>
             <p className="muted">These known services appeared once or without a clear rhythm. Confirm the ones you still pay for.</p>
-            {possibleRecurring.map((item) => (
-              <div className="row" key={item.merchantKey} style={{ marginTop: 12 }}>
-                <div>
-                  <div className="row__name">{item.name}</div>
-                  <div className="row__meta muted">{formatMoney(item.price, item.currency)} · {item.charges} {item.charges === 1 ? 'charge' : 'charges'}</div>
+            {possibleRecurring.map((item) => {
+              const needsChoice = item.askBilling === true;
+              const selected = frequencyChoices[item.merchantKey] ?? (item.frequency === 'unknown' ? undefined : item.frequency);
+              const allowed = selected === 'monthly' || selected === 'yearly' || selected === 'oneTime';
+              return (
+                <div className="possible-recurring-row" key={item.merchantKey}>
+                  <div>
+                    <div className="row__name">{item.name}</div>
+                    <div className="row__meta muted">{formatMoney(item.price, item.currency)} · {item.charges} {item.charges === 1 ? 'charge' : 'charges'}{item.estimate ? ' · estimate' : ''}</div>
+                  </div>
+                  {needsChoice || item.estimate ? (
+                    <label className="category-select-label">{needsChoice ? 'How often do you pay?' : 'Adjust estimate'}
+                      <select
+                        className="category-select"
+                        aria-label={`${needsChoice ? 'Billing frequency' : 'Adjust estimated billing frequency'} for ${item.name}`}
+                        value={selected ?? ''}
+                        onChange={(event) => setFrequencyChoices((current) => ({ ...current, [item.merchantKey]: event.target.value as 'monthly' | 'yearly' | 'oneTime' }))}
+                      >
+                        <option value="" disabled>Choose one</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                        <option value="oneTime">One-time</option>
+                      </select>
+                    </label>
+                  ) : <span className="category-tag">{item.frequency} {item.estimate ? 'estimate' : 'plan'}</span>}
+                  <Button
+                    variant="secondary"
+                    disabled={!allowed}
+                    onClick={() => dispatch({ type: 'confirmPossible', merchantKey: item.merchantKey, frequency: selected as 'monthly' | 'yearly' | 'oneTime' })}
+                  >
+                    {selected === 'oneTime' ? 'Add as one-time' : 'Confirm'}
+                  </Button>
                 </div>
-                <Button variant="secondary" onClick={() => dispatch({ type: 'confirmPossible', merchantKey: item.merchantKey })}>Confirm</Button>
-              </div>
-            ))}
+              );
+            })}
           </section>
         )}
 

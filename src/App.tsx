@@ -9,6 +9,7 @@ import { FoundItems } from './screens/FoundItems';
 import { QuickStart } from './screens/QuickStart';
 import { Result } from './screens/Result';
 import { Usage } from './screens/Usage';
+import { EmailShare } from './screens/EmailShare';
 
 function Flow() {
   const { state, audit } = useStore();
@@ -32,6 +33,8 @@ function Flow() {
       return audit.paywall ? <Result /> : <GoodShape />;
     case 'cutlist':
       return <CutList />;
+    case 'emailShare':
+      return <EmailShare />;
     default:
       return <Landing />;
   }
