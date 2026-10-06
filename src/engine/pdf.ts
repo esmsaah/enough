@@ -13,7 +13,7 @@ export type PdfBalanceCheck = { checked: number; passed: number };
 export type PdfParseResult = { transactions: Transaction[]; redactedCategories: string[]; balanceCheck: PdfBalanceCheck; columnQuestions: PdfColumnQuestion[]; columnCount: number };
 
 const DATE = /(?:\b\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\b|\b\d{4}[./-]\d{1,2}[./-]\d{1,2}\b|\b(?:\d{1,2}\s+)?[A-Za-z]{3,9}[,.]?\s+\d{1,2}(?:,?\s+\d{4})?\b|\b\d{1,2}\s+[A-Za-z]{3,9}(?:\s+\d{4})?\b)/;
-const AMOUNT = /(?:[€£$₹]|\b(?:INR|USD|EUR|GBP|RSD|BAM)\b)?\s*\(?-?\d[\d,.'’ ]*(?:[.,]\d{2})\)?-?/g;
+const AMOUNT = /(?:[€£$₹]|\b(?:INR|USD|EUR|GBP|RSD|BAM)\b)?\s*\(?[-+]?\d[\d,.'’ ]*(?:[.,]\d{2})\)?[-+]?/g;
 
 export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
   const pageLines = pages.map(groupLines);
@@ -23,7 +23,7 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
   for (let p = 0; p < pageLines.length; p++) {
     const lines = pageLines[p]!;
     lines.forEach((line, i) => {
-      const descriptionX = headingX(line, /description|narrative|details|opis|libelle|verwendungszweck/i);
+      const descriptionX = headingX(line, /description|narrative|details|opis|libelle|verwendungszweck|erlauterung|erläuterung|buchungstext|beschreibung|descripcion|concepto|omschrijving|descrizione|causale|descricao|aciklama|popis|tresc|szczegoly/i);
       const h = compactHeader(line.text);
       if (descriptionX === undefined || !/(?:moneyout|moneyin|paidout|paidin|withdraw|deposit|debit|credit|amount|iznos|betrag|haben|soll|duguje|potrazuje|rashod|prihod|uplate|isplate|uplata|isplata|priliv|odliv)/.test(h)) return;
       // A date caption can be split across multiple nearby text lines. Treat
@@ -35,7 +35,7 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
         .map(({ cell, y }) => {
           const sublabel = nearbyCells.filter(({ cell: sibling, y: siblingY }) =>
             sibling !== cell && Math.abs(sibling.x - cell.x) <= 70 && Math.abs(siblingY - y) <= 18
-            && /(?:valute|knjizen|booking|posted|posting|booked|value|valeur|valor|valuta)/.test(compactHeader(sibling.str)),
+            && /(?:valute|knjizen|booking|posted|posting|booked|value|valeur|valor|valuta|wert)/.test(compactHeader(sibling.str)),
           ).sort((a, b) => Math.abs(a.cell.x - cell.x) - Math.abs(b.cell.x - cell.x))[0]?.cell.str;
           return { x: cell.x, label: compactHeader(`${cell.str} ${sublabel ?? ''}`) };
         });
@@ -76,10 +76,17 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
   let carriedDate = '';
   let precedingDescription = '';
   let continuationTarget: ParsedRowForBalance | undefined;
+  let counterpartyTarget: ParsedRowForBalance | undefined;
+  let datedMoneyLines = 0; // table rows seen, in or out
+  const standingOrders = new Set<object>(); // standing orders are bills (rent, loans), a channel signal
   let balanceCheck: PdfBalanceCheck = { checked: 0, passed: 0 };
 
   for (const header of active) {
     const lines = pageLines[header.page]!;
+    // A single amount column with explicit signs (12,99- / 400,00+ / -12.99):
+    // positive values there are money in, never spending.
+    const signedSingleColumn = header.outX === undefined && header.inX === undefined && header.singleAmountX !== undefined
+      && lines.slice(header.line + 1).some((line) => line.cells.some((cell) => !DATE.test(cell.str.trim()) && extractAmounts(cell.str).some((amount) => amount.explicitSign)));
     for (let i = header.line + 1; i < lines.length; i++) {
       const line = lines[i]!;
       const normalized = normalizeHeader(line.text);
@@ -97,9 +104,14 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
       const descriptionEndX = header.genericLayout && amountBeforeDescription
         ? (header.balanceX !== undefined && header.balanceX > header.descriptionX ? header.balanceX : Infinity)
         : followingAmountX ?? Math.min(header.balanceX ?? Infinity, Infinity);
-      const beforeDate = line.cells.filter((cell) => cell.x >= header.descriptionX && cell.x < descriptionEndX && cell.str.trim() && !DATE.test(cell.str)).map((cell) => cell.str.trim()).join(' ');
+      const beforeDate = line.cells.filter((cell) => cell.x >= header.descriptionX - 15 && cell.x < descriptionEndX && cell.str.trim() && !DATE.test(cell.str)).map((cell) => cell.str.trim()).join(' ');
       const moneyCells = line.cells.filter((cell) => !DATE.test(cell.str.trim())).flatMap((cell) => extractAmounts(cell.str).map((amount) => ({ ...amount, x: cell.x })));
       if (!moneyCells.length) {
+        if (beforeDate && !explicitDate && counterpartyTarget && Math.abs(counterpartyTarget.y - line.y) <= 30) {
+          counterpartyTarget.description = cleanMerchant(beforeDate);
+          counterpartyTarget = undefined;
+          continue;
+        }
         if (beforeDate && !isSubline(beforeDate) && !isOpeningOrSummary(beforeDate)) {
           const isContinuation = header.genericLayout && !explicitDate && continuationTarget && Math.abs(continuationTarget.y - line.y) <= 18;
           if (isContinuation && continuationTarget) continuationTarget.description = appendText(continuationTarget.description, cleanMerchant(beforeDate));
@@ -109,6 +121,7 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
         continue;
       }
       if (explicitDate) carriedDate = explicitDate;
+      if (explicitDate) datedMoneyLines++;
       const date = explicitDate || carriedDate;
       if (!date) {
         if (beforeDate && !isSubline(beforeDate) && /(?:\/\s*(?:dr|cr|debit|credit)\s*\/|\b(?:debit|credit|transfer|card transaction)\b)/i.test(beforeDate)) precedingDescription = appendText(precedingDescription, beforeDate);
@@ -125,7 +138,8 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
         }
         if (header.outX !== undefined && header.inX === undefined) return outDistance < (header.balanceX === undefined ? 35 : Math.abs(cell.x - header.balanceX));
         if (header.inX !== undefined) return false;
-        return cell.x >= (header.singleAmountX ?? header.descriptionX);
+        if (cell.x < (header.singleAmountX ?? header.descriptionX) - 40) return false;
+        return !signedSingleColumn || cell.value < 0;
       });
       if (!candidates.length) {
         // Keep incoming rows as balance evidence even though imports only
@@ -136,6 +150,7 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
         }
         precedingDescription = '';
         continuationTarget = undefined;
+        counterpartyTarget = undefined;
         continue;
       }
 
@@ -155,6 +170,8 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
         const parsedRow = { date: parsedDate, description, amount, x: candidate.x, y: line.y, nums: moneyCells, header, page: header.page };
         rows.push(parsedRow);
         continuationTarget = parsedRow;
+        counterpartyTarget = isBookingType(description) ? parsedRow : undefined;
+        if (/^(?:dauerauftrag|standing order|trajni nalog|ordre permanent|orden permanente|ordine permanente)$/i.test(normalizeHeader(description))) standingOrders.add(parsedRow);
         if (/[•]/.test(description) || /\b(?:[\dX*]{4,})\b/.test(description)) categories.add('card number');
       }
     }
@@ -164,21 +181,47 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
   // same-day/same-value transactions with different descriptions.
   const seen = new Set<string>();
   balanceCheck = validateBalances(rows);
-  const safeRows = rows.filter((row) => row.amount > 0).map((row) => ({ ...row, description: redactDescription(cleanMerchant(row.description)) }));
+  const safeRows = rows.filter((row) => row.amount > 0).map((row) => ({ ...row, standing: standingOrders.has(row), description: redactDescription(cleanMerchant(row.description)) }));
   const transactions = safeRows.filter((row) => {
     const key = `${row.date}\0${row.description}\0${row.amount}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
-  }).map(({ date, description, amount }) => ({ date, merchantRaw: description, amount, currency: currencyFromDescription(description, allText) }));
+  }).map(({ date, description, amount, standing }) => ({ date, merchantRaw: description, amount, currency: currencyFromDescription(description, allText), ...(standing ? { bankCategoryHint: 'bill' as const } : {}) }));
   const columnCount = columnXs.length;
-  const columnQuestions = transactions.length ? [] : questions();
+  // A readable table with only money in (no spending) needs no column question.
+  const columnQuestions = transactions.length || datedMoneyLines > 0 ? [] : questions();
   return { transactions, redactedCategories: [...categories], balanceCheck, columnQuestions, columnCount };
 }
 
 
+// Some PDF producers merge "02.01.2026 02.01.2026 Lastschrift ... 13,99-" into
+// one text item. Split leading numeric dates and a trailing amount into their
+// own cells, with x estimated from character position, so columns still work.
+const LEADING_DATE = /^(\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\.?|\d{4}[./-]\d{1,2}[./-]\d{1,2})\s+/;
+const TRAILING_AMOUNT = /\s+([-+]?\(?\d[\d.,'’]*[.,]\d{2}\)?[-+]?)$/;
+function splitCell(item: PdfTextItem): PdfTextItem[] {
+  const text = item.str;
+  const width = item.width ?? 0;
+  if (!width || text.trim().split(/\s+/).length < 2) return [item];
+  const at = (index: number) => item.x + width * index / Math.max(1, text.length);
+  const out: PdfTextItem[] = [];
+  let start = 0;
+  let rest = text;
+  for (let match = LEADING_DATE.exec(rest); match; match = LEADING_DATE.exec(rest)) {
+    out.push({ ...item, str: match[1]!, x: at(start), width: width * match[1]!.length / text.length });
+    start += match[0].length;
+    rest = text.slice(start);
+  }
+  const tail = TRAILING_AMOUNT.exec(rest);
+  const middle = tail ? rest.slice(0, tail.index) : rest;
+  if (middle.trim()) out.push({ ...item, str: middle, x: at(start), width: width * middle.length / text.length });
+  if (tail) out.push({ ...item, str: tail[1]!, x: at(start + tail.index + tail[0].length - tail[1]!.length), width: width * tail[1]!.length / text.length });
+  return out.length ? out : [item];
+}
+
 function groupLines(items: PdfPage): Line[] {
-  const sorted = items.filter((item) => item.str.trim()).map((item) => ({ ...item, y: Number(item.y.toFixed(1)) })).sort((a, b) => b.y - a.y || a.x - b.x);
+  const sorted = items.flatMap(splitCell).filter((item) => item.str.trim()).map((item) => ({ ...item, y: Number(item.y.toFixed(1)) })).sort((a, b) => b.y - a.y || a.x - b.x);
   const groups: PdfTextItem[][] = [];
   for (const item of sorted) {
     let group = groups.find((items) => Math.abs(items[0]!.y - item.y) <= 2.5);
@@ -208,7 +251,7 @@ function normalizeHeader(value: string): string {
 
 function isTableHeader(value: string): boolean {
   const compact = compactHeader(value);
-  return /(?:description|narrative|details|opis|libelle|verwendungszweck)/.test(compact)
+  return /(?:description|narrative|details|opis|libelle|verwendungszweck|erlauterung|erläuterung|buchungstext|beschreibung|descripcion|concepto|omschrijving|descrizione|causale|descricao|aciklama|popis|tresc|szczegoly)/.test(compact)
     && /(?:moneyout|moneyin|paidout|paidin|withdraw|deposit|debit|credit|haben|soll|duguje|potrazuje|rashod|prihod|uplate|isplate|uplata|isplata|odliv|priliv)/.test(compact);
 }
 
@@ -219,9 +262,20 @@ function completeDate(raw: string, year: number): string {
   return normalized;
 }
 
-function extractAmounts(text: string): Array<{ value: number }> {
+function extractAmounts(text: string): Array<{ value: number; explicitSign: boolean }> {
   const matches = [...text.matchAll(AMOUNT)];
-  return matches.map((match) => ({ value: parseAmount(match[0]!) ?? 0 })).filter((item) => item.value !== 0);
+  return matches.map((match) => {
+    const raw = match[0]!.trim();
+    const plus = /^\+|\+$/.test(raw);
+    const value = parseAmount(raw.replace(/^\+|\+$/g, '')) ?? 0;
+    return { value, explicitSign: plus || value < 0 || /^\(.*\)$/.test(raw) };
+  }).filter((item) => item.value !== 0);
+}
+
+/** Booking-type words some banks print on the date line, with the counterparty on the next line. */
+function isBookingType(value: string): boolean {
+  return /^(?:sepa\s+)?(?:lastschrift|folgelastschrift|erstlastschrift|kartenzahlung(?:\s+girocard)?|dauerauftrag|gutschrift(?:\s*uberweisung)?|uberweisung|umbuchung|bargeldauszahlung|entgelt|abschluss|direct debit|standing order|card payment|debit card|faster payment|bank transfer|virement|prelevement|paiement carte|adeudo|recibo|transferencia|bonifico|addebito|pagamento|overboeking|incasso|betaalautomaat|przelew|platba kartou|prenos|placanje|uplata|isplata)$/i
+    .test(normalizeHeader(value));
 }
 
 function appendText(a: string, b: string): string { return [a, b].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim(); }
@@ -302,7 +356,7 @@ function valueAt(row: ParsedRowForBalance, x: number): number | undefined {
 
 function isSubline(value: string): boolean { return /^(?:vpa|utr|ref|rrn|auth|to|mobile|customer id|folio|txn)\b\s*[:#-]?|^card\s*:/i.test(value); }
 
-function isOpeningOrSummary(value: string): boolean { return /\b(brought forward|carried forward|opening balance|closing balance|balance summary|pending|stanje na racunu|pocetno stanje|prethodno stanje)\b/i.test(normalizeHeader(value)); }
+function isOpeningOrSummary(value: string): boolean { return /\b(brought forward|carried forward|opening balance|closing balance|balance summary|pending|stanje na racunu|pocetno stanje|prethodno stanje|kontostand|alter kontostand|neuer kontostand|saldo anterior|solde)\b/i.test(normalizeHeader(value)); }
 
 function cleanMerchant(value: string): string {
   let result = value.replace(/\s+/g, ' ').trim();

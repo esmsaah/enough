@@ -29,6 +29,10 @@ const KEYWORD_RULES: KeywordRule[] = [
       'electricity', 'power', 'osiguranje', 'insurance', 'versicherung',
       'seguro', 'assurance', 'voda', 'water', 'gas', 'plin', 'grijanje',
       'komunalac', 'utility',
+      // rent and housing, utilities (category words, many languages)
+      'miete', 'rent', 'kirija', 'stanarina', 'najam', 'loyer', 'alquiler', 'affitto', 'huur', 'czynsz', 'najemne',
+      'hausverwaltung', 'nebenkosten', 'property management', 'stadtwerke', 'strom', 'energie', 'energy', 'energia',
+      'energija', 'wasser', 'heizung', 'fernwarme', 'rundfunk', 'grejanje', 'toplana', 'vodovod',
     ],
   },
   {

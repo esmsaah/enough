@@ -69,3 +69,9 @@ The same six months (April to September 2026) of spending appear in every file, 
 ## Still needed from real people
 
 Modeled files prove the rules work. Only real exports prove the app works. See the list in the Build Brief, section 14.
+
+## Layout twins added 2026-10-06
+
+| File | Country | Modeled on | Notes |
+| --- | --- | --- | --- |
+| pdf/layout-twins/de_sparkasse_layout.pdf | DE | German savings bank (Sparkasse) PDF | one merged text item per date line, trailing +/- sign, counterparty on the line under the booking type, "Kontostand" closing line. Invented holder, IBAN and account. Expected results in de_sparkasse_expected.json |

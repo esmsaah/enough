@@ -1,0 +1,25 @@
+{
+  "de_sparkasse_layout.pdf": {
+    "mustRedact": [
+      "Erika Musterfrau",
+      "Beispielweg 7",
+      "DE00 1234 5678 0000 1111 22",
+      "9999999999"
+    ],
+    "mustFindRecurring": [
+      "netflix",
+      "spotify",
+      "telekom",
+      "mcfit",
+      "stadtwerke",
+      "miete"
+    ],
+    "spending": {
+      "Groceries": [
+        "rewe",
+        "edeka"
+      ]
+    },
+    "notes": "amount sign is a trailing +/-; merchant is on the line under the booking type; Gutschrift (credit) is not spending"
+  }
+}
