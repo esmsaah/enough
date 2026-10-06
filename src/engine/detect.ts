@@ -41,9 +41,21 @@ export type DetectionResult = {
   transactions: Transaction[]; // redacted rows only; safe for the on-device preview
   recurring: DetectedItem[];
   habits: DetectedItem[];
+  possibleRecurring: DetectedItem[];
+  ended: DetectedItem[];
+  possibleDoubleCharges: PossibleDoubleCharge[];
   mustAsk: Array<{ merchantKey: string; name: string; reason: string }>;
   ignored: string[];
   needMoreData: boolean; // fewer than 2 months of data
+};
+
+export type PossibleDoubleCharge = {
+  merchantKey: string;
+  name: string;
+  amount: number;
+  currency: string;
+  firstCharge: string;
+  secondCharge: string;
 };
 
 const INTERVALS: Array<{ freq: Frequency; days: number; tol: number }> = [
@@ -194,7 +206,7 @@ export function transactionsFromRows(
 // Transactions → detected items
 // ---------------------------------------------------------------------------
 
-export function detect(transactions: Transaction[], meta: ImportMeta): DetectionResult {
+export function detect(transactions: Transaction[], meta: ImportMeta, asOf = latestTransactionDate(transactions)): DetectionResult {
   const groups = new Map<string, Transaction[]>();
   const nameFor = new Map<string, string>();
 
@@ -214,6 +226,8 @@ export function detect(transactions: Transaction[], meta: ImportMeta): Detection
 
   const recurring: DetectedItem[] = [];
   const habits: DetectedItem[] = [];
+  const possibleRecurring: DetectedItem[] = [];
+  const ended: DetectedItem[] = [];
   const mustAsk: DetectionResult['mustAsk'] = [];
   const ignored: string[] = [];
 
@@ -251,29 +265,37 @@ export function detect(transactions: Transaction[], meta: ImportMeta): Detection
       lastCharge: last,
     };
 
-    // Habit: same merchant 3+ times a month at irregular amounts.
-    if (cat.category === 'habit' || perMonthCount(dates) >= 3) {
-      if (sorted.length >= 3 && !isRegular(gaps)) {
-        habits.push({ ...base, category: 'habit', frequency: 'monthly', price: round2(monthlyAverage(amounts, dates)), charges: sorted.length });
-        continue;
-      }
-    }
-
-    if (sorted.length < 2) continue; // can't confirm a rhythm from one charge
-
-    const freq = frequencyFromGaps(gaps);
-    if (!freq) {
-      // 2+ charges but no clean rhythm and not a habit → skip (surfaced later)
+    const canBeRecurring = cat.category === 'digital' || cat.category === 'membership' || cat.category === 'bill';
+    const fixed = amountsWithin(amounts, 0.05, 0.05) || hasSinglePriceStep(amounts);
+    if (sorted.length < 2) {
+      if (canBeRecurring) possibleRecurring.push(candidateItem(base, amounts, sorted.length));
       continue;
     }
 
-    const fixed = amountsWithin(amounts, 0.05);
-    // A bill is either a known/keyword bill, or an UNKNOWN merchant whose
-    // monthly amount varies. A known digital/membership item with varying
-    // amounts is a price increase, not a bill — keep it and use the latest price.
-    const isBill = base.category === 'bill' || (base.category === 'other' && !fixed && freq === 'monthly');
+    // Transactional merchants are never subscriptions, even when their
+    // purchase dates happen to repeat monthly or weekly.
+    if (cat.category === 'habit') {
+      habits.push({ ...base, category: 'habit', frequency: 'monthly', price: round2(monthlyAverage(amounts, dates)), charges: sorted.length });
+      continue;
+    }
+
+    // Irregular unknown spend at one merchant is useful as a habit when there
+    // are several purchases in the same month, but it is never called a bill.
+    if (cat.category === 'other' && sorted.length >= 3 && perMonthCount(dates) >= 2 && !fixed) {
+      habits.push({ ...base, category: 'habit', frequency: 'monthly', price: round2(monthlyAverage(amounts, dates)), charges: sorted.length });
+      continue;
+    }
+
+    const freq = frequencyFromGaps(gaps);
+    if (!freq) {
+      if (canBeRecurring && (cat.category === 'bill' || fixed)) possibleRecurring.push(candidateItem(base, amounts, sorted.length));
+      continue;
+    }
+
+    if (!fixed && base.category !== 'bill') continue;
+    const isBill = base.category === 'bill';
     const price = isBill ? mean(amounts) : amounts[amounts.length - 1]!; // bills: average; else latest price
-    recurring.push({
+    const detected: DetectedItem = {
       ...base,
       category: isBill ? 'bill' : base.category,
       displayCategory: isBill && base.category !== 'bill' ? 'Bills & Utilities' : base.displayCategory,
@@ -281,7 +303,11 @@ export function detect(transactions: Transaction[], meta: ImportMeta): Detection
       price: round2(price),
       nextCharge: addDays(last, INTERVALS.find((i) => i.freq === freq)!.days),
       charges: sorted.length,
-    });
+    };
+    const expectedInterval = INTERVALS.find((interval) => interval.freq === freq)!;
+    const endedAfterDays = Math.max(60, expectedInterval.days + expectedInterval.tol);
+    if (daysBetween(last, asOf) > endedAfterDays) ended.push(detected);
+    else recurring.push(detected);
   }
 
   return {
@@ -289,16 +315,23 @@ export function detect(transactions: Transaction[], meta: ImportMeta): Detection
     transactions,
     recurring,
     habits,
+    possibleRecurring,
+    ended,
+    possibleDoubleCharges: findPossibleDoubleCharges(transactions),
     mustAsk,
     ignored,
     needMoreData: meta.monthsSpan < 2,
   };
 }
 
+function latestTransactionDate(transactions: Transaction[]): string {
+  return transactions.reduce((latest, transaction) => transaction.date > latest ? transaction.date : latest, '0000-00-00');
+}
+
 /** Convenience: rows → full detection result. */
-export function runDetection(rows: string[][], fallbackCurrency = 'EUR', dateFormatOverride?: DateFormat, columnOverrides: ColumnOverrides = {}): DetectionResult {
+export function runDetection(rows: string[][], fallbackCurrency = 'EUR', dateFormatOverride?: DateFormat, columnOverrides: ColumnOverrides = {}, asOf?: string): DetectionResult {
   const { transactions, meta } = transactionsFromRows(rows, fallbackCurrency, dateFormatOverride, columnOverrides);
-  return detect(transactions, meta);
+  return asOf ? detect(transactions, meta, asOf) : detect(transactions, meta);
 }
 
 // ---------------------------------------------------------------------------
@@ -332,15 +365,68 @@ function frequencyFromGaps(gaps: number[]): Frequency | null {
   return null;
 }
 
-function isRegular(gaps: number[]): boolean {
-  return frequencyFromGaps(gaps) !== null && cv(gaps) < 0.25;
-}
-
-function amountsWithin(amounts: number[], pct: number): boolean {
+function amountsWithin(amounts: number[], pct: number, step = 0): boolean {
   if (amounts.length < 2) return true;
   const avg = mean(amounts);
   if (avg === 0) return true;
-  return amounts.every((a) => Math.abs(a - avg) / avg <= pct);
+  const tolerance = Math.max(Math.abs(avg) * pct, step);
+  return amounts.every((a) => Math.abs(a - avg) <= tolerance);
+}
+
+// A merchant may change its tariff once during the statement window. Treat a
+// single transition between two independently stable price levels as one
+// price step (for example, Spotify's annual price increase), while rejecting
+// the repeated arbitrary amounts typical of shops and cafes.
+function hasSinglePriceStep(amounts: number[]): boolean {
+  if (amounts.length < 4) return false;
+  for (let split = 2; split <= amounts.length - 2; split++) {
+    if (amountsWithin(amounts.slice(0, split), 0.05, 0.05)
+      && amountsWithin(amounts.slice(split), 0.05, 0.05)) return true;
+  }
+  return false;
+}
+
+function candidateItem(
+  base: Omit<DetectedItem, 'frequency' | 'price' | 'charges'>,
+  amounts: number[],
+  charges: number,
+): DetectedItem {
+  return { ...base, frequency: 'monthly', price: round2(median(amounts)), charges };
+}
+
+function findPossibleDoubleCharges(transactions: Transaction[]): PossibleDoubleCharge[] {
+  const groups = new Map<string, Array<Transaction & { merchantKey: string; name: string }>>();
+  for (const transaction of transactions) {
+    const normalized = normalizeMerchant(transaction.merchantRaw);
+    const info = matchMerchant(transaction.merchantRaw);
+    const merchantKey = info?.merchantKey ?? normalized;
+    if (!merchantKey) continue;
+    const group = groups.get(merchantKey) ?? [];
+    group.push({ ...transaction, merchantKey, name: info?.name ?? titleCase(normalized) });
+    groups.set(merchantKey, group);
+  }
+  const found: PossibleDoubleCharge[] = [];
+  for (const group of groups.values()) {
+    const sorted = [...group].sort((a, b) => a.date.localeCompare(b.date));
+    for (let i = 0; i < sorted.length; i++) {
+      for (let j = i + 1; j < sorted.length; j++) {
+        const first = sorted[i]!;
+        const second = sorted[j]!;
+        const gap = daysBetween(first.date, second.date);
+        if (gap > 7) break;
+        if (gap < 0 || first.currency !== second.currency || Math.abs(first.amount - second.amount) > 0.05) continue;
+        found.push({
+          merchantKey: first.merchantKey,
+          name: first.name,
+          amount: round2((first.amount + second.amount) / 2),
+          currency: first.currency,
+          firstCharge: first.date,
+          secondCharge: second.date,
+        });
+      }
+    }
+  }
+  return found;
 }
 
 function perMonthCount(dates: string[]): number {
@@ -376,13 +462,6 @@ function median(xs: number[]): number {
   const s = [...xs].sort((a, b) => a - b);
   const mid = Math.floor(s.length / 2);
   return s.length % 2 ? s[mid]! : (s[mid - 1]! + s[mid]!) / 2;
-}
-
-function cv(xs: number[]): number {
-  const m = mean(xs);
-  if (m === 0) return 0;
-  const variance = mean(xs.map((x) => (x - m) ** 2));
-  return Math.sqrt(variance) / m;
 }
 
 function mostCommon(xs: string[]): string | undefined {

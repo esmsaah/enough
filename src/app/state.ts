@@ -38,6 +38,7 @@ export type Action =
   | { type: 'statementParsed'; result: DetectionResult }
   | { type: 'statementDateFormat'; result: DetectionResult }
   | { type: 'acceptStatement' }
+  | { type: 'confirmPossible'; merchantKey: string }
   | { type: 'toggleQuickPick'; pick: QuickPick }
   | { type: 'addManual'; item: Omit<Item, 'id'> }
   | { type: 'removeItem'; id: string }
@@ -83,6 +84,12 @@ export function reducer(state: State, action: Action): State {
         } else items.push(item);
       }
       return { ...state, items, step: 'found' };
+    }
+
+    case 'confirmPossible': {
+      const found = state.statement?.possibleRecurring.find((candidate) => candidate.merchantKey === action.merchantKey);
+      if (!found || state.items.some((item) => item.merchantKey === found.merchantKey)) return state;
+      return { ...state, items: [...state.items, { id: newId(), ...detectedItemToInput(found) }] };
     }
 
     case 'toggleQuickPick': {
@@ -155,8 +162,11 @@ export function reducer(state: State, action: Action): State {
 
 function actionItems(result?: DetectionResult): Item[] {
   if (!result) return [];
-  return [...result.recurring, ...result.habits].map((found) => ({
-    id: newId(),
+  return [...result.recurring, ...result.habits].map((found) => ({ id: newId(), ...detectedItemToInput(found) }));
+}
+
+function detectedItemToInput(found: DetectionResult['recurring'][number]): Omit<Item, 'id'> {
+  return {
     name: found.name,
     merchantKey: found.merchantKey,
     category: found.category,
@@ -170,7 +180,7 @@ function actionItems(result?: DetectionResult): Item[] {
     nextCharge: found.nextCharge,
     currency: found.currency,
     approxConverted: found.approxConverted,
-  }));
+  };
 }
 
 /** Items that need a usage/visits/compare question (screen 7). */

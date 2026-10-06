@@ -46,14 +46,14 @@ const KEYWORD_RULES: KeywordRule[] = [
   {
     category: 'habit',
     displayCategory: 'Other',
-    words: ['cafe', 'kafa', 'coffee', 'kaffee', 'bar', 'restoran', 'restaurant'],
+    words: ['cafe', 'kafa', 'coffee', 'kaffee', 'bar', 'restoran', 'restaurant', 'maci', 'zaokret'],
   },
 ];
 
 // Supermarkets and fuel — ignored as habits unless the person adds them (rule 5).
 const IGNORE_WORDS = [
   'konzum', 'mercator', 'lidl', 'spar', 'aldi', 'kaufland', 'bingo', 'carrefour',
-  'supermarket', 'market', 'grocery', 'hipermarket', 'tommy', 'plodine', 'migros',
+  'supermarket', 'market', 'aroma marketi', 'idea', 'grocery', 'hipermarket', 'tommy', 'plodine', 'migros',
   'ina', 'omv', 'petrol', 'shell', 'gas station', 'benzin', 'crodux', 'eurotank',
 ];
 

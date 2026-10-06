@@ -68,7 +68,7 @@ describe('PDF external fixtures', () => {
   it('finds recurring Adobe Creative Cloud when enough statement months are present', async () => {
     const { transactions } = await parseFixture(join(ROOT, 'fixtures/pdf/external/northstar-business-current-mar-2026.pdf'));
     const expanded = [...transactions, ...transactions.filter((row) => row.merchantRaw.toLowerCase().includes('adobe')).map((row) => ({ ...row, date: '2026-04-07' }))];
-    const result = detect(expanded, meta(expanded));
+    const result = detect(expanded, meta(expanded), '2026-04-10');
     expect([...result.recurring, ...result.habits].some((item) => item.merchantKey.includes('adobe'))).toBe(true);
   });
 });

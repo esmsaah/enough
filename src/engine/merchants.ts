@@ -32,6 +32,8 @@ const MERCHANTS: MerchantDef[] = [
   { merchantKey: 'perplexity', name: 'Perplexity', category: 'digital', displayCategory: 'AI & Software', overlapGroup: 'ai', aliases: ['perplexity'] },
   { merchantKey: 'canva', name: 'Canva', category: 'digital', displayCategory: 'AI & Software', aliases: ['canva'] },
   { merchantKey: 'adobe', name: 'Adobe', category: 'digital', displayCategory: 'AI & Software', aliases: ['adobe'] },
+  { merchantKey: 'skillshare', name: 'Skillshare', category: 'digital', displayCategory: 'Learning', aliases: ['skillshare'] },
+  { merchantKey: 'outscraper', name: 'Outscraper', category: 'digital', displayCategory: 'AI & Software', aliases: ['outscraper'] },
   { merchantKey: 'notion', name: 'Notion', category: 'digital', displayCategory: 'AI & Software', aliases: ['notion'] },
   { merchantKey: 'microsoft', name: 'Microsoft 365', category: 'digital', displayCategory: 'AI & Software', aliases: ['microsoft', 'office 365', 'microsoft 365', 'msft'] },
   // --- Cloud & Storage (overlap: cloud) ---
@@ -60,6 +62,9 @@ const MERCHANTS: MerchantDef[] = [
   { merchantKey: 'bolt', name: 'Bolt', category: 'habit', displayCategory: 'Transport', aliases: ['bolt'] },
   // --- Bills / telecoms ---
   { merchantKey: 'telekom', name: 'Telekom', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['telekom', 'telecom', 't-mobile', 'bh telecom', 'mtel', 'hrvatski telekom'] },
+  { merchantKey: 'mts', name: 'mts', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['mts'] },
+  { merchantKey: 'infostan', name: 'Infostan', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['infostan'] },
+  { merchantKey: 'insurance', name: 'Insurance', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['insurance', 'osiguranje'] },
 ];
 
 // Payment-processor prefixes and noise tokens stripped before matching.

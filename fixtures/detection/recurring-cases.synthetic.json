@@ -1,0 +1,35 @@
+{
+  "asOf": "2026-10-20",
+  "transactions": [
+    { "date": "2026-08-02", "merchantRaw": "MAĆI", "amount": 0.88, "currency": "EUR" },
+    { "date": "2026-08-05", "merchantRaw": "MAĆI", "amount": 1.45, "currency": "EUR" },
+    { "date": "2026-08-10", "merchantRaw": "MAĆI", "amount": 2.12, "currency": "EUR" },
+    { "date": "2026-08-15", "merchantRaw": "MAĆI", "amount": 0.92, "currency": "EUR" },
+    { "date": "2026-08-01", "merchantRaw": "Aroma Marketi", "amount": 3.11, "currency": "EUR" },
+    { "date": "2026-08-08", "merchantRaw": "Aroma Marketi", "amount": 6.24, "currency": "EUR" },
+    { "date": "2026-08-15", "merchantRaw": "Aroma Marketi", "amount": 2.09, "currency": "EUR" },
+    { "date": "2026-08-22", "merchantRaw": "Aroma Marketi", "amount": 4.87, "currency": "EUR" },
+    { "date": "2026-08-03", "merchantRaw": "IDEA", "amount": 4.08, "currency": "EUR" },
+    { "date": "2026-08-10", "merchantRaw": "IDEA", "amount": 8.29, "currency": "EUR" },
+    { "date": "2026-08-17", "merchantRaw": "IDEA", "amount": 2.36, "currency": "EUR" },
+    { "date": "2026-08-04", "merchantRaw": "Zaokret", "amount": 10.87, "currency": "EUR" },
+    { "date": "2026-08-08", "merchantRaw": "Zaokret", "amount": 16.12, "currency": "EUR" },
+    { "date": "2026-08-13", "merchantRaw": "Zaokret", "amount": 8.44, "currency": "EUR" },
+    { "date": "2026-09-01", "merchantRaw": "Adobe Creative Cloud", "amount": 16.80, "currency": "EUR" },
+    { "date": "2026-09-03", "merchantRaw": "Adobe Creative Cloud", "amount": 16.83, "currency": "EUR" },
+    { "date": "2026-05-18", "merchantRaw": "Google One", "amount": 1.72, "currency": "EUR" },
+    { "date": "2026-06-18", "merchantRaw": "Google One", "amount": 1.71, "currency": "EUR" },
+    { "date": "2026-07-18", "merchantRaw": "Google One", "amount": 1.72, "currency": "EUR" },
+    { "date": "2026-08-15", "merchantRaw": "Netflix", "amount": 15.99, "currency": "EUR" },
+    { "date": "2026-09-14", "merchantRaw": "Netflix", "amount": 15.99, "currency": "EUR" },
+    { "date": "2026-10-14", "merchantRaw": "Netflix", "amount": 15.99, "currency": "EUR" }
+  ],
+  "singleCharges": [
+    { "date": "2026-10-01", "merchantRaw": "Adobe Creative Cloud", "amount": 16.80, "currency": "EUR" },
+    { "date": "2026-10-01", "merchantRaw": "mts Mobile", "amount": 34.99, "currency": "EUR" },
+    { "date": "2026-10-01", "merchantRaw": "Infostan", "amount": 42.50, "currency": "EUR" },
+    { "date": "2026-10-01", "merchantRaw": "Dunav osiguranje", "amount": 56.00, "currency": "EUR" },
+    { "date": "2026-10-01", "merchantRaw": "Skillshare", "amount": 10.99, "currency": "EUR" },
+    { "date": "2026-10-01", "merchantRaw": "Outscraper", "amount": 24.00, "currency": "EUR" }
+  ]
+}
