@@ -99,10 +99,10 @@ describe('synthetic merchant recurrence safeguards', () => {
       { date: '2026-10-01', merchantRaw: 'Skillshare', amount: 99, currency: 'EUR' },
       { date: '2026-10-02', merchantRaw: 'Outscraper', amount: 8, currency: 'EUR' },
       { date: '2026-10-03', merchantRaw: 'Airalo', amount: 11, currency: 'EUR' },
-      { date: '2026-10-04', merchantRaw: 'Local Studio', amount: 25, currency: 'EUR' },
+      { date: '2026-10-04', merchantRaw: 'Local Studio subscription charge', amount: 25, currency: 'EUR' },
     ], meta);
     expect(result.possibleRecurring.find((item) => item.merchantKey === 'skillshare')?.frequency).toBe('yearly');
-    expect(result.possibleRecurring.find((item) => item.merchantKey === 'local studio')).toMatchObject({ frequency: 'monthly', estimate: true, askBilling: true });
+    expect(result.possibleRecurring.find((item) => item.merchantKey === 'local studio charge')).toMatchObject({ frequency: 'monthly', estimate: true, askBilling: true });
     expect(result.possibleRecurring.some((item) => ['outscraper', 'airalo'].includes(item.merchantKey))).toBe(false);
     expect(result.habits.find((item) => item.merchantKey === 'outscraper')?.billingModel).toBe('usage');
     expect(result.habits.find((item) => item.merchantKey === 'airalo')?.frequency).toBe('oneTime');
@@ -147,12 +147,16 @@ describe('synthetic merchant recurrence safeguards', () => {
   });
 
   it('uses common price points and multilingual plan words as offline hints', () => {
-    const annualPrice = detect([{ date: '2026-09-01', merchantRaw: 'Local Software 119.88', amount: 119.88, currency: 'EUR' }], meta).possibleRecurring[0];
-    expect(annualPrice).toMatchObject({ billingModel: 'yearly', frequency: 'yearly', confidence: 0.7, estimate: true });
+    const annualPrice = detect([{ date: '2026-09-01', merchantRaw: 'Local software subscription', amount: 119.88, currency: 'EUR' }], meta).possibleRecurring[0];
+    expect(annualPrice).toMatchObject({ billingModel: 'yearly', frequency: 'yearly', confidence: 0.7, estimate: true, askBilling: true });
+    const localizedAnnual = detect([{ date: '2026-09-01', merchantRaw: 'Local godišnja plan', amount: 100, currency: 'EUR' }], meta).possibleRecurring[0];
+    expect(localizedAnnual).toMatchObject({ billingModel: 'yearly', frequency: 'yearly' });
     const topup = detect([{ date: '2026-09-01', merchantRaw: 'Mobile eSIM top-up', amount: 20, currency: 'EUR' }], meta);
-    expect(topup.habits[0]).toMatchObject({ billingModel: 'oneTime', frequency: 'oneTime' });
+    expect(topup.habits).toHaveLength(0);
+    expect(topup.ignored.length).toBe(1);
     const prepaid = detect([{ date: '2026-09-01', merchantRaw: 'Local prepaid recharge', amount: 10, currency: 'EUR' }], meta);
-    expect(prepaid.habits[0]?.billingModel).toBe('usage');
+    expect(prepaid.habits).toHaveLength(0);
+    expect(prepaid.ignored).toHaveLength(1);
   });
 
   it('uses bank category values to classify recurring bills', () => {
@@ -168,14 +172,14 @@ describe('synthetic merchant recurrence safeguards', () => {
 
   it('asks about at most the three priciest low-confidence single charges', () => {
     const transactions: Transaction[] = [
-      { date: '2026-09-01', merchantRaw: 'Northwind Studio', amount: 300, currency: 'EUR' },
-      { date: '2026-09-02', merchantRaw: 'Cedar Cloud', amount: 250, currency: 'EUR' },
-      { date: '2026-09-03', merchantRaw: 'River School', amount: 200, currency: 'EUR' },
-      { date: '2026-09-04', merchantRaw: 'Small Atelier', amount: 20, currency: 'EUR' },
+      { date: '2026-09-01', merchantRaw: 'Northwind Studio subscription charge', amount: 300, currency: 'EUR' },
+      { date: '2026-09-02', merchantRaw: 'Cedar Cloud subscription charge', amount: 250, currency: 'EUR' },
+      { date: '2026-09-03', merchantRaw: 'River School subscription charge', amount: 200, currency: 'EUR' },
+      { date: '2026-09-04', merchantRaw: 'Small Atelier subscription charge', amount: 20, currency: 'EUR' },
     ];
     const candidates = detect(transactions, meta).possibleRecurring;
     expect(candidates.filter((candidate) => candidate.askBilling)).toHaveLength(3);
-    expect(candidates.find((candidate) => candidate.name === 'Small Atelier')).toMatchObject({ frequency: 'monthly', estimate: true });
+    expect(candidates.find((candidate) => candidate.name === 'Small Atelier Charge')).toMatchObject({ frequency: 'monthly', estimate: true });
   });
 
   it('sums same-day bill entries before averaging monthly charges', () => {
@@ -187,5 +191,36 @@ describe('synthetic merchant recurrence safeguards', () => {
     const found = detect(transactions, meta);
     expect(found.recurring.find((item) => item.merchantKey === 'mts')?.price).toBe(35.5);
     expect(found.possibleDoubleCharges).toHaveLength(0);
+  });
+
+  it('ignores unrecognized single purchases but keeps known habits', () => {
+    const singlePurchases: Transaction[] = [
+      { date: '2026-09-01', merchantRaw: 'MOL fuel', amount: 46, currency: 'EUR' },
+      { date: '2026-09-02', merchantRaw: 'City parking', amount: 4, currency: 'EUR' },
+      { date: '2026-09-03', merchantRaw: 'Zeffy donation', amount: 12, currency: 'EUR' },
+      { date: '2026-09-04', merchantRaw: 'Bex courier', amount: 5, currency: 'EUR' },
+      { date: '2026-09-05', merchantRaw: 'Faturamati', amount: 8, currency: 'EUR' },
+    ];
+    const found = detect(singlePurchases, meta);
+    expect(found.possibleRecurring).toHaveLength(0);
+    expect(found.habits.map((item) => item.merchantKey)).toEqual(['bex courier']);
+    expect(found.ignored.map((item) => item.merchantKey)).toEqual(expect.arrayContaining(['mol fuel', 'city parking', 'zeffy donation', 'faturamati']));
+    expect(found.habits.find((item) => item.merchantKey === 'bex courier')?.category).toBe('habit');
+  });
+
+  it('requires three purchases per month before unknown shopping becomes a habit', () => {
+    const two = detect([
+      { date: '2026-09-01', merchantRaw: 'Cafe Central', amount: 8, currency: 'EUR', bankCategoryHint: 'eatingOut' },
+      { date: '2026-09-05', merchantRaw: 'Cafe Central', amount: 10, currency: 'EUR', bankCategoryHint: 'eatingOut' },
+    ], meta);
+    expect(two.habits).toHaveLength(0);
+    expect(two.ignored.some((item) => item.merchantKey === 'cafe central')).toBe(true);
+
+    const three = detect([
+      { date: '2026-09-01', merchantRaw: 'Cafe Central', amount: 8, currency: 'EUR', bankCategoryHint: 'eatingOut' },
+      { date: '2026-09-05', merchantRaw: 'Cafe Central', amount: 10, currency: 'EUR', bankCategoryHint: 'eatingOut' },
+      { date: '2026-09-09', merchantRaw: 'Cafe Central', amount: 12, currency: 'EUR', bankCategoryHint: 'eatingOut' },
+    ], meta);
+    expect(three.habits.find((item) => item.merchantKey === 'cafe central')).toMatchObject({ charges: 3, category: 'habit' });
   });
 });

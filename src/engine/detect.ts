@@ -269,8 +269,9 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     const priceGuess = inferPriceModel(amounts);
     const intervalGuess = frequencyFromGaps(dayGaps(dates));
     const intervalModel: BillingModel | undefined = intervalGuess === 'monthly' ? 'monthly' : intervalGuess === 'yearly' ? 'yearly' : undefined;
-    const billingGuess = info?.billingModel ?? statementModel ?? descriptionGuess ?? bankCategoryModel(bankCategory) ?? priceGuess?.model ?? intervalModel;
-    const confidence = info ? 0.98 : statementModel ? 0.88 : descriptionGuess ? 0.84 : bankCategory ? 0.78 : intervalModel ? 0.9 : priceGuess?.confidence ?? 0.35;
+    const explicitDescription = txs.some((transaction) => (inferBillingModelHint(transaction.merchantRaw)?.confidence ?? 0) >= 0.8);
+    const billingGuess = info?.billingModel ?? statementModel ?? (explicitDescription ? descriptionGuess : undefined) ?? bankCategoryModel(bankCategory) ?? priceGuess?.model ?? descriptionGuess ?? intervalModel;
+    const confidence = info ? 0.98 : statementModel ? 0.88 : explicitDescription ? 0.84 : bankCategory ? 0.78 : intervalModel ? 0.9 : priceGuess?.confidence ?? (descriptionGuess ? 0.72 : 0.35);
     const last = dates[dates.length - 1]!;
     const cat = categoryOf(info, normalized, bankCategory, billingGuess);
 
@@ -300,27 +301,36 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     const canBeRecurring = cat.category === 'digital' || cat.category === 'membership' || cat.category === 'bill';
     const fixed = amountsWithin(observedAmounts, 0.05, 0.05) || hasSinglePriceStep(observedAmounts);
     if (billingGuess === 'usage' || billingGuess === 'oneTime') {
-      habits.push(transactionalItem(base, observedAmounts, observedDates, billingGuess));
+      if (info?.category === 'habit' || perMonthCount(dates) >= 3) {
+        habits.push(transactionalItem(base, observedAmounts, observedDates, billingGuess));
+      } else if (key.trim()) ignored.push({ merchantKey: key, name: nameFor.get(key)! });
       continue;
     }
     if (sorted.length < 2) {
-      if (canBeRecurring || !info) {
+      const explicitRecurring = (info !== undefined && canBeRecurring)
+        || bankCategory === 'bill'
+        || statementModel === 'monthly' || statementModel === 'yearly'
+        || descriptionGuess === 'monthly' || descriptionGuess === 'yearly';
+      if (explicitRecurring) {
         const likelyFrequency: DetectedFrequency = billingGuess === 'monthly' || billingGuess === 'yearly' ? billingGuess : 'unknown';
         possibleRecurring.push(candidateItem(base, observedAmounts, sorted.length, likelyFrequency));
-      }
+      } else if (info?.category === 'habit') habits.push(transactionalItem(base, observedAmounts, observedDates, 'usage'));
+      else if (key.trim()) ignored.push({ merchantKey: key, name: nameFor.get(key)! });
       continue;
     }
 
     // Transactional merchants are never subscriptions, even when their
     // purchase dates happen to repeat monthly or weekly.
     if (cat.category === 'habit') {
-      habits.push({ ...base, category: 'habit', frequency: 'monthly', price: round2(monthlyAverage(observedAmounts, observedDates)), charges: sorted.length });
+      if (info?.category === 'habit' || perMonthCount(dates) >= 3) {
+        habits.push({ ...base, category: 'habit', frequency: 'monthly', price: round2(monthlyAverage(observedAmounts, observedDates)), charges: sorted.length });
+      } else if (key.trim()) ignored.push({ merchantKey: key, name: nameFor.get(key)! });
       continue;
     }
 
     // Irregular unknown spend at one merchant is useful as a habit when there
     // are several purchases in the same month, but it is never called a bill.
-    if (cat.category === 'other' && sorted.length >= 3 && perMonthCount(dates) >= 2 && !fixed) {
+    if (cat.category === 'other' && sorted.length >= 3 && perMonthCount(dates) >= 3 && !fixed) {
       habits.push({ ...base, category: 'habit', frequency: 'monthly', price: round2(monthlyAverage(observedAmounts, observedDates)), charges: sorted.length });
       continue;
     }
@@ -423,7 +433,7 @@ function bankCategoryModel(category?: BankCategoryHint): BillingModel | undefine
 
 function inferBillingModelHint(raw: string): { model: BillingModel; confidence: number } | undefined {
   const value = foldHeader(raw);
-  if (/\b(e.?sim|top.?up|one.?time|one time|einmalig|jednorazn|jednokrat|recarga unica|recharge unique)\b/.test(value)) return { model: 'oneTime', confidence: 0.88 };
+  if (/\b(e.?sim|top.?up|one.?time|one time|einmalig|jednorazn|jednokrat|recarga unica|recharge unique|donation|donate|parking|fuel|petrol|gas station|toll)\b/.test(value)) return { model: 'oneTime', confidence: 0.88 };
   if (/\b(pay as you go|usage|prepaid|per use|metered|dopuna|prepaid|aufladung|recarga)\b/.test(value)) return { model: 'usage', confidence: 0.82 };
   if (/\b(annual|annually|yearly|yearly renewal|year plan|jahres|jahrlich|godi[nš]nj[aie]|godisnj[aie]|anual|annuel|annuale|anualidad|roczna|roczne|yillik|ежегодн)\b/.test(value)) return { model: 'yearly', confidence: 0.86 };
   if (/\b(monthly|month plan|mjesecn[aie]|mjese[cč]n[aie]|monatlich|mensual|mensuel|mensile|mensualidad|miesieczn[aie]|aylik|ежемесячн)\b/.test(value)) return { model: 'monthly', confidence: 0.84 };

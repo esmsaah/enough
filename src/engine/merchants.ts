@@ -67,6 +67,8 @@ const MERCHANTS: MerchantDef[] = [
   { merchantKey: 'infostan', billingModel: 'monthly', name: 'Infostan', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['infostan'] },
   { merchantKey: 'insurance', billingModel: 'yearly', name: 'Insurance', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['insurance', 'osiguranje', 'wiener stadtische osig', 'wiener stadtische'] },
   { merchantKey: 'airalo', billingModel: 'oneTime', name: 'Airalo', category: 'habit', displayCategory: 'Other', aliases: ['airalo'] },
+  { merchantKey: 'bex courier', billingModel: 'usage', name: 'BEX Courier', category: 'habit', displayCategory: 'Shopping & Delivery', aliases: ['bex courier', 'bex express', 'bex'] },
+  { merchantKey: 'starbucks', billingModel: 'usage', name: 'Starbucks', category: 'habit', displayCategory: 'Other', aliases: ['starbucks'] },
   // --- Fixture services and common regional providers ---
   { merchantKey: 'electricity bill', billingModel: 'monthly', name: 'Electricity bill', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['electricity bill', 'power bill'] },
   { merchantKey: 'elektro distribucija', billingModel: 'monthly', name: 'Elektro distribucija', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['elektro distribucija', 'elektroprivreda'] },
