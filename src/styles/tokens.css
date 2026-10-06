@@ -1,0 +1,29 @@
+/* Enough — design tokens. Section 12 of ENOUGH_BRIEF.md. Use nothing else. */
+:root {
+  --navy: #14204a; /* landing, result header, share card */
+  --indigo: #3346d3; /* primary buttons on light, keep, pen circles */
+  --indigo-dark: #26379f;
+  --lime: #d4ee8a; /* found money only, max once per screen */
+  --coral-pen: #d2452a; /* strike-throughs, stamps, handwritten notes */
+  --coral-text: #c4320f; /* cut labels on light ground */
+  --amber: #f2b544;
+  --amber-text: #8a5a00;
+  --ground: #f2f1ec;
+  --paper: #fbfaf6;
+  --white: #ffffff;
+  --ink: #101014;
+  --muted: #5b5b66;
+  --muted-on-navy: #a9b1d6;
+  --line: #dedcd5;
+  --dash: #bdbcb3;
+
+  --font-display: 'Archivo', system-ui, sans-serif; /* stretch 110-125%, weight 700-800 */
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace; /* amounts, dates */
+  --font-hand: 'Caveat', 'Segoe Script', cursive; /* notes of four words or fewer */
+
+  --radius: 6px;
+  --radius-card: 8px;
+  --tap: 44px;
+  --button-h: 56px;
+  --gutter: 20px;
+}

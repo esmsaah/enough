@@ -63,6 +63,7 @@ export type Item = {
   duplicateOf?: string; // set for a second charge of the same service
   flaggedForReminder?: boolean;
   done?: boolean; // person marked the action as done
+  cancelUrl?: string; // known cancel page (merchant map) for "Cancel now"
   currency: string; // ISO code
   approxConverted?: boolean;
 };

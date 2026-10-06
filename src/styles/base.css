@@ -1,0 +1,73 @@
+/* Enough — base styles. Mobile first at 390px. No shadows, no gradients,
+   no emoji, no tilted cards, no rows of checkmarks. Section 8 & 12. */
+
+/* Self-host these fonts before launch (see LATER.md). Dev uses the stacks in
+   tokens.css so the app runs offline with no external requests (CSP §11). */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body { line-height: 1.4; }
+
+button { font-family: inherit; }
+
+/* The whole app lives in a phone-width column, centered on wider screens. */
+.app {
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--ground);
+  display: flex;
+  flex-direction: column;
+}
+
+.screen {
+  flex: 1;
+  padding: var(--gutter);
+  padding-bottom: calc(var(--gutter) + 96px); /* room for the sticky footer */
+}
+
+.screen--navy { background: var(--navy); color: var(--white); }
+
+h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.01em; margin: 12px 0 8px; line-height: 1.1; }
+h2 { font-size: 20px; font-weight: 700; margin: 24px 0 8px; }
+p { margin: 8px 0; }
+.muted { color: var(--muted); }
+.on-navy .muted, .screen--navy .muted { color: var(--muted-on-navy); }
+
+.mono { font-family: var(--font-mono); }
+.hand { font-family: var(--font-hand); color: var(--coral-pen); transform: rotate(-2deg); display: inline-block; }
+
+.stack > * + * { margin-top: 12px; }
+
+/* Sticky footer that holds the primary action + running total. */
+.footer {
+  position: sticky;
+  bottom: 0;
+  max-width: 430px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--line);
+}
+.footer--navy {
+  background: color-mix(in srgb, var(--navy) 90%, transparent);
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.total-line { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.total-line .amount { font-family: var(--font-mono); font-size: 22px; font-weight: 700; }
+
+.center { text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

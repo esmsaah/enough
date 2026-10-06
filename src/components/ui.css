@@ -1,0 +1,91 @@
+/* Enough — component styles. Section 12. */
+
+.btn {
+  min-height: var(--button-h);
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  font-weight: 700;
+  font-size: 17px;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: transform 0.05s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn--full { width: 100%; }
+.btn--primary { background: var(--indigo); color: var(--white); }
+.screen--navy .btn--primary { background: var(--lime); color: var(--navy); }
+.btn--secondary { background: transparent; color: var(--indigo); border-color: var(--indigo); }
+.screen--navy .btn--secondary { color: var(--white); border-color: rgba(255, 255, 255, 0.45); }
+.btn--ghost { background: transparent; color: var(--muted); min-height: var(--tap); font-size: 15px; padding: 0 8px; }
+.btn:disabled { opacity: 0.45; cursor: default; }
+
+.chip {
+  min-height: var(--tap);
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.chip--on { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+.chip-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.stepper { display: inline-flex; align-items: center; gap: 4px; }
+.stepper button {
+  width: var(--tap); height: var(--tap);
+  border-radius: var(--radius); border: 1.5px solid var(--line);
+  background: var(--paper); font-size: 22px; font-weight: 700; cursor: pointer; color: var(--ink);
+}
+.stepper__value { min-width: 40px; text-align: center; font-size: 18px; font-weight: 700; }
+
+.progress { height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 4px 0 4px; }
+.progress__fill { height: 100%; background: var(--indigo); transition: width 0.25s ease; }
+
+.verdict {
+  display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.03em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 4px; border: 1.5px solid;
+}
+.verdict--cut { color: var(--coral-text); border-color: var(--coral-text); background: color-mix(in srgb, var(--coral-text) 8%, transparent); }
+.verdict--lookAgain { color: var(--amber-text); border-color: var(--amber-text); background: color-mix(in srgb, var(--amber) 22%, transparent); }
+.verdict--keep { color: var(--indigo-dark); border-color: var(--indigo-dark); background: color-mix(in srgb, var(--indigo) 8%, transparent); }
+
+.penstrike { position: relative; display: inline-block; }
+.penstrike__line {
+  position: absolute; left: -2%; top: 45%; width: 104%; height: 12px;
+  overflow: visible; animation: strike 0.25s ease-out forwards;
+}
+@keyframes strike { from { stroke-dasharray: 200; stroke-dashoffset: 200; } to { stroke-dashoffset: 0; } }
+.penstrike__line path { stroke-dasharray: 200; stroke-dashoffset: 200; animation: strike 0.25s ease-out forwards; }
+
+/* Item row + card */
+.card {
+  background: var(--paper); border: 1.5px solid var(--line);
+  border-radius: var(--radius-card); padding: 14px; margin: 10px 0;
+}
+.row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.row__name { font-weight: 700; }
+.row__meta { font-size: 13px; }
+.amount-mono { font-family: var(--font-mono); font-weight: 700; }
+
+/* Receipt with torn edges (SVG zigzag) */
+.receipt { background: var(--paper); position: relative; padding: 18px 18px; border-left: 1.5px solid var(--line); border-right: 1.5px solid var(--line); }
+.receipt__edge { display: block; width: 100%; height: 10px; }
+.receipt__row { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 14px; padding: 6px 0; }
+.receipt__divider { border: none; border-top: 1.5px dashed var(--dash); margin: 8px 0; }
+.receipt__total { display: flex; justify-content: space-between; font-family: var(--font-mono); font-weight: 700; font-size: 18px; padding-top: 6px; }
+
+.blur { filter: blur(7px); user-select: none; pointer-events: none; }
+.locked-note { color: var(--muted); font-size: 14px; text-align: center; margin-top: 10px; }
+
+.amount-input {
+  flex: 1; min-height: var(--tap); border: 1.5px solid var(--line);
+  border-radius: var(--radius); padding: 0 12px; font-size: 18px; background: var(--white); color: var(--ink);
+}
+.amount-input:focus { outline: 2px solid var(--indigo); border-color: var(--indigo); }
+.usage-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.usage-btns .chip { flex: 1; min-width: 92px; justify-content: center; }
+.delete-all { display: block; margin: 24px auto 8px; color: var(--coral-text); background: none; border: none; text-decoration: underline; cursor: pointer; font-size: 14px; }
