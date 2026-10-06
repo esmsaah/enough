@@ -1,0 +1,326 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-09-27T01:23:30Z"
+  },
+  "title": "Enough · V1 design",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "Foundations.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 2300,
+      "title": "Design system"
+    },
+    "DesignNotes.dc.html": {
+      "x": 1520,
+      "y": 0,
+      "w": 720,
+      "h": 1640,
+      "title": "Design notes"
+    },
+    "LandingDesktop.dc.html": {
+      "x": 2320,
+      "y": 0,
+      "w": 1440,
+      "h": 960,
+      "title": "Landing · desktop",
+      "is_interactive": true
+    },
+    "Main.dc.html": {
+      "x": 0,
+      "y": 2680,
+      "w": 390,
+      "h": 844,
+      "title": "01 Landing",
+      "is_interactive": true
+    },
+    "QuickStart.dc.html": {
+      "x": 470,
+      "y": 2680,
+      "w": 390,
+      "h": 844,
+      "title": "02 Quick start",
+      "is_interactive": true
+    },
+    "Upload.dc.html": {
+      "x": 940,
+      "y": 2680,
+      "w": 390,
+      "h": 900,
+      "title": "03 Add statement",
+      "is_interactive": true
+    },
+    "WhatWeKeep.dc.html": {
+      "x": 1410,
+      "y": 2680,
+      "w": 390,
+      "h": 844,
+      "title": "04 What we keep",
+      "is_interactive": true
+    },
+    "FoundItems.dc.html": {
+      "x": 1880,
+      "y": 2680,
+      "w": 390,
+      "h": 1080,
+      "title": "05 Found items",
+      "is_interactive": true
+    },
+    "WhatIsThis.dc.html": {
+      "x": 2350,
+      "y": 2680,
+      "w": 390,
+      "h": 844,
+      "title": "06 What is this?",
+      "is_interactive": true
+    },
+    "Cash.dc.html": {
+      "x": 2820,
+      "y": 2680,
+      "w": 390,
+      "h": 900,
+      "title": "07 Paid in cash?",
+      "is_interactive": true
+    },
+    "Usage.dc.html": {
+      "x": 3290,
+      "y": 2680,
+      "w": 390,
+      "h": 844,
+      "title": "08 Usage card",
+      "is_interactive": true
+    },
+    "Result.dc.html": {
+      "x": 3760,
+      "y": 2680,
+      "w": 390,
+      "h": 1260,
+      "title": "09 Result + paywall",
+      "is_interactive": true
+    },
+    "GoodShape.dc.html": {
+      "x": 4230,
+      "y": 2680,
+      "w": 390,
+      "h": 900,
+      "title": "10 Good shape",
+      "is_interactive": true
+    },
+    "CutList.dc.html": {
+      "x": 4700,
+      "y": 2680,
+      "w": 390,
+      "h": 2140,
+      "title": "11 Full cut list",
+      "is_interactive": true
+    },
+    "EmailShare.dc.html": {
+      "x": 5170,
+      "y": 2680,
+      "w": 390,
+      "h": 1260,
+      "title": "12 Email and share",
+      "is_interactive": true
+    },
+    "States.dc.html": {
+      "x": 0,
+      "y": 5200,
+      "w": 1346,
+      "h": 2600,
+      "title": "Edge states"
+    },
+    "EmailReport.dc.html": {
+      "x": 1426,
+      "y": 5200,
+      "w": 680,
+      "h": 1700,
+      "title": "Report email"
+    },
+    "EmailReminder.dc.html": {
+      "x": 2186,
+      "y": 5200,
+      "w": 680,
+      "h": 720,
+      "title": "Reminder email"
+    },
+    "ShareCards.dc.html": {
+      "x": 0,
+      "y": 8180,
+      "w": 3560,
+      "h": 3420,
+      "title": "Share cards · story and square"
+    },
+    "DeskQuickStart.dc.html": {
+      "x": 0,
+      "y": 11980,
+      "w": 1440,
+      "h": 900,
+      "title": "02 Quick start · desktop",
+      "is_interactive": true
+    },
+    "DeskUpload.dc.html": {
+      "x": 1520,
+      "y": 11980,
+      "w": 1440,
+      "h": 900,
+      "title": "03 Add statement · desktop",
+      "is_interactive": true
+    },
+    "DeskKeep.dc.html": {
+      "x": 3040,
+      "y": 11980,
+      "w": 1440,
+      "h": 900,
+      "title": "04 What we keep · desktop",
+      "is_interactive": true
+    },
+    "DeskFound.dc.html": {
+      "x": 4560,
+      "y": 11980,
+      "w": 1440,
+      "h": 1080,
+      "title": "05 Found items · desktop",
+      "is_interactive": true
+    },
+    "DeskWhatIs.dc.html": {
+      "x": 0,
+      "y": 13180,
+      "w": 1440,
+      "h": 900,
+      "title": "06 What is this? · desktop",
+      "is_interactive": true
+    },
+    "DeskCash.dc.html": {
+      "x": 1520,
+      "y": 13180,
+      "w": 1440,
+      "h": 1080,
+      "title": "07 Paid in cash? · desktop",
+      "is_interactive": true
+    },
+    "DeskUsage.dc.html": {
+      "x": 3040,
+      "y": 13180,
+      "w": 1440,
+      "h": 1000,
+      "title": "08 Usage card · desktop",
+      "is_interactive": true
+    },
+    "DeskResult.dc.html": {
+      "x": 4560,
+      "y": 13180,
+      "w": 1440,
+      "h": 1040,
+      "title": "09 Result + paywall · desktop",
+      "is_interactive": true
+    },
+    "DeskGoodShape.dc.html": {
+      "x": 0,
+      "y": 14380,
+      "w": 1440,
+      "h": 900,
+      "title": "10 Good shape · desktop",
+      "is_interactive": true
+    },
+    "DeskCutList.dc.html": {
+      "x": 1520,
+      "y": 14380,
+      "w": 1440,
+      "h": 1480,
+      "title": "11 Full cut list · desktop",
+      "is_interactive": true
+    },
+    "DeskEmailShare.dc.html": {
+      "x": 3040,
+      "y": 14380,
+      "w": 1440,
+      "h": 900,
+      "title": "12 Email and share · desktop",
+      "is_interactive": true
+    }
+  },
+  "order": [
+    "Foundations.dc.html",
+    "DesignNotes.dc.html",
+    "LandingDesktop.dc.html",
+    "Main.dc.html",
+    "QuickStart.dc.html",
+    "Upload.dc.html",
+    "WhatWeKeep.dc.html",
+    "FoundItems.dc.html",
+    "WhatIsThis.dc.html",
+    "Cash.dc.html",
+    "Usage.dc.html",
+    "Result.dc.html",
+    "GoodShape.dc.html",
+    "CutList.dc.html",
+    "EmailShare.dc.html",
+    "States.dc.html",
+    "EmailReport.dc.html",
+    "EmailReminder.dc.html",
+    "ShareCards.dc.html",
+    "DeskQuickStart.dc.html",
+    "DeskUpload.dc.html",
+    "DeskKeep.dc.html",
+    "DeskFound.dc.html",
+    "DeskWhatIs.dc.html",
+    "DeskCash.dc.html",
+    "DeskUsage.dc.html",
+    "DeskResult.dc.html",
+    "DeskGoodShape.dc.html",
+    "DeskCutList.dc.html",
+    "DeskEmailShare.dc.html"
+  ],
+  "notes": {
+    "t_found": {
+      "x": 0,
+      "y": -300,
+      "text": "Design system, notes, desktop landing",
+      "kind": "title1",
+      "maxW": 3760
+    },
+    "t_flow": {
+      "x": 0,
+      "y": 2420,
+      "text": "The audit, 12 screens at 390 px",
+      "kind": "title1",
+      "maxW": 5560
+    },
+    "t_states": {
+      "x": 0,
+      "y": 4940,
+      "text": "Edge states and emails",
+      "kind": "title1",
+      "maxW": 2866
+    },
+    "t_share": {
+      "x": 0,
+      "y": 7920,
+      "text": "Share cards in three tones",
+      "kind": "title1",
+      "maxW": 3560
+    },
+    "t_desk": {
+      "x": 0,
+      "y": 11720,
+      "text": "The audit on desktop, 1440 px",
+      "kind": "title1",
+      "maxW": 6000
+    },
+    "n_desk": {
+      "x": 4560,
+      "y": 14380,
+      "w": 900,
+      "maxH": 360,
+      "fill": "blue",
+      "text": "Desktop pattern. The step screens keep the mobile content in a left column and add a receipt on the right that fills up as you go, so the yearly total is always in view. Result, good shape and the cut list open with a full-width navy band. Buttons stop being full width and sit next to their secondary link. Landing desktop starts this flow in Play."
+    }
+  },
+  "designSystems": []
+}

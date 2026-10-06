@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Reminder email</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#E7E6E0;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+</style>
+</helmet>
+<div style="width: 680px; height: 720px; box-sizing: border-box; background: #E7E6E0; padding: 32px 40px; display: flex; flex-direction: column; gap: 18px">
+  <div class="m" style="display: grid; grid-template-columns: 80px minmax(0, 1fr); row-gap: 6px; font-size: 13px; color: #5B5B66">
+    <span>FROM</span><span style="color: #101014">Enough</span>
+    <span>SUBJECT</span><span style="color: #101014; font-weight: 600">Disney+ renews on 14 October</span>
+  </div>
+
+  <div style="background: #FBFAF6; border-radius: 8px; padding: 40px 44px; display: flex; flex-direction: column; gap: 28px">
+    <span style="font-size: 20px; font-weight: 800; font-stretch: 125%">Enough.</span>
+    <p style="margin: 0; font-size: 26px; line-height: 1.3; font-weight: 700; font-stretch: 108%">Disney+ renews on 14 October for <span class="m" style="font-size: 24px">€10.99</span>. In your audit you said you almost never use it.</p>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap">
+      <a href="#cancel" style="display: inline-flex; align-items: center; height: 52px; padding: 0 24px; border-radius: 6px; background: #3346D3; color: #FFFFFF; font-size: 16px; font-weight: 700; text-decoration: none">Go to Disney+ to cancel</a>
+      <a href="CutList.dc.html" style="display: inline-flex; align-items: center; height: 52px; padding: 0 8px; font-size: 16px; font-weight: 600; color: #101014; text-underline-offset: 3px">Open my audit</a>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px; padding: 0 8px; font-size: 13px; line-height: 1.55; color: #5B5B66">
+    <span>You asked for renewal reminders when you finished your audit. They end on their own after 12 months.</span>
+    <a href="#unsubscribe">Stop reminders and delete everything</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":680,"height":720}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

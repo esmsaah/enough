@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Design notes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#FBFAF6;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.n{display:grid;grid-template-columns:36px minmax(0,1fr);border-top:1px dashed #BDBCB3;padding-top:14px}
+.n h2{margin:0;font-size:19px;font-weight:800;font-stretch:112%;line-height:1.25}
+.n p{margin:6px 0 0;font-size:15px;line-height:1.5;color:#3A3A44}
+</style>
+</helmet>
+<div style="width: 720px; height: 1640px; box-sizing: border-box; background: #FBFAF6; border: 1px solid #DEDDD5; padding: 64px 60px; display: flex; flex-direction: column; gap: 20px">
+  <span class="m" style="font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #5B5B66">Design notes · for Claude Code</span>
+  <h1 style="margin: 0 0 8px; font-size: 44px; line-height: 1.0; font-weight: 800; font-stretch: 118%; letter-spacing: -1.5px">The audit reads like a receipt someone marked up for you.</h1>
+
+  <div class="n"><span class="m" style="font-size: 13px">01</span><div><h2>Five screens are the reference</h2><p>Landing, quick start, what we keep, usage card and result come from the first design pass. Every other screen copies their spacing, header and type. Screen padding 20, section gap 18, back arrow plus progress bar on top.</p></div></div>
+  <div class="n"><span class="m" style="font-size: 13px">02</span><div><h2>One set of example numbers</h2><p>10 items, €1,488.04 a year, €124 a month. Five items flagged with one action each, €699.60 potential. Gym 3 visits and a €8 single entry gives the €192. Target €30 a month picks YouTube Premium, Disney+ and Netflix for €30.31.</p></div></div>
+  <div class="n"><span class="m" style="font-size: 13px">03</span><div><h2>Navy only for the big moments</h2><p>Landing, the result header, the cut list header and the share card. Everything you work through sits on the light ground.</p></div></div>
+  <div class="n"><span class="m" style="font-size: 13px">04</span><div><h2>Lime means money you found</h2><p>Used once per screen at most. The lime button on navy is the one exception the tokens allow.</p></div></div>
+  <div class="n"><span class="m" style="font-size: 13px">05</span><div><h2>Before paying</h2><p>Total, monthly, item count, how many aren't earning their place, the saving as one number, and the first cut item in full. The rest are placeholder bars, not real rows hidden with blur. The withdrawal checkbox sits above the button.</p></div></div>
+  <div class="n"><span class="m" style="font-size: 13px">06</span><div><h2>Nothing found, nothing to pay</h2><p>With no cut or look again item, or a saving under €10, the result turns into Good shape with a receipt that says TO PAY €0.00.</p></div></div>
+  <div class="n"><span class="m" style="font-size: 13px">07</span><div><h2>Verdicts carry a word and a shape</h2><p>Cut is coral with a cross, Look again amber with a circle, Keep indigo with a tick. Group totals are savings for Cut and Look again, cost for Keep.</p></div></div>
+  <div class="n"><span class="m" style="font-size: 13px">08</span><div><h2>Word "free" is gone</h2><p>Titles, links and states were checked. "Not now" and "Delete everything" replace the old links.</p></div></div>
+
+  <div style="margin-top: auto; border-top: 1.5px solid #101014; padding-top: 14px; display: flex; flex-direction: column; gap: 6px">
+    <span style="font-size: 15px; font-weight: 700">Open for the founder</span>
+    <span style="font-size: 14px; line-height: 1.5; color: #3A3A44">Section 1 of the brief says the person never sees which items before paying, section 9 shows the first cut item. The screens follow section 9. The withdrawal wording, founder name and domain are still placeholders.</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":720,"height":1640}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

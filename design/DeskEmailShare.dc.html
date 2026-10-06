@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Email and share, desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Caveat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#F2F1EC;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#5B5B66}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;height:56px;padding:0 32px;background:#3346D3;color:#FFFFFF;border-radius:6px;font-size:17px;font-weight:700;text-decoration:none;border:0;font-family:inherit;cursor:pointer}
+.btn:hover{background:#26379F;color:#FFFFFF}
+.lnk{font-size:15px;color:#101014;text-decoration:underline;text-underline-offset:3px;padding:10px 0}
+.chip{height:44px;padding:0 16px;border-radius:22px;border:1.5px solid #C9C8BF;background:#FFFFFF;color:#101014;font-family:'Archivo',sans-serif;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip.on{border-color:#3346D3;background:#3346D3;color:#FFFFFF;font-weight:600}
+.st{display:flex;flex-direction:column;gap:8px;flex:1 1 0}
+.st i{display:block;height:4px;border-radius:2px;background:#DEDDD5}
+.st.on i{background:#3346D3}
+.st span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#5B5B66}
+.st.on span{color:#101014;font-weight:600}
+.rr{display:flex;justify-content:space-between;gap:12px}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; box-sizing: border-box; overflow: hidden; background: #F2F1EC; color: #101014; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 56px; height: 76px; padding: 0 80px; border-bottom: 1px solid #DEDDD5">
+    <a href="LandingDesktop.dc.html" style="font-size: 24px; font-weight: 800; font-stretch: 125%; letter-spacing: -0.5px; color: #101014; text-decoration: none">Enough.</a>
+    <span style="flex-grow: 1"></span>
+    <div style="flex-grow: 1"></div>
+    <a href="#delete" class="lnk" style="color: #5B5B66">Delete everything</a>
+  </header>
+
+  <main style="display: grid; grid-template-columns: minmax(0, 1fr) 520px; column-gap: 120px; padding: 56px 160px 56px; flex-grow: 1">
+    <section style="display: flex; flex-direction: column; gap: 20px">
+      <a href="DeskCutList.dc.html" style="align-self: flex-start; display: flex; align-items: center; gap: 4px; min-height: 44px; font-size: 15px; font-weight: 500; color: #101014; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>My audit</a>
+      <h1 style="margin: 0; font-size: 52px; line-height: 1.0; font-weight: 800; font-stretch: 115%; letter-spacing: -1.8px">Keep it close.</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.45; color: #5B5B66; max-width: 560px">We'll send a short letter with your cut list, and nudge you before the things you flagged renew.</p>
+      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; max-width: 480px; margin-top: 8px">Email<input type="email" value="you@example.com" aria-label="Email" style="height: 52px; box-sizing: border-box; border: 1.5px solid #C9C8BF; border-radius: 6px; background: #FFFFFF; padding: 0 14px; font-family: 'Archivo', sans-serif; font-size: 17px"><span style="font-size: 13px; font-weight: 400; color: #5B5B66">The one you used at checkout. Change it if you like.</span></label>
+      <div style="display: flex; flex-direction: column; gap: 8px; max-width: 520px">
+        <label style="display: flex; gap: 12px; align-items: flex-start; min-height: 44px; font-size: 16px; line-height: 1.4; cursor: pointer"><input type="checkbox" checked style="width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: #3346D3">Send me my audit report</label>
+        <label style="display: flex; gap: 12px; align-items: flex-start; min-height: 44px; font-size: 16px; line-height: 1.4; cursor: pointer"><input type="checkbox" style="width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: #3346D3">Remind me 2 days before anything I flagged renews, for 12 months</label>
+        <div style="border-top: 1px dashed #BDBCB3; margin: 4px 0"></div>
+        <label style="display: flex; gap: 12px; align-items: flex-start; min-height: 44px; font-size: 16px; line-height: 1.4; color: #5B5B66; cursor: pointer"><input type="checkbox" style="width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: #3346D3">News about Enough, now and then</label>
+      </div>
+      <div style="display: flex; align-items: center; gap: 24px; margin-top: 8px"><button class="btn">Send</button><span style="font-size: 14px; color: #5B5B66">Only your summary is sent, never your statement.</span></div>
+    </section>
+
+    <aside style="display: flex; flex-direction: column; gap: 18px">
+      <div class="rr" style="align-items: baseline; border-bottom: 1.5px solid #101014; padding-bottom: 12px"><span style="font-size: 22px; font-weight: 800; font-stretch: 115%">Your share card</span><span class="m" style="font-size: 11px; color: #5B5B66">NO NAMES · NO BANK DATA</span></div>
+      <div style="display: flex; gap: 24px">
+        <div style="width: 270px; height: 480px; flex-shrink: 0; box-sizing: border-box; background: #14204A; color: #FFFFFF; border-radius: 10px; padding: 30px 24px 22px; display: flex; flex-direction: column">
+          <span style="font-size: 18px; font-weight: 800; font-stretch: 125%">Enough.</span>
+          <span class="m" style="font-size: 10px; letter-spacing: 1.2px; color: #A9B1D6; margin-top: 44px">EVERY MONTH, ADDED UP</span>
+          <span style="font-size: 76px; line-height: 0.92; font-weight: 800; font-stretch: 120%; letter-spacing: -3px; margin-top: 8px">€1,488</span>
+          <span style="font-size: 17px; line-height: 1.25; font-weight: 700; margin-top: 14px">a year on things I pay for every month.</span>
+          <span style="align-self: flex-start; margin-top: 12px; background: #D4EE8A; color: #14204A; font-size: 17px; line-height: 1.35; font-weight: 800; padding: 2px 6px">€699.60 of it isn't earning its place.</span>
+          <span style="flex-grow: 1"></span>
+          <span class="m" style="font-size: 9px; color: #A9B1D6; border-top: 1px solid #2B3766; padding-top: 10px">KNOW WHAT'S WORTH PAYING FOR · [DOMAIN]</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; flex-grow: 1">
+          <span class="cap">Tone</span>
+          <button class="chip on">Calm</button><button class="chip">Proud</button><button class="chip">Honest</button>
+          <span class="cap" style="margin-top: 10px">Format</span>
+          <div style="display: flex; gap: 8px"><button class="chip on">Story</button><button class="chip">Square</button></div>
+        </div>
+      </div>
+      <label style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; border-top: 1px solid #DEDDD5; border-bottom: 1px solid #DEDDD5; font-size: 15px; cursor: pointer">Hide amounts, show only what I found<input type="checkbox" role="switch" style="width: 22px; height: 22px; margin: 0; accent-color: #3346D3"></label>
+      <div style="display: flex; gap: 12px"><button class="btn" style="background: #FFFFFF; color: #3346D3; border: 1.5px solid #3346D3; flex: 1 1 0">Download image</button><button class="btn" style="background: #FFFFFF; color: #3346D3; border: 1.5px solid #3346D3; flex: 1 1 0">Copy link</button></div>
+    </aside>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

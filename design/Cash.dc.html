@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Paid in cash?</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Caveat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#F2F1EC;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#5B5B66}
+.btn{display:flex;justify-content:center;align-items:center;gap:10px;height:56px;background:#3346D3;color:#FFFFFF;border-radius:6px;font-size:17px;font-weight:700;text-decoration:none;border:0;width:100%;font-family:inherit;cursor:pointer}
+.btn:hover{background:#26379F;color:#FFFFFF}
+.chip{height:44px;padding:0 14px;border-radius:22px;border:1.5px solid #C9C8BF;background:#FFFFFF;color:#101014;font-family:'Archivo',sans-serif;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip.on{border-color:#3346D3;background:#3346D3;color:#FFFFFF;font-weight:600}
+.step{width:52px;height:52px;border-radius:26px;border:1.5px solid #C9C8BF;background:#FFFFFF;font-size:24px;color:#101014;cursor:pointer;font-family:inherit}
+.seg{flex:1 1 0;min-height:44px;border:1.5px solid #C9C8BF;background:#FFFFFF;font-family:'Archivo',sans-serif;font-size:14px;color:#101014;cursor:pointer}
+.seg.on{background:#3346D3;border-color:#3346D3;color:#FFFFFF;font-weight:600}
+</style>
+</helmet>
+<div style="width: 390px; height: 900px; box-sizing: border-box; overflow: hidden; background: #F2F1EC; color: #101014; font-family: 'Archivo', sans-serif; padding: 20px 20px 28px; display: flex; flex-direction: column; gap: 18px">
+  <div style="display: flex; align-items: center; gap: 12px; height: 44px">
+    <a href="WhatIsThis.dc.html" aria-label="Back" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: -12px; color: #101014"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></a>
+    <div style="flex-grow: 1; height: 4px; background: #DEDDD5; border-radius: 2px; overflow: hidden"><div style="width: 70%; height: 4px; background: #3346D3"></div></div>
+    <div class="m" style="font-size: 12px; color: #5B5B66">3/4</div>
+  </div>
+
+  <h1 style="margin: 0; font-size: 32px; line-height: 1.04; font-weight: 800; font-stretch: 115%; letter-spacing: -1px">Anything you pay for in cash?</h1>
+  <p style="margin: 0; font-size: 16px; line-height: 1.45; color: #5B5B66">No statement shows these. A rough number is fine, we mark it as an estimate.</p>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 8px">
+    <button class="chip">Gym</button>
+    <button class="chip">Hairdresser</button>
+    <button class="chip">Kids' training</button>
+    <button class="chip">Lessons</button>
+    <button class="chip">Cleaning</button>
+    <button class="chip">Rent</button>
+    <button class="chip">Parking</button>
+    <button class="chip">Coffee</button>
+    <button class="chip on">Car wash</button>
+    <button class="chip" style="border-style: dashed; border-color: #9C9B93; background: transparent; color: #3346D3; font-weight: 600">+ Something else</button>
+  </div>
+
+  <div style="background: #FFFFFF; border: 1px solid #D5D4CC; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="font-size: 20px; font-weight: 700">Car wash</span>
+      <span class="m" style="font-size: 11px; font-weight: 600; letter-spacing: 1.2px; color: #8A5A00; border: 1.5px solid #F2B544; border-radius: 4px; padding: 3px 7px">ESTIMATE</span>
+    </div>
+    <span style="font-size: 15px; font-weight: 600">About how much each time</span>
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <button class="step" aria-label="Less">−</button>
+      <span style="font-size: 40px; font-weight: 800; font-stretch: 115%">€9.25</span>
+      <button class="step" aria-label="More">+</button>
+    </div>
+    <div style="border-top: 1px dashed #BDBCB3"></div>
+    <span style="font-size: 15px; font-weight: 600">How often</span>
+    <div style="display: flex">
+      <button class="seg" style="border-radius: 6px 0 0 6px">Weekly</button>
+      <button class="seg" style="margin-left: -1.5px">Monthly</button>
+      <button class="seg on" style="margin-left: -1.5px">3 months</button>
+      <button class="seg" style="margin-left: -1.5px; border-radius: 0 6px 6px 0">Yearly</button>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 14px; color: #5B5B66">That's about</span><span class="m" style="font-size: 17px; font-weight: 600">€37.00 a year</span></div>
+  </div>
+
+  <div style="flex-grow: 1"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 4px">
+    <a href="Usage.dc.html" class="btn">Add and continue</a>
+    <a href="Usage.dc.html" style="text-align: center; font-size: 15px; color: #101014; text-decoration: underline; text-underline-offset: 3px; padding: 10px 0">Nothing in cash</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

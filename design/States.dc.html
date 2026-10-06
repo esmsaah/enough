@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Edge states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Caveat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#E7E6E0;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#5B5B66}
+.btn{display:flex;justify-content:center;align-items:center;gap:10px;height:56px;background:#3346D3;color:#FFFFFF;border-radius:6px;font-size:17px;font-weight:700;text-decoration:none;border:0;width:100%;font-family:inherit;cursor:pointer}
+.btn:hover{background:#26379F;color:#FFFFFF}
+.chip{height:44px;padding:0 14px;border-radius:22px;border:1.5px solid #C9C8BF;background:#FFFFFF;color:#101014;font-family:'Archivo',sans-serif;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.p{width:390px;height:560px;box-sizing:border-box;background:#F2F1EC;border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.tag{display:flex;align-items:center;gap:10px;height:38px;padding:0 16px;background:#FFFFFF;border-bottom:1px solid #DEDDD5}
+.in{display:flex;flex-direction:column;gap:16px;padding:24px 20px 24px;flex-grow:1}
+.h{margin:0;font-size:28px;line-height:1.04;font-weight:800;font-stretch:115%;letter-spacing:-1px}
+.s{margin:0;font-size:15px;line-height:1.45;color:#5B5B66}
+.lnk{font-size:15px;color:#101014;text-decoration:underline;text-underline-offset:3px;padding:10px 0;text-align:center}
+.row{display:flex;justify-content:space-between;align-items:center;min-height:52px;border-top:1px solid #DEDDD5;font-size:16px;font-weight:600;color:#101014;text-decoration:none}
+.r{display:flex;justify-content:space-between}
+</style>
+</helmet>
+<div style="width: 1346px; height: 2600px; box-sizing: border-box; background: #E7E6E0; padding: 48px; display: flex; flex-direction: column; gap: 40px">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 80px">
+    <h1 style="margin: 0; font-size: 44px; font-weight: 800; font-stretch: 118%; letter-spacing: -1.5px">Edge states</h1>
+    <span style="font-size: 15px; color: #5B5B66">Each one offers a way forward. None is a dead end.</span>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px">
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">01</span><span class="cap">Short data · found items</span></div>
+      <div class="in">
+        <h2 class="h">4 things so far.</h2>
+        <div style="display: flex; gap: 10px; align-items: flex-start; background: #FFFFFF; border: 1.5px solid #F2B544; border-radius: 6px; padding: 12px 14px"><span class="m" style="font-size: 11px; font-weight: 600; color: #8A5A00; padding-top: 2px">1 MONTH</span><span style="font-size: 14px; line-height: 1.45">Add another month to find more. Most things only show up the second time they're charged.</span></div>
+        <div style="background: #FFFFFF; border: 1px solid #D5D4CC; border-radius: 8px; padding: 0 16px">
+          <div class="row" style="border-top: 0"><span>Netflix</span><span class="m" style="font-size: 14px">€191.88</span></div>
+          <div class="row"><span>Spotify</span><span class="m" style="font-size: 14px">€131.88</span></div>
+          <div class="row"><span>iCloud+</span><span class="m" style="font-size: 14px">€35.88</span></div>
+        </div>
+        <div style="flex-grow: 1"></div>
+        <a href="Upload.dc.html" class="btn">Add another month</a>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">02</span><span class="cap">Photo read · confirm rows</span></div>
+      <div class="in">
+        <h2 class="h">Did we read this right?</h2>
+        <p class="s">Photos can blur. Tap a row to fix it.</p>
+        <div class="m" style="background: #FBFAF6; border: 1px solid #DEDDD5; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; font-size: 13px">
+          <div class="r"><span>12.09 NETFLIX.COM</span><span>15.99</span></div>
+          <div class="r"><span>10.09 FIT ZONE DOO</span><span>40.00</span></div>
+          <div class="r" style="background: #FFF4DC; margin: 0 -8px; padding: 4px 8px"><span>08.09 D1SNEYPLU5</span><span>10.99 ?</span></div>
+          <div class="r"><span>05.09 DROPBOX*PLUS</span><span>11.99</span></div>
+        </div>
+        <span style="font-size: 13px; color: #8A5A00">1 row looks unsure</span>
+        <div style="flex-grow: 1"></div>
+        <a href="#" class="btn">Looks right</a>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">03</span><span class="cap">Unreadable file</span></div>
+      <div class="in">
+        <h2 class="h">We couldn't read this file.</h2>
+        <p class="s">It isn't a bank export we recognise. Try one of these instead.</p>
+        <div style="display: flex; flex-direction: column">
+          <a href="#" class="row">Export CSV or Excel from your bank<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+          <a href="#" class="row">Take a photo of the statement<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+          <a href="Cash.dc.html" class="row" style="border-bottom: 1px solid #DEDDD5">Add by hand<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+        </div>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">04</span><span class="cap">Scanned PDF</span></div>
+      <div class="in">
+        <h2 class="h">This PDF is a scan.</h2>
+        <p class="s">It's a picture of a page, so there's no text inside. We can read it like a photo, on your phone. It takes a little longer.</p>
+        <div style="flex-grow: 1"></div>
+        <a href="#" class="btn">Read it as a photo</a>
+        <a href="Cash.dc.html" class="lnk">Add by hand instead</a>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">05</span><span class="cap">Date format · asked once</span></div>
+      <div class="in">
+        <h2 class="h">One quick check.</h2>
+        <p class="s">Your statement writes dates like <span class="m" style="color: #101014">03/04/2026</span>. Which is it?</p>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <button class="chip" style="justify-content: space-between; border-radius: 6px; height: 52px">3 April 2026<span class="m" style="font-size: 12px; color: #5B5B66">DD/MM</span></button>
+          <button class="chip" style="justify-content: space-between; border-radius: 6px; height: 52px">March 4, 2026<span class="m" style="font-size: 12px; color: #5B5B66">MM/DD</span></button>
+        </div>
+        <span style="font-size: 13px; color: #5B5B66">We'll use it for the whole file.</span>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">06</span><span class="cap">Nothing recurring found</span></div>
+      <div class="in">
+        <h2 class="h">Nothing repeats yet.</h2>
+        <p class="s">We read 94 lines but found nothing charged on a regular rhythm. That usually means the file covers too little time.</p>
+        <div style="flex-grow: 1"></div>
+        <a href="Upload.dc.html" class="btn">Add more months</a>
+        <a href="QuickStart.dc.html" class="lnk">Tap what you pay for instead</a>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">07</span><span class="cap">One item only</span></div>
+      <div style="background: #14204A; color: #FFFFFF; padding: 22px 20px 24px; display: flex; flex-direction: column; gap: 8px">
+        <span class="m" style="font-size: 11px; letter-spacing: 1.4px; color: #A9B1D6">YOUR YEAR IN RECURRING COSTS</span>
+        <span style="font-size: 60px; line-height: 0.95; font-weight: 800; font-stretch: 120%; letter-spacing: -2px">€131.88</span>
+        <span style="font-size: 14px; color: #C9CEE8">1 thing · €10.99 every month</span>
+      </div>
+      <div class="in">
+        <p class="s" style="color: #101014">Disney+, twelve payments a year that are easy to stop noticing.</p>
+        <p class="s">Most people find 6 to 12 once they add a statement.</p>
+        <div style="flex-grow: 1"></div>
+        <a href="Upload.dc.html" class="btn">Add a bank statement</a>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">08</span><span class="cap">30+ items · grouped</span></div>
+      <div class="in">
+        <h2 class="h">34 things. Grouped so it stays readable.</h2>
+        <div style="background: #FFFFFF; border: 1px solid #D5D4CC; border-radius: 8px; padding: 0 16px">
+          <sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+            <button style="display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 0; border: 0; border-top: 1px solid #DEDDD5; background: transparent; font-family: 'Archivo', sans-serif; color: #101014; cursor: pointer; text-align: left">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5B5B66" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+              <span style="font-size: 16px; font-weight: 600; flex-grow: 1">{{ g.name }}</span>
+              <span class="m" style="font-size: 11px; color: #5B5B66">{{ g.count }}</span>
+              <span class="m" style="font-size: 14px; width: 84px; text-align: right">{{ g.year }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">09</span><span class="cap">Payment cancelled</span></div>
+      <div class="in">
+        <h2 class="h">The payment didn't go through.</h2>
+        <p class="s">Nothing is lost. Your answers and your result are right where you left them.</p>
+        <div class="r" style="align-items: baseline; border-top: 1px dashed #BDBCB3; padding-top: 14px"><span style="font-size: 44px; font-weight: 800; font-stretch: 118%; letter-spacing: -1.5px">€1,488</span><span style="font-size: 14px; color: #5B5B66">a year · 10 things</span></div>
+        <div style="flex-grow: 1"></div>
+        <a href="Result.dc.html" class="btn">Try again</a>
+        <a href="Result.dc.html" class="lnk">Back to my result</a>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">10</span><span class="cap">Email failed</span></div>
+      <div class="in">
+        <h2 class="h">We couldn't send it.</h2>
+        <p class="s">The email to you@example.com bounced. Check the address, or try again in a minute. Your audit is still here.</p>
+        <input value="you@example.com" aria-label="Email" style="height: 52px; box-sizing: border-box; border: 1.5px solid #C4320F; border-radius: 6px; background: #FFFFFF; padding: 0 14px; font-family: 'Archivo', sans-serif; font-size: 17px">
+        <div style="flex-grow: 1"></div>
+        <a href="#" class="btn">Send again</a>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">11</span><span class="cap">Email sent</span></div>
+      <div class="in">
+        <h2 class="h">Sent.</h2>
+        <p class="s">Your audit is on its way to you@example.com. It holds item names, amounts, verdicts and renewal dates. Nothing from your statement.</p>
+        <span style="font-family: 'Caveat', cursive; font-size: 26px; font-weight: 700; color: #3346D3; display: inline-block; transform: rotate(-2deg)">check your inbox</span>
+        <div style="flex-grow: 1"></div>
+        <a href="EmailShare.dc.html" class="btn">Make my share card</a>
+      </div></div>
+
+    <div class="p"><div class="tag"><span class="m" style="font-size: 12px; font-weight: 600">12</span><span class="cap">Inside TikTok or Instagram</span></div>
+      <div style="background: #14204A; color: #FFFFFF; flex-grow: 1; display: flex; flex-direction: column">
+        <div style="display: flex; align-items: center; gap: 10px; background: #FBFAF6; color: #101014; padding: 10px 8px 10px 16px">
+          <span style="font-size: 14px; line-height: 1.4; flex-grow: 1">This browser can wipe your progress. Open in Safari or Chrome.</span>
+          <a href="#" style="font-size: 14px; font-weight: 700; white-space: nowrap; padding: 12px 4px">Open</a>
+          <button aria-label="Dismiss" style="width: 44px; height: 44px; border: 0; background: transparent; color: #101014; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div style="padding: 28px 20px; display: flex; flex-direction: column; gap: 16px; flex-grow: 1">
+          <span style="font-size: 22px; font-weight: 800; font-stretch: 125%">Enough.</span>
+          <span style="font-size: 32px; line-height: 1.04; font-weight: 700; font-stretch: 110%; letter-spacing: -1px">Know what's worth paying for. <span style="color: #A9B1D6">Cut the rest.</span></span>
+          <div style="flex-grow: 1"></div>
+          <a href="QuickStart.dc.html" style="display: flex; justify-content: center; align-items: center; height: 56px; background: #D4EE8A; color: #101014; border-radius: 6px; font-size: 17px; font-weight: 700; text-decoration: none">Start my audit</a>
+        </div>
+      </div></div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1346,"height":2600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      groups: [
+        { name: 'Streaming and music', count: '7', year: '€804.12' },
+        { name: 'Bills', count: '6', year: '€1,912.40' },
+        { name: 'Gym and clubs', count: '4', year: '€702.60' },
+        { name: 'Apps and cloud', count: '9', year: '€431.52' },
+        { name: 'Delivery and taxi', count: '5', year: '€1,140.00' },
+        { name: 'Other', count: '3', year: '€96.00' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Design system</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Caveat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#F2F1EC;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#5B5B66}
+.sec{display:flex;align-items:baseline;justify-content:space-between;border-top:1.5px solid #101014;padding-top:12px}
+.sec h2{margin:0;font-size:26px;font-weight:800;font-stretch:118%;letter-spacing:-0.5px}
+.tile{background:#FFFFFF;border:1px solid #D5D4CC;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.btn{display:flex;justify-content:center;align-items:center;gap:10px;height:56px;background:#3346D3;color:#FFFFFF;border-radius:6px;font-size:17px;font-weight:700;text-decoration:none;border:0;width:100%;font-family:inherit;cursor:pointer}
+.btn:hover{background:#26379F;color:#FFFFFF}
+.chip{height:44px;padding:0 14px;border-radius:22px;border:1.5px solid #C9C8BF;background:#FFFFFF;color:#101014;font-family:'Archivo',sans-serif;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip.on{border-color:#3346D3;background:#3346D3;color:#FFFFFF;font-weight:600}
+.step{width:52px;height:52px;border-radius:26px;border:1.5px solid #C9C8BF;background:#FFFFFF;font-size:24px;color:#101014;cursor:pointer;font-family:inherit}
+.field{height:52px;box-sizing:border-box;border:1.5px solid #C9C8BF;border-radius:6px;background:#FFFFFF;padding:0 14px;font-family:'Archivo',sans-serif;font-size:17px;color:#101014;width:100%}
+.r{display:flex;justify-content:space-between}
+</style>
+</helmet>
+<div style="width: 1440px; height: 2300px; box-sizing: border-box; background: #F2F1EC; color: #101014; font-family: 'Archivo', sans-serif; padding: 72px 80px; display: flex; flex-direction: column; gap: 56px">
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-end">
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <span style="font-size: 30px; font-weight: 800; font-stretch: 125%; letter-spacing: -0.5px">Enough.</span>
+      <h1 style="margin: 0; font-size: 72px; line-height: 0.95; font-weight: 800; font-stretch: 120%; letter-spacing: -2.5px">Design system</h1>
+    </div>
+    <p style="margin: 0; max-width: 460px; font-size: 16px; line-height: 1.5; color: #5B5B66">Tokens live in <span class="m" style="font-size: 14px; color: #101014">/src/styles/tokens.css</span>. Use nothing else. Navy frames the big moments, indigo does the work, lime only ever marks money you found.</p>
+  </div>
+
+  <section style="display: flex; flex-direction: column; gap: 20px">
+    <div class="sec"><h2>Color</h2><span class="cap">contrast on the ground it is used on</span></div>
+    <div style="display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 16px">
+      <sc-for list="{{ colors }}" as="c" hint-placeholder-count="16">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div style="height: 76px; border-radius: 6px; border: 1px solid #D5D4CC; background: {{ c.hex }}"></div>
+          <span class="m" style="font-size: 12px; font-weight: 600; margin-top: 4px">{{ c.name }}</span>
+          <span class="m" style="font-size: 11px; color: #5B5B66">{{ c.hex }}</span>
+          <span style="font-size: 12px; line-height: 1.35; color: #5B5B66">{{ c.use }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px">
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <div class="sec"><h2>Type</h2><span class="cap">Archivo · IBM Plex Mono · Caveat</span></div>
+      <div class="r" style="align-items: baseline; border-bottom: 1px solid #DEDDD5; padding-bottom: 14px"><span style="font-size: 76px; line-height: 0.95; font-weight: 800; font-stretch: 120%; letter-spacing: -3px">€1,488</span><span class="cap">Total · 76 · 800 · wdth 120</span></div>
+      <div class="r" style="align-items: baseline; border-bottom: 1px solid #DEDDD5; padding-bottom: 14px"><span style="font-size: 34px; line-height: 1.02; font-weight: 800; font-stretch: 115%; letter-spacing: -1px">Tap what you pay for.</span><span class="cap">Title · 32–34 · 800</span></div>
+      <div class="r" style="align-items: baseline; border-bottom: 1px solid #DEDDD5; padding-bottom: 14px"><span style="font-size: 17px; font-weight: 700">Show my full cut list</span><span class="cap">Button · 17 · 700</span></div>
+      <div class="r" style="align-items: baseline; border-bottom: 1px solid #DEDDD5; padding-bottom: 14px"><span style="font-size: 16px; line-height: 1.45; color: #5B5B66">Start with the obvious ones.</span><span class="cap">Body · 16 / 1.45</span></div>
+      <div class="r" style="align-items: baseline; border-bottom: 1px solid #DEDDD5; padding-bottom: 14px"><span class="m" style="font-size: 13.5px">NETFLIX.COM &#160; €15.99</span><span class="cap">Amounts, dates, merchants · mono</span></div>
+      <div class="r" style="align-items: baseline; border-bottom: 1px solid #DEDDD5; padding-bottom: 14px"><span class="cap" style="color: #5B5B66">Your year in recurring costs</span><span class="cap">Label · mono 11 caps</span></div>
+      <div class="r" style="align-items: baseline"><span style="font-family: 'Caveat', cursive; font-size: 26px; font-weight: 700; color: #D2452A; display: inline-block; transform: rotate(-2deg)">not earning it</span><span class="cap">Hand note · 4 words max · 24+</span></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <div class="sec"><h2>Space and shape</h2><span class="cap">tokens</span></div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <div class="tile" style="gap: 8px"><span class="m" style="font-size: 13px; font-weight: 600">--radius · 6px</span><div style="height: 44px; border: 1.5px solid #101014; border-radius: 6px"></div><span style="font-size: 13px; color: #5B5B66">buttons, inputs, tags</span></div>
+        <div class="tile" style="gap: 8px"><span class="m" style="font-size: 13px; font-weight: 600">--radius-card · 8px</span><div style="height: 44px; border: 1.5px solid #101014; border-radius: 8px"></div><span style="font-size: 13px; color: #5B5B66">cards, share card</span></div>
+        <div class="tile" style="gap: 8px"><span class="m" style="font-size: 13px; font-weight: 600">--tap · 44px</span><div style="width: 44px; height: 44px; background: #3346D3; border-radius: 6px"></div><span style="font-size: 13px; color: #5B5B66">every tappable thing</span></div>
+        <div class="tile" style="gap: 8px"><span class="m" style="font-size: 13px; font-weight: 600">--button-h · 56px</span><div style="height: 56px; background: #3346D3; border-radius: 6px"></div><span style="font-size: 13px; color: #5B5B66">primary actions</span></div>
+        <div class="tile" style="gap: 8px"><span class="m" style="font-size: 13px; font-weight: 600">--gutter · 20px</span><div style="height: 44px; display: flex; gap: 0"><div style="width: 20px; background: #D4EE8A"></div><div style="flex-grow: 1; border: 1.5px dashed #BDBCB3; border-left: 0; border-right: 0"></div><div style="width: 20px; background: #D4EE8A"></div></div><span style="font-size: 13px; color: #5B5B66">side margins, section gap 18</span></div>
+        <div class="tile" style="gap: 8px"><span class="m" style="font-size: 13px; font-weight: 600">Never</span><span style="font-size: 14px; line-height: 1.5">Shadows, gradients, emoji, tilted cards, rows of checkmarks. Lime more than once on a screen.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 20px">
+    <div class="sec"><h2>Components</h2><span class="cap">build once, use everywhere</span></div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+
+      <div class="tile" style="padding: 0; overflow: hidden; background: #14204A; border-color: #14204A">
+        <span class="cap" style="color: #A9B1D6; padding: 16px 20px 0">Receipt · PenStrike · PenCircle</span>
+        <div style="display: flex; flex-direction: column; padding: 0 20px 20px">
+          <svg width="100%" height="10" viewBox="0 0 390 10" preserveAspectRatio="none" aria-hidden="true" style="display: block"><path d="M0 10 L0 5 L10 0 L20 5 L30 0 L40 5 L50 0 L60 5 L70 0 L80 5 L90 0 L100 5 L110 0 L120 5 L130 0 L140 5 L150 0 L160 5 L170 0 L180 5 L190 0 L200 5 L210 0 L220 5 L230 0 L240 5 L250 0 L260 5 L270 0 L280 5 L290 0 L300 5 L310 0 L320 5 L330 0 L340 5 L350 0 L360 5 L370 0 L380 5 L390 0 L390 10 Z" fill="#FBFAF6"></path></svg>
+          <div class="m" style="background: #FBFAF6; padding: 12px 18px; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px">
+            <div class="r"><span>Netflix</span><span>€191.88</span></div>
+            <div class="r"><span style="position: relative; display: inline-block">Disney+<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: -4px; top: 3px; width: calc(100% + 8px); height: 10px; overflow: visible"><path d="M1 6 C 18 3, 35 7, 55 4 S 88 3, 99 5" stroke="#D2452A" stroke-width="2.2" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"></path></svg></span><span style="color: #8E8D86">€131.88</span></div>
+            <div class="r" style="align-items: center"><span>FitZone Gym</span><span style="position: relative; display: inline-block; font-weight: 600; padding: 0 2px">€288<svg viewBox="0 0 60 30" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: -10px; top: -7px; width: calc(100% + 20px); height: 32px; overflow: visible"><path d="M8 17 C 6 6, 30 2, 46 5 C 58 8, 58 22, 42 26 C 26 29, 6 26, 4 16 C 3 11, 10 6, 18 5" stroke="#3346D3" stroke-width="1.8" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"></path></svg></span></div>
+            <div style="border-top: 1px dashed #BDBCB3"></div>
+            <div class="r" style="font-family: 'Archivo', sans-serif; align-items: baseline"><span style="font-size: 13px; font-weight: 700; letter-spacing: 1px">TOTAL, ONCE</span><span style="font-size: 26px; font-weight: 800; font-stretch: 115%">€4.99</span></div>
+          </div>
+          <svg width="100%" height="10" viewBox="0 0 390 10" preserveAspectRatio="none" aria-hidden="true" style="display: block"><path d="M0 0 L390 0 L390 5 L380 10 L370 5 L360 10 L350 5 L340 10 L330 5 L320 10 L310 5 L300 10 L290 5 L280 10 L270 5 L260 10 L250 5 L240 10 L230 5 L220 10 L210 5 L200 10 L190 5 L180 10 L170 5 L160 10 L150 5 L140 10 L130 5 L120 10 L110 5 L100 10 L90 5 L80 10 L70 5 L60 10 L50 5 L40 10 L30 5 L20 10 L10 5 L0 10 Z" fill="#FBFAF6"></path></svg>
+          <span style="font-size: 13px; color: #A9B1D6; margin-top: 12px">PenStrike draws in 250 ms when an item is cut. PenCircle marks the one number that matters.</span>
+        </div>
+      </div>
+
+      <div class="tile">
+        <span class="cap">Stamp · HandNote</span>
+        <div style="position: relative; height: 150px; background: #FFFFFF; border: 1px dashed #BDBCB3; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 0 16px">
+          <div class="m" style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 12.5px"><span style="color: #5B5B66">IBAN</span><span style="height: 12px; background: #101014; border-radius: 2px"></span><span style="font-size: 11px; color: #C4320F; font-weight: 600">REMOVED</span></div>
+          <div class="m" style="display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 12.5px"><span style="color: #5B5B66">Balance</span><span style="height: 12px; background: #101014; border-radius: 2px"></span><span style="font-size: 11px; color: #C4320F; font-weight: 600">REMOVED</span></div>
+          <div style="position: absolute; left: 110px; top: 44px; transform: rotate(-7deg); border: 2px solid #D2452A; border-radius: 4px; padding: 5px 9px; color: #D2452A; font-weight: 800; font-stretch: 120%; font-size: 12px; letter-spacing: 1.5px; line-height: 1.15; text-align: center; background: #FFFFFF">REDACTED<br><span style="font-size: 9.5px; letter-spacing: 1.2px; font-weight: 700">ON THIS PHONE</span></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <span style="font-family: 'Caveat', cursive; font-size: 26px; font-weight: 700; color: #D2452A; display: inline-block; transform: rotate(-3deg)">barely used</span>
+          <span style="font-family: 'Caveat', cursive; font-size: 24px; font-weight: 600; color: #3346D3; display: inline-block; transform: rotate(-2deg)">that's per visit →</span>
+        </div>
+        <span style="font-size: 13px; color: #5B5B66">Stamp is the only rotated label. Hand notes stay at 24px or larger.</span>
+      </div>
+
+      <div class="tile">
+        <span class="cap">Button</span>
+        <a href="#" class="btn">Show my full cut list</a>
+        <div style="background: #14204A; border-radius: 6px; padding: 14px"><a href="#" class="btn" style="background: #D4EE8A; color: #101014">Start my audit</a></div>
+        <div style="display: flex; gap: 10px"><a href="#" class="btn" style="background: #FFFFFF; color: #3346D3; border: 1.5px solid #3346D3">Save image</a><a href="#" class="btn" style="background: #DEDDD5; color: #5B5B66; cursor: default">Disabled</a></div>
+        <a href="#" style="font-size: 15px; color: #101014; text-decoration: underline; text-underline-offset: 3px">Text link for secondary actions</a>
+      </div>
+
+      <div class="tile">
+        <span class="cap">Chip</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button class="chip on">Netflix <span class="m" style="font-size: 12px; color: #C9CEF5">€15.99</span></button>
+          <button class="chip">Disney+</button>
+          <button class="chip" style="border-style: dashed; border-color: #9C9B93; background: transparent; color: #3346D3; font-weight: 600">+ Something else</button>
+        </div>
+        <span class="cap" style="margin-top: 6px">Tag</span>
+        <div style="display: flex; gap: 8px">
+          <span class="m" style="font-size: 11px; font-weight: 600; letter-spacing: 1.2px; color: #8A5A00; border: 1.5px solid #F2B544; border-radius: 4px; padding: 3px 7px">ESTIMATE</span>
+          <span class="m" style="font-size: 11px; font-weight: 600; color: #C4320F">REMOVED</span>
+        </div>
+      </div>
+
+      <div class="tile">
+        <span class="cap">Stepper · ProgressBar</span>
+        <div style="display: flex; align-items: center; justify-content: space-between"><button class="step" aria-label="Fewer">−</button><span style="font-size: 44px; font-weight: 800; font-stretch: 115%">3</span><button class="step" aria-label="More">+</button></div>
+        <div style="display: flex; align-items: center; gap: 12px; height: 44px">
+          <span style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; margin-left: -12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#101014" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></span>
+          <div style="flex-grow: 1; height: 4px; background: #DEDDD5; border-radius: 2px; overflow: hidden"><div style="width: 50%; height: 4px; background: #3346D3"></div></div>
+          <span class="m" style="font-size: 12px; color: #5B5B66">2/4</span>
+        </div>
+      </div>
+
+      <div class="tile">
+        <span class="cap">Input · Checkbox</span>
+        <input class="field" value="you@example.com" aria-label="Example email">
+        <label style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 1.4; cursor: pointer"><input type="checkbox" style="width: 22px; height: 22px; margin: 0; accent-color: #3346D3">Remind me 2 days before anything I flagged renews</label>
+        <span style="font-size: 13px; color: #5B5B66">Every checkbox starts unchecked.</span>
+      </div>
+
+      <div class="tile" style="grid-column: span 2">
+        <span class="cap">ItemRow · VerdictGroup</span>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; font-stretch: 115%; color: #C4320F; border-bottom: 1.5px solid #101014; padding-bottom: 8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4320F" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>Cut</span>
+            <div class="r" style="font-size: 16px; font-weight: 700"><span>Disney+</span><span class="m" style="font-size: 14px; font-weight: 500">€131.88</span></div>
+            <span style="font-size: 13px; color: #5B5B66">You said you almost never use it.</span>
+            <div class="r" style="font-size: 14px; font-weight: 600"><span>Cancel</span><span class="m">−€131.88/yr</span></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; font-stretch: 115%; color: #8A5A00; border-bottom: 1.5px solid #101014; padding-bottom: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A5A00" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M12 8v5"></path><path d="M12 16.5v.5"></path></svg>Look again</span>
+            <div class="r" style="font-size: 16px; font-weight: 700"><span>Dropbox Plus</span><span class="m" style="font-size: 14px; font-weight: 500">€143.88</span></div>
+            <span style="font-size: 13px; color: #5B5B66">Overlaps with iCloud+, which you use more.</span>
+            <div class="r" style="font-size: 14px; font-weight: 600"><span>Remove overlap</span><span class="m">−€143.88/yr</span></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; font-stretch: 115%; color: #3346D3; border-bottom: 1.5px solid #101014; padding-bottom: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3346D3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"></path></svg>Keep</span>
+            <div class="r" style="font-size: 16px; font-weight: 700"><span>Spotify</span><span class="m" style="font-size: 14px; font-weight: 500">€131.88</span></div>
+            <span style="font-size: 13px; color: #5B5B66">You use this. It's earning its place.</span>
+            <div class="r" style="font-size: 14px; font-weight: 600; color: #5B5B66"><span>Keep</span><span class="m">€0</span></div>
+          </div>
+        </div>
+        <span style="font-size: 13px; color: #5B5B66">A verdict is always a word and a shape, never color alone. One action per item, so savings never add up twice.</span>
+      </div>
+
+      <div class="tile" style="background: #14204A; border-color: #14204A; color: #FFFFFF">
+        <span class="cap" style="color: #A9B1D6">Found money · lime</span>
+        <span style="font-size: 15px; color: #C9CEE8">You could keep up to</span>
+        <span style="align-self: flex-start; font-size: 44px; line-height: 1; font-weight: 800; font-stretch: 118%; letter-spacing: -1.5px; background: #D4EE8A; color: #14204A; padding: 2px 6px">€699.60</span>
+        <span style="font-size: 13px; color: #A9B1D6">Once per screen, only for money the audit found.</span>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      colors: [
+        { name: '--navy', hex: '#14204A', use: 'Landing, result header, share card' },
+        { name: '--indigo', hex: '#3346D3', use: 'Buttons on light, keep, pen circles · 7.1 with white' },
+        { name: '--indigo-dark', hex: '#26379F', use: 'Pressed and hover' },
+        { name: '--lime', hex: '#D4EE8A', use: 'Found money only, once a screen · 12.3 on navy' },
+        { name: '--coral-pen', hex: '#D2452A', use: 'Strikes, stamps, hand notes at 24px+' },
+        { name: '--coral-text', hex: '#C4320F', use: 'Cut labels on light · 4.9' },
+        { name: '--amber', hex: '#F2B544', use: 'Estimate outline, look again marks' },
+        { name: '--amber-text', hex: '#8A5A00', use: 'Look again labels · 5.2' },
+        { name: '--ground', hex: '#F2F1EC', use: 'App background' },
+        { name: '--paper', hex: '#FBFAF6', use: 'Receipts' },
+        { name: '--white', hex: '#FFFFFF', use: 'Cards, inputs' },
+        { name: '--ink', hex: '#101014', use: 'Text, redaction bars' },
+        { name: '--muted', hex: '#5B5B66', use: 'Secondary text · 5.9' },
+        { name: '--muted-on-navy', hex: '#A9B1D6', use: 'Secondary on navy · 7.5' },
+        { name: '--line', hex: '#DEDDD5', use: 'Row dividers, progress track' },
+        { name: '--dash', hex: '#BDBCB3', use: 'Receipt dashes' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

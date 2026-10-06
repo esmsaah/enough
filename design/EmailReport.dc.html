@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Report email</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#E7E6E0;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.g{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px solid #101014;padding-bottom:8px;margin-top:28px}
+.i{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid #DEDDD5;font-size:15px}
+.i small{display:block;font-size:13px;color:#5B5B66;margin-top:3px}
+</style>
+</helmet>
+<div style="width: 680px; height: 1700px; box-sizing: border-box; background: #E7E6E0; padding: 32px 40px; display: flex; flex-direction: column; gap: 18px">
+  <div class="m" style="display: grid; grid-template-columns: 80px minmax(0, 1fr); row-gap: 6px; font-size: 13px; color: #5B5B66">
+    <span>FROM</span><span style="color: #101014">Enough</span>
+    <span>SUBJECT</span><span style="color: #101014; font-weight: 600">Your Enough audit, €1,488 a year</span>
+  </div>
+
+  <div style="background: #FBFAF6; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column">
+    <div style="background: #14204A; color: #FFFFFF; padding: 36px 44px 34px; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 20px; font-weight: 800; font-stretch: 125%">Enough.</span>
+      <span class="m" style="font-size: 11px; letter-spacing: 1.4px; color: #A9B1D6; margin-top: 18px">YOUR YEAR IN RECURRING COSTS</span>
+      <span style="font-size: 72px; line-height: 0.95; font-weight: 800; font-stretch: 120%; letter-spacing: -3px">€1,488</span>
+      <span style="font-size: 15px; color: #C9CEE8">10 things · €124 every month</span>
+    </div>
+    <div style="padding: 32px 44px 40px; display: flex; flex-direction: column">
+      <p style="margin: 0; font-size: 16px; line-height: 1.6">Here's your audit, kept in one place. Five things aren't earning their place. You could keep up to <span style="background: #D4EE8A; padding: 1px 4px; font-weight: 700">€699.60 a year</span>, based on what you told us.</p>
+
+      <div class="g"><span style="font-size: 17px; font-weight: 800; font-stretch: 115%; color: #C4320F">✕ Cut</span><span class="m" style="font-size: 12px">SAVES €323.88</span></div>
+      <div class="i"><div><b style="font-weight: 600">FitZone Gym</b><small>Pay per visit · −€192.00 a year</small></div><span class="m">€480.00</span></div>
+      <div class="i"><div><b style="font-weight: 600">Disney+</b><small>Cancel · −€131.88 a year · renews 14 Oct</small></div><span class="m">€131.88</span></div>
+
+      <div class="g"><span style="font-size: 17px; font-weight: 800; font-stretch: 115%; color: #8A5A00">○ Look again</span><span class="m" style="font-size: 12px">SAVES €375.72</span></div>
+      <div class="i"><div><b style="font-weight: 600">YouTube Premium</b><small>Remove overlap with Spotify · −€167.88 a year</small></div><span class="m">€167.88</span></div>
+      <div class="i"><div><b style="font-weight: 600">Dropbox Plus</b><small>Remove overlap with iCloud+ · −€143.88 a year</small></div><span class="m">€143.88</span></div>
+      <div class="i"><div><b style="font-weight: 600">Netflix</b><small>Rotate, pause 4 months a year · −€63.96 a year</small></div><span class="m">€191.88</span></div>
+
+      <div class="g"><span style="font-size: 17px; font-weight: 800; font-stretch: 115%; color: #3346D3">✓ Keep</span><span class="m" style="font-size: 12px">€372.52 A YEAR</span></div>
+      <div class="i"><span>Spotify</span><span class="m">€131.88</span></div>
+      <div class="i"><span>Max</span><span class="m">€119.88</span></div>
+      <div class="i"><span>Newspaper app</span><span class="m">€47.88</span></div>
+      <div class="i"><span>Car wash, estimate</span><span class="m">€37.00</span></div>
+      <div class="i"><span>iCloud+</span><span class="m">€35.88</span></div>
+
+      <a href="CutList.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; height: 52px; padding: 0 26px; margin-top: 30px; border-radius: 6px; background: #3346D3; color: #FFFFFF; font-size: 16px; font-weight: 700; text-decoration: none">Open my audit</a>
+
+      <p style="margin: 32px 0 0; font-size: 18px; line-height: 1.4; font-weight: 700; font-stretch: 108%">Not everything you pay for has to be essential. But everything you keep paying for should earn its place.</p>
+      <span style="font-size: 14px; color: #5B5B66; margin-top: 10px">[Founder name], who made Enough</span>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 8px; padding: 0 8px; font-size: 13px; line-height: 1.55; color: #5B5B66">
+    <span>We keep this email address, item names, amounts, verdicts and renewal dates for flagged items, so we can remind you. Nothing from your statement ever left your phone. Everything is deleted after 12 months.</span>
+    <a href="#unsubscribe">Unsubscribe and delete everything</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":680,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

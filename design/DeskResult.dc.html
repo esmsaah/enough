@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Result and paywall, desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Caveat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#F2F1EC;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#5B5B66}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;height:56px;padding:0 32px;background:#3346D3;color:#FFFFFF;border-radius:6px;font-size:17px;font-weight:700;text-decoration:none;border:0;font-family:inherit;cursor:pointer}
+.btn:hover{background:#26379F;color:#FFFFFF}
+.lnk{font-size:15px;color:#101014;text-decoration:underline;text-underline-offset:3px;padding:10px 0}
+.chip{height:44px;padding:0 16px;border-radius:22px;border:1.5px solid #C9C8BF;background:#FFFFFF;color:#101014;font-family:'Archivo',sans-serif;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip.on{border-color:#3346D3;background:#3346D3;color:#FFFFFF;font-weight:600}
+.st{display:flex;flex-direction:column;gap:8px;flex:1 1 0}
+.st i{display:block;height:4px;border-radius:2px;background:#DEDDD5}
+.st.on i{background:#3346D3}
+.st span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#5B5B66}
+.st.on span{color:#101014;font-weight:600}
+.rr{display:flex;justify-content:space-between;gap:12px}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1040px; box-sizing: border-box; overflow: hidden; background: #F2F1EC; color: #101014; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 56px; height: 76px; padding: 0 80px; border-bottom: 1px solid #DEDDD5">
+    <a href="LandingDesktop.dc.html" style="font-size: 24px; font-weight: 800; font-stretch: 125%; letter-spacing: -0.5px; color: #101014; text-decoration: none">Enough.</a>
+    <nav style="display: flex; gap: 12px; flex-grow: 1; max-width: 720px" aria-label="Steps">
+      <div class="st on"><i></i><span>1 Pick</span></div><div class="st on"><i></i><span>2 Statement</span></div><div class="st on"><i></i><span>3 Check</span></div><div class="st on"><i></i><span>4 Usage</span></div><div class="st on"><i></i><span>5 Result</span></div>
+    </nav>
+    <div style="flex-grow: 1"></div>
+    <a href="#delete" class="lnk" style="color: #5B5B66">Delete everything</a>
+  </header>
+
+  <div style="background: #14204A; color: #FFFFFF; padding: 48px 160px 52px; display: flex; justify-content: space-between; align-items: flex-end">
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <span class="m" style="font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #A9B1D6">Your year in recurring costs</span>
+      <span style="font-size: 120px; line-height: 0.92; font-weight: 800; font-stretch: 120%; letter-spacing: -5px">€1,488</span>
+      <span style="font-size: 17px; color: #C9CEE8">10 things · €124 every month · 3 months of statements</span>
+    </div>
+    <div style="width: 440px; box-sizing: border-box; border: 1.5px solid #A9B1D6; border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600"><span style="width: 8px; height: 8px; border-radius: 4px; background: #D2452A"></span>5 things aren't earning their place</div>
+      <span style="font-size: 15px; color: #C9CEE8">You could keep up to</span>
+      <div style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 56px; line-height: 1; font-weight: 800; font-stretch: 118%; letter-spacing: -2px; background: #D4EE8A; color: #14204A; padding: 2px 8px">€699.60</span><span style="font-size: 16px; color: #C9CEE8">a year</span></div>
+    </div>
+  </div>
+
+  <main style="display: grid; grid-template-columns: minmax(0, 1fr) 440px; column-gap: 120px; padding: 48px 160px 0; flex-grow: 1">
+    <section style="display: flex; flex-direction: column">
+      <span class="cap" style="padding-bottom: 12px">Preview of your cut list</span>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-top: 1px solid #DEDDD5">
+        <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 18px; font-weight: 700">Disney+</span><span style="font-size: 14px; color: #5B5B66">Almost never used · cancel</span></div>
+        <span class="m" style="font-size: 16px; font-weight: 600; color: #C4320F">+€131.88</span>
+      </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-top: 1px solid #DEDDD5; filter: blur(4px); opacity: 0.55" aria-hidden="true"><div style="display: flex; flex-direction: column; gap: 7px"><span style="display: block; width: 140px; height: 12px; background: #101014; border-radius: 2px"></span><span style="display: block; width: 220px; height: 9px; background: #BDBCB3; border-radius: 2px"></span></div><span style="display: block; width: 70px; height: 12px; background: #101014; border-radius: 2px"></span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-top: 1px solid #DEDDD5; filter: blur(4px); opacity: 0.55" aria-hidden="true"><div style="display: flex; flex-direction: column; gap: 7px"><span style="display: block; width: 120px; height: 12px; background: #101014; border-radius: 2px"></span><span style="display: block; width: 190px; height: 9px; background: #BDBCB3; border-radius: 2px"></span></div><span style="display: block; width: 70px; height: 12px; background: #101014; border-radius: 2px"></span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-top: 1px solid #DEDDD5; filter: blur(4px); opacity: 0.55" aria-hidden="true"><div style="display: flex; flex-direction: column; gap: 7px"><span style="display: block; width: 160px; height: 12px; background: #101014; border-radius: 2px"></span><span style="display: block; width: 240px; height: 9px; background: #BDBCB3; border-radius: 2px"></span></div><span style="display: block; width: 70px; height: 12px; background: #101014; border-radius: 2px"></span></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-top: 1px solid #DEDDD5; border-bottom: 1px solid #DEDDD5; filter: blur(4px); opacity: 0.55" aria-hidden="true"><div style="display: flex; flex-direction: column; gap: 7px"><span style="display: block; width: 110px; height: 12px; background: #101014; border-radius: 2px"></span><span style="display: block; width: 170px; height: 9px; background: #BDBCB3; border-radius: 2px"></span></div><span style="display: block; width: 70px; height: 12px; background: #101014; border-radius: 2px"></span></div>
+      <p style="margin: 20px 0 0; font-size: 15px; line-height: 1.5; color: #5B5B66; max-width: 520px">The other four, what to do with each, and a plan for your own target open the moment you pay.</p>
+    </section>
+
+    <aside style="display: flex; flex-direction: column; gap: 14px">
+      <div style="background: #FFFFFF; border: 1px solid #DEDDD5; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <div style="font-size: 21px; font-weight: 700; line-height: 1.2">See exactly what to cut, and what to keep.</div>
+        <div class="m" style="display: flex; flex-direction: column; gap: 9px; font-size: 13px">
+          <div class="rr" style="font-size: 10.5px; letter-spacing: 1.2px; color: #5B5B66"><span>YOUR FULL AUDIT</span><span>QTY 1</span></div>
+          <div style="border-top: 1px dashed #BDBCB3"></div>
+          <div style="display: flex; align-items: baseline; gap: 6px"><span>Cut / pause / keep, all 10</span><span style="flex-grow: 1; border-bottom: 1px dotted #BDBCB3"></span><span style="color: #5B5B66">incl.</span></div>
+          <div style="display: flex; align-items: baseline; gap: 6px"><span>Plan for your savings target</span><span style="flex-grow: 1; border-bottom: 1px dotted #BDBCB3"></span><span style="color: #5B5B66">incl.</span></div>
+          <div style="display: flex; align-items: baseline; gap: 6px"><span>Renewal emails, 12 months</span><span style="flex-grow: 1; border-bottom: 1px dotted #BDBCB3"></span><span style="color: #5B5B66">incl.</span></div>
+          <div style="display: flex; align-items: baseline; gap: 6px"><span>Monthly fee</span><span style="flex-grow: 1; border-bottom: 1px dotted #BDBCB3"></span><span style="color: #5B5B66">€0.00</span></div>
+          <div style="border-top: 1.5px solid #101014; margin-top: 2px"></div>
+          <div class="rr" style="font-family: 'Archivo', sans-serif; align-items: baseline"><span style="font-size: 14px; font-weight: 700; letter-spacing: 1px">TOTAL, ONCE</span><span style="font-size: 44px; font-weight: 800; font-stretch: 115%; letter-spacing: -1px">€4.99</span></div>
+        </div>
+        <label style="display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-size: 13.5px; line-height: 1.45"><input type="checkbox" required style="width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: #3346D3">I want immediate access to my audit and understand I lose the 14-day withdrawal right.</label>
+        <a href="DeskCutList.dc.html" class="btn">Show my full cut list</a>
+        <div style="text-align: center; font-size: 12.5px; color: #5B5B66">Secure checkout by Lemon Squeezy · instant access</div>
+      </div>
+      <div class="rr"><a href="#later" class="lnk">Not now</a><a href="#delete" class="lnk" style="color: #5B5B66">Delete everything</a></div>
+    </aside>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1040}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

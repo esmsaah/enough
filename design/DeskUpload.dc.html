@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Add statement, desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Caveat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#F2F1EC;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#5B5B66}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;height:56px;padding:0 32px;background:#3346D3;color:#FFFFFF;border-radius:6px;font-size:17px;font-weight:700;text-decoration:none;border:0;font-family:inherit;cursor:pointer}
+.btn:hover{background:#26379F;color:#FFFFFF}
+.lnk{font-size:15px;color:#101014;text-decoration:underline;text-underline-offset:3px;padding:10px 0}
+.chip{height:44px;padding:0 16px;border-radius:22px;border:1.5px solid #C9C8BF;background:#FFFFFF;color:#101014;font-family:'Archivo',sans-serif;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip.on{border-color:#3346D3;background:#3346D3;color:#FFFFFF;font-weight:600}
+.st{display:flex;flex-direction:column;gap:8px;flex:1 1 0}
+.st i{display:block;height:4px;border-radius:2px;background:#DEDDD5}
+.st.on i{background:#3346D3}
+.st span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#5B5B66}
+.st.on span{color:#101014;font-weight:600}
+.rr{display:flex;justify-content:space-between;gap:12px}
+</style>
+</helmet>
+<div style="width: 1440px; height: 900px; box-sizing: border-box; overflow: hidden; background: #F2F1EC; color: #101014; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 56px; height: 76px; padding: 0 80px; border-bottom: 1px solid #DEDDD5">
+    <a href="LandingDesktop.dc.html" style="font-size: 24px; font-weight: 800; font-stretch: 125%; letter-spacing: -0.5px; color: #101014; text-decoration: none">Enough.</a>
+    <nav style="display: flex; gap: 12px; flex-grow: 1; max-width: 720px" aria-label="Steps">
+      <div class="st on"><i></i><span>1 Pick</span></div><div class="st on"><i></i><span>2 Statement</span></div><div class="st"><i></i><span>3 Check</span></div><div class="st"><i></i><span>4 Usage</span></div><div class="st"><i></i><span>5 Result</span></div>
+    </nav>
+    <div style="flex-grow: 1"></div>
+    <a href="#delete" class="lnk" style="color: #5B5B66">Delete everything</a>
+  </header>
+
+  <main style="display: grid; grid-template-columns: minmax(0, 1fr) 400px; column-gap: 120px; padding: 64px 160px 0; flex-grow: 1">
+    <section style="display: flex; flex-direction: column; gap: 20px">
+      <h1 style="margin: 0; font-size: 52px; line-height: 1.0; font-weight: 800; font-stretch: 115%; letter-spacing: -1.8px">Add your bank statement.</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.45; color: #5B5B66; max-width: 600px">The last 3 months works best. Several files are fine, even from different banks.</p>
+      <label style="display: flex; align-items: center; gap: 24px; margin-top: 8px; padding: 28px; border: 2px dashed #BDBCB3; border-radius: 8px; background: #FFFFFF; cursor: pointer">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3346D3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M12 11v6M9 14l3-3 3 3"></path></svg>
+        <span style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1"><span style="font-size: 18px; font-weight: 700">Drop files here, or choose them</span><span class="m" style="font-size: 12px; color: #5B5B66">PDF · EXCEL · CSV · PHOTO</span></span>
+        <input type="file" multiple accept=".csv,.xls,.xlsx,.pdf,image/*" style="position: absolute; width: 1px; height: 1px; opacity: 0">
+        <span style="display: inline-flex; align-items: center; height: 44px; padding: 0 18px; border: 1.5px solid #3346D3; border-radius: 6px; color: #3346D3; font-weight: 700; font-size: 15px">Choose files</span>
+      </label>
+      <div style="background: #FFFFFF; border: 1px solid #D5D4CC; border-radius: 8px; padding: 0 20px">
+        <div class="m" style="display: grid; grid-template-columns: minmax(0, 1fr) 200px 60px; column-gap: 16px; align-items: center; min-height: 52px; font-size: 13.5px"><span>statement-jul.csv</span><span style="color: #5B5B66; font-size: 12px">112 lines read</span><span style="color: #3346D3; font-weight: 600; font-size: 11px; text-align: right">DONE</span></div>
+        <div class="m" style="display: grid; grid-template-columns: minmax(0, 1fr) 200px 60px; column-gap: 16px; align-items: center; min-height: 52px; font-size: 13.5px; border-top: 1px solid #DEDDD5"><span>statement-aug-sep.pdf</span><span style="height: 4px; background: #DEDDD5; border-radius: 2px; overflow: hidden; display: block"><span style="display: block; width: 54%; height: 4px; background: #3346D3"></span></span><span style="font-weight: 600; font-size: 11px; text-align: right">54%</span></div>
+      </div>
+      <span style="font-size: 16px; font-weight: 600">Reading on this computer. Nothing is uploaded.</span>
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><span class="cap" style="margin-right: 6px">Where to find the export</span><button class="chip on">Raiffeisen</button><button class="chip">Intesa</button><button class="chip">Revolut</button><button class="chip">Other bank</button></div>
+      <p style="margin: 0; font-size: 15px; line-height: 1.5">In e-banking, open your account, choose <span class="m" style="font-size: 13.5px">Izvod</span>, pick the last 3 months and download as PDF or Excel.</p>
+      <div style="flex-grow: 1"></div>
+      <div style="display: flex; align-items: center; gap: 28px; border-top: 1px dashed #BDBCB3; padding: 28px 0 56px">
+        <a href="DeskKeep.dc.html" class="btn">Continue</a>
+        <a href="DeskCash.dc.html" class="lnk">Add by hand instead</a>
+      </div>
+    </section>
+
+    <aside style="display: flex; flex-direction: column; padding-top: 6px">
+      <svg width="400" height="10" viewBox="0 0 390 10" preserveAspectRatio="none" aria-hidden="true" style="display: block"><path d="M0 10 L0 5 L10 0 L20 5 L30 0 L40 5 L50 0 L60 5 L70 0 L80 5 L90 0 L100 5 L110 0 L120 5 L130 0 L140 5 L150 0 L160 5 L170 0 L180 5 L190 0 L200 5 L210 0 L220 5 L230 0 L240 5 L250 0 L260 5 L270 0 L280 5 L290 0 L300 5 L310 0 L320 5 L330 0 L340 5 L350 0 L360 5 L370 0 L380 5 L390 0 L390 10 Z" fill="#FBFAF6"></path></svg>
+      <div class="m" style="background: #FBFAF6; padding: 18px 26px 20px; display: flex; flex-direction: column; gap: 11px; font-size: 14px">
+        <div class="rr" style="font-size: 11px; letter-spacing: 1.2px; color: #5B5B66"><span>YOUR AUDIT SO FAR</span><span>SEP 2026</span></div>
+        <div style="border-top: 1px dashed #BDBCB3"></div>
+        <div class="rr"><span>Netflix</span><span>€191.88</span></div>
+        <div class="rr"><span>Spotify</span><span>€131.88</span></div>
+        <div class="rr"><span>FitZone Gym</span><span>€480.00</span></div>
+        <div class="rr" style="color: #5B5B66"><span>Reading statement</span><span>· · ·</span></div>
+        <div style="border-top: 1.5px solid #101014; margin-top: 4px"></div>
+        <div class="rr" style="font-family: 'Archivo', sans-serif; align-items: baseline"><span style="font-size: 14px; font-weight: 700">So far, a year</span><span style="font-size: 40px; font-weight: 800; font-stretch: 118%; letter-spacing: -1px">€803.76</span></div>
+        <div class="rr" style="color: #5B5B66; font-size: 12px"><span>3 PICKED</span><span>€66.98/MO</span></div>
+      </div>
+      <svg width="400" height="10" viewBox="0 0 390 10" preserveAspectRatio="none" aria-hidden="true" style="display: block"><path d="M0 0 L390 0 L390 5 L380 10 L370 5 L360 10 L350 5 L340 10 L330 5 L320 10 L310 5 L300 10 L290 5 L280 10 L270 5 L260 10 L250 5 L240 10 L230 5 L220 10 L210 5 L200 10 L190 5 L180 10 L170 5 L160 10 L150 5 L140 10 L130 5 L120 10 L110 5 L100 10 L90 5 L80 10 L70 5 L60 10 L50 5 L40 10 L30 5 L20 10 L10 5 L0 10 Z" fill="#FBFAF6"></path></svg>
+      <p style="margin: 16px 0 0; font-size: 13.5px; line-height: 1.45; color: #5B5B66">This receipt fills up as you go. It lives on this device until you delete it.</p>
+    </aside>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

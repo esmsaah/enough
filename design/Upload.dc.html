@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Add statement</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Caveat:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#F2F1EC;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#5B5B66}
+.btn{display:flex;justify-content:center;align-items:center;gap:10px;height:56px;background:#3346D3;color:#FFFFFF;border-radius:6px;font-size:17px;font-weight:700;text-decoration:none;border:0;width:100%;font-family:inherit;cursor:pointer}
+.btn:hover{background:#26379F;color:#FFFFFF}
+.chip{height:44px;padding:0 14px;border-radius:22px;border:1.5px solid #C9C8BF;background:#FFFFFF;color:#101014;font-family:'Archivo',sans-serif;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.chip.on{border-color:#3346D3;background:#3346D3;color:#FFFFFF;font-weight:600}
+.f{display:grid;grid-template-columns:28px minmax(0,1fr) auto;column-gap:10px;row-gap:6px;align-items:center;padding:14px 16px;border-top:1px solid #DEDDD5}
+</style>
+</helmet>
+<div style="width: 390px; height: 900px; box-sizing: border-box; overflow: hidden; background: #F2F1EC; color: #101014; font-family: 'Archivo', sans-serif; padding: 20px 20px 28px; display: flex; flex-direction: column; gap: 18px">
+  <div style="display: flex; align-items: center; gap: 12px; height: 44px">
+    <a href="QuickStart.dc.html" aria-label="Back" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-left: -12px; color: #101014"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></a>
+    <div style="flex-grow: 1; height: 4px; background: #DEDDD5; border-radius: 2px; overflow: hidden"><div style="width: 38%; height: 4px; background: #3346D3"></div></div>
+    <div class="m" style="font-size: 12px; color: #5B5B66">2/4</div>
+  </div>
+
+  <h1 style="margin: 0; font-size: 32px; line-height: 1.04; font-weight: 800; font-stretch: 115%; letter-spacing: -1px">Add your bank statement.</h1>
+  <p style="margin: 0; font-size: 16px; line-height: 1.45; color: #5B5B66">The last 3 months works best. Several files are fine, even from different banks.</p>
+
+  <div style="background: #FFFFFF; border: 1px solid #D5D4CC; border-radius: 8px; display: flex; flex-direction: column">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px">
+      <span class="cap">3 files</span>
+      <label style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 15px; font-weight: 600; color: #3346D3; cursor: pointer"><input type="file" multiple accept=".csv,.xls,.xlsx,.pdf,image/*" style="position: absolute; width: 1px; height: 1px; opacity: 0">+ Add more</label>
+    </div>
+    <div class="f">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#101014" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg>
+      <div style="display: flex; flex-direction: column; gap: 2px"><span class="m" style="font-size: 13.5px">statement-jul.csv</span><span class="m" style="font-size: 11px; color: #5B5B66">112 lines read</span></div>
+      <span class="m" style="font-size: 11px; font-weight: 600; color: #3346D3">DONE</span>
+    </div>
+    <div class="f">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#101014" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg>
+      <div style="display: flex; flex-direction: column; gap: 2px"><span class="m" style="font-size: 13.5px">statement-aug-sep.pdf</span><span class="m" style="font-size: 11px; color: #5B5B66">page 2 of 3</span></div>
+      <span class="m" style="font-size: 11px; font-weight: 600">54%</span>
+      <div style="grid-column: 2 / 4; height: 4px; background: #DEDDD5; border-radius: 2px; overflow: hidden"><div style="width: 54%; height: 4px; background: #3346D3"></div></div>
+    </div>
+    <div class="f" style="color: #5B5B66">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B5B66" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M21 16l-5-5-9 8"></path></svg>
+      <div style="display: flex; flex-direction: column; gap: 2px"><span class="m" style="font-size: 13.5px">IMG_2231.jpg</span><span class="m" style="font-size: 11px">photo · waiting</span></div>
+      <span class="m" style="font-size: 11px">NEXT</span>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 10px">
+    <span style="font-size: 15px; font-weight: 600">Reading on your phone. Nothing is uploaded.</span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px; border-top: 1px dashed #BDBCB3; padding-top: 16px">
+    <span class="cap">Where to find the export</span>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px">
+      <button class="chip on">Raiffeisen</button>
+      <button class="chip">Intesa</button>
+      <button class="chip">Revolut</button>
+      <button class="chip">Other bank</button>
+    </div>
+    <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #101014">In the app, open your account, tap <span class="m" style="font-size: 13px">Izvod</span>, pick the last 3 months and save as PDF or Excel.</p>
+  </div>
+
+  <div style="flex-grow: 1"></div>
+
+  <div style="display: flex; flex-direction: column; gap: 4px">
+    <a href="WhatWeKeep.dc.html" class="btn">Continue</a>
+    <a href="Cash.dc.html" style="text-align: center; font-size: 15px; color: #101014; text-decoration: underline; text-underline-offset: 3px; padding: 10px 0">Add by hand instead</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

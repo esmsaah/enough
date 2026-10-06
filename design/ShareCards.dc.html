@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Enough — Share cards</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#E7E6E0;color:#101014}
+a{color:#3346D3}a:hover{color:#26379F}
+.m{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums}
+.lab{height:60px;display:flex;align-items:center;gap:16px;font-size:30px;color:#5B5B66}
+.lab b{font-weight:800;font-stretch:115%;color:#101014}
+.lime{background:#D4EE8A;color:#14204A;padding:0 14px}
+.rc{display:flex;justify-content:space-between;align-items:center;position:relative}
+</style>
+</helmet>
+<div style="width: 3560px; height: 3420px; box-sizing: border-box; background: #E7E6E0; padding: 80px; display: flex; flex-direction: column; gap: 100px">
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 80px">
+    <sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <div class="lab"><b>{{ c.tone }}</b>Story · 1080 × 1920</div>
+        <div style="width: 1080px; height: 1920px; box-sizing: border-box; background: #14204A; color: #FFFFFF; border-radius: 24px; padding: 150px 110px 120px; display: flex; flex-direction: column">
+          <span style="font-size: 56px; font-weight: 800; font-stretch: 125%; letter-spacing: -1px">Enough.</span>
+          <span class="m" style="font-size: 34px; letter-spacing: 4px; color: #A9B1D6; margin-top: 110px">{{ c.top }}</span>
+          <sc-if value="{{ c.isNum }}" hint-placeholder-val="{{ true }}">
+            <span style="font-size: 290px; line-height: 0.92; font-weight: 800; font-stretch: 120%; letter-spacing: -10px; margin-top: 30px">{{ c.big }}</span>
+          </sc-if>
+          <sc-if value="{{ c.isText }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size: 170px; line-height: 0.98; font-weight: 800; font-stretch: 115%; letter-spacing: -5px; margin-top: 30px">{{ c.big }}</span>
+          </sc-if>
+          <span style="font-size: 62px; line-height: 1.2; font-weight: 700; font-stretch: 108%; margin-top: 56px">{{ c.line }}</span>
+          <span style="align-self: flex-start; font-size: 62px; line-height: 1.35; font-weight: 800; font-stretch: 110%; margin-top: 44px" class="lime">{{ c.found }}</span>
+          <div class="m" style="margin-top: 70px; display: flex; flex-direction: column; gap: 34px; font-size: 36px; color: #A9B1D6">
+            <div class="rc"><span>············</span><span>€··.··</span><svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: -8px; top: 18px; width: calc(100% + 16px); height: 12px; overflow: visible"><path d="M1 6 C 18 3, 35 7, 55 4 S 88 3, 99 5" stroke="#D2452A" stroke-width="7" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"></path></svg></div>
+            <div class="rc"><span>·········</span><span>€··.··</span></div>
+            <div class="rc"><span>··········</span><span>€··.··</span><svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: -8px; top: 18px; width: calc(100% + 16px); height: 12px; overflow: visible"><path d="M1 5 C 25 7, 45 3, 70 6 S 92 4, 99 5" stroke="#D2452A" stroke-width="7" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"></path></svg></div>
+          </div>
+          <div style="flex-grow: 1"></div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 2px solid #2B3766; padding-top: 40px; font-size: 34px; color: #A9B1D6">
+            <span>Know what's worth paying for</span>
+            <span class="m" style="font-size: 30px">[DOMAIN]</span>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 80px">
+    <sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <div class="lab"><b>{{ c.tone }}</b>Square · 1080 × 1080</div>
+        <div style="width: 1080px; height: 1080px; box-sizing: border-box; background: #14204A; color: #FFFFFF; border-radius: 24px; padding: 96px 96px 84px; display: flex; flex-direction: column">
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <span style="font-size: 44px; font-weight: 800; font-stretch: 125%">Enough.</span>
+            <span class="m" style="font-size: 26px; letter-spacing: 3px; color: #A9B1D6">{{ c.top }}</span>
+          </div>
+          <sc-if value="{{ c.isNum }}" hint-placeholder-val="{{ true }}">
+            <span style="font-size: 220px; line-height: 0.92; font-weight: 800; font-stretch: 120%; letter-spacing: -8px; margin-top: 60px">{{ c.big }}</span>
+          </sc-if>
+          <sc-if value="{{ c.isText }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size: 132px; line-height: 0.98; font-weight: 800; font-stretch: 115%; letter-spacing: -4px; margin-top: 60px">{{ c.big }}</span>
+          </sc-if>
+          <span style="font-size: 46px; line-height: 1.2; font-weight: 700; font-stretch: 108%; margin-top: 40px">{{ c.line }}</span>
+          <div style="flex-grow: 1"></div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px">
+            <span style="font-size: 46px; line-height: 1.35; font-weight: 800; font-stretch: 110%" class="lime">{{ c.found }}</span>
+            <span class="m" style="font-size: 24px; color: #A9B1D6; white-space: nowrap">[DOMAIN]</span>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"hideAmounts":{"editor":"boolean","default":false,"section":"Card"},"$preview":{"width":3560,"height":3420}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const hide = this.props.hideAmounts ?? false;
+    const shown = [
+      { tone: 'Calm', top: 'EVERY MONTH, ADDED UP', big: '€1,488', isNum: true, line: 'a year on things I pay for every month.', found: '€699.60 of it isn’t earning its place.' },
+      { tone: 'Proud', top: 'OUT OF €1,488 A YEAR', big: 'I found €699.60.', isNum: false, line: 'Money I was paying for things I barely use.', found: 'Now it stays with me.' },
+      { tone: 'Honest', top: 'EVERY MONTH, ADDED UP', big: 'I had no idea.', isNum: false, line: 'I pay €1,488 a year for things I pay for every month.', found: '€699.60 of it isn’t earning its place.' }
+    ];
+    const hidden = [
+      { tone: 'Calm', top: 'WHAT I FOUND', big: '€699.60', isNum: true, line: 'a year going to things that aren’t earning their place.', found: 'Now I know which ones.' },
+      { tone: 'Proud', top: 'WHAT I FOUND', big: 'I found €699.60.', isNum: false, line: 'Money I was paying for things I barely use.', found: 'Now it stays with me.' },
+      { tone: 'Honest', top: 'WHAT I FOUND', big: 'I had no idea.', isNum: false, line: 'What I pay for every month, added up for a year, surprised me.', found: '€699.60 of it isn’t earning its place.' }
+    ];
+    return { cards: (hide ? hidden : shown).map((c) => ({ ...c, isText: !c.isNum })) };
+  }
+}
+</script>
+</body>
+</html>
