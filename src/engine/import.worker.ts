@@ -16,7 +16,8 @@ type StatementFile = { name: string; bytes: ArrayBuffer };
 scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files: StatementFile[] } | { id: number; type: 'dateFormat'; format: DateFormat }>) => {
   const { id } = event.data;
   try {
-    if (event.data.type === 'files') statementFiles = await Promise.all(event.data.files.map(async ({ name, bytes }) => {
+    if (event.data.type === 'files') {
+      const addedFiles = await Promise.all(event.data.files.map(async ({ name, bytes }) => {
       const extension = name.split('.').pop()?.toLowerCase();
       if (extension === 'csv' || extension === 'txt') return { rows: parseCsvBytes(new Uint8Array(bytes)) };
       if (extension === 'xls' || extension === 'xlsx') {
@@ -35,7 +36,9 @@ scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files:
         return { pdf: pages };
       }
       throw new Error('Choose a CSV, Excel (.xls, .xlsx), or text PDF statement.');
-    }));
+      }));
+      statementFiles = [...(statementFiles ?? []), ...addedFiles];
+    }
     if (!statementFiles) throw new Error('Choose a statement file first.');
     const batches = statementFiles.map((file) => {
       if (file.pdf) {
@@ -58,7 +61,7 @@ scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files:
     });
     const unique = new Map<string, (typeof batches)[number]['transactions'][number]>();
     for (const batch of batches) for (const transaction of batch.transactions) {
-      unique.set(`${transaction.date}\u0000${transaction.merchantRaw}\u0000${transaction.amount}\u0000${transaction.currency}`, transaction);
+      unique.set(`${transaction.date}\u0000${transaction.merchantRaw.trim().toLowerCase()}\u0000${transaction.amount}\u0000${transaction.currency}`, transaction);
     }
     const transactions = [...unique.values()];
     const meta = combineMeta(batches.map((batch) => batch.meta), transactions, event.data.type === 'dateFormat' ? event.data.format : undefined);

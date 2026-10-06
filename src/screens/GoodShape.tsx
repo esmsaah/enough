@@ -3,6 +3,7 @@
 import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { Button } from '../components/ui';
+import { ShareCard } from '../components/ShareCard';
 import { AuditSections } from './AuditSections';
 
 export function GoodShape() {
@@ -18,10 +19,7 @@ export function GoodShape() {
 
       <AuditSections />
 
-      <div className="card" style={{ background: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.18)', marginTop: 20 }}>
-        <p className="hand" style={{ fontSize: 22 }}>I checked. I'm in good shape.</p>
-        <p className="muted" style={{ fontSize: 13 }}>Share card (drawn in M6).</p>
-      </div>
+      <ShareCard currency={audit.currency} goodShape />
 
       <div style={{ marginTop: 22 }}>
         <Button variant="secondary" full onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>Add more and check again</Button>

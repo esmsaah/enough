@@ -31,7 +31,7 @@ export function FoundItems() {
         <ProgressBar step={3} total={4} />
         <p className="muted mono">SCREEN 5</p>
         <h1>Found items</h1>
-        <p className="muted">Check these recurring costs. You can change a category, remove an item or add anything missing.</p>
+        <p className="muted">Add your last 3 months for the best result. Check recurring costs, change a category or add anything missing.</p>
 
         {state.statement?.needMoreData && (
           <div className="card"><strong>Add another month to find more.</strong><p className="muted">You can continue with what this statement shows.</p></div>
@@ -46,13 +46,20 @@ export function FoundItems() {
           const category = CATEGORIES.find((c) => c.label === item.displayCategory) ?? CATEGORIES[CATEGORIES.length - 1]!;
           return (
             <article className="card found-item" key={item.id}>
-              <div className="row" style={{ alignItems: 'flex-start' }}>
+            <div className="row" style={{ alignItems: 'flex-start' }}>
                 <div>
                   <div className="row__name">{item.name}</div>
-                  <div className="row__meta muted">{item.frequency === 'oneTime' ? 'One-time · not recurring' : `${item.frequency} · ${formatMoney(item.price, item.currency)} per period`}</div>
-                  <div className="found-item__year mono">{item.frequency === 'oneTime' ? 'Not annualized' : `${formatMoney(yearlyCost(item), item.currency)} / year`}</div>
+                  <div className="row__meta muted">{item.category === 'bill'
+                    ? `Bill · ${item.charges === 1 ? 'seen once, add more months to confirm' : item.frequency}`
+                    : item.billingModel === 'usage' ? 'Pay-as-you-go · actual spend'
+                      : item.frequency === 'oneTime' ? 'One-time · not recurring' : `${item.frequency} · ${formatMoney(item.price, item.currency)} per period`}</div>
+                  <div className="found-item__year mono">{item.category === 'bill' ? 'Compare offers'
+                    : item.frequency === 'oneTime' || item.billingModel === 'usage' ? 'Not annualized' : `${formatMoney(yearlyCost(item), item.currency)} / year`}</div>
+                  {item.extraPurchases && <div className="row__meta muted">Extra purchases: {item.extraPurchases.charges} · {formatMoney(item.extraPurchases.total, item.currency)} total</div>}
                 </div>
-                <Button variant="ghost" onClick={() => dispatch({ type: 'removeItem', id: item.id })}>Remove</Button>
+                {item.category === 'bill'
+                  ? <Button variant="secondary" onClick={() => dispatch({ type: 'goto', step: 'usage' })}>Compare offers</Button>
+                  : <Button variant="ghost" onClick={() => dispatch({ type: 'removeItem', id: item.id })}>Remove</Button>}
               </div>
               {item.category === 'other' ? (
                 <label className="category-select-label">Choose a category
@@ -80,7 +87,7 @@ export function FoundItems() {
                 <div className="possible-recurring-row" key={item.merchantKey}>
                   <div>
                     <div className="row__name">{item.name}</div>
-                    <div className="row__meta muted">{formatMoney(item.price, item.currency)} · {item.charges} {item.charges === 1 ? 'charge' : 'charges'}{item.estimate ? ' · estimate' : ''}</div>
+                    <div className="row__meta muted">{item.category === 'bill' ? `Bill · ${item.charges === 1 ? 'seen once, add more months to confirm' : `${item.charges} charges`}` : `${formatMoney(item.price, item.currency)} · ${item.charges} ${item.charges === 1 ? 'charge' : 'charges'}`}{item.estimate ? ' · estimate' : ''}</div>
                   </div>
                   {needsChoice || item.estimate ? (
                     <label className="category-select-label">{needsChoice ? 'How often do you pay?' : 'Adjust estimate'}

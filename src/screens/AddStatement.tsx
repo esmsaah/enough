@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent } from 'react';
+import { useRef, useState, type ChangeEvent, type DragEvent } from 'react';
 import { useStore } from '../app/store';
 import { importStatement } from '../app/statementImport';
 import { Button, ProgressBar } from '../components/ui';
@@ -8,9 +8,9 @@ export function AddStatement() {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [dragging, setDragging] = useState(false);
 
-  async function onFile(event: ChangeEvent<HTMLInputElement>) {
-    const files = Array.from(event.target.files ?? []);
+  async function onFiles(files: File[]) {
     if (!files.length) return;
     setBusy(true);
     setError('');
@@ -20,8 +20,18 @@ export function AddStatement() {
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'This statement could not be read.');
       setBusy(false);
-      event.target.value = '';
+      if (input.current) input.current.value = '';
     }
+  }
+
+  async function onFile(event: ChangeEvent<HTMLInputElement>) {
+    await onFiles(Array.from(event.target.files ?? []));
+  }
+
+  function onDrop(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    setDragging(false);
+    void onFiles(Array.from(event.dataTransfer.files));
   }
 
   return (
@@ -34,12 +44,21 @@ export function AddStatement() {
 
         <section className="card">
           <h2 style={{ marginTop: 0 }}>Bank statement</h2>
-          <p>Choose one or more CSV, Excel, or text PDF exports from your bank. Never enter your bank login.</p>
+          <p>Add your last 3 months for the best result. Choose one or more CSV, Excel, or text PDF exports from your bank. Never enter your bank login.</p>
           <p className="muted" style={{ fontSize: 13 }}>Scanned PDFs and photos are coming next.</p>
-          <input ref={input} className="sr-only" type="file" accept=".csv,.txt,.xls,.xlsx,.pdf,text/csv,text/plain,application/pdf" multiple onChange={onFile} />
-          <Button full disabled={busy} onClick={() => input.current?.click()}>
-            {busy ? 'Reading on this phone…' : 'Choose statement file(s)'}
-          </Button>
+          <div
+            className={`file-dropzone${dragging ? ' file-dropzone--active' : ''}`}
+            onDragEnter={(event) => { event.preventDefault(); setDragging(true); }}
+            onDragOver={(event) => event.preventDefault()}
+            onDragLeave={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setDragging(false); }}
+            onDrop={onDrop}
+          >
+            <p className="file-dropzone__hint">Drop statement files here</p>
+            <input ref={input} className="sr-only" type="file" accept=".csv,.txt,.xls,.xlsx,.pdf,text/csv,text/plain,application/pdf" multiple onChange={onFile} />
+            <Button full disabled={busy} onClick={() => input.current?.click()}>
+              {busy ? 'Reading on this device…' : 'Choose statement file(s)'}
+            </Button>
+          </div>
           {error && <p role="alert" className="error-message">{error}</p>}
         </section>
 

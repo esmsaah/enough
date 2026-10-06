@@ -122,7 +122,7 @@ describe('synthetic merchant recurrence safeguards', () => {
     expect(result.possibleRecurring.find((item) => item.merchantKey === 'skillshare')?.frequency).toBe('yearly');
     expect(result.possibleRecurring.find((item) => item.merchantKey === 'local studio charge')).toMatchObject({ frequency: 'monthly', estimate: true, askBilling: true });
     expect(result.possibleRecurring.some((item) => ['outscraper', 'airalo'].includes(item.merchantKey))).toBe(false);
-    expect(result.habits.find((item) => item.merchantKey === 'outscraper')?.billingModel).toBe('usage');
+    expect(result.habits.find((item) => item.merchantKey === 'outscraper')).toMatchObject({ billingModel: 'usage', frequency: 'oneTime' });
     expect(result.habits.find((item) => item.merchantKey === 'airalo')?.frequency).toBe('oneTime');
   });
 
@@ -240,5 +240,44 @@ describe('synthetic merchant recurrence safeguards', () => {
       { date: '2026-09-09', merchantRaw: 'Cafe Central', amount: 12, currency: 'EUR', bankCategoryHint: 'eatingOut' },
     ], meta);
     expect(three.habits.find((item) => item.merchantKey === 'cafe central')).toMatchObject({ charges: 3, category: 'habit' });
+  });
+
+  it('separates an unknown merchant’s stable plan price from variable add-on purchases', () => {
+    const found = detect([
+      { date: '2026-06-01', merchantRaw: 'Upwork', amount: 19.99, currency: 'EUR' },
+      { date: '2026-06-08', merchantRaw: 'Upwork', amount: 8, currency: 'EUR' },
+      { date: '2026-07-01', merchantRaw: 'Upwork', amount: 19.99, currency: 'EUR' },
+      { date: '2026-07-18', merchantRaw: 'Upwork', amount: 12, currency: 'EUR' },
+      { date: '2026-08-01', merchantRaw: 'Upwork', amount: 19.99, currency: 'EUR' },
+      { date: '2026-08-04', merchantRaw: 'Upwork', amount: 5, currency: 'EUR' },
+    ], meta);
+    expect(found.recurring.find((item) => item.merchantKey === 'upwork')).toMatchObject({
+      price: 19.99, frequency: 'monthly', charges: 3, extraPurchases: { charges: 3, total: 25 },
+    });
+  });
+
+  it('treats regional shops and variable monthly shopping as spending, not subscriptions', () => {
+    const shops: Transaction[] = [
+      { date: '2026-06-01', merchantRaw: 'Maxi', amount: 31, currency: 'EUR' },
+      { date: '2026-07-01', merchantRaw: 'Maxi', amount: 42, currency: 'EUR' },
+      { date: '2026-08-01', merchantRaw: 'Maxi', amount: 26, currency: 'EUR' },
+      { date: '2026-06-03', merchantRaw: 'Apoteka Central', amount: 12, currency: 'EUR' },
+      { date: '2026-07-03', merchantRaw: 'Apoteka Central', amount: 15, currency: 'EUR' },
+      { date: '2026-08-03', merchantRaw: 'Apoteka Central', amount: 9, currency: 'EUR' },
+      { date: '2026-06-04', merchantRaw: 'MOL fuel', amount: 50, currency: 'EUR' },
+      { date: '2026-07-04', merchantRaw: 'MOL fuel', amount: 65, currency: 'EUR' },
+      { date: '2026-08-04', merchantRaw: 'MOL fuel', amount: 42, currency: 'EUR' },
+    ];
+    const found = detect(shops, meta);
+    expect(found.recurring).toHaveLength(0);
+    expect(found.possibleRecurring).toHaveLength(0);
+    expect(found.spendingByCategory).toMatchObject({ Groceries: 135, Transport: 157 });
+  });
+
+  it('keeps a single utility charge identified as a bill and never annualizes it', () => {
+    const found = detect([{ date: '2026-08-01', merchantRaw: 'Infostan', amount: 45, currency: 'EUR' }], meta);
+    expect(found.possibleRecurring.find((item) => item.merchantKey === 'infostan')).toMatchObject({
+      category: 'bill', billingModel: 'monthly', frequency: 'monthly', charges: 1,
+    });
   });
 });

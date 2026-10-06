@@ -1,9 +1,9 @@
 // Screen 10 — email report, renewal reminders and share card (§8, §10).
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
-import { formatMoney } from '../app/money';
+import { useMemo, useState, type FormEvent } from 'react';
 import { useStore } from '../app/store';
 import { clearEverything } from '../app/storage';
 import { Button, ProgressBar } from '../components/ui';
+import { ShareCard } from '../components/ShareCard';
 import { toReportSummary } from '../engine/report';
 import './email-share.css';
 
@@ -24,7 +24,6 @@ export function EmailShare() {
     .reduce((total, recommendation) => total + recommendation.potentialYearlySaving, 0);
   const hasDoneItems = doneIds.size > 0;
   const shareAmount = hasDoneItems ? doneSavings : audit.potentialYearlySaving;
-  const shareStatement = hasDoneItems ? 'I cut' : 'I could cut';
   const hasOptions = state.sendReport || state.enableReminders || state.newsConsent;
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.reportEmail);
   const canSubmit = hasOptions && emailValid && (!state.enableReminders || reminderCount > 0) && !sending;
@@ -40,7 +39,7 @@ export function EmailShare() {
         email: state.reportEmail.trim(),
         options: { report: state.sendReport, reminders: state.enableReminders, news: state.newsConsent },
         items: state.sendReport ? safeItems : state.enableReminders ? safeItems.filter((item) => item.nextCharge) : [],
-        ...(rotationReminderCount && audit.rotationPlan ? {
+        ...(state.enableReminders && rotationReminderCount && audit.rotationPlan ? {
           rotationReminders: {
             currency: audit.currency,
             monthlyCost: audit.rotationPlan.newMonthlyCost,
@@ -74,15 +73,8 @@ export function EmailShare() {
     <div className="screen email-share-screen">
       <ProgressBar step={4} total={4} />
       <p className="muted mono">YOUR NEXT STEPS</p>
-      <h1>Email and share.</h1>
-      <p className="muted">Your statement and transaction rows stay on this device. We send only the summary you choose below.</p>
-
-      <ShareCard
-        amount={shareAmount}
-        currency={audit.currency}
-        statement={shareStatement}
-        hasDoneItems={hasDoneItems}
-      />
+      <h1>Keep it close.</h1>
+      <p className="muted email-share-intro">We’ll send a short letter with your cut list, and nudge you before the things you flagged renew.</p>
 
       <form className="email-share-form" onSubmit={submit}>
         <label className="email-share-label" htmlFor="report-email">Email address</label>
@@ -96,6 +88,7 @@ export function EmailShare() {
           onChange={(event) => dispatch({ type: 'setReportEmail', email: event.target.value })}
           placeholder="you@example.com"
         />
+        <p className="muted">The one you used at checkout. Change it if you like.</p>
 
         <label className="consent-card">
           <input type="checkbox" checked={state.sendReport} onChange={(event) => dispatch({ type: 'setEmailConsent', key: 'sendReport', value: event.target.checked })} />
@@ -123,6 +116,8 @@ export function EmailShare() {
         )}
       </form>
 
+      <ShareCard currency={audit.currency} yearlyTotal={audit.yearlyTotal} saving={shareAmount} doneSaving={hasDoneItems} />
+
       <Button variant="secondary" full onClick={() => dispatch({ type: 'goto', step: 'cutlist' })}>Back to full list</Button>
       <button
         className="delete-all"
@@ -132,68 +127,5 @@ export function EmailShare() {
         }}
       >Delete everything</button>
     </div>
-  );
-}
-
-function ShareCard({ amount, currency, statement, hasDoneItems }: { amount: number; currency: string; statement: string; hasDoneItems: boolean }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const displayAmount = formatMoney(amount, currency, { round: true });
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas?.getContext('2d');
-    if (!canvas || !context) return;
-    canvas.width = 1200;
-    canvas.height = 630;
-    context.fillStyle = '#14204a';
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = '#d4ee8a';
-    context.fillRect(76, 82, 16, 16);
-    context.fillStyle = '#a9b1d6';
-    context.font = '700 28px ui-monospace, SFMono-Regular, Menlo, monospace';
-    context.fillText('ENOUGH  /  MY AUDIT', 118, 100);
-    context.fillStyle = '#ffffff';
-    context.font = '800 65px system-ui, sans-serif';
-    context.fillText(statement, 76, 250);
-    context.fillStyle = '#d4ee8a';
-    context.font = '800 100px ui-monospace, SFMono-Regular, Menlo, monospace';
-    const fittedAmount = displayAmount.length > 12 ? 76 : 100;
-    context.font = `800 ${fittedAmount}px ui-monospace, SFMono-Regular, Menlo, monospace`;
-    context.fillText(displayAmount, 76, 385);
-    context.fillStyle = '#a9b1d6';
-    context.font = '600 36px system-ui, sans-serif';
-    context.fillText(hasDoneItems ? 'a year · today' : 'a year · my next move', 80, 462);
-    context.fillStyle = '#ffffff';
-    context.font = '700 30px system-ui, sans-serif';
-    context.fillText('I checked what I pay for.', 80, 548);
-  }, [displayAmount, hasDoneItems, statement]);
-
-  async function shareOrDownload() {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
-    if (!blob) return;
-    const file = new File([blob], 'enough-audit.png', { type: 'image/png' });
-    if (navigator.share && navigator.canShare?.({ files: [file] })) {
-      try {
-        await navigator.share({ files: [file], title: 'My Enough audit' });
-        return;
-      } catch (error) {
-        if (error instanceof DOMException && error.name === 'AbortError') return;
-      }
-    }
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'enough-audit.png';
-    link.click();
-    URL.revokeObjectURL(url);
-  }
-
-  return (
-    <section className="share-card-section" aria-label="Share card">
-      <canvas ref={canvasRef} className="share-card-canvas" aria-label={`${statement} ${displayAmount} a year`} />
-      <p className="muted share-card-note">{hasDoneItems ? 'Based on the items you marked Done.' : 'Planned saving until you mark an item Done.'}</p>
-      <Button variant="secondary" full onClick={shareOrDownload}>Share or save card</Button>
-    </section>
   );
 }

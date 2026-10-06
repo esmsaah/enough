@@ -35,6 +35,7 @@ export type DetectedItem = {
   estimate: boolean;
   askBilling?: boolean;
   possibleDuplicateCharge?: { amount: number; firstCharge: string; secondCharge: string };
+  extraPurchases?: { charges: number; total: number };
   cancelUrl?: string;
   priceIncrease?: { from: number; to: number; yearlyIncrease: number };
   price: number; // per period, in display currency
@@ -181,7 +182,7 @@ export function transactionsFromRows(
     const cur = (currencyCol !== undefined ? (r[currencyCol] ?? '').trim().toUpperCase() : '') || headerCurrency || fallbackCurrency;
     for (const category of redactedDescriptionCategories(rawDesc)) redactedCategories.add(category);
     const bankCategoryHint = categoryCol === -1 ? undefined : classifyBankCategory(r[categoryCol] ?? '');
-    const billingModelHint = inferBillingModelHint(rawDesc)?.model;
+    const billingModelHint = inferBillingModelHint(rawDesc)?.model ?? inferBillingModelHint(fullDescription)?.model;
     raws.push({ date: rawDate, description: redactDescription(rawDesc), out, currency: cur, ...(billingModelHint ? { billingModelHint } : {}), ...(bankCategoryHint ? { bankCategoryHint } : {}) });
     dateStrings.push(rawDate);
   }
@@ -222,6 +223,7 @@ export function transactionsFromRows(
 export function detect(transactions: Transaction[], meta: ImportMeta, asOf = latestTransactionDate(transactions)): DetectionResult {
   const groups = new Map<string, Transaction[]>();
   const nameFor = new Map<string, string>();
+  const spendingOnly = new Map<string, { merchantKey: string; name: string }>();
   const spendingByCategory: Record<SpendingCategory, number> = {
     Groceries: 0,
     'Cafes & eating out': 0,
@@ -238,6 +240,12 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     if (spendCategory) spendingByCategory[spendCategory] += convert(t.amount, t.currency, meta.displayCurrency) ?? t.amount;
     const key = info?.merchantKey ?? normalized;
     if (!key) continue;
+    const analysisCategory = categoryOf(info, normalized, t.bankCategoryHint, t.billingModelHint).category;
+    if (spendCategory && isIgnoredMerchant(normalized)
+      && analysisCategory !== 'digital' && analysisCategory !== 'membership' && analysisCategory !== 'bill') {
+      if (isIgnoredMerchant(normalized)) spendingOnly.set(key, { merchantKey: key, name: info?.name ?? titleCase(normalized) });
+      continue;
+    }
     if (!groups.has(key)) {
       groups.set(key, []);
       nameFor.set(key, info?.name ?? titleCase(normalized));
@@ -250,7 +258,7 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
   const possibleRecurring: DetectedItem[] = [];
   const ended: DetectedItem[] = [];
   const mustAsk: DetectionResult['mustAsk'] = [];
-  const ignored: Array<{ merchantKey: string; name: string }> = [];
+  const ignored: Array<{ merchantKey: string; name: string }> = [...spendingOnly.values()];
 
   for (const [key, txs] of groups) {
     const normalized = normalizeMerchant(txs[0]!.merchantRaw);
@@ -280,16 +288,31 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     const intervalGuess = frequencyFromGaps(dayGaps(dates));
     const intervalModel: BillingModel | undefined = intervalGuess === 'monthly' ? 'monthly' : intervalGuess === 'yearly' ? 'yearly' : undefined;
     const explicitDescription = txs.some((transaction) => (inferBillingModelHint(transaction.merchantRaw)?.confidence ?? 0) >= 0.8);
-    const billingGuess = info?.billingModel ?? statementModel ?? (explicitDescription ? descriptionGuess : undefined) ?? bankCategoryModel(bankCategory) ?? priceGuess?.model ?? descriptionGuess ?? intervalModel;
-    const confidence = info ? 0.98 : statementModel ? 0.88 : explicitDescription ? 0.84 : bankCategory ? 0.78 : intervalModel ? 0.9 : priceGuess?.confidence ?? (descriptionGuess ? 0.72 : 0.35);
+    let billingGuess = info?.billingModel ?? statementModel ?? (explicitDescription ? descriptionGuess : undefined) ?? bankCategoryModel(bankCategory) ?? priceGuess?.model ?? descriptionGuess ?? intervalModel;
+    let confidence = info ? 0.98 : statementModel ? 0.88 : explicitDescription ? 0.84 : bankCategory ? 0.78 : intervalModel ? 0.9 : priceGuess?.confidence ?? (descriptionGuess ? 0.72 : 0.35);
     const last = dates[dates.length - 1]!;
-    const cat = categoryOf(info, normalized, bankCategory, billingGuess);
+    let cat = categoryOf(info, normalized, bankCategory, billingGuess);
 
     // Multiple entries for a utility on one date represent that day's total,
     // not separate observations in the recurring-price average.
     const observations = cat.category === 'bill' ? sumBillDayEntries(dates, amounts) : { dates, amounts };
     const observedDates = observations.dates;
     const observedAmounts = observations.amounts;
+    const stablePlan = cat.category === 'bill' || billingGuess === 'usage' || billingGuess === 'oneTime' || hasSinglePriceStep(observedAmounts)
+      ? undefined
+      : findStablePlan(observedAmounts, observedDates);
+    const planIndices = new Set(stablePlan?.indices ?? []);
+    const planDates = stablePlan ? stablePlan.indices.map((index) => observedDates[index]!) : observedDates;
+    const planAmounts = stablePlan ? stablePlan.indices.map((index) => observedAmounts[index]!) : observedAmounts;
+    const extraAmounts = stablePlan ? observedAmounts.filter((_, index) => !planIndices.has(index)) : [];
+    if (stablePlan && cat.category === 'other') {
+      cat = { category: 'digital', displayCategory: 'AI & Software' };
+    }
+    if (stablePlan) {
+      if (stablePlan.frequency === 'monthly' || stablePlan.frequency === 'yearly') billingGuess ??= stablePlan.frequency;
+      confidence = Math.max(confidence, 0.9);
+    }
+    const lastPlanCharge = planDates[planDates.length - 1] ?? last;
     const gaps = dayGaps(observedDates);
 
     const base = {
@@ -301,15 +324,16 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
       billingModel: billingGuess,
       cancelUrl: info?.cancelUrl,
       confidence,
-      estimate: confidence < 0.8,
+      estimate: confidence < 0.8 || new Set(dates.map((date) => date.slice(0, 7))).size <= 1,
       currency,
       approxConverted,
-      lastCharge: last,
+      lastCharge: lastPlanCharge,
       possibleDuplicateCharge: findPossibleDoubleCharges(txs).map((charge) => ({ amount: convert(charge.amount, charge.currency, currency) ?? charge.amount, firstCharge: charge.firstCharge, secondCharge: charge.secondCharge }))[0],
+      ...(extraAmounts.length ? { extraPurchases: { charges: extraAmounts.length, total: round2(extraAmounts.reduce((sum, amount) => sum + amount, 0)) } } : {}),
     };
 
     const canBeRecurring = cat.category === 'digital' || cat.category === 'membership' || cat.category === 'bill';
-    const fixed = amountsWithin(observedAmounts, 0.05, 0.05) || hasSinglePriceStep(observedAmounts);
+    const fixed = stablePlan !== undefined || amountsWithin(observedAmounts, 0.05, 0.05) || hasSinglePriceStep(observedAmounts);
     if (billingGuess === 'usage' || billingGuess === 'oneTime') {
       if (info?.category === 'habit' || perMonthCount(dates) >= 3) {
         habits.push(transactionalItem(base, observedAmounts, observedDates, billingGuess));
@@ -345,7 +369,7 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
       continue;
     }
 
-    const freq = frequencyFromGaps(gaps);
+    const freq = stablePlan?.frequency ?? frequencyFromGaps(gaps);
     if (!freq) {
       if (canBeRecurring && (cat.category === 'bill' || fixed)) possibleRecurring.push(candidateItem(base, observedAmounts, sorted.length, 'unknown'));
       continue;
@@ -353,20 +377,21 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
 
     if (!fixed && base.category !== 'bill') continue;
     const isBill = base.category === 'bill';
-    const price = isBill ? mean(observedAmounts) : observedAmounts[observedAmounts.length - 1]!; // bills: average; else latest price
+    const price = isBill ? mean(observedAmounts) : stablePlan ? median(planAmounts) : observedAmounts[observedAmounts.length - 1]!; // bills: average; plans: stable component only
+    const planIncrease = stablePlan ? detectPriceIncrease(planAmounts, freq) : undefined;
     const detected: DetectedItem = {
       ...base,
       category: isBill ? 'bill' : base.category,
       displayCategory: isBill && base.category !== 'bill' ? 'Bills & Utilities' : base.displayCategory,
       frequency: freq,
       price: round2(price),
-      nextCharge: addDays(last, INTERVALS.find((i) => i.freq === freq)!.days),
-      charges: sorted.length,
+      nextCharge: addDays(lastPlanCharge, INTERVALS.find((i) => i.freq === freq)!.days),
+      charges: stablePlan?.indices.length ?? sorted.length,
       confidence: billingGuess ? Math.max(confidence, 0.8) : 0.86,
-      estimate: confidence < 0.8,
+      estimate: base.estimate,
       approxConverted,
       bankCategoryHint: bankCategory,
-      priceIncrease: detectPriceIncrease(observedAmounts, freq),
+      priceIncrease: planIncrease ?? detectPriceIncrease(observedAmounts, freq),
     };
     const expectedInterval = INTERVALS.find((interval) => interval.freq === freq)!;
     const endedAfterDays = Math.max(60, expectedInterval.days + expectedInterval.tol);
@@ -409,16 +434,20 @@ function spendingCategoryFor(
   if (transaction.bankCategoryHint === 'eatingOut') return 'Cafes & eating out';
   if (info?.displayCategory === 'Transport' || /\b(fuel|petrol|gas station|parking|park|taxi|cab|ride|train|bus|transit|toll|metro)\b/.test(folded)) return 'Transport';
   if (info?.displayCategory === 'Shopping & Delivery') return 'Delivery';
+  if (transaction.billingModelHint === 'usage' || transaction.billingModelHint === 'oneTime'
+    || info?.billingModel === 'usage' || info?.billingModel === 'oneTime') return undefined;
   if (isIgnoredMerchant(normalized)) {
     if (/\b(ina|mol|fuel|petrol|gas station|benzin|crodux|eurotank|shell|omv)\b/.test(folded)) return 'Transport';
     return 'Groceries';
   }
+  if (transaction.bankCategoryHint === 'shopping') return 'Groceries';
+  if (/\b(supermarket|market|marketi|grocery|groceries|hipermarket|trgovina|food store|pharmacy|pharmacie|apoteka|drogerie|drugstore)\b/.test(folded)) return 'Groceries';
+  if (/\b(restaurant|restoran|cafe|coffee|kafana|bistro|fast food)\b/.test(folded)) return 'Cafes & eating out';
   const keywordCategory = classifyByKeyword(normalized);
   if (keywordCategory?.displayCategory === 'Transport') return 'Transport';
   if (keywordCategory?.displayCategory === 'Shopping & Delivery') return 'Delivery';
   if (keywordCategory?.category === 'habit' || info?.category === 'habit') return 'Cafes & eating out';
   if (/\b(grocery|groceries|supermarket|market|hipermarket|trgovina|food store)\b/.test(folded)) return 'Groceries';
-  if (transaction.bankCategoryHint === 'shopping' && /\b(grocery|groceries|supermarket|market|lidl|idea|spar|konzum|mercator|kaufland)\b/.test(folded)) return 'Groceries';
   return undefined;
 }
 
@@ -445,7 +474,8 @@ function categoryOf(
   if (info) return { category: info.category, displayCategory: info.displayCategory };
   if (billingModel === 'usage' || billingModel === 'oneTime') return { category: 'habit', displayCategory: 'Other' };
   if (bankCategory === 'bill') return { category: 'bill', displayCategory: 'Bills & Utilities' };
-  if (bankCategory === 'shopping' || bankCategory === 'eatingOut') return { category: 'habit', displayCategory: bankCategory === 'shopping' ? 'Shopping & Delivery' : 'Other' };
+  if (bankCategory === 'shopping') return { category: 'other', displayCategory: 'Other' };
+  if (bankCategory === 'eatingOut') return { category: 'habit', displayCategory: 'Other' };
   const kw = classifyByKeyword(normalized);
   if (kw) return kw;
   return { category: 'other', displayCategory: 'Other' };
@@ -512,6 +542,23 @@ function amountsWithin(amounts: number[], pct: number, step = 0): boolean {
   return amounts.every((a) => Math.abs(a - avg) <= tolerance);
 }
 
+/** Find the most frequent stable-price subset that itself follows a billing interval.
+ *  Variable same-merchant charges (for example add-ons) stay outside the plan. */
+function findStablePlan(amounts: number[], dates: string[]): { indices: number[]; frequency: Frequency } | undefined {
+  if (amounts.length < 2 || amounts.length !== dates.length) return undefined;
+  let best: { indices: number[]; frequency: Frequency } | undefined;
+  for (const anchor of amounts) {
+    const indices = amounts.map((amount, index) => Math.abs(amount - anchor) <= Math.max(0.05, Math.abs(anchor) * 0.05) ? index : -1).filter((index) => index >= 0);
+    if (indices.length < 2 || (best && indices.length < best.indices.length)) continue;
+    const planDates = indices.map((index) => dates[index]!);
+    const frequency = frequencyFromGaps(dayGaps(planDates));
+    const mostRecent = Math.max(...indices);
+    const previousMostRecent = best ? Math.max(...best.indices) : -1;
+    if (frequency && (!best || indices.length > best.indices.length || (indices.length === best.indices.length && mostRecent > previousMostRecent))) best = { indices, frequency };
+  }
+  return best;
+}
+
 // A merchant may change its tariff once during the statement window. Treat a
 // single transition between two independently stable price levels as one
 // price step (for example, Spotify's annual price increase), while rejecting
@@ -557,7 +604,7 @@ function candidateItem(
   charges: number,
   frequency: DetectedFrequency = 'unknown',
 ): DetectedItem {
-  return { ...base, frequency, price: round2(median(amounts)), charges, confidence: base.confidence ?? 0.35, estimate: (base.confidence ?? 0.35) < 0.8 };
+  return { ...base, frequency, price: round2(median(amounts)), charges, confidence: base.confidence ?? 0.35, estimate: base.estimate };
 }
 
 function transactionalItem(
@@ -569,8 +616,8 @@ function transactionalItem(
   return {
     ...base,
     category: 'habit',
-    frequency: billingModel === 'oneTime' ? 'oneTime' : 'monthly',
-    price: round2(billingModel === 'oneTime' ? mean(amounts) : monthlyAverage(amounts, dates)),
+    frequency: billingModel === 'oneTime' || amounts.length === 1 ? 'oneTime' : 'monthly',
+    price: round2(billingModel === 'oneTime' || amounts.length === 1 ? mean(amounts) : monthlyAverage(amounts, dates)),
     charges: amounts.length,
   };
 }

@@ -67,6 +67,8 @@ export type Item = {
   billingModel?: BillingModel;
   bankCategoryHint?: BankCategoryHint;
   confidence?: number; // 0–1 confidence in the inferred billing pattern
+  charges?: number;
+  extraPurchases?: { charges: number; total: number };
   source: Source;
   estimate: boolean; // true for cash and manual guesses
   lastCharge?: string; // ISO date, from statement

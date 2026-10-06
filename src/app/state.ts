@@ -3,7 +3,7 @@
 // runAudit; this only holds the inputs and where the person is in the flow.
 
 import type { BillingModel, Frequency, Item, Usage } from '../engine/types';
-import type { DetectionResult } from '../engine/detect';
+import { detect, type DetectionResult, type ImportMeta } from '../engine/detect';
 import type { QuickPick } from './catalog';
 
 export type Step =
@@ -87,7 +87,11 @@ export function reducer(state: State, action: Action): State {
     case 'goto':
       return { ...state, step: action.step };
 
-    case 'statementParsed':
+    case 'statementParsed': {
+      const result = mergeStatementResults(state.statement, action.result);
+      return { ...state, statement: result, currency: result.meta.displayCurrency, step: 'keep' };
+    }
+
     case 'statementDateFormat':
       return { ...state, statement: action.result, currency: action.result.meta.displayCurrency, step: 'keep' };
 
@@ -215,6 +219,26 @@ export function reducer(state: State, action: Action): State {
   }
 }
 
+function mergeStatementResults(previous: DetectionResult | undefined, added: DetectionResult): DetectionResult {
+  if (!previous) return added;
+  const unique = new Map<string, DetectionResult['transactions'][number]>();
+  for (const row of [...previous.transactions, ...added.transactions]) {
+    unique.set(`${row.date}\u0000${row.merchantRaw.trim().toLowerCase()}\u0000${row.amount}\u0000${row.currency}`, row);
+  }
+  const transactions = [...unique.values()];
+  const currencyCounts = new Map<string, number>();
+  for (const row of transactions) currencyCounts.set(row.currency, (currencyCounts.get(row.currency) ?? 0) + 1);
+  const dates = transactions.map((row) => row.date).sort();
+  const mergedMeta: ImportMeta = {
+    ...added.meta,
+    displayCurrency: [...currencyCounts].sort((a, b) => b[1] - a[1])[0]?.[0] ?? added.meta.displayCurrency,
+    monthsSpan: dates.length < 2 ? 0 : Math.max(0, (Date.parse(dates[dates.length - 1]!) - Date.parse(dates[0]!)) / 86_400_000 / 30),
+    redactedCategories: [...new Set([...previous.meta.redactedCategories, ...added.meta.redactedCategories])],
+    columnCount: Math.max(previous.meta.columnCount, added.meta.columnCount),
+  };
+  return detect(transactions, mergedMeta);
+}
+
 function actionItems(result?: DetectionResult): Item[] {
   if (!result) return [];
   return [...result.recurring, ...result.habits]
@@ -237,6 +261,8 @@ function detectedItemToInput(found: DetectionResult['possibleRecurring'][number]
     overlapGroup: found.overlapGroup,
     billingModel: found.billingModel,
     confidence: found.confidence,
+    charges: found.charges,
+    extraPurchases: found.extraPurchases,
     bankCategoryHint: found.bankCategoryHint,
     possibleDuplicateCharge: found.possibleDuplicateCharge,
     priceIncrease: found.priceIncrease,

@@ -10,6 +10,8 @@ import { QuickStart } from './screens/QuickStart';
 import { Result } from './screens/Result';
 import { Usage } from './screens/Usage';
 import { EmailShare } from './screens/EmailShare';
+import { DesktopHeader } from './components/DesktopHeader';
+import { DesktopReceipt } from './components/DesktopReceipt';
 
 function Flow() {
   const { state, audit } = useStore();
@@ -43,9 +45,20 @@ function Flow() {
 export function App() {
   return (
     <StoreProvider>
-      <div className="app">
-        <Flow />
-      </div>
+      <AppFrame />
     </StoreProvider>
+  );
+}
+
+function AppFrame() {
+  const { state } = useStore();
+  const showDesktopHeader = state.step !== 'landing';
+  const showReceipt = ['quickstart', 'addstatement', 'keep', 'found', 'anythingElse', 'usage', 'cutlist'].includes(state.step);
+  return (
+    <div className={`app${showReceipt ? ' app--with-receipt' : ''}`}>
+      {showDesktopHeader && <DesktopHeader />}
+      <main className="app-content"><Flow /></main>
+      {showReceipt && <DesktopReceipt />}
+    </div>
   );
 }

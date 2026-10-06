@@ -2,17 +2,19 @@ import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { Button } from '../components/ui';
 
-/** Shared result breakdown for both the paywall and good-shape outcomes. */
+/** Shared result breakdown for the paywall and good-shape outcomes. */
 export function AuditSections() {
+  return <div className="audit-sections"><SubscriptionsSection /><BreakdownSections /></div>;
+}
+
+export function SubscriptionsSection() {
   const { state, audit, dispatch } = useStore();
   const cur = audit.currency;
   const increases = audit.items.filter((item) => item.priceIncrease);
   const increaseTotal = increases.reduce((sum, item) => sum + (item.priceIncrease?.yearlyIncrease ?? 0), 0);
-  const categories = Object.entries(audit.spendingByCategory).filter(([, amount]) => amount > 0);
 
   return (
-    <div className="stack" style={{ marginTop: 24, gap: 16 }}>
-      <section aria-labelledby="subscriptions-heading">
+      <section className="audit-subscriptions" aria-labelledby="subscriptions-heading">
         <h2 id="subscriptions-heading">Subscriptions</h2>
         {increases.length > 0 && (
           <p className="muted" role="status">
@@ -43,7 +45,15 @@ export function AuditSections() {
           <label className="row"><span>Email rotation reminders</span><input type="checkbox" checked={state.rotationRemindersEnabled} onChange={(event) => dispatch({ type: 'setRotationReminders', enabled: event.target.checked })} /></label>
         </div>}
       </section>
+  );
+}
 
+export function BreakdownSections() {
+  const { audit, dispatch } = useStore();
+  const cur = audit.currency;
+  const categories = Object.entries(audit.spendingByCategory).filter(([, amount]) => amount > 0);
+  return (
+    <div className="audit-breakdown">
       <section aria-labelledby="bills-heading">
         <h2 id="bills-heading">Bills</h2>
         <div className="row"><span>Yearly total</span><strong>{formatMoney(audit.billYearlyTotal, cur, { round: true })}</strong></div>
