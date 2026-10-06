@@ -491,3 +491,15 @@ Enough is global from day one. The interface stays English in V1, but statements
 - Currencies. rates.ts covers at least the 40 most traded currencies. An unknown currency is shown unconverted with a note, never guessed.
 
 Test files: /fixtures/csv/global (AED with Arabic digits, SAR with Hijri dates, JPY, INR, CHF, TRY, BRL, THB with Buddhist Era), expected results in /fixtures/expected. Add them to fixtures.test.ts with forbiddenAfterRedaction from each expected file.
+
+---
+
+## Addendum, 2026-10-06 · AI understanding and price
+
+- Price is **€5.99 once** (`AUDIT_PRICE_EUR`).
+- Parsing and redaction still run fully on the device with no network calls. After parsing, two optional AI steps run, on by default, with a toggle on the upload screen.
+  1. **Merchant research** (`/api/merchants`). Only cleaned merchant names leave the device. The server learns what each merchant is (kind, category, billing model, plan prices, add-ons, cancel page) and caches it for everyone.
+  2. **Analyst** (`/api/analyse`). An anonymous item list (merchant, type, price, interval, usage) gets one human sentence per item and category corrections. The analyst never produces numbers.
+- Behaviour rules stay the final judge of plan price, extras and interval. If AI is off, offline or over the daily budget, the app works on rules alone.
+- Privacy promise: "We never see your statement. Only shop names and prices leave your device, never your name, account or dates."
+- Setup: D1 database `enough` with `schema.sql`, secret `ANTHROPIC_API_KEY` in Cloudflare Pages, D1 id in `wrangler.toml`.
