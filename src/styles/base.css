@@ -231,3 +231,6 @@ p { margin: 8px 0; }
   .share-card-preview--square { width: min(100%, 340px); }
   .share-card-controls { grid-template-columns: 1fr; }
 }
+
+.found-section__title { margin: 28px 0 2px; font-size: 20px; font-weight: 800; font-stretch: 112%; }
+.found-section__note { margin: 0 0 10px; font-size: 14px; }

@@ -97,7 +97,10 @@ export function reducer(state: State, action: Action): State {
 
     case 'acceptStatement': {
       const candidates = [...actionItems(state.statement)];
-      const items = [...state.items];
+      // A re-run over more statements replaces earlier statement findings, so
+      // an item reclassified by the new data (e.g. a shop) does not linger.
+      const candidateKeys = new Set(candidates.map((item) => item.merchantKey));
+      const items = state.items.filter((item) => item.source !== 'statement' || candidateKeys.has(item.merchantKey) || item.usage !== undefined);
       for (const item of candidates) {
         const index = items.findIndex((current) => item.merchantKey && current.merchantKey === item.merchantKey);
         if (index !== -1) {

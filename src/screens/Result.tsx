@@ -1,5 +1,5 @@
 // Screen 8 — Result + paywall. Section 8 & 9.
-import { formatMoney } from '../app/money';
+import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { useStore } from '../app/store';
 import { Button, VerdictBadge } from '../components/ui';
 import { Receipt } from '../components/Receipt';
@@ -49,9 +49,9 @@ export function Result() {
 
         <section className="result-checkout" aria-label="Unlock the full audit">
           <Receipt>
-            <div className="receipt__row"><span>Enough audit</span><span>{formatMoney(4.99, 'EUR')}</span></div>
+            <div className="receipt__row"><span>Enough audit</span><span>{formatMoney(AUDIT_PRICE_EUR, 'EUR')}</span></div>
             <hr className="receipt__divider" />
-            <div className="receipt__total"><span>TOTAL, ONCE</span><span>{formatMoney(4.99, 'EUR')}</span></div>
+            <div className="receipt__total"><span>TOTAL, ONCE</span><span>{formatMoney(AUDIT_PRICE_EUR, 'EUR')}</span></div>
           </Receipt>
           <Button variant="primary" full onClick={() => dispatch({ type: 'unlock' })}>Show my full cut list</Button>
           <p className="locked-note">One payment. No account. The rest of your list unlocks here.</p>

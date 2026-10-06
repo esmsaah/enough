@@ -281,3 +281,21 @@ describe('synthetic merchant recurrence safeguards', () => {
     });
   });
 });
+
+describe('known plan + add-ons', () => {
+  it('keeps the plan price and moves other charges from the same merchant to extras', () => {
+    const meta: ImportMeta = { displayCurrency: 'USD', dateFormat: 'iso', dateAmbiguous: false, monthsSpan: 3, redactedCategories: [], columnQuestions: [], columnCount: 3 };
+    const rows = [
+      { date: '2026-07-07', merchantRaw: 'Upwork', amount: 19.99, currency: 'USD' },
+      { date: '2026-07-20', merchantRaw: 'Upwork', amount: 27.49, currency: 'USD' },
+      { date: '2026-08-07', merchantRaw: 'Upwork', amount: 19.99, currency: 'USD' },
+      { date: '2026-09-07', merchantRaw: 'Upwork', amount: 19.99, currency: 'USD' },
+      { date: '2026-09-13', merchantRaw: 'Upwork', amount: 3, currency: 'USD' },
+    ];
+    const result = detect(rows, meta);
+    const upwork = result.recurring.find((item) => item.merchantKey === 'upwork');
+    expect(upwork?.frequency).toBe('monthly');
+    expect(upwork?.price).toBe(19.99);
+    expect(upwork?.extraPurchases).toEqual({ charges: 2, total: 30.49, label: 'Connects' });
+  });
+});

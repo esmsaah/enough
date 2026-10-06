@@ -6,7 +6,7 @@ _As of 2026-09-27 · Esma_
 
 ## 1. What to build
 
-Enough is a mobile-first web app, opened from a link with no install and no account, that audits a person's recurring costs once and tells them what to cut, pause or keep. It costs €4.99 once, charged only if the audit finds money the person can keep.
+Enough is a mobile-first web app, opened from a link with no install and no account, that audits a person's recurring costs once and tells them what to cut, pause or keep. It costs €5.99 once, charged only if the audit finds money the person can keep.
 
 The person adds a bank statement (CSV, Excel, text PDF or a photo), picks common services by tap, or enters costs by hand, including costs paid in cash. The app finds recurring payments, asks a few questions about usage, and shows the yearly cost of each item with one suggested action and its potential yearly saving.
 
@@ -35,7 +35,7 @@ Build the audit engine first, as pure tested functions, and put screens on top o
 
 **Definition of done for the whole V1**
 
-A person on a phone opens the link, adds a real statement or taps a few services, finishes the audit in under four minutes, pays €4.99, sees the full cut list, receives the report by email, and later gets a reminder before a flagged renewal.
+A person on a phone opens the link, adds a real statement or taps a few services, finishes the audit in under four minutes, pays €5.99, sees the full cut list, receives the report by email, and later gets a reminder before a flagged renewal.
 
 ## 3. Architecture
 
@@ -298,7 +298,7 @@ Two clear paths from the landing, few questions, and a finish that makes people 
 | 5 | Found items | build | list with yearly cost. Each unknown merchant has an inline category chip (one tap, replaces the separate "What is this?" cards). Remove, add, and "add another month to find more" |
 | 6 | Anything else? | build | one optional screen with a clear Skip. "Anything you pay yearly?" (insurance, domain, memberships) and "Anything you pay in cash?" (gym, hairdresser, kids' training, lessons, cleaning, rent, parking, coffee), amount and frequency, marked estimate |
 | 7 | Usage | designed, update | asked only for digital items and memberships. Up to 6 items, one card each (designed). More than 6, one screen with a row per item and three buttons |
-| 8 | Result + paywall | designed | yearly total, count, potential saving, first item visible, rest blurred, receipt with TOTAL, ONCE €4.99 |
+| 8 | Result + paywall | designed | yearly total, count, potential saving, first item visible, rest blurred, receipt with TOTAL, ONCE €5.99 |
 | 8b | Good shape | build | when nothing is found. No payment. Offers a share card "I checked. I'm in good shape." |
 | 9 | Full cut list | build | before and after yearly total, then the savings target tool right below it, then Cut, Look again, Keep. Each cut item has "Cancel now" (link to the cancel page when known) and a "Done" check. Each item has "Remind me before it renews" |
 | 10 | Email and share | build | report email, reminder opt-in for the items toggled on screen 9, share card showing money actually cut ("I cut €276 today") from items marked Done, or the planned saving if none are done yet |
@@ -313,7 +313,7 @@ Two clear paths from the landing, few questions, and a finish that makes people 
 
 ## 9. Paywall, payment and unlock
 
-One product in Lemon Squeezy, "Enough audit", €4.99, one-time. The overlay checkout keeps the person on the page, so the audit is never lost.
+One product in Lemon Squeezy, "Enough audit", €5.99, one-time. The overlay checkout keeps the person on the page, so the audit is never lost.
 
 **Before paying the person sees**
 
@@ -334,7 +334,7 @@ All other recommendations are not rendered at all until unlock (not just blurred
 
 **Honest limit**
 
-The engine runs on the device, so a technical person could read the recommendations from the code. For a €4.99 product this is acceptable. Do not add obfuscation or DRM.
+The engine runs on the device, so a technical person could read the recommendations from the code. For a €5.99 product this is acceptable. Do not add obfuscation or DRM.
 
 **Refunds**
 

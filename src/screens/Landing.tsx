@@ -1,6 +1,6 @@
 // Mobile and desktop versions follow design/Main and design/LandingDesktop.
 import { useStore } from '../app/store';
-import { formatMoney } from '../app/money';
+import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { Button } from '../components/ui';
 
 const EXAMPLE: Array<[string, number]> = [
@@ -23,7 +23,7 @@ export function Landing() {
             <Button variant="primary" full onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}>I have a bank statement</Button>
             <Button variant="secondary" full onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>I'll tap what I pay for</Button>
           </div>
-          <p className="landing-price">{formatMoney(4.99, 'EUR')} once, only if we find money you can keep</p>
+          <p className="landing-price">{formatMoney(AUDIT_PRICE_EUR, 'EUR')} once, only if we find money you can keep</p>
         </main>
         <aside className="landing-example" aria-label="Example yearly costs">
           <div className="landing-example__paper">

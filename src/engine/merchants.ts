@@ -12,7 +12,15 @@ export type MerchantInfo = {
   cancelUrl?: string;
   yearlyPrice?: number; // known cheaper annual price (rule 8), in EUR
   billingModel: BillingModel;
+  /** Known plan prices. Charges matching one are the plan; other charges from
+   *  the same merchant are add-ons (e.g. Upwork plan + Connects). */
+  plans?: KnownPlan[];
+  addonsLabel?: string;
+  /** 'builtin' = curated here, 'research' = learned by the merchant research API. */
+  origin?: 'builtin' | 'research';
 };
+
+export type KnownPlan = { price: number; currency: string; interval: 'monthly' | 'yearly' };
 
 type MerchantDef = Omit<MerchantInfo, 'billingModel'> & { aliases: string[]; billingModel: BillingModel };
 
@@ -34,6 +42,7 @@ const MERCHANTS: MerchantDef[] = [
   { merchantKey: 'canva', billingModel: 'monthly', name: 'Canva', category: 'digital', displayCategory: 'AI & Software', aliases: ['canva'] },
   { merchantKey: 'adobe', billingModel: 'monthly', name: 'Adobe', category: 'digital', displayCategory: 'AI & Software', aliases: ['adobe'] },
   { merchantKey: 'skillshare', billingModel: 'yearly', name: 'Skillshare', category: 'digital', displayCategory: 'Learning', aliases: ['skillshare'] },
+  { merchantKey: 'upwork', billingModel: 'monthly', name: 'Upwork', category: 'digital', displayCategory: 'AI & Software', plans: [{ price: 19.99, currency: 'USD', interval: 'monthly' }], addonsLabel: 'Connects', aliases: ['upwork'] },
   { merchantKey: 'outscraper', billingModel: 'usage', name: 'Outscraper', category: 'habit', displayCategory: 'Other', aliases: ['outscraper'] },
   { merchantKey: 'notion', billingModel: 'monthly', name: 'Notion', category: 'digital', displayCategory: 'AI & Software', aliases: ['notion'] },
   { merchantKey: 'microsoft', billingModel: 'monthly', name: 'Microsoft 365', category: 'digital', displayCategory: 'AI & Software', aliases: ['microsoft', 'office 365', 'microsoft 365', 'msft'] },
@@ -135,10 +144,28 @@ export function normalizeMerchant(raw: string): string {
 
 /** Look up a raw merchant string against the known-merchant map.
  *  Aliases match as WHOLE words; longest alias wins. */
+const RESEARCHED: MerchantDef[] = [];
+
+/** Add merchant profiles learned by the research API (cached per device).
+ *  Built-in entries always win over researched ones with the same key. */
+export function registerMerchantProfiles(profiles: Array<MerchantInfo & { aliases?: string[] }>): void {
+  const builtinKeys = new Set(MERCHANTS.map((def) => def.merchantKey));
+  for (const profile of profiles) {
+    if (!profile.merchantKey || builtinKeys.has(profile.merchantKey)) continue;
+    const def: MerchantDef = { ...profile, origin: 'research', aliases: profile.aliases?.length ? profile.aliases : [profile.merchantKey] };
+    const index = RESEARCHED.findIndex((existing) => existing.merchantKey === def.merchantKey);
+    if (index >= 0) RESEARCHED[index] = def; else RESEARCHED.push(def);
+  }
+}
+
+export function clearResearchedMerchants(): void {
+  RESEARCHED.length = 0;
+}
+
 export function matchMerchant(raw: string): MerchantInfo | undefined {
   const folded = foldMerchant(raw);
   const candidates: Array<{ alias: string; def: MerchantDef }> = [];
-  for (const def of MERCHANTS) {
+  for (const def of [...MERCHANTS, ...RESEARCHED]) {
     for (const alias of def.aliases) candidates.push({ alias, def });
   }
   candidates.sort((a, b) => b.alias.length - a.alias.length);

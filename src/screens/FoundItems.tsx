@@ -22,6 +22,14 @@ export function FoundItems() {
   const { state, dispatch } = useStore();
   const [frequencyChoices, setFrequencyChoices] = useState<Record<string, 'monthly' | 'yearly' | 'oneTime'>>({});
   const statementItems = state.items.filter((item) => item.source === 'statement');
+  const subscriptionItems = statementItems.filter((item) => item.category !== 'bill' && item.category !== 'habit');
+  const billItems = statementItems.filter((item) => item.category === 'bill');
+  const spendingItems = statementItems.filter((item) => item.category === 'habit');
+  const sections: Array<{ title: string; note: string; items: typeof statementItems }> = [
+    { title: 'Subscriptions', note: 'Digital services and memberships. These get a verdict.', items: subscriptionItems },
+    { title: 'Bills', note: 'You need these. We check if a better offer exists.', items: billItems },
+    { title: 'Spending', note: 'Pay-as-you-go and one-time. Not counted as subscriptions.', items: spendingItems },
+  ];
   const possibleRecurring = state.statement?.possibleRecurring.filter((candidate) => !state.items.some((item) => item.merchantKey === candidate.merchantKey)) ?? [];
   const ended = state.statement?.ended ?? [];
   const possibleDoubleCharges = state.statement?.possibleDoubleCharges ?? [];
@@ -42,7 +50,11 @@ export function FoundItems() {
             <h2 style={{ marginTop: 0 }}>No recurring costs found yet</h2>
             <p className="muted">Try another month of transactions or add costs by hand.</p>
           </div>
-        ) : statementItems.map((item) => {
+        ) : sections.filter((section) => section.items.length > 0).map((section) => (
+          <section key={section.title} aria-label={section.title}>
+            <h2 className="found-section__title">{section.title}</h2>
+            <p className="muted found-section__note">{section.note}</p>
+            {section.items.map((item) => {
           const category = CATEGORIES.find((c) => c.label === item.displayCategory) ?? CATEGORIES[CATEGORIES.length - 1]!;
           return (
             <article className="card found-item" key={item.id}>
@@ -55,11 +67,11 @@ export function FoundItems() {
                       : item.frequency === 'oneTime' ? 'One-time · not recurring' : `${item.frequency} · ${formatMoney(item.price, item.currency)} per period`}</div>
                   <div className="found-item__year mono">{item.category === 'bill' ? 'Compare offers'
                     : item.frequency === 'oneTime' || item.billingModel === 'usage' ? 'Not annualized' : `${formatMoney(yearlyCost(item), item.currency)} / year`}</div>
-                  {item.extraPurchases && <div className="row__meta muted">Extra purchases: {item.extraPurchases.charges} · {formatMoney(item.extraPurchases.total, item.currency)} total</div>}
+                  {item.extraPurchases && <div className="row__meta muted">{item.extraPurchases.label ?? 'Extra purchases'} bought separately · {item.extraPurchases.charges}× · {formatMoney(item.extraPurchases.total, item.currency)} total, not counted in the plan</div>}
                 </div>
                 {item.category === 'bill'
-                  ? <Button variant="secondary" onClick={() => dispatch({ type: 'goto', step: 'usage' })}>Compare offers</Button>
-                  : <Button variant="ghost" onClick={() => dispatch({ type: 'removeItem', id: item.id })}>Remove</Button>}
+                  ? <span className="category-tag">Bill</span>
+                  : <Button variant="ghost" onClick={() => dispatch({ type: 'removeItem', id: item.id })}>{item.category === 'habit' ? 'Hide' : 'Not mine'}</Button>}
               </div>
               {item.category === 'other' ? (
                 <label className="category-select-label">Choose a category
@@ -73,7 +85,9 @@ export function FoundItems() {
               ) : <span className="category-tag">{item.displayCategory}</span>}
             </article>
           );
-        })}
+            })}
+          </section>
+        ))}
 
         {possibleRecurring.length > 0 && (
           <section className="card" aria-label="Possible recurring costs">
@@ -103,13 +117,13 @@ export function FoundItems() {
                         <option value="oneTime">One-time</option>
                       </select>
                     </label>
-                  ) : <span className="category-tag">{item.frequency} {item.estimate ? 'estimate' : 'plan'}</span>}
+                  ) : <span className="category-tag">{item.category === 'bill' ? 'Bill' : `${item.frequency} ${item.estimate ? 'estimate' : 'plan'}`}</span>}
                   <Button
                     variant="secondary"
                     disabled={!allowed}
                     onClick={() => dispatch({ type: 'confirmPossible', merchantKey: item.merchantKey, frequency: selected as 'monthly' | 'yearly' | 'oneTime' })}
                   >
-                    {selected === 'oneTime' ? 'Add as one-time' : 'Confirm'}
+                    {selected === 'oneTime' ? 'Add as one-time' : item.category === 'bill' ? 'Add bill' : 'Confirm'}
                   </Button>
                 </div>
               );

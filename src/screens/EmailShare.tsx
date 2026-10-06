@@ -1,3 +1,4 @@
+import { resetStatements } from '../app/statementImport';
 // Screen 10 — email report, renewal reminders and share card (§8, §10).
 import { useMemo, useState, type FormEvent } from 'react';
 import { useStore } from '../app/store';
@@ -123,6 +124,7 @@ export function EmailShare() {
         className="delete-all"
         onClick={async () => {
           await clearEverything();
+          resetStatements();
           dispatch({ type: 'reset' });
         }}
       >Delete everything</button>

@@ -34,3 +34,8 @@ export async function importStatement(files: File[]): Promise<DetectionResult> {
 export function resolveStatementDates(format: DateFormat): Promise<DetectionResult> {
   return send({ type: 'dateFormat', format });
 }
+
+/** Forget every statement file held by the parsing worker (new audit / delete everything). */
+export function resetStatements(): void {
+  worker.postMessage({ id: ++nextId, type: 'reset' });
+}

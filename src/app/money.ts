@@ -22,3 +22,6 @@ export const YEARLY: Record<'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'one
 export function yearlyCost(item: { price: number; frequency: keyof typeof YEARLY }): number {
   return Math.round((item.price * YEARLY[item.frequency] + Number.EPSILON) * 100) / 100;
 }
+
+/** One-time audit price. Decided 2026-10-06: €5.99 (≈ €4 net after VAT, Lemon Squeezy fee and AI cost). */
+export const AUDIT_PRICE_EUR = 5.99;

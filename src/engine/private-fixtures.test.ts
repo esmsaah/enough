@@ -28,9 +28,11 @@ describe('local private statement regressions (private files are never committed
     for (const holder of holderValues) expect(transactions.some((transaction) => transaction.merchantRaw === holder)).toBe(false);
     const subscriptions = [...result.recurring, ...result.possibleRecurring];
     expect(upworkRows.length).toBeGreaterThan(1);
-    // This statement only repeats one Upwork amount on adjacent days, so it
-    // must not extrapolate that cluster as a regular subscription.
-    expect(subscriptions.some((item) => item.merchantKey.includes('upwork'))).toBe(false);
+    // Upwork: the 19.99 plan is the subscription, Connects purchases are extras.
+    const upwork = subscriptions.find((item) => item.merchantKey === 'upwork');
+    expect(upwork?.price).toBeCloseTo(19.99, 2);
+    expect(upwork?.extraPurchases?.label).toBe('Connects');
+    expect(upwork?.extraPurchases?.charges).toBeGreaterThan(0);
     expect(subscriptions.some((item) => item.merchantKey.includes('outscraper'))).toBe(false);
     for (const shop of ['maxi', 'idea', 'lidl', 'konzum', 'mercator', 'bingo', 'aman']) {
       expect(subscriptions.some((item) => item.merchantKey.includes(shop))).toBe(false);

@@ -1,3 +1,4 @@
+import { resetStatements } from '../app/statementImport';
 // Screen 9 — Full cut list (after unlock). Section 8 & 9.
 // Before/after yearly total, the savings-target tool, then Cut / Look again /
 // Keep. Cut items get "Cancel now" and a Done check; every item can be flagged
@@ -86,6 +87,7 @@ export function CutList() {
         className="delete-all"
         onClick={async () => {
           await clearEverything();
+          resetStatements();
           dispatch({ type: 'reset' });
         }}
       >

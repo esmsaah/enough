@@ -6,7 +6,7 @@
 import { classifyHeader, foldHeader, looksLikeHeaderRow, type ColumnRole } from './headers';
 import { classifyByKeyword, isIgnoredMerchant, isPrivateTransfer } from './keywords';
 import { inferColumns, isComplete as isCompletedValue, isOutgoing as isOutgoingValue, type ColumnOverrides, type ColumnQuestion } from './columns';
-import { matchMerchant, normalizeMerchant } from './merchants';
+import { matchMerchant, normalizeMerchant, type KnownPlan } from './merchants';
 import { convert } from './rates';
 import { detectDateFormat, normalizeDigits, parseAmount, parseDate, type DateFormat } from './parse';
 import { redactDescription, redactedDescriptionCategories } from './redact';
@@ -35,7 +35,7 @@ export type DetectedItem = {
   estimate: boolean;
   askBilling?: boolean;
   possibleDuplicateCharge?: { amount: number; firstCharge: string; secondCharge: string };
-  extraPurchases?: { charges: number; total: number };
+  extraPurchases?: { charges: number; total: number; label?: string };
   cancelUrl?: string;
   priceIncrease?: { from: number; to: number; yearlyIncrease: number };
   price: number; // per period, in display currency
@@ -298,9 +298,10 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     const observations = cat.category === 'bill' ? sumBillDayEntries(dates, amounts) : { dates, amounts };
     const observedDates = observations.dates;
     const observedAmounts = observations.amounts;
-    const stablePlan = cat.category === 'bill' || billingGuess === 'usage' || billingGuess === 'oneTime' || hasSinglePriceStep(observedAmounts)
+    const knownPlan = info?.plans?.length ? matchKnownPlan(observedAmounts, info.plans, currency) : undefined;
+    const stablePlan = knownPlan ?? (cat.category === 'bill' || billingGuess === 'usage' || billingGuess === 'oneTime' || hasSinglePriceStep(observedAmounts)
       ? undefined
-      : findStablePlan(observedAmounts, observedDates);
+      : findStablePlan(observedAmounts, observedDates));
     const planIndices = new Set(stablePlan?.indices ?? []);
     const planDates = stablePlan ? stablePlan.indices.map((index) => observedDates[index]!) : observedDates;
     const planAmounts = stablePlan ? stablePlan.indices.map((index) => observedAmounts[index]!) : observedAmounts;
@@ -329,7 +330,7 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
       approxConverted,
       lastCharge: lastPlanCharge,
       possibleDuplicateCharge: findPossibleDoubleCharges(txs).map((charge) => ({ amount: convert(charge.amount, charge.currency, currency) ?? charge.amount, firstCharge: charge.firstCharge, secondCharge: charge.secondCharge }))[0],
-      ...(extraAmounts.length ? { extraPurchases: { charges: extraAmounts.length, total: round2(extraAmounts.reduce((sum, amount) => sum + amount, 0)) } } : {}),
+      ...(extraAmounts.length ? { extraPurchases: { charges: extraAmounts.length, total: round2(extraAmounts.reduce((sum, amount) => sum + amount, 0)), ...(info?.addonsLabel ? { label: info.addonsLabel } : {}) } } : {}),
     };
 
     const canBeRecurring = cat.category === 'digital' || cat.category === 'membership' || cat.category === 'bill';
@@ -544,6 +545,19 @@ function amountsWithin(amounts: number[], pct: number, step = 0): boolean {
 
 /** Find the most frequent stable-price subset that itself follows a billing interval.
  *  Variable same-merchant charges (for example add-ons) stay outside the plan. */
+// A merchant whose plan prices are known (built in or researched): charges
+// near a plan price are the plan, everything else from it is an add-on.
+function matchKnownPlan(amounts: number[], plans: KnownPlan[], currency: string): { indices: number[]; frequency: Frequency } | undefined {
+  let best: { indices: number[]; frequency: Frequency } | undefined;
+  for (const plan of plans) {
+    const price = convert(plan.price, plan.currency, currency) ?? plan.price;
+    const tolerance = Math.max(0.05, price * (plan.currency === currency ? 0.05 : 0.12));
+    const indices = amounts.map((amount, index) => Math.abs(amount - price) <= tolerance ? index : -1).filter((index) => index >= 0);
+    if (indices.length && (!best || indices.length > best.indices.length)) best = { indices, frequency: plan.interval };
+  }
+  return best;
+}
+
 function findStablePlan(amounts: number[], dates: string[]): { indices: number[]; frequency: Frequency } | undefined {
   if (amounts.length < 2 || amounts.length !== dates.length) return undefined;
   let best: { indices: number[]; frequency: Frequency } | undefined;
@@ -629,6 +643,9 @@ function findPossibleDoubleCharges(transactions: Transaction[]): PossibleDoubleC
     const info = isPrivateTransfer(normalized) ? undefined : matchMerchant(transaction.merchantRaw);
     const category = categoryOf(info, normalized, transaction.bankCategoryHint).category;
     if (category !== 'digital' && category !== 'bill') continue;
+    // Merchants that sell add-ons (Upwork Connects): repeated add-on purchases
+    // are normal; only a repeated plan charge can be a double charge.
+    if (info?.plans?.length && !matchKnownPlan([transaction.amount], info.plans, transaction.currency)) continue;
     const merchantKey = info?.merchantKey ?? normalized;
     if (!merchantKey.trim()) continue;
     const group = groups.get(merchantKey) ?? [];

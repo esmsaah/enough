@@ -13,8 +13,12 @@ let statementFiles: Array<{ rows?: string[][]; pdf?: PdfPage[] }> | undefined;
 const scope = self as DedicatedWorkerGlobalScope;
 
 type StatementFile = { name: string; bytes: ArrayBuffer };
-scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files: StatementFile[] } | { id: number; type: 'dateFormat'; format: DateFormat }>) => {
+scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files: StatementFile[] } | { id: number; type: 'dateFormat'; format: DateFormat } | { id: number; type: 'reset' }>) => {
   const { id } = event.data;
+  if (event.data.type === 'reset') {
+    statementFiles = undefined;
+    return;
+  }
   try {
     if (event.data.type === 'files') {
       const addedFiles = await Promise.all(event.data.files.map(async ({ name, bytes }) => {
