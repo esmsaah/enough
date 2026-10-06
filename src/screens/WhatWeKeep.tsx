@@ -41,6 +41,13 @@ export function WhatWeKeep() {
         {result.meta.redactedCategories.length === 0 && <p className="muted">No extra personal fields were found in this export.</p>}
 
         <h2>Kept rows</h2>
+        {result.meta.columnQuestions.length > 0 && <div className="card" role="group" aria-label="Choose statement columns">
+          <h2 style={{ marginTop: 0 }}>Which columns should we use?</h2>
+          <p className="muted">We could not confidently identify these fields. Column numbers start at 1.</p>
+          {result.meta.columnQuestions.map((question) => <p key={question.role}>
+            Which column is {question.role}? {question.candidates.length ? `Candidates: ${question.candidates.map((candidate) => candidate + 1).join(', ')}.` : 'No text columns were detected.'}
+          </p>)}
+        </div>}
         {result.transactions.length === 0 ? (
           <div className="card"><p>No transaction rows could be read from this file. Try a CSV with date, description and amount columns.</p></div>
         ) : (

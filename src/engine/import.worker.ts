@@ -40,13 +40,13 @@ scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files:
     const batches = statementFiles.map((file) => {
       if (file.pdf) {
         const parsed = transactionsFromPdfPages(file.pdf);
-        if (!parsed.transactions.length) throw new Error('This PDF has no selectable text. Try a CSV or Excel export instead.');
+        if (!file.pdf.some((page) => page.some((cell) => cell.str.trim()))) throw new Error('This PDF has no selectable text. Try a CSV or Excel export instead.');
         return {
           transactions: parsed.transactions,
           meta: {
             displayCurrency: parsed.transactions[0]?.currency ?? 'EUR', dateFormat: 'dmy' as const,
             dateAmbiguous: false, monthsSpan: 0, redactedCategories: parsed.redactedCategories,
-            columnQuestions: [], columnCount: 0,
+            columnQuestions: parsed.columnQuestions, columnCount: parsed.columnCount,
           },
         };
       }
