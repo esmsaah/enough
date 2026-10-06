@@ -110,7 +110,7 @@ function ItemCard({ rec }: { rec: Recommendation }) {
         </span>
         <VerdictBadge verdict={rec.verdict} />
       </div>
-      <p className="muted" style={{ margin: '6px 0 0', fontSize: 14 }}>{rec.reason}</p>
+      <p className="muted" style={{ margin: '6px 0 0', fontSize: 14 }}>{state.analystNotes[rec.itemId]?.reason ?? rec.reason}</p>
       <div className="row" style={{ marginTop: 8 }}>
         <span className="amount-mono">{formatMoney(rec.yearlyCost, cur, { round: true })}/yr</span>
         {rec.potentialYearlySaving > 0 && (

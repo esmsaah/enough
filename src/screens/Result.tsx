@@ -43,7 +43,7 @@ export function Result() {
 
         {firstItem && firstCut && <section className="card result-first-action" aria-label="First suggested action">
           <div className="row"><span className="row__name" style={{ color: 'var(--white)' }}>{firstItem.name}</span><VerdictBadge verdict={firstCut.verdict} /></div>
-          <p className="muted" style={{ margin: '6px 0 0' }}>{firstCut.reason}</p>
+          <p className="muted" style={{ margin: '6px 0 0' }}>{state.analystNotes[firstCut.itemId]?.reason ?? firstCut.reason}</p>
           <p className="mono" style={{ margin: '4px 0 0', color: 'var(--lime)' }}>save {formatMoney(firstCut.potentialYearlySaving, cur, { round: true })}/yr</p>
         </section>}
 

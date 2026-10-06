@@ -1,10 +1,12 @@
 import { useRef, useState, type ChangeEvent, type DragEvent } from 'react';
 import { useStore } from '../app/store';
 import { importStatement } from '../app/statementImport';
+import { researchMerchants } from '../app/merchantResearch';
 import { Button, ProgressBar } from '../components/ui';
 
 export function AddStatement() {
-  const { dispatch } = useStore();
+  const { state, dispatch } = useStore();
+  const [status, setStatus] = useState('');
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -16,10 +18,15 @@ export function AddStatement() {
     setError('');
     try {
       const result = await importStatement(files);
+      if (state.aiRecognition) {
+        setStatus('Recognising shop names…');
+        await researchMerchants(result.transactions, result.meta.displayCurrency);
+      }
       dispatch({ type: 'statementParsed', result });
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'This statement could not be read.');
       setBusy(false);
+      setStatus('');
       if (input.current) input.current.value = '';
     }
   }
@@ -40,7 +47,7 @@ export function AddStatement() {
         <ProgressBar step={1} total={4} />
         <p className="muted mono">SCREEN 2A</p>
         <h1>Add a statement</h1>
-        <p className="muted">Your file is read on this phone. It is never uploaded.</p>
+        <p className="muted">Your file is read on this device and never uploaded. Only shop names are checked online, never amounts, dates or your details.</p>
 
         <section className="card">
           <h2 style={{ marginTop: 0 }}>Bank statement</h2>
@@ -56,9 +63,13 @@ export function AddStatement() {
             <p className="file-dropzone__hint">Drop statement files here</p>
             <input ref={input} className="sr-only" type="file" accept=".csv,.txt,.xls,.xlsx,.pdf,text/csv,text/plain,application/pdf" multiple onChange={onFile} />
             <Button full disabled={busy} onClick={() => input.current?.click()}>
-              {busy ? 'Reading on this device…' : 'Choose statement file(s)'}
+              {busy ? (status || 'Reading on this device…') : 'Choose statement file(s)'}
             </Button>
           </div>
+          <label className="ai-toggle">
+            <input type="checkbox" checked={state.aiRecognition} onChange={(event) => dispatch({ type: 'setAiRecognition', enabled: event.target.checked })} />
+            Use AI to recognise shop names (names only)
+          </label>
           {error && <p role="alert" className="error-message">{error}</p>}
         </section>
 

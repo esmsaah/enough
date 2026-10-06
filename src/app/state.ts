@@ -31,6 +31,10 @@ export type State = {
   newsConsent: boolean;
   rotationPinnedIds: string[];
   rotationRemindersEnabled: boolean;
+  /** Names-only merchant research and the anonymous AI analyst. On by default. */
+  aiRecognition: boolean;
+  /** Analyst notes by item id: one human sentence, never an amount. */
+  analystNotes: Record<string, { reason?: string; moveTo?: 'subscription' | 'bill' | 'spending'; displayCategory?: Item['displayCategory'] }>;
 };
 
 export const initialState: State = {
@@ -44,6 +48,8 @@ export const initialState: State = {
   newsConsent: false,
   rotationPinnedIds: [],
   rotationRemindersEnabled: false,
+  aiRecognition: true,
+  analystNotes: {},
 };
 
 export type Action =
@@ -72,6 +78,8 @@ export type Action =
   | { type: 'setEmailConsent'; key: 'sendReport' | 'enableReminders' | 'newsConsent'; value: boolean }
   | { type: 'unlock' }
   | { type: 'reset' }
+  | { type: 'setAiRecognition'; enabled: boolean }
+  | { type: 'analystNotes'; notes: State['analystNotes'] }
   | { type: 'hydrate'; state: State };
 
 function newId(): string {
@@ -212,6 +220,21 @@ export function reducer(state: State, action: Action): State {
 
     case 'unlock':
       return { ...state, unlocked: true, step: 'cutlist' };
+    case 'setAiRecognition':
+      return { ...state, aiRecognition: action.enabled };
+
+    case 'analystNotes': {
+      const items = state.items.map((item) => {
+        const note = action.notes[item.id];
+        if (!note?.moveTo && !note?.displayCategory) return item;
+        if (note.moveTo === 'bill') return { ...item, category: 'bill' as const, displayCategory: 'Bills & Utilities' as const };
+        if (note.moveTo === 'spending') return { ...item, category: 'habit' as const, displayCategory: note.displayCategory ?? item.displayCategory };
+        if (note.moveTo === 'subscription' && (item.category === 'habit' || item.category === 'other')) return { ...item, category: 'digital' as const, displayCategory: note.displayCategory ?? item.displayCategory };
+        return note.displayCategory ? { ...item, displayCategory: note.displayCategory } : item;
+      });
+      return { ...state, items, analystNotes: { ...state.analystNotes, ...action.notes } };
+    }
+
     case 'reset':
       return { ...initialState };
     case 'hydrate':
@@ -223,7 +246,8 @@ export function reducer(state: State, action: Action): State {
 }
 
 function mergeStatementResults(previous: DetectionResult | undefined, added: DetectionResult): DetectionResult {
-  if (!previous) return added;
+  // Always re-run detection here so merchants learned after parsing apply.
+  if (!previous) return detect(added.transactions, added.meta);
   const unique = new Map<string, DetectionResult['transactions'][number]>();
   for (const row of [...previous.transactions, ...added.transactions]) {
     unique.set(`${row.date}\u0000${row.merchantRaw.trim().toLowerCase()}\u0000${row.amount}\u0000${row.currency}`, row);

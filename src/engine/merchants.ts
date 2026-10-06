@@ -1,7 +1,7 @@
 // Enough — known-merchant map and merchant-string normalization.
 // Section 6 of ENOUGH_BRIEF.md. Pure: no UI, no network.
 
-import type { BillingModel, Category, DisplayCategory, OverlapGroup } from './types';
+import type { BillingModel, Category, DisplayCategory, OverlapGroup, SpendingCategory } from './types';
 
 export type MerchantInfo = {
   merchantKey: string;
@@ -16,6 +16,8 @@ export type MerchantInfo = {
    *  the same merchant are add-ons (e.g. Upwork plan + Connects). */
   plans?: KnownPlan[];
   addonsLabel?: string;
+  /** Shops, cafes, fuel: totals only, never a subscription or habit row. */
+  spendingCategory?: SpendingCategory;
   /** 'builtin' = curated here, 'research' = learned by the merchant research API. */
   origin?: 'builtin' | 'research';
 };

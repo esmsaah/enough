@@ -234,3 +234,6 @@ p { margin: 8px 0; }
 
 .found-section__title { margin: 28px 0 2px; font-size: 20px; font-weight: 800; font-stretch: 112%; }
 .found-section__note { margin: 0 0 10px; font-size: 14px; }
+
+.ai-toggle { display: flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 12px; font-size: 14px; }
+.ai-toggle input { width: 20px; height: 20px; margin: 0; accent-color: var(--indigo, #3346D3); }

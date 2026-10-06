@@ -241,9 +241,10 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     const key = info?.merchantKey ?? normalized;
     if (!key) continue;
     const analysisCategory = categoryOf(info, normalized, t.bankCategoryHint, t.billingModelHint).category;
-    if (spendCategory && isIgnoredMerchant(normalized)
+    const spendingOnlyMerchant = isIgnoredMerchant(normalized) || info?.spendingCategory !== undefined;
+    if (spendCategory && spendingOnlyMerchant
       && analysisCategory !== 'digital' && analysisCategory !== 'membership' && analysisCategory !== 'bill') {
-      if (isIgnoredMerchant(normalized)) spendingOnly.set(key, { merchantKey: key, name: info?.name ?? titleCase(normalized) });
+      spendingOnly.set(key, { merchantKey: key, name: info?.name ?? titleCase(normalized) });
       continue;
     }
     if (!groups.has(key)) {
@@ -432,6 +433,7 @@ function spendingCategoryFor(
   const folded = foldHeader(transaction.merchantRaw);
   const analysis = categoryOf(info, normalized, transaction.bankCategoryHint, transaction.billingModelHint).category;
   if (analysis === 'bill' || analysis === 'digital' || analysis === 'membership') return undefined;
+  if (info?.spendingCategory) return info.spendingCategory;
   if (transaction.bankCategoryHint === 'eatingOut') return 'Cafes & eating out';
   if (info?.displayCategory === 'Transport' || /\b(fuel|petrol|gas station|parking|park|taxi|cab|ride|train|bus|transit|toll|metro)\b/.test(folded)) return 'Transport';
   if (info?.displayCategory === 'Shopping & Delivery') return 'Delivery';

@@ -33,7 +33,7 @@ export function Landing() {
             <hr />
             <div className="landing-example__total"><span>Found this year</span><strong>{formatMoney(467.76, 'EUR')}</strong></div>
           </div>
-          <p className="landing-privacy">We never see your statement. Personal details are removed on this device.</p>
+          <p className="landing-privacy">We never see your statement. Only shop names and prices leave your device, never your name, account or dates.</p>
         </aside>
       </div>
       <section className="landing-how" id="how">
