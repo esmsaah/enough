@@ -10,7 +10,7 @@ import { matchMerchant, normalizeMerchant } from './merchants';
 import { convert } from './rates';
 import { detectDateFormat, normalizeDigits, parseAmount, parseDate, type DateFormat } from './parse';
 import { redactDescription, redactedDescriptionCategories } from './redact';
-import type { BankCategoryHint, BillingModel, Category, DetectedFrequency, DisplayCategory, Frequency, OverlapGroup, Transaction } from './types';
+import type { BankCategoryHint, BillingModel, Category, DetectedFrequency, DisplayCategory, Frequency, OverlapGroup, SpendingCategory, Transaction } from './types';
 
 export type ImportMeta = {
   displayCurrency: string;
@@ -36,6 +36,7 @@ export type DetectedItem = {
   askBilling?: boolean;
   possibleDuplicateCharge?: { amount: number; firstCharge: string; secondCharge: string };
   cancelUrl?: string;
+  priceIncrease?: { from: number; to: number; yearlyIncrease: number };
   price: number; // per period, in display currency
   currency: string;
   approxConverted?: boolean;
@@ -52,6 +53,7 @@ export type DetectionResult = {
   possibleRecurring: DetectedItem[];
   ended: DetectedItem[];
   possibleDoubleCharges: PossibleDoubleCharge[];
+  spendingByCategory: Record<SpendingCategory, number>;
   mustAsk: Array<{ merchantKey: string; name: string; reason: string }>;
   ignored: Array<{ merchantKey: string; name: string }>;
   needMoreData: boolean; // fewer than 2 months of data
@@ -220,12 +222,20 @@ export function transactionsFromRows(
 export function detect(transactions: Transaction[], meta: ImportMeta, asOf = latestTransactionDate(transactions)): DetectionResult {
   const groups = new Map<string, Transaction[]>();
   const nameFor = new Map<string, string>();
+  const spendingByCategory: Record<SpendingCategory, number> = {
+    Groceries: 0,
+    'Cafes & eating out': 0,
+    Transport: 0,
+    Delivery: 0,
+  };
 
   for (const t of transactions) {
     const normalized = normalizeMerchant(t.merchantRaw);
     // A private transfer is never matched to a merchant, even if a person's
     // name coincides with a brand ("Transfer to Claude Dupont" is not Claude).
     const info = isPrivateTransfer(normalized) ? undefined : matchMerchant(t.merchantRaw);
+    const spendCategory = spendingCategoryFor(t, normalized, info);
+    if (spendCategory) spendingByCategory[spendCategory] += convert(t.amount, t.currency, meta.displayCurrency) ?? t.amount;
     const key = info?.merchantKey ?? normalized;
     if (!key) continue;
     if (!groups.has(key)) {
@@ -356,6 +366,7 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
       estimate: confidence < 0.8,
       approxConverted,
       bankCategoryHint: bankCategory,
+      priceIncrease: detectPriceIncrease(observedAmounts, freq),
     };
     const expectedInterval = INTERVALS.find((interval) => interval.freq === freq)!;
     const endedAfterDays = Math.max(60, expectedInterval.days + expectedInterval.tol);
@@ -380,10 +391,35 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     possibleRecurring,
     ended,
     possibleDoubleCharges: findPossibleDoubleCharges(transactions),
+    spendingByCategory,
     mustAsk,
     ignored,
     needMoreData: meta.monthsSpan < 2,
   };
+}
+
+function spendingCategoryFor(
+  transaction: Transaction,
+  normalized: string,
+  info: ReturnType<typeof matchMerchant>,
+): SpendingCategory | undefined {
+  const folded = foldHeader(transaction.merchantRaw);
+  const analysis = categoryOf(info, normalized, transaction.bankCategoryHint, transaction.billingModelHint).category;
+  if (analysis === 'bill' || analysis === 'digital' || analysis === 'membership') return undefined;
+  if (transaction.bankCategoryHint === 'eatingOut') return 'Cafes & eating out';
+  if (info?.displayCategory === 'Transport' || /\b(fuel|petrol|gas station|parking|park|taxi|cab|ride|train|bus|transit|toll|metro)\b/.test(folded)) return 'Transport';
+  if (info?.displayCategory === 'Shopping & Delivery') return 'Delivery';
+  if (isIgnoredMerchant(normalized)) {
+    if (/\b(ina|mol|fuel|petrol|gas station|benzin|crodux|eurotank|shell|omv)\b/.test(folded)) return 'Transport';
+    return 'Groceries';
+  }
+  const keywordCategory = classifyByKeyword(normalized);
+  if (keywordCategory?.displayCategory === 'Transport') return 'Transport';
+  if (keywordCategory?.displayCategory === 'Shopping & Delivery') return 'Delivery';
+  if (keywordCategory?.category === 'habit' || info?.category === 'habit') return 'Cafes & eating out';
+  if (/\b(grocery|groceries|supermarket|market|hipermarket|trgovina|food store)\b/.test(folded)) return 'Groceries';
+  if (transaction.bankCategoryHint === 'shopping' && /\b(grocery|groceries|supermarket|market|lidl|idea|spar|konzum|mercator|kaufland)\b/.test(folded)) return 'Groceries';
+  return undefined;
 }
 
 function latestTransactionDate(transactions: Transaction[]): string {
@@ -488,6 +524,32 @@ function hasSinglePriceStep(amounts: number[]): boolean {
   }
   return false;
 }
+
+function detectPriceIncrease(
+  amounts: number[],
+  frequency: Frequency,
+): { from: number; to: number; yearlyIncrease: number } | undefined {
+  if (amounts.length < 4) return undefined;
+  const multiplier = YEARLY_MULTIPLIER_FOR_FREQUENCY[frequency];
+  for (let split = 2; split <= amounts.length - 2; split++) {
+    const oldPrices = amounts.slice(0, split);
+    const newPrices = amounts.slice(split);
+    if (!amountsWithin(oldPrices, 0.05, 0.05) || !amountsWithin(newPrices, 0.05, 0.05)) continue;
+    const from = mean(oldPrices);
+    const to = mean(newPrices);
+    if (to <= from * 1.05) continue;
+    return { from: round2(from), to: round2(to), yearlyIncrease: round2((to - from) * multiplier) };
+  }
+  return undefined;
+}
+
+const YEARLY_MULTIPLIER_FOR_FREQUENCY: Record<Frequency, number> = {
+  weekly: 52,
+  monthly: 12,
+  quarterly: 4,
+  yearly: 1,
+  oneTime: 0,
+};
 
 function candidateItem(
   base: Omit<DetectedItem, 'frequency' | 'price' | 'charges'>,

@@ -27,7 +27,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     void saveState(state);
   }, [state]);
 
-  const audit = runAudit(state.items, { unlocked: state.unlocked, displayCurrency: state.currency });
+  const audit = runAudit(state.items, {
+    unlocked: state.unlocked,
+    displayCurrency: state.currency,
+    spendingByCategory: state.statement?.spendingByCategory,
+    spendingCurrency: state.statement?.meta.displayCurrency,
+    pinnedVideoItemIds: state.rotationPinnedIds,
+  });
   return <StoreContext.Provider value={{ state, dispatch, audit }}>{children}</StoreContext.Provider>;
 }
 

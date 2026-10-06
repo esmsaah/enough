@@ -16,6 +16,19 @@ export type Frequency = 'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'oneTime
 export type DetectedFrequency = Frequency | 'unknown';
 export type BillingModel = 'monthly' | 'yearly' | 'usage' | 'oneTime';
 export type BankCategoryHint = 'bill' | 'shopping' | 'eatingOut' | 'other';
+export type SpendingCategory = 'Groceries' | 'Cafes & eating out' | 'Transport' | 'Delivery';
+
+export type StreamingRotationPlan = {
+  currency: string;
+  services: Array<{ id: string; name: string; pinned: boolean; monthlyEquivalent: number }>;
+  months: Array<{ month: string; reminderDate: string; activeServiceId?: string; activeServiceName?: string; monthlyCost: number }>;
+  pinnedServiceIds: string[];
+  baselineYearlyCost: number;
+  plannedYearlyCost: number;
+  newMonthlyCost: number;
+  yearlySaving: number;
+  estimate: boolean;
+};
 
 /** Analysis type — how the engine reasons about an item. */
 export type Category =
@@ -75,6 +88,7 @@ export type Item = {
   currency: string; // ISO code
   approxConverted?: boolean;
   possibleDuplicateCharge?: { amount: number; firstCharge: string; secondCharge: string };
+  priceIncrease?: { from: number; to: number; yearlyIncrease: number };
 };
 
 export type ActionType =
@@ -102,7 +116,12 @@ export type Recommendation = {
 };
 
 export type Audit = {
+  /** Digital subscriptions and memberships; the only items scored for verdicts. */
   items: Item[];
+  bills: Item[];
+  billYearlyTotal: number;
+  spendingByCategory: Record<SpendingCategory, number>;
+  rotationPlan?: StreamingRotationPlan;
   habits: Item[];
   recommendations: Recommendation[];
   yearlyTotal: number;

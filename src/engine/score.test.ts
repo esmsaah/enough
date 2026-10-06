@@ -152,21 +152,25 @@ describe('rule 3 — overlap groups (music/cloud/ai): keep most used, drop the r
     const audit = runAudit([netflix, disney]);
     // both used "always" → neither is a rotate loser, both keep
     expect(audit.recommendations.every((r) => r.action === 'keep')).toBe(true);
+    expect(audit.rotationPlan).toBeDefined();
+    expect(audit.rotationPlan?.months).toHaveLength(12);
   });
 });
 
-describe('rule 4 — two+ video services watched sometimes → rotate, saving = monthly × 4', () => {
-  it('keeps one and pauses the other', () => {
+describe('streaming rotation plan', () => {
+  it('rotates services monthly, calculates savings, and keeps pinned services active', () => {
     const netflix = item({ id: 'n', name: 'Netflix', overlapGroup: 'video', usage: 'sometimes', wouldMiss: true, price: 15.99 });
     const max = item({ id: 'm', name: 'Max', overlapGroup: 'video', usage: 'sometimes', wouldMiss: true, price: 10.99 });
-    const audit = runAudit([netflix, max]);
-    const recN = audit.recommendations.find((r) => r.itemId === 'n')!;
-    const recM = audit.recommendations.find((r) => r.itemId === 'm')!;
-    // most used tie → cheaper kept (Max)
-    expect(recM.action).toBe('keep');
-    expect(recN.action).toBe('rotate');
-    expect(recN.verdict).toBe('lookAgain');
-    expect(recN.potentialYearlySaving).toBe(63.96); // 15.99 × 4
+    const plan = runAudit([netflix, max], { createdAt: '2026-10-06' }).rotationPlan!;
+    expect(plan.months).toHaveLength(12);
+    expect(plan.months.map((month) => month.activeServiceId)).toEqual(Array.from({ length: 12 }, (_, index) => index % 2 ? 'n' : 'm'));
+    expect(plan.months[0]?.reminderDate).toBe('2026-10-30');
+    expect(plan.newMonthlyCost).toBe(13.49);
+    expect(plan.yearlySaving).toBe(161.88);
+    const pinned = runAudit([netflix, max], { createdAt: '2026-10-06', pinnedVideoItemIds: ['n'] }).rotationPlan!;
+    expect(pinned.pinnedServiceIds).toEqual(['n']);
+    expect(pinned.months.every((month) => month.monthlyCost === 26.98)).toBe(true);
+    expect(pinned.yearlySaving).toBe(0);
   });
 });
 
@@ -200,16 +204,16 @@ describe('rules 5 & 6 — memberships vs per-visit cost', () => {
   });
 });
 
-describe('rule 7 — bill not compared in over a year → look again, saving 0', () => {
-  it('flags compareOffers', () => {
-    const r = scoreOne({ category: 'bill', displayCategory: 'Bills & Utilities', price: 26, compareState: 'overAYear' });
-    expect(r.verdict).toBe('lookAgain');
-    expect(r.action).toBe('compareOffers');
-    expect(r.potentialYearlySaving).toBe(0);
-  });
-  it('keeps a bill compared this year', () => {
-    const r = scoreOne({ category: 'bill', displayCategory: 'Bills & Utilities', price: 26, compareState: 'thisYear' });
-    expect(r.verdict).toBe('keep');
+describe('bills are separate from subscriptions', () => {
+  it('keeps bill totals outside the subscription total and recommendations', () => {
+    const subscription = item({ id: 'sub', price: 10 });
+    const bill = item({ id: 'bill', category: 'bill', displayCategory: 'Bills & Utilities', price: 26, compareState: 'overAYear' });
+    const audit = runAudit([subscription, bill]);
+    expect(audit.items.map((entry) => entry.id)).toEqual(['sub']);
+    expect(audit.bills.map((entry) => entry.id)).toEqual(['bill']);
+    expect(audit.yearlyTotal).toBe(120);
+    expect(audit.billYearlyTotal).toBe(312);
+    expect(audit.recommendations.map((entry) => entry.itemId)).toEqual(['sub']);
   });
 });
 

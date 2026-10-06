@@ -16,6 +16,8 @@ export function EmailShare() {
     () => state.items.filter((item) => item.flaggedForReminder && item.nextCharge),
     [state.items],
   );
+  const rotationReminderCount = state.rotationRemindersEnabled && audit.rotationPlan ? audit.rotationPlan.months.length : 0;
+  const reminderCount = reminderItems.length + rotationReminderCount;
   const doneIds = new Set(state.items.filter((item) => item.done).map((item) => item.id));
   const doneSavings = audit.recommendations
     .filter((recommendation) => doneIds.has(recommendation.itemId))
@@ -25,7 +27,7 @@ export function EmailShare() {
   const shareStatement = hasDoneItems ? 'I cut' : 'I could cut';
   const hasOptions = state.sendReport || state.enableReminders || state.newsConsent;
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.reportEmail);
-  const canSubmit = hasOptions && emailValid && (!state.enableReminders || reminderItems.length > 0) && !sending;
+  const canSubmit = hasOptions && emailValid && (!state.enableReminders || reminderCount > 0) && !sending;
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,6 +40,14 @@ export function EmailShare() {
         email: state.reportEmail.trim(),
         options: { report: state.sendReport, reminders: state.enableReminders, news: state.newsConsent },
         items: state.sendReport ? safeItems : state.enableReminders ? safeItems.filter((item) => item.nextCharge) : [],
+        ...(rotationReminderCount && audit.rotationPlan ? {
+          rotationReminders: {
+            currency: audit.currency,
+            monthlyCost: audit.rotationPlan.newMonthlyCost,
+            yearlySaving: audit.rotationPlan.yearlySaving,
+            schedule: audit.rotationPlan.months.map(({ month, reminderDate, activeServiceName }) => ({ month, reminderDate, activeServiceName })),
+          },
+        } : {}),
       };
       const response = await fetch('/api/report', {
         method: 'POST',
@@ -91,14 +101,14 @@ export function EmailShare() {
           <input type="checkbox" checked={state.sendReport} onChange={(event) => dispatch({ type: 'setEmailConsent', key: 'sendReport', value: event.target.checked })} />
           <span><strong>Send me my audit report.</strong><small>Cut, Look again and Keep, with yearly costs and actions.</small></span>
         </label>
-        <label className={`consent-card ${reminderItems.length ? '' : 'consent-card--muted'}`}>
+        <label className={`consent-card ${reminderCount ? '' : 'consent-card--muted'}`}>
           <input
             type="checkbox"
             checked={state.enableReminders}
-            disabled={reminderItems.length === 0}
+            disabled={reminderCount === 0}
             onChange={(event) => dispatch({ type: 'setEmailConsent', key: 'enableReminders', value: event.target.checked })}
           />
-          <span><strong>Remind me 2 days before renewals I flagged.</strong><small>{reminderItems.length ? `${reminderItems.length} item${reminderItems.length === 1 ? '' : 's'} flagged · reminders for 12 months` : 'Flag an item with a renewal date on the cut list first.'}</small></span>
+          <span><strong>Remind me 2 days before renewals and streaming switches.</strong><small>{reminderCount ? `${reminderItems.length} renewals and ${rotationReminderCount} rotation switches · reminders for 12 months` : 'Flag an item with a renewal date or choose a streaming rotation first.'}</small></span>
         </label>
         <label className="consent-card">
           <input type="checkbox" checked={state.newsConsent} onChange={(event) => dispatch({ type: 'setEmailConsent', key: 'newsConsent', value: event.target.checked })} />

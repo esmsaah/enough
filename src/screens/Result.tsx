@@ -7,6 +7,7 @@ import { useStore } from '../app/store';
 import { Button, VerdictBadge } from '../components/ui';
 import { Receipt } from '../components/Receipt';
 import { RATES_PER_EUR } from '../engine/rates';
+import { AuditSections } from './AuditSections';
 
 export function Result() {
   const { state, audit, dispatch } = useStore();
@@ -31,6 +32,8 @@ export function Result() {
           {Object.keys(RATES_PER_EUR).sort().map((currency) => <option key={currency} value={currency}>{currency}</option>)}
         </select>
       </label>
+
+      <AuditSections />
 
       <div style={{ margin: '22px 0' }}>
         <p style={{ fontSize: 18, margin: 0 }}>

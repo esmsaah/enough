@@ -86,6 +86,24 @@ describe('synthetic merchant recurrence safeguards', () => {
     expect(result.ignored.every((item) => item.merchantKey.trim().length > 0)).toBe(true);
   });
 
+  it('shows only the requested spending categories and leaves bills/subscriptions separate', () => {
+    const categorized = detect([
+      { date: '2026-09-01', merchantRaw: 'Lidl', amount: 20, currency: 'EUR' },
+      { date: '2026-09-02', merchantRaw: 'Coffee Corner', amount: 8, currency: 'EUR', bankCategoryHint: 'eatingOut' },
+      { date: '2026-09-03', merchantRaw: 'Uber ride', amount: 12, currency: 'EUR' },
+      { date: '2026-09-04', merchantRaw: 'Wolt', amount: 15, currency: 'EUR' },
+      { date: '2026-09-05', merchantRaw: 'Adobe Creative Cloud', amount: 16.99, currency: 'EUR' },
+      { date: '2026-09-06', merchantRaw: 'mts Mobile', amount: 34.99, currency: 'EUR' },
+      { date: '2026-09-07', merchantRaw: 'Unknown antique shop', amount: 70, currency: 'EUR' },
+    ], meta);
+    expect(categorized.spendingByCategory).toEqual({
+      Groceries: 20,
+      'Cafes & eating out': 8,
+      Transport: 12,
+      Delivery: 15,
+    });
+  });
+
   it('maps billing models for known merchants and asks about an unknown single charge', () => {
     expect(matchMerchant('Skillshare')?.billingModel).toBe('yearly');
     expect(matchMerchant('Outscraper')?.billingModel).toBe('usage');

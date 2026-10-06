@@ -29,6 +29,8 @@ export type State = {
   sendReport: boolean;
   enableReminders: boolean;
   newsConsent: boolean;
+  rotationPinnedIds: string[];
+  rotationRemindersEnabled: boolean;
 };
 
 export const initialState: State = {
@@ -40,6 +42,8 @@ export const initialState: State = {
   sendReport: false,
   enableReminders: false,
   newsConsent: false,
+  rotationPinnedIds: [],
+  rotationRemindersEnabled: false,
 };
 
 export type Action =
@@ -63,6 +67,8 @@ export type Action =
   | { type: 'toggleDone'; id: string }
   | { type: 'setReportEmail'; email: string }
   | { type: 'setCurrency'; currency: string }
+  | { type: 'setRotationPinned'; itemId: string; pinned: boolean }
+  | { type: 'setRotationReminders'; enabled: boolean }
   | { type: 'setEmailConsent'; key: 'sendReport' | 'enableReminders' | 'newsConsent'; value: boolean }
   | { type: 'unlock' }
   | { type: 'reset' }
@@ -179,6 +185,21 @@ export function reducer(state: State, action: Action): State {
     case 'setCurrency':
       return { ...state, currency: action.currency.toUpperCase() };
 
+    case 'setRotationPinned':
+      return {
+        ...state,
+        rotationPinnedIds: action.pinned
+          ? [...new Set([...state.rotationPinnedIds, action.itemId])]
+          : state.rotationPinnedIds.filter((id) => id !== action.itemId),
+      };
+
+    case 'setRotationReminders':
+      return {
+        ...state,
+        rotationRemindersEnabled: action.enabled,
+        ...(action.enabled ? { enableReminders: true } : {}),
+      };
+
     case 'setEmailConsent':
       return { ...state, [action.key]: action.value };
 
@@ -218,6 +239,7 @@ function detectedItemToInput(found: DetectionResult['possibleRecurring'][number]
     confidence: found.confidence,
     bankCategoryHint: found.bankCategoryHint,
     possibleDuplicateCharge: found.possibleDuplicateCharge,
+    priceIncrease: found.priceIncrease,
     price: found.price,
     frequency: frequency ?? (found.frequency === 'unknown' ? 'monthly' : found.frequency),
     source: 'statement',

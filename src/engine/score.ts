@@ -14,6 +14,8 @@ import type {
   Item,
   OverlapGroup,
   Recommendation,
+  SpendingCategory,
+  StreamingRotationPlan,
   Verdict,
 } from './types';
 
@@ -70,8 +72,6 @@ type Context = {
   /** for a member being cut for overlap: the name of the item kept in its group */
   overlapKeptName: Map<string, string>;
   overlapLosers: Set<string>;
-  /** video items to pause (rule 4) mapped to the name kept */
-  rotateLosers: Set<string>;
   byId: Map<string, Item>;
 };
 
@@ -83,7 +83,6 @@ function buildContext(items: Item[]): Context {
   const duplicateExtras = new Set<string>();
   const overlapKeptName = new Map<string, string>();
   const overlapLosers = new Set<string>();
-  const rotateLosers = new Set<string>();
 
   // --- Duplicates: the same service charged more than once (rule 2). ---
   // Group by merchantKey (fall back to lowercased name). The first occurrence
@@ -121,21 +120,7 @@ function buildContext(items: Item[]): Context {
     }
   }
 
-  // --- Video: 2+ services used "sometimes" → keep one, pause the rest (rule 4). ---
-  const videoSometimes = items.filter(
-    (i) =>
-      i.overlapGroup === 'video' &&
-      i.usage === 'sometimes' &&
-      !duplicateExtras.has(i.id),
-  );
-  if (videoSometimes.length >= 2) {
-    const kept = pickKept(videoSometimes);
-    for (const m of videoSometimes) {
-      if (m.id !== kept.id) rotateLosers.add(m.id);
-    }
-  }
-
-  return { duplicateExtras, overlapKeptName, overlapLosers, rotateLosers, byId };
+  return { duplicateExtras, overlapKeptName, overlapLosers, byId };
 }
 
 /** Most used wins; ties go to the cheaper one (by yearly cost). */
@@ -216,12 +201,6 @@ export function scoreItem(item: Item, ctx: Context): Recommendation {
     return rec('removeOverlap', yc, `Overlaps with ${keptName}, which you use more.`);
   }
 
-  // Rule 4 — two+ video services watched only sometimes → pause part of the year.
-  if (ctx.rotateLosers.has(item.id)) {
-    const saving = round2(item.price * 4); // monthly price × 4 months paused
-    return rec('rotate', saving, 'You watch it only sometimes — pause it for four months a year.');
-  }
-
   // Rules 5 & 6 — memberships priced against per-visit cost.
   if (item.category === 'membership' && typeof item.visitsPerMonth === 'number') {
     const monthly = monthlyEquivalent(item);
@@ -284,7 +263,14 @@ export function scoreItem(item: Item, ctx: Context): Recommendation {
 
 export function runAudit(
   items: Item[],
-  opts: { unlocked?: boolean; createdAt?: string; displayCurrency?: string } = {},
+  opts: {
+    unlocked?: boolean;
+    createdAt?: string;
+    displayCurrency?: string;
+    spendingByCategory?: Partial<Record<SpendingCategory, number>>;
+    spendingCurrency?: string;
+    pinnedVideoItemIds?: string[];
+  } = {},
 ): Audit {
   const currency = opts.displayCurrency ?? mostCommonCurrency(items) ?? 'EUR';
   const convertedItems = items.map((item) => {
@@ -292,24 +278,53 @@ export function runAudit(
     const price = convert(item.price, item.currency, currency);
     return price === undefined
       ? { ...item, currency }
-      : { ...item, price, currency, approxConverted: true };
+      : {
+        ...item,
+        price,
+        currency,
+        approxConverted: true,
+        ...(item.priceIncrease ? {
+          priceIncrease: {
+            from: convert(item.priceIncrease.from, item.currency, currency) ?? item.priceIncrease.from,
+            to: convert(item.priceIncrease.to, item.currency, currency) ?? item.priceIncrease.to,
+            yearlyIncrease: convert(item.priceIncrease.yearlyIncrease, item.currency, currency) ?? item.priceIncrease.yearlyIncrease,
+          },
+        } : {}),
+      };
   });
-  const habits = convertedItems.filter((item) => item.category === 'habit' || item.billingModel === 'usage' || item.billingModel === 'oneTime' || item.frequency === 'oneTime');
-  const recurringItems = convertedItems.filter((item) => !habits.includes(item));
-  const ctx = buildContext(recurringItems);
-  const recommendations = recurringItems.map((i) => scoreItem(i, ctx));
+  const subscriptions = convertedItems.filter((item) => (item.category === 'digital' || item.category === 'membership') && item.billingModel !== 'usage' && item.billingModel !== 'oneTime' && item.frequency !== 'oneTime');
+  const bills = convertedItems.filter((item) => item.category === 'bill');
+  const habits = convertedItems.filter((item) => !subscriptions.includes(item) && !bills.includes(item));
+  const ctx = buildContext(subscriptions);
+  const recommendations = subscriptions.map((i) => scoreItem(i, ctx));
 
-  const yearlyTotal = round2(recurringItems.reduce((s, i) => s + yearlyCost(i), 0));
+  const yearlyTotal = round2(subscriptions.reduce((s, i) => s + yearlyCost(i), 0));
+  const billYearlyTotal = round2(bills.reduce((s, i) => s + yearlyCost(i), 0));
   const habitYearlyTotal = round2(habits.reduce((s, i) => s + yearlyCost(i), 0));
-  const potentialYearlySaving = round2(
-    recommendations.reduce((s, r) => s + r.potentialYearlySaving, 0),
-  );
+  const cutVideoIds = new Set(recommendations.filter((rec) => rec.verdict === 'cut').map((rec) => rec.itemId));
+  const rotationPlan = buildStreamingRotationPlan(subscriptions.filter((item) => !cutVideoIds.has(item.id)), currency, opts.pinnedVideoItemIds ?? [], opts.createdAt);
+  const videoIds = new Set(subscriptions.filter((item) => item.overlapGroup === 'video').map((item) => item.id));
+  const videoSavings = recommendations.filter((rec) => videoIds.has(rec.itemId)).reduce((sum, rec) => sum + rec.potentialYearlySaving, 0);
+  const otherSavings = recommendations.filter((rec) => !videoIds.has(rec.itemId)).reduce((sum, rec) => sum + rec.potentialYearlySaving, 0);
+  const potentialYearlySaving = round2(otherSavings + Math.max(videoSavings, rotationPlan?.yearlySaving ?? 0));
+  const spendCategories: SpendingCategory[] = ['Groceries', 'Cafes & eating out', 'Transport', 'Delivery'];
+  const spendingByCategory = Object.fromEntries(spendCategories.map((category) => {
+    const raw = opts.spendingByCategory?.[category] ?? 0;
+    const converted = opts.spendingCurrency && opts.spendingCurrency !== currency
+      ? convert(raw, opts.spendingCurrency, currency) ?? raw
+      : raw;
+    return [category, round2(converted)];
+  })) as Record<SpendingCategory, number>;
 
-  const hasActionable = recommendations.some((r) => r.verdict !== 'keep');
+  const hasActionable = recommendations.some((r) => r.verdict !== 'keep') || (rotationPlan?.yearlySaving ?? 0) > videoSavings;
   const paywall = hasActionable && potentialYearlySaving >= paywallThreshold(currency);
 
   return {
-    items: recurringItems,
+    items: subscriptions,
+    bills,
+    billYearlyTotal,
+    spendingByCategory,
+    ...(rotationPlan ? { rotationPlan } : {}),
     habits,
     recommendations,
     yearlyTotal,
@@ -321,6 +336,59 @@ export function runAudit(
     unlocked: opts.unlocked ?? false,
     createdAt: opts.createdAt ?? new Date().toISOString().slice(0, 10),
   };
+}
+
+export function buildStreamingRotationPlan(
+  subscriptions: Item[],
+  currency: string,
+  pinnedIds: string[] = [],
+  createdAt?: string,
+): StreamingRotationPlan | undefined {
+  const videoServices = subscriptions
+    .filter((item) => item.overlapGroup === 'video' && item.billingModel !== 'usage' && item.billingModel !== 'oneTime')
+    .sort((a, b) => a.name.localeCompare(b.name));
+  if (videoServices.length < 2) return undefined;
+
+  const requestedPins = new Set(pinnedIds);
+  const pinned = videoServices.filter((service) => requestedPins.has(service.id));
+  const rotating = videoServices.filter((service) => !requestedPins.has(service.id));
+  const pinnedIdsInPlan = pinned.map((service) => service.id);
+  const pinnedMonthly = pinned.reduce((sum, service) => sum + monthlyEquivalent(service), 0);
+  const base = createdAt ?? new Date().toISOString().slice(0, 10);
+  const months = Array.from({ length: 12 }, (_, index) => {
+    const monthStart = addMonths(base, index + 1);
+    const reminderDate = new Date(Date.parse(`${monthStart}T00:00:00Z`) - 2 * 86_400_000).toISOString().slice(0, 10);
+    const service = rotating.length ? rotating[index % rotating.length] : undefined;
+    return {
+      month: new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${monthStart}T00:00:00Z`)),
+      reminderDate,
+      ...(service ? { activeServiceId: service.id, activeServiceName: service.name } : {}),
+      monthlyCost: round2(pinnedMonthly + (service ? monthlyEquivalent(service) : 0)),
+    };
+  });
+  const baselineYearlyCost = round2(videoServices.reduce((sum, service) => sum + yearlyCost(service), 0));
+  const plannedYearlyCost = round2(months.reduce((sum, month) => sum + month.monthlyCost, 0));
+  return {
+    currency,
+    services: videoServices.map((service) => ({
+      id: service.id,
+      name: service.name,
+      pinned: requestedPins.has(service.id),
+      monthlyEquivalent: monthlyEquivalent(service),
+    })),
+    months,
+    pinnedServiceIds: pinnedIdsInPlan,
+    baselineYearlyCost,
+    plannedYearlyCost,
+    newMonthlyCost: round2(plannedYearlyCost / 12),
+    yearlySaving: round2(Math.max(0, baselineYearlyCost - plannedYearlyCost)),
+    estimate: videoServices.some((service) => service.estimate || service.approxConverted || service.frequency !== 'monthly'),
+  };
+}
+
+function addMonths(isoDate: string, months: number): string {
+  const [year, month] = isoDate.slice(0, 10).split('-').map(Number);
+  return new Date(Date.UTC(year!, month! - 1 + months, 1)).toISOString().slice(0, 10);
 }
 
 function mostCommonCurrency(items: Item[]): string | undefined {

@@ -16,6 +16,7 @@ export type ReportLine = {
   verdict: Recommendation['verdict'];
   action: Recommendation['action'];
   reason: string;
+  priceIncrease?: { from: number; to: number; yearlyIncrease: number };
   nextCharge?: string; // only for flagged items
 };
 
@@ -44,6 +45,7 @@ export function toReportSummary(items: Item[], recs: Recommendation[]): ReportLi
       verdict: rec.verdict,
       action: rec.action,
       reason: rec.reason,
+      ...(item.priceIncrease ? { priceIncrease: item.priceIncrease } : {}),
       ...(item.flaggedForReminder && item.nextCharge ? { nextCharge: item.nextCharge } : {}),
     });
   }

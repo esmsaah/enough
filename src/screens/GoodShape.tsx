@@ -3,6 +3,7 @@
 import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { Button } from '../components/ui';
+import { AuditSections } from './AuditSections';
 
 export function GoodShape() {
   const { state, audit, dispatch } = useStore();
@@ -14,6 +15,8 @@ export function GoodShape() {
         We looked at {audit.items.length} {audit.items.length === 1 ? 'item' : 'items'} worth{' '}
         {formatMoney(audit.yearlyTotal, state.currency, { round: true })} a year and found nothing worth cutting. Nothing to pay.
       </p>
+
+      <AuditSections />
 
       <div className="card" style={{ background: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.18)', marginTop: 20 }}>
         <p className="hand" style={{ fontSize: 22 }}>I checked. I'm in good shape.</p>
