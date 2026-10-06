@@ -17,3 +17,7 @@ export const YEARLY: Record<'weekly' | 'monthly' | 'quarterly' | 'yearly', numbe
   quarterly: 4,
   yearly: 1,
 };
+
+export function yearlyCost(item: { price: number; frequency: keyof typeof YEARLY }): number {
+  return Math.round((item.price * YEARLY[item.frequency] + Number.EPSILON) * 100) / 100;
+}

@@ -3,10 +3,14 @@
 // runAudit; this only holds the inputs and where the person is in the flow.
 
 import type { Item, Usage } from '../engine/types';
+import type { DetectionResult } from '../engine/detect';
 import type { QuickPick } from './catalog';
 
 export type Step =
   | 'landing'
+  | 'addstatement'
+  | 'keep'
+  | 'found'
   | 'quickstart'
   | 'anythingElse'
   | 'usage'
@@ -19,6 +23,7 @@ export type State = {
   items: Item[];
   unlocked: boolean;
   currency: string;
+  statement?: DetectionResult;
 };
 
 export const initialState: State = {
@@ -30,11 +35,15 @@ export const initialState: State = {
 
 export type Action =
   | { type: 'goto'; step: Step }
+  | { type: 'statementParsed'; result: DetectionResult }
+  | { type: 'statementDateFormat'; result: DetectionResult }
+  | { type: 'acceptStatement' }
   | { type: 'toggleQuickPick'; pick: QuickPick }
   | { type: 'addManual'; item: Omit<Item, 'id'> }
   | { type: 'removeItem'; id: string }
   | { type: 'setPrice'; id: string; price: number }
   | { type: 'setDisplayCategory'; id: string; displayCategory: Item['displayCategory'] }
+  | { type: 'setClassification'; id: string; category: Item['category']; displayCategory: Item['displayCategory'] }
   | { type: 'setUsage'; id: string; usage: Usage }
   | { type: 'setWouldMiss'; id: string; wouldMiss: boolean }
   | { type: 'setVisits'; id: string; visits: number }
@@ -58,6 +67,23 @@ export function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'goto':
       return { ...state, step: action.step };
+
+    case 'statementParsed':
+    case 'statementDateFormat':
+      return { ...state, statement: action.result, currency: action.result.meta.displayCurrency, step: 'keep' };
+
+    case 'acceptStatement': {
+      const candidates = [...actionItems(state.statement)];
+      const items = [...state.items];
+      for (const item of candidates) {
+        const index = items.findIndex((current) => item.merchantKey && current.merchantKey === item.merchantKey);
+        if (index !== -1) {
+          const existing = items[index]!;
+          items[index] = { ...existing, ...item, id: existing.id, usage: existing.usage, wouldMiss: existing.wouldMiss };
+        } else items.push(item);
+      }
+      return { ...state, items, step: 'found' };
+    }
 
     case 'toggleQuickPick': {
       const existing = state.items.find(
@@ -92,6 +118,8 @@ export function reducer(state: State, action: Action): State {
       return { ...state, items: patch(state.items, action.id, { price: action.price }) };
     case 'setDisplayCategory':
       return { ...state, items: patch(state.items, action.id, { displayCategory: action.displayCategory }) };
+    case 'setClassification':
+      return { ...state, items: patch(state.items, action.id, { category: action.category, displayCategory: action.displayCategory }) };
     case 'setUsage':
       return { ...state, items: patch(state.items, action.id, { usage: action.usage }) };
     case 'setWouldMiss':
@@ -123,6 +151,26 @@ export function reducer(state: State, action: Action): State {
     default:
       return state;
   }
+}
+
+function actionItems(result?: DetectionResult): Item[] {
+  if (!result) return [];
+  return [...result.recurring, ...result.habits].map((found) => ({
+    id: newId(),
+    name: found.name,
+    merchantKey: found.merchantKey,
+    category: found.category,
+    displayCategory: found.displayCategory,
+    overlapGroup: found.overlapGroup,
+    price: found.price,
+    frequency: found.frequency,
+    source: 'statement',
+    estimate: false,
+    lastCharge: found.lastCharge,
+    nextCharge: found.nextCharge,
+    currency: found.currency,
+    approxConverted: found.approxConverted,
+  }));
 }
 
 /** Items that need a usage/visits/compare question (screen 7). */

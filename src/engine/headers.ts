@@ -6,6 +6,8 @@ export type ColumnRole =
   | 'date'
   | 'valueDate'
   | 'merchant' // clean payee/merchant name — preferred over description
+  | 'direction'
+  | 'status'
   | 'description'
   | 'holder' // account/card holder — personal, dropped
   | 'amount' // single signed amount column
@@ -19,6 +21,8 @@ export type ColumnRole =
  *  more specific roles (valueDate, debit/credit, balance) are tested before
  *  the generic ones so "datum valute" is not mistaken for "datum". */
 const HEADER_KEYWORDS: Array<[ColumnRole, string[]]> = [
+  ['direction', ['direction']],
+  ['status', ['status']],
   ['valueDate', ['datum valute', 'value date', 'valuta', 'valutadatum', 'datum knjizenja', 'wertstellung']],
   ['balance', [
     'balance', 'saldo', 'stanje', 'kontostand', 'running balance', 'balans', 'bakiye',
@@ -39,11 +43,11 @@ const HEADER_KEYWORDS: Array<[ColumnRole, string[]]> = [
   // so "Card Holder Full Name" is not mistaken for a payee.
   ['holder', [
     'card holder', 'holder', 'vlasnik', 'klijent', 'account holder', 'kontoinhaber',
-    'karteninhaber', 'payer name', 'payee name', 'payer', 'payee', 'klijent racuna',
+    'karteninhaber', 'payer name', 'payer', 'klijent racuna',
     'اسم العميل', 'رقم الحساب',
   ]],
   // Clean payee/merchant column — preferred over a verbose description.
-  ['merchant', ['merchant', 'beneficiary', 'beguenstigter', 'primatelj', 'partner name', 'recipient', 'empfaenger', 'naziv primatelja', 'name']],
+  ['merchant', ['merchant', 'payee name', 'payee', 'beneficiary', 'beguenstigter', 'primatelj', 'partner name', 'recipient', 'empfaenger', 'naziv primatelja', 'name']],
   ['description', [
     'description', 'opis', 'opis transakcije', 'opis promjene', 'opis promene',
     'verwendungszweck', 'buchungstext', 'reference', 'namjena', 'memo', 'narrative',
@@ -58,7 +62,7 @@ const HEADER_KEYWORDS: Array<[ColumnRole, string[]]> = [
     'المبلغ', '金額', 'จำนวนเงิน',
   ]],
   ['date', [
-    'date', 'datum', 'fecha', 'data', 'started date', 'completed date',
+    'date', 'datum', 'fecha', 'data', 'started date', 'completed date', 'created on', 'finished on',
     'datum prometa', 'transaction date', 'txn date', 'booking date', 'booking day',
     'buchungstag', 'datum transakcije', 'tarih', 'fecha', 'data valuta',
     'датум', 'датум промета', 'التاريخ', 'التاريخ الهجري', '取引日', '日付', 'วันที่',

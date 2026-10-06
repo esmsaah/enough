@@ -41,6 +41,13 @@ Ambiguities resolved while building, per the brief's instruction to pick the sim
 24. **rates.ts** extended to ~40 of the most-traded currencies plus BAM/RSD/BGN/UAH; unknown currencies are shown unconverted, never guessed.
 25. **Encodings**: known legacy fixtures decode via an explicit map (windows-1250, iso-8859-1); global fixtures are UTF-8. Full auto-detection of Shift_JIS/GBK/Big5/UTF-16 is stubbed via `decodeBytes` and deferred (no fixture needs it yet).
 
+## Statement upload screens (2026-10-06)
+
+26. **CSV, Excel and text PDFs are parsed in a dedicated Web Worker.** Excel uses the first worksheet via the official SheetJS tarball; PDF.js and its worker are bundled locally. Multiple files are merged and exact duplicate transactions are removed. The persisted preview contains only redacted transaction fields and derived detections; raw rows remain in worker memory only.
+27. **Ambiguous date choice applies only to files whose dates are ambiguous.** A batch can include files with different but individually clear date formats; those keep their detected interpretation while the person resolves only ambiguous dates.
+28. **Statement columns combine header meaning and row evidence.** Date, amount, merchant, direction, status and account-holder detection use generic multilingual header semantics plus parsed-value patterns; uncertain required columns ask the person to choose. Positive values in debit columns remain outgoing transactions, while credits are dropped.
+29. **Text PDFs use generic table reconstruction.** PDF.js item coordinates and date/description/debit/credit/balance headings identify transaction tables, skip summary and pending sections, carry dates across wrapped rows, and discard incoming rows and sub-lines. Parsing reads local file bytes only; image-only PDFs report that selectable text is required.
+
 ## Open / not yet built
 
 - Section 6 (import, redaction, recurring detection) — not started. This is where the `/fixtures` `expected/*.json` contract gets exercised, and where the "never leaves the device" redaction test lives. Planned next.

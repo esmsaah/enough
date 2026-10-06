@@ -5,9 +5,10 @@
 
 import { classifyHeader, foldHeader, looksLikeHeaderRow, type ColumnRole } from './headers';
 import { classifyByKeyword, isIgnoredMerchant, isPrivateTransfer } from './keywords';
+import { inferColumns, isComplete as isCompletedValue, isOutgoing as isOutgoingValue, type ColumnOverrides, type ColumnQuestion } from './columns';
 import { matchMerchant, normalizeMerchant } from './merchants';
 import { detectDateFormat, normalizeDigits, parseAmount, parseDate, type DateFormat } from './parse';
-import { redactDescription } from './redact';
+import { redactDescription, redactedDescriptionCategories } from './redact';
 import type { Category, DisplayCategory, Frequency, OverlapGroup, Transaction } from './types';
 
 export type ImportMeta = {
@@ -16,6 +17,8 @@ export type ImportMeta = {
   dateAmbiguous: boolean;
   monthsSpan: number;
   redactedCategories: string[];
+  columnQuestions: ColumnQuestion[];
+  columnCount: number;
 };
 
 export type DetectedItem = {
@@ -35,6 +38,7 @@ export type DetectedItem = {
 
 export type DetectionResult = {
   meta: ImportMeta;
+  transactions: Transaction[]; // redacted rows only; safe for the on-device preview
   recurring: DetectedItem[];
   habits: DetectedItem[];
   mustAsk: Array<{ merchantKey: string; name: string; reason: string }>;
@@ -55,85 +59,111 @@ const INTERVALS: Array<{ freq: Frequency; days: number; tol: number }> = [
 
 type RawRow = { date: string; description: string; out: number | null; currency: string };
 
+function findHeaderRow(rows: string[][]): number {
+  const known = rows.findIndex(looksLikeHeaderRow);
+  if (known !== -1) return known;
+  for (let index = 0; index < Math.min(rows.length - 1, 8); index++) {
+    const candidate = rows[index]!.filter((cell) => cell.trim());
+    if (candidate.length < 3 || candidate.some((cell) => parseAmount(cell) !== null || /\d{1,4}[./-]\d{1,2}[./-]\d{2,4}/.test(cell))) continue;
+    const sample = rows.slice(index + 1, index + 6);
+    const hasDateLikeValues = sample.some((row) => row.some((cell) => /\d{1,4}[./-]\d{1,2}[./-]\d{2,4}/.test(cell)));
+    const hasNumericValues = sample.some((row) => row.some((cell) => parseAmount(cell) !== null));
+    if (hasDateLikeValues && hasNumericValues) return index;
+  }
+  return -1;
+}
+
+function requiredColumnQuestions(selection: ReturnType<typeof inferColumns>, count: number): ColumnQuestion[] {
+  const columns = Array.from({ length: count }, (_, index) => index);
+  const questions: ColumnQuestion[] = [];
+  if (selection.date === undefined) questions.push({ role: 'date', candidates: columns });
+  if (selection.amount === undefined) questions.push({ role: 'amount', candidates: columns });
+  if (selection.merchant === undefined) questions.push({ role: 'merchant', candidates: columns });
+  return questions;
+}
+
+
 /** Map already-split rows (arrays of cells) to redacted Transactions. */
 export function transactionsFromRows(
   rows: string[][],
   fallbackCurrency = 'EUR',
+  dateFormatOverride?: DateFormat,
+  columnOverrides: ColumnOverrides = {},
 ): { transactions: Transaction[]; meta: ImportMeta } {
-  const headerIdx = rows.findIndex((r) => looksLikeHeaderRow(r));
+  const headerIdx = findHeaderRow(rows);
   const redactedCategories = new Set<string>();
-  if (headerIdx === -1) {
-    return {
-      transactions: [],
-      meta: { displayCurrency: fallbackCurrency, dateFormat: 'ambiguous', dateAmbiguous: true, monthsSpan: 0, redactedCategories: [] },
-    };
-  }
-
-  const header = rows[headerIdx]!;
+  const header = headerIdx === -1 ? [] : rows[headerIdx]!;
+  const dataRows = headerIdx === -1 ? rows : rows.slice(headerIdx + 1);
   const roles: ColumnRole[] = header.map(classifyHeader);
   const col = (role: ColumnRole) => roles.indexOf(role);
-  const dateCol = col('date') !== -1 ? col('date') : col('valueDate');
-  // All clean merchant columns, exact "merchant" header first (Wise has both a
-  // "Merchant" and a beneficiary column; either may be the filled one per row).
-  const merchantCols = roles
-    .map((r, i) => (r === 'merchant' ? i : -1))
-    .filter((i) => i !== -1)
-    .sort((a, b) => (foldHeader(header[b]!) === 'merchant' ? 1 : 0) - (foldHeader(header[a]!) === 'merchant' ? 1 : 0));
-  const descCol = col('description'); // fallback / used when no merchant cell is filled
-  const amountCol = col('amount');
-  const debitCol = col('debit');
-  const creditCol = col('credit');
-  const currencyCol = col('currency');
-  void creditCol; // credits (money in) are intentionally ignored
+  const inferred = inferColumns(header, dataRows, columnOverrides);
+  const columnCount = Math.max(header.length, ...dataRows.map((row) => row.length), 0);
 
-  // Note which personal columns we are dropping (for the "What we keep" screen).
-  roles.forEach((r) => {
-    if (r === 'balance') redactedCategories.add('balance');
-    if (r === 'holder') redactedCategories.add('name');
+  // Note which personal columns are always dropped, even when their contents
+  // would otherwise look like a merchant name.
+  roles.forEach((role) => {
+    if (role === 'balance') redactedCategories.add('balance');
+    if (role === 'holder') redactedCategories.add('name');
   });
+  if (inferred.holderColumns.length) redactedCategories.add('name');
   header.forEach((h) => {
-    const f = h.toLowerCase();
+    const f = foldHeader(h);
     if (/iban|account number|racun|rachunek|konto/.test(f)) redactedCategories.add('IBAN');
-    if (/holder|name|ime|primatelj|payer|payee/.test(f)) redactedCategories.add('name');
+    if (/holder|owner|account name|payer|payee|created by/.test(f)) redactedCategories.add('name');
     if (/address|adresa|adresse/.test(f)) redactedCategories.add('address');
   });
 
-  // Currency may be embedded in the amount header, e.g. "Amount (EUR)".
   const headerCurrency = header.map((h) => h.match(/\(([A-Z]{3})\)/)?.[1]).find(Boolean);
+  if (inferred.questions.length || inferred.date === undefined || inferred.amount === undefined || inferred.merchant === undefined) {
+    const dateFormat = dateFormatOverride ?? 'ambiguous';
+    return {
+      transactions: [],
+      meta: {
+        displayCurrency: headerCurrency ?? fallbackCurrency,
+        dateFormat,
+        dateAmbiguous: inferred.questions.some((question) => question.role === 'date') || dateFormat === 'ambiguous',
+        monthsSpan: 0,
+        redactedCategories: [...redactedCategories],
+        columnQuestions: inferred.questions.length ? inferred.questions : requiredColumnQuestions(inferred, columnCount),
+        columnCount,
+      },
+    };
+  }
+
+  const dateCol = inferred.date;
+  const merchantCol = inferred.merchant;
+  const descCol = col('description');
+  const amountCol = inferred.amount;
+  const currencyCol = inferred.currency;
+  const directionCol = inferred.direction;
+  const statusCol = inferred.status;
 
   // First pass: collect raw rows and the date strings for format detection.
   const raws: RawRow[] = [];
   const dateStrings: string[] = [];
-  for (let i = headerIdx + 1; i < rows.length; i++) {
-    const r = rows[i]!;
-    if (dateCol === -1 || !r[dateCol]) continue;
+  for (const r of dataRows) {
+    if (directionCol !== undefined && !isOutgoingValue(r[directionCol] ?? '')) continue;
+    if (statusCol !== undefined && !isCompletedValue(r[statusCol] ?? '')) continue;
+    if (!r[dateCol]) continue;
     const rawDate = normalizeDigits((r[dateCol] ?? '').trim()); // Arabic/Thai digits → ASCII
     if (!/\d/.test(rawDate)) continue; // footer/blank lines
-    // Prefer the clean merchant column; fall back to the description when the
-    // merchant cell is empty (e.g. Wise transfers have no Merchant value).
-    let merchantCell = '';
-    for (const mc of merchantCols) {
-      const v = (r[mc] ?? '').trim();
-      if (v) { merchantCell = v; break; }
-    }
-    const rawDesc = merchantCell || (descCol !== -1 ? (r[descCol] ?? '') : '');
+    let rawDesc = (r[merchantCol] ?? '').trim() || (descCol !== -1 ? (r[descCol] ?? '') : '');
+    const fullDescription = descCol !== -1 ? (r[descCol] ?? '').trim() : '';
+    if (fullDescription && isPrivateTransfer(normalizeMerchant(fullDescription))) rawDesc = fullDescription;
     let out: number | null = null;
-    if (amountCol !== -1) {
+    if (amountCol !== undefined) {
       const v = parseAmount(r[amountCol] ?? '');
-      if (v !== null && v < 0) out = Math.abs(v); // single signed column: out = negative
+      if (v !== null && (directionCol !== undefined ? v !== 0 : roles[amountCol] === 'debit' ? v > 0 : v < 0)) out = Math.abs(v);
     }
-    if (out === null && debitCol !== -1) {
-      const v = parseAmount(r[debitCol] ?? '');
-      if (v !== null && v !== 0) out = Math.abs(v);
-    }
-    // ignore credits (money in): if only a credit is present, out stays null
-    const cur = (currencyCol !== -1 ? (r[currencyCol] ?? '').trim().toUpperCase() : '') || headerCurrency || fallbackCurrency;
-    if (redactDescription(rawDesc) !== rawDesc) redactedCategories.add('card number');
+    const cur = (currencyCol !== undefined ? (r[currencyCol] ?? '').trim().toUpperCase() : '') || headerCurrency || fallbackCurrency;
+    for (const category of redactedDescriptionCategories(rawDesc)) redactedCategories.add(category);
     raws.push({ date: rawDate, description: redactDescription(rawDesc), out, currency: cur });
     dateStrings.push(rawDate);
   }
 
-  const dateFormat = detectDateFormat(dateStrings);
+  const dateFormat = dateFormatOverride && detectDateFormat(dateStrings) === 'ambiguous'
+    ? dateFormatOverride
+    : detectDateFormat(dateStrings);
 
   const transactions: Transaction[] = [];
   for (const r of raws) {
@@ -154,6 +184,8 @@ export function transactionsFromRows(
       dateAmbiguous: dateFormat === 'ambiguous',
       monthsSpan,
       redactedCategories: [...redactedCategories],
+      columnQuestions: [],
+      columnCount,
     },
   };
 }
@@ -254,6 +286,7 @@ export function detect(transactions: Transaction[], meta: ImportMeta): Detection
 
   return {
     meta,
+    transactions,
     recurring,
     habits,
     mustAsk,
@@ -263,8 +296,8 @@ export function detect(transactions: Transaction[], meta: ImportMeta): Detection
 }
 
 /** Convenience: rows → full detection result. */
-export function runDetection(rows: string[][], fallbackCurrency = 'EUR'): DetectionResult {
-  const { transactions, meta } = transactionsFromRows(rows, fallbackCurrency);
+export function runDetection(rows: string[][], fallbackCurrency = 'EUR', dateFormatOverride?: DateFormat, columnOverrides: ColumnOverrides = {}): DetectionResult {
+  const { transactions, meta } = transactionsFromRows(rows, fallbackCurrency, dateFormatOverride, columnOverrides);
   return detect(transactions, meta);
 }
 

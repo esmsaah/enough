@@ -12,6 +12,7 @@ const GROUPS = [
 export function QuickStart() {
   const { state, dispatch, audit } = useStore();
   const selected = new Set(state.items.filter((i) => i.source === 'quickpick').map((i) => i.merchantKey));
+  const backStep = state.statement ? 'found' : 'landing';
 
   return (
     <>
@@ -43,9 +44,12 @@ export function QuickStart() {
           <span className="muted">{selected.size} selected · per year</span>
           <span className="amount">{formatMoney(audit.yearlyTotal, state.currency, { round: true })}</span>
         </div>
-        <Button full disabled={selected.size === 0} onClick={() => dispatch({ type: 'goto', step: 'anythingElse' })}>
-          Continue
-        </Button>
+        <div className="row" style={{ gap: 12 }}>
+          <Button variant="secondary" onClick={() => dispatch({ type: 'goto', step: backStep })}>Back</Button>
+          <Button full disabled={selected.size === 0} onClick={() => dispatch({ type: 'goto', step: 'anythingElse' })}>
+            Continue
+          </Button>
+        </div>
       </div>
     </>
   );

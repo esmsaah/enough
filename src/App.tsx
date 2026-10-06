@@ -3,6 +3,9 @@ import { AnythingElse } from './screens/AnythingElse';
 import { CutList } from './screens/CutList';
 import { GoodShape } from './screens/GoodShape';
 import { Landing } from './screens/Landing';
+import { AddStatement } from './screens/AddStatement';
+import { WhatWeKeep } from './screens/WhatWeKeep';
+import { FoundItems } from './screens/FoundItems';
 import { QuickStart } from './screens/QuickStart';
 import { Result } from './screens/Result';
 import { Usage } from './screens/Usage';
@@ -12,6 +15,12 @@ function Flow() {
   switch (state.step) {
     case 'landing':
       return <Landing />;
+    case 'addstatement':
+      return <AddStatement />;
+    case 'keep':
+      return <WhatWeKeep />;
+    case 'found':
+      return <FoundItems />;
     case 'quickstart':
       return <QuickStart />;
     case 'anythingElse':

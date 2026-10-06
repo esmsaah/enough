@@ -1,4 +1,4 @@
-// Screen 1 — Landing. Section 8. Two buttons; quick-pick path is the M1 route.
+// Screen 1 — Landing. Section 8. Two clear paths into the audit.
 import { useStore } from '../app/store';
 import { Button } from '../components/ui';
 
@@ -13,15 +13,12 @@ export function Landing() {
       </p>
 
       <div className="stack" style={{ marginTop: 28 }}>
-        <Button variant="secondary" full onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>
+        <Button variant="primary" full onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}>
           I have a bank statement
         </Button>
-        <Button variant="primary" full onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>
+        <Button variant="secondary" full onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>
           I'll tap what I pay for
         </Button>
-        <p className="muted center" style={{ fontSize: 13 }}>
-          Reading a statement arrives next. For now, tap what you pay for.
-        </p>
       </div>
     </div>
   );

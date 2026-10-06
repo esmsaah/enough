@@ -93,7 +93,7 @@ export function AnythingElse() {
 
       <div className="footer">
         <div className="row" style={{ gap: 12 }}>
-          <Button variant="secondary" onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>Back</Button>
+          <Button variant="secondary" onClick={() => dispatch({ type: 'goto', step: state.statement ? 'found' : 'quickstart' })}>Back</Button>
           <Button full onClick={() => dispatch({ type: 'goto', step: 'usage' })}>
             {state.items.some((i) => i.source === 'manual' || i.source === 'cash') ? 'Continue' : 'Skip'}
           </Button>

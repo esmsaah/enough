@@ -1,0 +1,55 @@
+{
+  "uk_highstreet_layout.pdf": {
+    "mustRedact": [
+      "MARA TESTWELL",
+      "12345678",
+      "87654321",
+      "00-11-22",
+      "01-02-1985",
+      "TESTWELL",
+      "JON FAKEMAN",
+      "JANE DOE-EXAMPLE",
+      "12 Sample Road"
+    ],
+    "mustSkipRows": [
+      "BROUGHT FORWARD"
+    ],
+    "dateCarriesDown": true,
+    "mustFindOut": [
+      "tesco",
+      "netflix",
+      "spotify",
+      "pure gym",
+      "sumup",
+      "playstationnetwork",
+      "mcdonalds"
+    ],
+    "mustAsk": [
+      "transfer to a person (JANE DOE-EXAMPLE)"
+    ],
+    "notes": "merchant follows the 'Card Transaction 8603 03OCT26 CD' prefix; credits (Paid In) are not spending"
+  },
+  "emoney_multitable_layout.pdf": {
+    "mustRedact": [
+      "LEO SAMPLEMAN",
+      "LT12 3456 7890 1234 5678",
+      "7 Fictional Lane",
+      "999999******1234",
+      "JON FAKEMAN"
+    ],
+    "mustSkipTables": [
+      "Balance summary",
+      "Pending"
+    ],
+    "mustFindOut": [
+      "netflix",
+      "spotify",
+      "apple"
+    ],
+    "mustIgnoreSublines": [
+      "To:",
+      "Card:"
+    ],
+    "notes": "only the Account transactions table counts; Shell is pending and must not appear"
+  }
+}

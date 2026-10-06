@@ -71,3 +71,17 @@ p { margin: 8px 0; }
 
 .center { text-align: center; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.redaction-bars { display: grid; gap: 6px; margin: 16px 0; }
+.redaction-bar { display: flex; min-height: 34px; align-items: center; justify-content: space-between; gap: 12px; padding: 5px 10px; background: var(--ink); color: var(--white); font-size: 13px; }
+.redaction-bar strong { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; }
+.kept-rows { background: var(--paper); border: 1.5px solid var(--line); border-radius: var(--radius-card); padding: 4px 12px; }
+.kept-row { display: grid; grid-template-columns: 86px minmax(0, 1fr) auto; align-items: baseline; gap: 8px; padding: 10px 0; border-bottom: 1px dashed var(--dash); font-size: 12px; }
+.kept-row:last-of-type { border-bottom: 0; }
+.kept-row__date, .kept-row__amount { font-size: 11px; white-space: nowrap; }
+.kept-row__merchant { overflow-wrap: anywhere; }
+.error-message { color: var(--coral-text); font-size: 14px; }
+.found-item__year { margin-top: 6px; font-size: 13px; }
+.category-select-label { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; color: var(--muted); font-size: 13px; }
+.category-select { min-height: var(--tap); padding: 0 10px; border: 1.5px solid var(--line); border-radius: var(--radius); background: var(--white); color: var(--ink); font: inherit; }
+.category-tag { display: inline-block; margin-top: 12px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-size: 12px; }

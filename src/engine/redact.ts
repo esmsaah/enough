@@ -30,7 +30,19 @@ export function redactDescription(input: string): string {
 }
 
 /** Personal-data categories the "What we keep" screen shows as REMOVED bars. */
-export const REDACTED_CATEGORIES = ['name', 'IBAN', 'address', 'balance', 'card number'] as const;
+export const REDACTED_CATEGORIES = ['name', 'IBAN', 'address', 'balance', 'card number', 'email', 'phone number', 'personal identifier'] as const;
+
+/** Describe the personal-data patterns removed from a transaction description. */
+export function redactedDescriptionCategories(input: string): string[] {
+  const categories = new Set<string>();
+  if (/\b[A-Z]{2}\d{2}(?:[ ]?[A-Z0-9]){10,30}\b/i.test(input)) categories.add('IBAN');
+  if (/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/.test(input)) categories.add('email');
+  const hasCardNumber = /\b(?:\d[ -]?){13,19}\b/.test(input);
+  if (hasCardNumber) categories.add('card number');
+  else if (/\+?\d[\d\s().-]{7,}\d/.test(input)) categories.add('phone number');
+  else if (/\b\d{10,}\b/.test(input)) categories.add('personal identifier');
+  return [...categories];
+}
 
 /**
  * True if a string still contains anything that looks personal after

@@ -79,6 +79,7 @@ export function isIgnoredMerchant(normalizedMerchant: string): boolean {
 /** A transfer to a private person — never auto-classified, always ask. */
 export function isPrivateTransfer(normalizedMerchant: string): boolean {
   const s = normalizedMerchant.toLowerCase().trim();
+  if (s === 'transfer to a person') return true;
   // English/German: "... to Firstname Lastname", with an optional transfer verb.
   if (/^(transfer|sent money|sent|payment|wire|standing order|outgoing transfer|ueberweisung|uberweisung|virement)?\s*to\s+[a-z]+(\s+[a-z]+){1,2}$/.test(s)) {
     return true;
