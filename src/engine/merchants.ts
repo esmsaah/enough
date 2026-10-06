@@ -64,7 +64,7 @@ const MERCHANTS: MerchantDef[] = [
   { merchantKey: 'telekom', name: 'Telekom', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['telekom', 'telecom', 't-mobile', 'bh telecom', 'mtel', 'hrvatski telekom'] },
   { merchantKey: 'mts', name: 'mts', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['mts'] },
   { merchantKey: 'infostan', name: 'Infostan', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['infostan'] },
-  { merchantKey: 'insurance', name: 'Insurance', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['insurance', 'osiguranje'] },
+  { merchantKey: 'insurance', name: 'Insurance', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['insurance', 'osiguranje', 'wiener stadtische osig', 'wiener stadtische'] },
 ];
 
 // Payment-processor prefixes and noise tokens stripped before matching.

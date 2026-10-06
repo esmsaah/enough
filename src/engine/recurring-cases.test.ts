@@ -43,6 +43,40 @@ describe('synthetic merchant recurrence safeguards', () => {
     });
   });
 
+  it('flags possible double charges only for digital and bill merchants', () => {
+    const transactions: Transaction[] = [
+      { date: '2026-09-01', merchantRaw: 'MAĆI', amount: 4.20, currency: 'EUR' },
+      { date: '2026-09-03', merchantRaw: 'MAĆI', amount: 4.20, currency: 'EUR' },
+      { date: '2026-09-01', merchantRaw: 'Upwork', amount: 24.00, currency: 'EUR' },
+      { date: '2026-09-03', merchantRaw: 'Upwork', amount: 24.00, currency: 'EUR' },
+      { date: '2026-09-01', merchantRaw: 'Adobe Creative Cloud', amount: 16.80, currency: 'EUR' },
+      { date: '2026-09-03', merchantRaw: 'Adobe Creative Cloud', amount: 16.80, currency: 'EUR' },
+      { date: '2026-09-01', merchantRaw: 'mts Mobile', amount: 34.99, currency: 'EUR' },
+      { date: '2026-09-03', merchantRaw: 'mts Mobile', amount: 34.99, currency: 'EUR' },
+    ];
+    const found = detect(transactions, meta).possibleDoubleCharges.map((item) => item.merchantKey);
+    expect(found).toEqual(['adobe', 'mts']);
+    expect(found).not.toContain('maci');
+    expect(found).not.toContain('upwork');
+  });
+
+  it('offers a one-charge Wiener Städtische insurance payment as a yearly bill', () => {
+    const transaction: Transaction = {
+      date: '2026-09-12', merchantRaw: 'Wiener Stadtische Osig', amount: 89.50, currency: 'EUR',
+    };
+    const candidate = detect([transaction], meta).possibleRecurring.find((item) => item.merchantKey === 'insurance');
+    expect(candidate).toMatchObject({ category: 'bill', frequency: 'yearly', charges: 1 });
+  });
+
+  it('never returns an empty key for ignored merchants', () => {
+    const result = detect([
+      { date: '2026-09-01', merchantRaw: 'Lidl', amount: 12.30, currency: 'EUR' },
+      { date: '2026-09-02', merchantRaw: 'Revolut card payment', amount: 2.00, currency: 'EUR' },
+    ], meta);
+    expect(result.ignored).toEqual(['lidl']);
+    expect(result.ignored.every((merchantKey) => merchantKey.trim().length > 0)).toBe(true);
+  });
+
   it('moves a recurring item with no charge in over 60 days to ended', () => {
     expect(result.ended.some((item) => item.merchantKey === 'google one')).toBe(true);
     expect(result.recurring.some((item) => item.merchantKey === 'google one')).toBe(false);

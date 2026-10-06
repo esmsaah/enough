@@ -55,3 +55,5 @@ Ambiguities resolved while building, per the brief's instruction to pick the sim
 - Manual audit flow UI (screens 2B, 5, 6, 7, 8, 9, 10) with a fake unlock button — not started.
 - The `expected/*.json` "price" field is sometimes a sentence for bills ("average, varies 24.10–27.80"), so the fixture comparison in M2 must assert frequency + averaging for bills, not exact price.
 - Ambiguous-date file must return an explicit "ask dd/mm or mm/dd" state, not a silent guess (M2).
+
+31. **Possible double charges and single bill candidates.** Double-charge warnings are restricted to digital and bill categories, excluding transactional habits and general merchants. A single recognized insurance charge is offered as a possible yearly bill; other single bill candidates retain a monthly default. Empty normalized merchant keys are filtered before they can enter ignored-item results.

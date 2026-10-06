@@ -268,7 +268,10 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     const canBeRecurring = cat.category === 'digital' || cat.category === 'membership' || cat.category === 'bill';
     const fixed = amountsWithin(amounts, 0.05, 0.05) || hasSinglePriceStep(amounts);
     if (sorted.length < 2) {
-      if (canBeRecurring) possibleRecurring.push(candidateItem(base, amounts, sorted.length));
+      if (canBeRecurring) {
+        const likelyFrequency = key === 'insurance' ? 'yearly' : 'monthly';
+        possibleRecurring.push(candidateItem(base, amounts, sorted.length, likelyFrequency));
+      }
       continue;
     }
 
@@ -390,17 +393,20 @@ function candidateItem(
   base: Omit<DetectedItem, 'frequency' | 'price' | 'charges'>,
   amounts: number[],
   charges: number,
+  frequency: Frequency = 'monthly',
 ): DetectedItem {
-  return { ...base, frequency: 'monthly', price: round2(median(amounts)), charges };
+  return { ...base, frequency, price: round2(median(amounts)), charges };
 }
 
 function findPossibleDoubleCharges(transactions: Transaction[]): PossibleDoubleCharge[] {
   const groups = new Map<string, Array<Transaction & { merchantKey: string; name: string }>>();
   for (const transaction of transactions) {
     const normalized = normalizeMerchant(transaction.merchantRaw);
-    const info = matchMerchant(transaction.merchantRaw);
+    const info = isPrivateTransfer(normalized) ? undefined : matchMerchant(transaction.merchantRaw);
+    const category = categoryOf(info, normalized).category;
+    if (category !== 'digital' && category !== 'bill') continue;
     const merchantKey = info?.merchantKey ?? normalized;
-    if (!merchantKey) continue;
+    if (!merchantKey.trim()) continue;
     const group = groups.get(merchantKey) ?? [];
     group.push({ ...transaction, merchantKey, name: info?.name ?? titleCase(normalized) });
     groups.set(merchantKey, group);
