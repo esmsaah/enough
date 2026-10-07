@@ -151,7 +151,7 @@ p { margin: 8px 0; }
 .share-card-buttons .btn { flex: 1 1 0; }
 
 @media (min-width: 901px) {
-  body:has(.landing-screen) { background: var(--navy); }
+  body:has(.landing-screen) { background: var(--ground); }
   .app { width: 100%; max-width: 1100px; min-height: 100vh; }
   .app--with-receipt { display: grid; grid-template-columns: minmax(0, 1fr) 320px; column-gap: 36px; align-content: start; }
   .app-content { min-width: 0; display: flex; flex-direction: column; }
@@ -256,11 +256,101 @@ p { margin: 8px 0; }
 
 @media (min-width: 901px) {
   .app.app--landing { max-width: none; background: var(--navy); }
-  .app--landing .landing-screen { max-width: none; padding: 36px 0 72px; }
+  .app.app--landing .screen.landing-screen { max-width: none; width: 100%; margin: 0; padding: 36px 0 72px; }
   .landing-inner { max-width: 1200px; margin: 0 auto; padding: 0 64px; box-sizing: border-box; }
   .landing-alt { font-size: 17px; max-width: 540px; }
   .landing-how h2, .landing-trust h2 { margin-top: 72px; font-size: 28px; }
   .landing-how ol { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
   .landing-trust ul { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
   .landing-how li strong { font-size: 19px; }
+}
+
+/* Landing is navy edge to edge at every width (no light side blocks). */
+.app.app--landing { max-width: none; background: var(--navy); }
+.app--landing .landing-screen { width: 100%; box-sizing: border-box; }
+@media (max-width: 900px) {
+  .landing-inner { max-width: 520px; margin: 0 auto; }
+}
+
+/* Navy only for the first screen; how it works and trust sit on the light ground. */
+.landing-screen { padding: 0; background: var(--ground); }
+.landing-hero { background: var(--navy); color: var(--white); padding: var(--gutter) var(--gutter) 32px; }
+.landing-light { background: var(--ground); color: var(--ink); padding: 8px var(--gutter) 56px; }
+.landing-light .landing-how h2, .landing-light .landing-trust h2 { color: var(--ink); }
+.landing-light .landing-how li, .landing-light .landing-trust li { border-top-color: var(--line); }
+.landing-light .landing-how li strong, .landing-light .landing-trust li strong { color: var(--ink); }
+.landing-light .landing-how li span:last-child, .landing-light .landing-trust li span { color: var(--muted); }
+.landing-light .landing-how__n { color: var(--indigo); }
+.app.app--landing { background: var(--ground); }
+@media (min-width: 901px) {
+  .app.app--landing .screen.landing-screen { padding: 0; }
+  .landing-hero { padding: 36px 0 96px; }
+  .landing-light { padding: 8px 0 96px; }
+}
+
+/* ===== Landing v3: split hero ===== */
+.app.app--landing .screen.lp { max-width: none; width: 100%; margin: 0; padding: 0; background: var(--ground); }
+.lp-hero { display: grid; grid-template-columns: 1fr; }
+.lp-left { background: var(--navy); color: var(--white); padding: 24px var(--gutter) 36px; display: flex; flex-direction: column; gap: 16px; }
+.lp-brand { display: flex; flex-direction: column; gap: 2px; margin-bottom: 20px; }
+.lp-brand strong { font-size: 22px; font-weight: 800; letter-spacing: -.5px; }
+.lp-brand span { color: var(--muted-on-navy); font-size: 12px; }
+.lp-left h1 { margin: 0; font-size: 40px; line-height: 1; letter-spacing: -1.2px; font-weight: 800; }
+.lp-sub { margin: 0; color: #d6daf0; font-size: 18px; line-height: 1.4; }
+.lp-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.lp-btn { min-height: 54px; padding: 0 26px; border-radius: 6px; font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; }
+.lp-btn--primary { background: var(--lime, #D4EE8A); color: var(--ink); border: 0; flex: 1 1 auto; }
+.lp-btn--ghost { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.55); flex: 1 1 auto; }
+.lp-btn:hover { filter: brightness(1.06); }
+.lp-price { margin: 0; font-family: var(--font-mono); font-size: 12px; color: #d6daf0; }
+.lp-chips { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.lp-chips li { border: 1.5px solid var(--lime, #D4EE8A); color: var(--lime, #D4EE8A); border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 600; }
+.lp-right { position: relative; background: var(--ground); padding: 40px var(--gutter) 24px; display: flex; justify-content: center; }
+.lp-how-link { display: none; }
+.lp-receipt { margin: 0; width: min(100%, 420px); transform: rotate(-1.5deg); filter: drop-shadow(0 18px 30px rgba(20,32,74,.18)); }
+.lp-receipt__paper { background: var(--paper); color: var(--ink); padding: 22px 26px; font-family: var(--font-mono); font-size: 14px; display: grid; gap: 12px;
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%, conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  -webkit-mask-composite: source-in; mask-composite: intersect; padding-block: 30px; }
+.lp-receipt__cap { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; }
+.lp-receipt__paper hr { border: 0; border-top: 1px dashed var(--dash); margin: 0; width: 100%; }
+.lp-row { position: relative; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.lp-row--cut > span { color: #8e8d86; position: relative; }
+.lp-row--cut > span:first-child { color: var(--ink); }
+.lp-strike { position: absolute; left: -4px; top: 5px; width: calc(100% + 8px); height: 10px; overflow: visible; }
+.lp-strike path { stroke: var(--coral-pen, #D2452A); stroke-width: 2.2; fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.lp-gym { display: flex; gap: 10px; align-items: baseline; }
+.lp-gym s { color: #8e8d86; }
+.lp-gym b { position: relative; padding: 0 2px; }
+.lp-gym svg { position: absolute; left: -10px; top: -7px; width: calc(100% + 20px); height: 32px; overflow: visible; }
+.lp-gym svg path { stroke: var(--indigo, #3346D3); stroke-width: 1.8; fill: none; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.lp-note { position: absolute; font-family: var(--font-hand, 'Caveat', cursive); font-style: normal; font-size: 20px; color: var(--coral-pen, #D2452A); white-space: nowrap; transform: rotate(-4deg); }
+.lp-note--dropbox { left: 92px; top: -16px; }
+.lp-note--gym { right: -6px; top: 20px; color: var(--indigo, #3346D3); font-size: 18px; }
+.lp-total { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-display); margin-top: 6px; }
+.lp-total span { font-weight: 600; font-size: 14px; }
+.lp-total strong { font-size: 32px; font-weight: 800; letter-spacing: -.5px; }
+.lp-cards { padding: 8px var(--gutter) 48px; color: var(--ink); }
+.lp-cards h2 { margin: 36px 0 14px; font-size: 24px; font-weight: 800; }
+.lp-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.lp-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.lp-card strong { font-size: 17px; }
+.lp-card span:last-child { color: var(--muted); font-size: 14px; line-height: 1.45; }
+.lp-card__n { font-family: var(--font-mono); font-size: 12px; color: var(--indigo); font-weight: 600; }
+.lp-footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+@media (min-width: 901px) {
+  .lp-hero { grid-template-columns: minmax(0, 56fr) minmax(0, 44fr); min-height: 640px; }
+  .lp-left { padding: 40px 72px 64px max(64px, calc((100vw - 1200px) / 2 + 24px)); gap: 20px; justify-content: flex-start; }
+  .lp-brand { flex-direction: row; align-items: baseline; gap: 16px; margin-bottom: 64px; }
+  .lp-brand strong { font-size: 26px; }
+  .lp-brand span { font-size: 13px; }
+  .lp-left h1 { font-size: 76px; letter-spacing: -2.5px; max-width: 620px; }
+  .lp-sub { font-size: 21px; }
+  .lp-btn--primary, .lp-btn--ghost { flex: 0 0 auto; }
+  .lp-right { padding: 40px max(64px, calc((100vw - 1200px) / 2 + 24px)) 40px 64px; align-items: center; }
+  .lp-how-link { display: block; position: absolute; top: 44px; right: max(64px, calc((100vw - 1200px) / 2 + 24px)); color: var(--ink); font-size: 15px; text-underline-offset: 3px; }
+  .lp-cards { max-width: 1200px; margin: 0 auto; padding: 24px 64px 72px; box-sizing: border-box; }
+  .lp-cards h2 { margin-top: 56px; font-size: 30px; }
+  .lp-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .lp-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 }
