@@ -1,0 +1,19 @@
+{
+  "ba_unicredit_layout.pdf": {
+    "mustRedact": [
+      "TESTI\u0106 ANA",
+      "BA00 0000 0000 0000 0000",
+      "00000000000"
+    ],
+    "mustFindRecurring": [
+      "google storage (USD 1.99 monthly)",
+      "bh telecom (bill)",
+      "new york times (USD 4 monthly)"
+    ],
+    "mustSkipRows": [
+      "EXCH KONVERZIJA (currency exchange, not spending)",
+      "Prethodno stanje / Promet / Novo stanje summary lines"
+    ],
+    "notes": "single signed amount column plus running balance; merchant glued to city (BHTELESARAJEVO); original USD price prefixed in description"
+  }
+}

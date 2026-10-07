@@ -4,7 +4,7 @@
 // Pure: no I/O, no network. Detection needs no understanding of language.
 
 import { classifyHeader, foldHeader, looksLikeHeaderRow, type ColumnRole } from './headers';
-import { classifyByKeyword, isIgnoredMerchant, isPrivateTransfer } from './keywords';
+import { classifyByKeyword, isIgnoredMerchant, isInternalMovement, isPrivateTransfer } from './keywords';
 import { inferColumns, isComplete as isCompletedValue, isOutgoing as isOutgoingValue, type ColumnOverrides, type ColumnQuestion } from './columns';
 import { matchMerchant, normalizeMerchant, type KnownPlan } from './merchants';
 import { convert } from './rates';
@@ -235,6 +235,7 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
 
   for (const t of transactions) {
     const normalized = normalizeMerchant(t.merchantRaw);
+    if (isInternalMovement(normalized)) continue;
     // A private transfer is never matched to a merchant, even if a person's
     // name coincides with a brand ("Transfer to Claude Dupont" is not Claude).
     const info = isPrivateTransfer(normalized) ? undefined : matchMerchant(t.merchantRaw);

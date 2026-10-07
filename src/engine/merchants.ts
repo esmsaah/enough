@@ -52,7 +52,7 @@ const MERCHANTS: MerchantDef[] = [
   { merchantKey: 'dropbox', billingModel: 'monthly', name: 'Dropbox', category: 'digital', displayCategory: 'Cloud & Storage', overlapGroup: 'cloud', aliases: ['dropbox'] },
   { merchantKey: 'apple', billingModel: 'monthly', name: 'Apple', category: 'digital', displayCategory: 'Cloud & Storage', overlapGroup: 'cloud', aliases: ['apple com bill', 'apple.com/bill', 'itunes', 'apple'] },
   { merchantKey: 'icloud', billingModel: 'monthly', name: 'iCloud+', category: 'digital', displayCategory: 'Cloud & Storage', overlapGroup: 'cloud', aliases: ['icloud'] },
-  { merchantKey: 'google one', billingModel: 'monthly', name: 'Google One', category: 'digital', displayCategory: 'Cloud & Storage', overlapGroup: 'cloud', aliases: ['google one', 'googleone', 'google storage'] },
+  { merchantKey: 'google one', billingModel: 'monthly', name: 'Google One', category: 'digital', displayCategory: 'Cloud & Storage', overlapGroup: 'cloud', aliases: ['google one', 'googleone', 'google storage', 'google sto', 'google cloud storage', 'google storage'] },
   { merchantKey: 'onedrive', billingModel: 'monthly', name: 'OneDrive', category: 'digital', displayCategory: 'Cloud & Storage', overlapGroup: 'cloud', aliases: ['onedrive'] },
   // --- News & Media ---
   { merchantKey: 'nyt', billingModel: 'monthly', name: 'The New York Times', category: 'digital', displayCategory: 'News & Media', aliases: ['nytimes', 'new york times', 'nyt'] },
@@ -73,7 +73,7 @@ const MERCHANTS: MerchantDef[] = [
   { merchantKey: 'uber', billingModel: 'usage', name: 'Uber', category: 'habit', displayCategory: 'Transport', aliases: ['uber'] },
   { merchantKey: 'bolt', billingModel: 'usage', name: 'Bolt', category: 'habit', displayCategory: 'Transport', aliases: ['bolt'] },
   // --- Bills / telecoms ---
-  { merchantKey: 'telekom', billingModel: 'monthly', name: 'Telekom', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['telekom', 'telecom', 't-mobile', 'bh telecom', 'mtel', 'hrvatski telekom'] },
+  { merchantKey: 'telekom', billingModel: 'monthly', name: 'Telekom', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['telekom', 'telecom', 't-mobile', 'bh telecom', 'bhtelecom', 'bh mobile', 'bhmobile', 'bhtele', 'mtel', 'hrvatski telekom'] },
   { merchantKey: 'mts', billingModel: 'monthly', name: 'mts', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['mts'] },
   { merchantKey: 'infostan', billingModel: 'monthly', name: 'Infostan', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['infostan'] },
   { merchantKey: 'insurance', billingModel: 'yearly', name: 'Insurance', category: 'bill', displayCategory: 'Bills & Utilities', aliases: ['insurance', 'osiguranje', 'wiener stadtische osig', 'wiener stadtische'] },
@@ -127,9 +127,24 @@ export function containsWord(folded: string, phrase: string): boolean {
  * reference codes and noise, collapses spaces. Keeps "+" (disney+) and known
  * words like "premium". Does not consult the merchant map.
  */
+// City names banks glue onto the merchant ("OSIGURANJESARAJEVO").
+const GLUED_CITIES = ['sarajevo', 'beograd', 'zagreb', 'ljubljana', 'skopje', 'podgorica', 'banjaluka', 'mostar', 'tuzla', 'zenica', 'novisad', 'nis', 'split', 'rijeka', 'wien', 'berlin', 'muenchen', 'london', 'paris', 'istanbul'];
+
+/** Generic cleanup of statement noise: a leading original-currency price
+ *  ("USD 1.99GOOGLE"), a URL scheme, and a city glued to the last word. */
+export function stripStatementNoise(raw: string): string {
+  let s = raw.replace(/^\s*[A-Z]{3}\s*\d+(?:[.,]\d+)?\s*/, '').replace(/https?:\/\//gi, '');
+  s = s.replace(/[A-Za-z]{3,}/g, (word) => {
+    const lower = word.toLowerCase();
+    const city = GLUED_CITIES.find((c) => lower.endsWith(c) && lower.length > c.length + 2);
+    return city ? `${word.slice(0, word.length - city.length)} ${word.slice(word.length - city.length)}` : word;
+  });
+  return s;
+}
+
 export function normalizeMerchant(raw: string): string {
   // Drop processor prefixes before folding (they use * and / that folding eats).
-  let s = raw.replace(/\b(google|openai|paypal|sq|sumup)\s*[*/]\s*/gi, ' ');
+  let s = stripStatementNoise(raw).replace(/\b(google|openai|paypal|sq|sumup)\s*[*/]\s*/gi, ' ');
   s = foldMerchant(s); // space-separated word tokens, "com" now its own token
   const noise = new Set(NOISE_TOKENS);
   s = s
@@ -165,7 +180,7 @@ export function clearResearchedMerchants(): void {
 }
 
 export function matchMerchant(raw: string): MerchantInfo | undefined {
-  const folded = foldMerchant(raw);
+  const folded = foldMerchant(stripStatementNoise(raw));
   const candidates: Array<{ alias: string; def: MerchantDef }> = [];
   for (const def of [...MERCHANTS, ...RESEARCHED]) {
     for (const alias of def.aliases) candidates.push({ alias, def });

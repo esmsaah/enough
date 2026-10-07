@@ -33,6 +33,8 @@ const KEYWORD_RULES: KeywordRule[] = [
       'miete', 'rent', 'kirija', 'stanarina', 'najam', 'loyer', 'alquiler', 'affitto', 'huur', 'czynsz', 'najemne',
       'hausverwaltung', 'nebenkosten', 'property management', 'stadtwerke', 'strom', 'energie', 'energy', 'energia',
       'energija', 'wasser', 'heizung', 'fernwarme', 'rundfunk', 'grejanje', 'toplana', 'vodovod',
+      // bank account fees
+      'naknada', 'provizija', 'kontofuhrung', 'kontofuehrung', 'account fee', 'bank fee', 'frais bancaires', 'comision',
     ],
   },
   {
@@ -78,6 +80,12 @@ export function classifyByKeyword(
 
 /** Supermarkets and fuel — ignored as habits unless the person adds them.
  *  Whole-word: "ina" (fuel) never matches "marina"; "spar" never "sparkasse". */
+/** Money moved between your own balances or currencies: never spending. */
+export function isInternalMovement(normalizedMerchant: string): boolean {
+  if (/\b(naknada|provizija|fee)\b/.test(normalizedMerchant)) return false;
+  return /\b(konverzija|konverzijaoperativni|exchange|conversion|currency exchange|umbuchung|umrechnung|change de devises|interni prenos|own account|vlastiti racun)\b/.test(normalizedMerchant);
+}
+
 export function isIgnoredMerchant(normalizedMerchant: string): boolean {
   return IGNORE_WORDS.some((w) => containsWord(normalizedMerchant, w));
 }

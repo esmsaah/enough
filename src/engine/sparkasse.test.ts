@@ -43,3 +43,16 @@ describe('local private regression (never committed)', () => {
     expect(parsed.columnQuestions).toHaveLength(0);
   });
 });
+
+describe('Bosnian bank foreign-currency layout (synthetic twin)', () => {
+  it('signed amount column, glued city names, USD price prefix, exchanges skipped', async () => {
+    const parsed = transactionsFromPdfPages(await pages(join(__dirname, '..', '..', 'fixtures', 'pdf', 'layout-twins', 'ba_unicredit_layout.pdf')));
+    expect(parsed.balanceCheck.checked).toBeGreaterThan(0);
+    expect(parsed.balanceCheck.passed).toBe(parsed.balanceCheck.checked);
+    expect(JSON.stringify(parsed.transactions)).not.toMatch(/TESTIĆ|BA00 0000/);
+    const result = detect(parsed.transactions, meta);
+    const keys = result.recurring.map((item) => item.merchantKey);
+    expect(keys).toEqual(expect.arrayContaining(['nyt', 'google one', 'telekom']));
+    expect(keys.some((key) => /konverzija|exch/.test(key))).toBe(false);
+  });
+});

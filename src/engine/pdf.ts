@@ -394,7 +394,8 @@ function validateBalances(rows: ParsedRowForBalance[]): PdfBalanceCheck {
         const incoming = inX === undefined ? 0 : valueAt(chronological[i]!, inX) ?? 0;
         if (out === 0 && incoming === 0) continue;
         assignments++;
-        if (Math.abs(previous - out + incoming - current) <= 0.03) valid++;
+        // Separate out/in columns (positive values) or one signed column (+ in, - out).
+        if (Math.abs(previous - out + incoming - current) <= 0.03 || (inX === undefined && Math.abs(previous + out - current) <= 0.03)) valid++;
       }
       const hintScore = (header.balanceX !== undefined && Math.abs(balanceX - header.balanceX) < 40 ? 3 : 0)
         + (header.outX !== undefined && Math.abs(outX - header.outX) < 40 ? 2 : 0)
