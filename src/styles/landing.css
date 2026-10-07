@@ -3,6 +3,7 @@
 
 .b2.landing-screen { gap: 0; padding: 0 !important; background: var(--ground); color: var(--ink); scroll-behavior: smooth; }
 .app.app--landing:has(.b2) { background: var(--navy); }
+.b2 { --font-display: 'Enough B2 Archivo', system-ui, sans-serif; --font-mono: 'Enough B2 Mono', ui-monospace, 'SF Mono', Menlo, monospace; }
 .b2 * { box-sizing: border-box; }
 .b2 h1, .b2 h2, .b2 h3 { font-family: var(--font-display); font-stretch: 118%; margin: 0; }
 
@@ -26,7 +27,7 @@
 .b2-logo { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: #fff; text-decoration: none; letter-spacing: -0.01em; }
 .b2-logo__dot { color: var(--lime); }
 .b2-nav { display: flex; gap: 20px; }
-.b2-nav a { color: var(--muted-on-navy); text-decoration: none; font-size: 15px; font-weight: 600; }
+.b2-nav a { color: var(--muted-on-navy); text-decoration: underline; text-underline-offset: 4px; font-size: 15px; font-weight: 600; }
 .b2-nav a:hover { color: #fff; }
 
 /* ---- 2 Hero ---- */
@@ -39,7 +40,7 @@
 .b2-chips { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .b2-chip {
   min-height: 44px; padding: 8px 18px; border-radius: 999px;
-  border: 1.5px solid #2b3766; background: transparent; color: #c9cee8;
+  border: 1.5px solid rgba(169, 177, 214, 0.52); background: transparent; color: #d6daf0;
   font-weight: 600; font-size: 15px; cursor: pointer; font-family: var(--font-display);
 }
 .b2-chip > span { font-size: 19px; line-height: 0; margin-right: 3px; color: var(--white); }
@@ -81,7 +82,7 @@
 
 .b2-rrow--found span:first-child { font-weight: 700; letter-spacing: 0.1em; }
 .b2-found { display: inline-flex; align-items: baseline; gap: 8px; }
-.b2-found mark { background: var(--lime); color: var(--ink); padding: 2px 8px; font-family: var(--font-display); font-size: 34px; line-height: 1; font-weight: 800; border-radius: 2px; }
+.b2-found mark { background: var(--lime); color: var(--ink); padding: 2px 8px; font-family: var(--font-display); font-size: clamp(28px, 8vw, 36px); line-height: 1; font-weight: 800; border-radius: 2px; }
 .b2-found small { color: var(--muted); font-family: var(--font-display); font-size: 11px; }
 .b2-struck { position: relative; display: inline-block; }
 .b2-strike { position: absolute; inset: 50% -3% auto; width: 106%; height: 12px; overflow: visible; pointer-events: none; }

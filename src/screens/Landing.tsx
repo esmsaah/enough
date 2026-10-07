@@ -7,6 +7,7 @@ import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { QUICK_PICKS } from '../app/catalog';
 import { importStatement } from '../app/statementImport';
 import { researchMerchants } from '../app/merchantResearch';
+import '../styles/landing-fonts.css';
 import '../styles/landing.css';
 
 const PRICE = formatMoney(AUDIT_PRICE_EUR, 'EUR'); // €5.99
