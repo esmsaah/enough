@@ -75,7 +75,7 @@ export type ResearchProfile = {
 };
 
 const DISPLAY: DisplayCategory[] = ['Entertainment', 'AI & Software', 'Cloud & Storage', 'News & Media', 'Learning', 'Fitness & Health', 'Kids & Family', 'Shopping & Delivery', 'Bills & Utilities', 'Transport', 'Other'];
-const SPENDING: SpendingCategory[] = ['Groceries', 'Cafes & eating out', 'Transport', 'Delivery'];
+const SPENDING: SpendingCategory[] = ['Groceries', 'Shopping', 'Cafes & eating out', 'Transport', 'Travel', 'Delivery'];
 const BILLING: BillingModel[] = ['monthly', 'yearly', 'usage', 'oneTime'];
 const KINDS: ResearchProfile['kind'][] = ['subscription', 'membership', 'bill', 'spending', 'oneTime', 'transfer', 'unknown'];
 

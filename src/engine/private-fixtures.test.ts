@@ -59,3 +59,22 @@ describe('local private statement regressions (private files are never committed
     console.info('Private OTP review', `rows=${parsed.transactions.length}`, `balanceCheck=${rate}`, 'redaction=pass');
   });
 });
+
+describe('local private Wise PDF, 12 months (never committed)', () => {
+  const WISE_PDF = join(PRIVATE, 'wise_2023_2024_real.pdf');
+  it.skipIf(!existsSync(WISE_PDF))('reads block-layout payments, keeps subscriptions and does not trust bank bill labels blindly', async () => {
+    const { pdfItemsFromTextContent } = await import('./pdf');
+    const pdf = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(WISE_PDF)), useSystemFonts: true, disableFontFace: true }).promise;
+    const pages: PdfPage[] = [];
+    for (let n = 1; n <= pdf.numPages; n++) pages.push(pdfItemsFromTextContent((await (await pdf.getPage(n)).getTextContent()).items));
+    const parsed = transactionsFromPdfPages(pages);
+    expect(parsed.transactions.length).toBeGreaterThan(1000);
+    expect(JSON.stringify(parsed.transactions)).not.toMatch(/not an official statement/i);
+    const meta = { displayCurrency: 'EUR', dateFormat: 'iso' as const, dateAmbiguous: false, monthsSpan: 12, redactedCategories: [], columnQuestions: [], columnCount: 0 };
+    const result = detect(parsed.transactions, meta);
+    const subs = result.recurring.map((item) => item.merchantKey);
+    for (const key of ['netflix', 'spotify', 'adobe']) expect(subs).toContain(key);
+    expect([...result.recurring, ...result.possibleRecurring].filter((item) => item.category === 'bill').length).toBeLessThan(10);
+    expect(result.spendingByCategory.Shopping).toBeGreaterThan(result.spendingByCategory.Groceries);
+  });
+});

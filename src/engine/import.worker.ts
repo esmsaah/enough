@@ -1,6 +1,6 @@
 import { parseCsvBytes } from './csv';
 import { detect, transactionsFromRows, type DetectionResult, type ImportMeta } from './detect';
-import { transactionsFromPdfPages, type PdfPage } from './pdf';
+import { pdfItemsFromTextContent, transactionsFromPdfPages, type PdfPage } from './pdf';
 import type { DateFormat } from './parse';
 import * as XLSX from 'xlsx';
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs';
@@ -35,7 +35,7 @@ scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files:
         const pages: PdfPage[] = [];
         for (let pageNo = 1; pageNo <= pdf.numPages; pageNo++) {
           const content = await (await pdf.getPage(pageNo)).getTextContent();
-          pages.push(content.items.flatMap((item) => 'str' in item ? [{ str: item.str, x: item.transform[4], y: item.transform[5], width: item.width }] : []));
+          pages.push(pdfItemsFromTextContent(content.items));
         }
         return { pdf: pages };
       }

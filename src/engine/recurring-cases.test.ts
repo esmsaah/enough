@@ -98,6 +98,8 @@ describe('synthetic merchant recurrence safeguards', () => {
     ], meta);
     expect(categorized.spendingByCategory).toEqual({
       Groceries: 20,
+      Shopping: 0,
+      Travel: 0,
       'Cafes & eating out': 8,
       Transport: 12,
       Delivery: 15,

@@ -226,6 +226,8 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
   const spendingOnly = new Map<string, { merchantKey: string; name: string }>();
   const spendingByCategory: Record<SpendingCategory, number> = {
     Groceries: 0,
+    Shopping: 0,
+    Travel: 0,
     'Cafes & eating out': 0,
     Transport: 0,
     Delivery: 0,
@@ -272,7 +274,14 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     const info = matchMerchant(txs[0]!.merchantRaw);
     const descriptionGuess = mostCommon(txs.map((transaction) => inferBillingModelHint(transaction.merchantRaw)?.model).filter((value): value is BillingModel => !!value));
     const statementModel = mostCommon(txs.map((transaction) => transaction.billingModelHint).filter((value): value is BillingModel => !!value));
-    const bankCategory = mostCommon(txs.map((transaction) => transaction.bankCategoryHint).filter((value): value is BankCategoryHint => !!value));
+    const statedBankCategory = mostCommon(txs.map((transaction) => transaction.bankCategoryHint).filter((value): value is BankCategoryHint => !!value));
+    // A bank's own "Bills" label is only a hint (apps file restaurants and post
+    // offices under it). Without a known merchant or bill keyword it counts
+    // only when the payments actually repeat on a regular interval.
+    const billLabelOnly = !info && statedBankCategory === 'bill' && classifyByKeyword(normalized)?.category !== 'bill';
+    const bankCategory = billLabelOnly && (txs.length < 2 || !frequencyFromGaps(dayGaps([...txs].map((t) => t.date).sort())))
+      ? undefined
+      : statedBankCategory;
     // Supermarkets and fuel are ignored as habits unless the person adds them.
     if (!info && isIgnoredMerchant(normalized)) {
       if (key.trim()) ignored.push({ merchantKey: key, name: nameFor.get(key)! });
@@ -308,7 +317,8 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     const planAmounts = stablePlan ? stablePlan.indices.map((index) => observedAmounts[index]!) : observedAmounts;
     const extraAmounts = stablePlan ? observedAmounts.filter((_, index) => !planIndices.has(index)) : [];
     if (stablePlan && cat.category === 'other') {
-      cat = { category: 'digital', displayCategory: 'AI & Software' };
+      // A regular plan the bank itself files under bills is a bill (phone, internet).
+      cat = statedBankCategory === 'bill' ? { category: 'bill', displayCategory: 'Bills & Utilities' } : { category: 'digital', displayCategory: 'AI & Software' };
     }
     if (stablePlan) {
       if (stablePlan.frequency === 'monthly' || stablePlan.frequency === 'yearly') billingGuess ??= stablePlan.frequency;
@@ -431,11 +441,12 @@ function spendingCategoryFor(
   info: ReturnType<typeof matchMerchant>,
 ): SpendingCategory | undefined {
   const folded = foldHeader(transaction.merchantRaw);
-  const analysis = categoryOf(info, normalized, transaction.bankCategoryHint, transaction.billingModelHint).category;
+  const analysis = categoryOf(info, normalized, transaction.bankCategoryHint === 'bill' ? undefined : transaction.bankCategoryHint, transaction.billingModelHint).category;
   if (analysis === 'bill' || analysis === 'digital' || analysis === 'membership') return undefined;
   if (info?.spendingCategory) return info.spendingCategory;
   if (transaction.bankCategoryHint === 'eatingOut') return 'Cafes & eating out';
-  if (info?.displayCategory === 'Transport' || /\b(fuel|petrol|gas station|parking|park|taxi|cab|ride|train|bus|transit|toll|metro)\b/.test(folded)) return 'Transport';
+  if (/\b(hotel|hotels|hostel|motel|airbnb|booking|airport|aeropuerto|aeroport|flughafen|aerodrom|airlines?|airways|air|flydubai|ryanair|easyjet|wizz|duty free|travel|putovanje|zavod za turizam)\b/.test(folded)) return 'Travel';
+  if (info?.displayCategory === 'Transport' || /\b(fuel|petrol|gas station|parking|park|taxi|cab|ride|train|bus|transit|toll|metro|tankstelle|benzinska|naplatna|autoceste|putevi|ticket)\b/.test(folded)) return 'Transport';
   if (info?.displayCategory === 'Shopping & Delivery') return 'Delivery';
   if (transaction.billingModelHint === 'usage' || transaction.billingModelHint === 'oneTime'
     || info?.billingModel === 'usage' || info?.billingModel === 'oneTime') return undefined;
@@ -443,15 +454,15 @@ function spendingCategoryFor(
     if (/\b(ina|mol|fuel|petrol|gas station|benzin|crodux|eurotank|shell|omv)\b/.test(folded)) return 'Transport';
     return 'Groceries';
   }
-  if (transaction.bankCategoryHint === 'shopping') return 'Groceries';
-  if (/\b(supermarket|market|marketi|grocery|groceries|hipermarket|trgovina|food store|pharmacy|pharmacie|apoteka|drogerie|drugstore)\b/.test(folded)) return 'Groceries';
-  if (/\b(restaurant|restoran|cafe|coffee|kafana|bistro|fast food)\b/.test(folded)) return 'Cafes & eating out';
+  if (/\b(supermarket|supermercado|supermarche|supermarches|supermarkt|market|marketi|grocery|groceries|hipermarket|hypermarket|trgovina|food store|pharmacy|pharmacie|farmacia|apoteka|apoteke|drogerie|drugstore|pekara|bakery|mesnica|mesara)\b/.test(folded)) return 'Groceries';
+  if (/\b(restaurant|restoran|cafe|caffe|coffee|kafe|kafana|bistro|fast food|pizzeria|burger|grill|bar)\b/.test(folded)) return 'Cafes & eating out';
   const keywordCategory = classifyByKeyword(normalized);
   if (keywordCategory?.displayCategory === 'Transport') return 'Transport';
   if (keywordCategory?.displayCategory === 'Shopping & Delivery') return 'Delivery';
   if (keywordCategory?.category === 'habit' || info?.category === 'habit') return 'Cafes & eating out';
-  if (/\b(grocery|groceries|supermarket|market|hipermarket|trgovina|food store)\b/.test(folded)) return 'Groceries';
-  return undefined;
+  // A bank's "Shopping" label without a food word is general shopping, not groceries.
+  if (transaction.bankCategoryHint === 'shopping') return 'Shopping';
+  return undefined; // includes bank "Bills" labels with no spending word
 }
 
 function latestTransactionDate(transactions: Transaction[]): string {

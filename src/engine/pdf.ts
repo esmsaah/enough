@@ -15,6 +15,17 @@ export type PdfParseResult = { transactions: Transaction[]; redactedCategories: 
 const DATE = /(?:\b\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\b|\b\d{4}[./-]\d{1,2}[./-]\d{1,2}\b|\b(?:\d{1,2}\s+)?[A-Za-z]{3,9}[,.]?\s+\d{1,2}(?:,?\s+\d{4})?\b|\b\d{1,2}\s+[A-Za-z]{3,9}(?:\s+\d{4})?\b)/;
 const AMOUNT = /(?:[€£$₹]|\b(?:INR|USD|EUR|GBP|RSD|BAM)\b)?\s*\(?[-+]?\d[\d,.'’ ]*(?:[.,]\d{2})\)?[-+]?/g;
 
+/** PDF.js text items → page cells. Rotated text (diagonal watermarks such as
+ *  "This is not an official statement") is dropped. */
+export function pdfItemsFromTextContent(items: unknown[]): PdfPage {
+  return items.flatMap((raw) => {
+    const item = raw as { str?: string; transform?: number[]; width?: number };
+    if (typeof item.str !== 'string' || !item.transform) return [];
+    if (Math.abs(item.transform[1] ?? 0) > 0.01 || Math.abs(item.transform[2] ?? 0) > 0.01) return [];
+    return [{ str: item.str, x: item.transform[4]!, y: item.transform[5]!, width: item.width }];
+  });
+}
+
 export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
   const pageLines = pages.map(groupLines);
   const columnXs = clusterXs(pageLines.flatMap((lines) => lines.flatMap((line) => line.cells.map((cell) => cell.x))));
@@ -67,7 +78,13 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
     return /\b(transactions?|activity|statement entries|account entries)\b/i.test(previous);
   });
   const active = transactionHeaders.length ? transactionHeaders : selected;
-  if (!active.length) return { transactions: [], redactedCategories: [], balanceCheck: { checked: 0, passed: 0 }, columnQuestions: questions(), columnCount: columnXs.length };
+  if (!active.length) {
+    // No column header at all: many app-made statements list each payment as a
+    // small block instead of a table row. Try that before asking the person.
+    const blocks = transactionsFromBlocks(pageLines);
+    if (blocks.length) return { transactions: blocks, redactedCategories: [], balanceCheck: { checked: 0, passed: 0 }, columnQuestions: [], columnCount: columnXs.length };
+    return { transactions: [], redactedCategories: [], balanceCheck: { checked: 0, passed: 0 }, columnQuestions: questions(), columnCount: columnXs.length };
+  }
 
   const allText = pageLines.flat().map((line) => line.text).join('\n');
   const year = Number(allText.match(/\b(20\d{2})\b/)?.[1] ?? new Date().getFullYear());
@@ -218,6 +235,73 @@ function splitCell(item: PdfTextItem): PdfTextItem[] {
   if (middle.trim()) out.push({ ...item, str: middle, x: at(start), width: width * middle.length / text.length });
   if (tail) out.push({ ...item, str: tail[1]!, x: at(start + tail.index + tail[0].length - tail[1]!.length), width: width * tail[1]!.length / text.length });
   return out.length ? out : [item];
+}
+
+// ---------------------------------------------------------------------------
+// Block layout (fintech exports such as Wise, Revolut, N26 PDFs):
+//   "<status> | <counterparty>            <original amount CUR>"
+//   "<full date> | Transaction: <TYPE> | Category: <label>   <fee CUR>  <amount CUR>"
+// Amounts carry a currency code; the last one in the block is the account amount.
+// ---------------------------------------------------------------------------
+const CODED_AMOUNT = /(?:^|\s)([-+−]?\d[\d,' ]*(?:\.\d+)?)\s*([A-Z]{3})\b/g;
+const SKIP_STATUS = /^(?:moved|cancelled|canceled|declined|card checked|refunded|received|added|topped up|converted|reverted|failed)\b/i;
+const PERSON_STATUS = /^(?:sent|transfer|paid to)\b/i;
+const CASH_STATUS = /^(?:withdrawn|cash withdrawal|atm)\b/i;
+const SKIP_CATEGORY = /\b(?:money added|cash|transfers?|savings|exchange|income|salary|refund)\b/i;
+
+function codedAmounts(text: string): Array<{ value: number; currency: string }> {
+  return [...text.matchAll(CODED_AMOUNT)].flatMap((match) => {
+    const value = parseAmount(match[1]!.replace(/[ ']/g, '').replace('−', '-'));
+    return value === null ? [] : [{ value: Math.abs(value), currency: match[2]! }];
+  });
+}
+
+function bankCategoryFromLabel(label: string): Transaction['bankCategoryHint'] {
+  const l = label.toLowerCase();
+  if (/\b(bills?|utilities|subscriptions?)\b/.test(l)) return 'bill';
+  if (/\b(eating out|restaurants?|cafes?|food and drink)\b/.test(l)) return 'eatingOut';
+  if (/\b(groceries|shopping|personal care|health)\b/.test(l)) return 'shopping';
+  return undefined;
+}
+
+function transactionsFromBlocks(pageLines: Line[][]): Transaction[] {
+  const out: Transaction[] = [];
+  for (const lines of pageLines) {
+    for (let i = 0; i < lines.length; i++) {
+      const anchor = lines[i]!;
+      const dateMatch = anchor.text.match(/^\s*(\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4}|[A-Za-z]{3,9}\s+\d{1,2},?\s+\d{4}|\d{4}-\d{2}-\d{2}|\d{1,2}[./]\d{1,2}[./]\d{4})\b/);
+      if (!dateMatch || !anchor.text.includes('|')) continue;
+      const date = parseDate(dateMatch[1]!, dateMatch[1]!.includes('/') ? 'ambiguous' : 'dmy');
+      if (!date) continue;
+      // Counterparty: the nearest earlier line with a "|" that is not itself an anchor.
+      let head: Line | undefined;
+      for (let k = i - 1; k >= Math.max(0, i - 3); k--) {
+        if (/^\s*\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4}/.test(lines[k]!.text)) break;
+        if (lines[k]!.text.includes('|')) { head = lines[k]; break; }
+      }
+      if (!head) continue;
+      const [statusRaw, ...rest] = head.text.split('|');
+      const status = (statusRaw ?? '').trim();
+      const counterparty = rest.join(' ').replace(CODED_AMOUNT, ' ').replace(/\s+/g, ' ').trim();
+      // Category label may wrap onto a following line.
+      let category = anchor.text.match(/category:\s*([A-Za-z &]+?)(?=\s+[-+]?\d|$)/i)?.[1]?.trim() ?? '';
+      const tail: Line[] = [];
+      for (let k = i + 1; k < Math.min(lines.length, i + 5); k++) {
+        if (lines[k]!.text.includes('|')) break;
+        tail.push(lines[k]!);
+      }
+      if (!category) category = tail.find((line) => /^[A-Za-z &]+$/.test(line.text.trim()))?.text.trim() ?? '';
+      if (SKIP_STATUS.test(status) || CASH_STATUS.test(status) || SKIP_CATEGORY.test(category)) continue;
+      const amounts = [...codedAmounts(anchor.text.replace(/^.*?category:[^0-9]*/i, '')), ...tail.flatMap((line) => codedAmounts(line.text))];
+      const amount = amounts[amounts.length - 1];
+      if (!amount || !(amount.value > 0)) continue;
+      const merchantRaw = PERSON_STATUS.test(status) ? 'Transfer to a person' : redactDescription(cleanMerchant(counterparty));
+      if (!merchantRaw) continue;
+      const hint = bankCategoryFromLabel(category);
+      out.push({ date, merchantRaw, amount: amount.value, currency: amount.currency, ...(hint ? { bankCategoryHint: hint } : {}) });
+    }
+  }
+  return out;
 }
 
 function groupLines(items: PdfPage): Line[] {

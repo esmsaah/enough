@@ -307,7 +307,7 @@ export function runAudit(
   const videoSavings = recommendations.filter((rec) => videoIds.has(rec.itemId)).reduce((sum, rec) => sum + rec.potentialYearlySaving, 0);
   const otherSavings = recommendations.filter((rec) => !videoIds.has(rec.itemId)).reduce((sum, rec) => sum + rec.potentialYearlySaving, 0);
   const potentialYearlySaving = round2(otherSavings + Math.max(videoSavings, rotationPlan?.yearlySaving ?? 0));
-  const spendCategories: SpendingCategory[] = ['Groceries', 'Cafes & eating out', 'Transport', 'Delivery'];
+  const spendCategories: SpendingCategory[] = ['Groceries', 'Shopping', 'Cafes & eating out', 'Transport', 'Travel', 'Delivery'];
   const spendingByCategory = Object.fromEntries(spendCategories.map((category) => {
     const raw = opts.spendingByCategory?.[category] ?? 0;
     const converted = opts.spendingCurrency && opts.spendingCurrency !== currency

@@ -16,7 +16,7 @@ export type Frequency = 'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'oneTime
 export type DetectedFrequency = Frequency | 'unknown';
 export type BillingModel = 'monthly' | 'yearly' | 'usage' | 'oneTime';
 export type BankCategoryHint = 'bill' | 'shopping' | 'eatingOut' | 'other';
-export type SpendingCategory = 'Groceries' | 'Cafes & eating out' | 'Transport' | 'Delivery';
+export type SpendingCategory = 'Groceries' | 'Shopping' | 'Cafes & eating out' | 'Transport' | 'Travel' | 'Delivery';
 
 export type StreamingRotationPlan = {
   currency: string;
