@@ -55,7 +55,7 @@ function AppFrame() {
   const showDesktopHeader = state.step !== 'landing';
   const showReceipt = ['quickstart', 'addstatement', 'keep', 'found', 'anythingElse', 'usage', 'cutlist'].includes(state.step);
   return (
-    <div className={`app${showReceipt ? ' app--with-receipt' : ''}`}>
+    <div className={`app${showReceipt ? ' app--with-receipt' : ''}${state.step === 'landing' ? ' app--landing' : ''}`}>
       {showDesktopHeader && <DesktopHeader />}
       <main className="app-content"><Flow /></main>
       {showReceipt && <DesktopReceipt />}
