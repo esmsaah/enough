@@ -14,6 +14,9 @@ export type QuickPick = {
   overlapGroup?: OverlapGroup;
   cancelUrl?: string;
   yearlyPrice?: number; // known cheaper annual price, EUR (rule 8)
+  currency?: string; // currency of price, default EUR
+  group?: string; // tap-list group
+  priceUnknown?: boolean; // catalog has no typical price: person enters it
 };
 
 export const QUICK_PICKS: QuickPick[] = [
@@ -73,3 +76,36 @@ export const YEARLY_CHIPS: Array<{ name: string; displayCategory: DisplayCategor
   { name: 'Software licence', displayCategory: 'AI & Software', category: 'digital' },
   { name: 'Membership', displayCategory: 'Fitness & Health', category: 'membership' },
 ];
+
+// ---------------------------------------------------------------------------
+// Researched catalog → tap list
+// ---------------------------------------------------------------------------
+import { CATALOG, catalogCategory, catalogForCountry, type CatalogEntry } from '../engine/catalog';
+
+export function pickFromCatalog(entry: CatalogEntry): QuickPick {
+  return {
+    merchantKey: entry.k,
+    name: entry.n.replace(/\s*\(.*?\)\s*/g, ' ').trim(),
+    category: catalogCategory(entry),
+    displayCategory: entry.c,
+    price: entry.p ?? 0,
+    currency: entry.cur ?? 'EUR',
+    frequency: 'monthly',
+    group: entry.gen ? 'Everyday costs' : entry.g,
+    ...(entry.p === undefined ? { priceUnknown: true } : {}),
+    ...(entry.cu ? { cancelUrl: entry.cu } : {}),
+    ...(entry.y ? { yearlyPrice: entry.y } : {}),
+  };
+}
+
+/** Tap list for a country: local, then global, plus generic everyday costs. */
+export function picksForCountry(country: string): QuickPick[] {
+  return catalogForCountry(country).map(pickFromCatalog);
+}
+
+export function searchCatalog(query: string): QuickPick[] {
+  const q = query.trim().toLowerCase();
+  if (q.length < 2) return [];
+  return CATALOG.filter((e) => e.n.toLowerCase().includes(q) || e.a.some((a) => a.toLowerCase().includes(q)))
+    .sort((a, b) => b.pop - a.pop).slice(0, 30).map(pickFromCatalog);
+}

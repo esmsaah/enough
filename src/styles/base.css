@@ -237,3 +237,8 @@ p { margin: 8px 0; }
 
 .ai-toggle { display: flex; align-items: center; gap: 10px; min-height: 44px; margin-top: 12px; font-size: 14px; }
 .ai-toggle input { width: 20px; height: 20px; margin: 0; accent-color: var(--indigo, #3346D3); }
+
+.country-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; font-size: 15px; }
+.country-line select { min-height: 40px; border: 1.5px solid var(--line, #C9C8BF); border-radius: 6px; padding: 0 10px; font: inherit; background: #fff; }
+.search-input { width: 100%; box-sizing: border-box; min-height: 48px; border: 1.5px solid var(--line, #C9C8BF); border-radius: 6px; padding: 0 14px; font: inherit; font-size: 16px; margin-bottom: 8px; }
+.link-button { background: none; border: 0; color: var(--indigo, #3346D3); font: inherit; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; min-height: 44px; padding: 0 8px; cursor: pointer; }

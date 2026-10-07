@@ -233,12 +233,29 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     Delivery: 0,
   };
 
+  // Catalog matches for digital services count only when the payments look like
+  // a plan (a repeated amount); otherwise a food app or shop with a "Plus" plan
+  // in the catalog would turn every order into a subscription.
+  const catalogCharges = new Map<string, Array<{ amount: number; date: string }>>();
+  const needsPlanEvidence = (info: ReturnType<typeof matchMerchant>) => info?.origin === 'catalog' && (info.category === 'digital' || info.displayCategory === 'Transport');
+  for (const t of transactions) {
+    const candidate = matchMerchant(t.merchantRaw);
+    if (needsPlanEvidence(candidate)) catalogCharges.set(candidate!.merchantKey, [...(catalogCharges.get(candidate!.merchantKey) ?? []), { amount: t.amount, date: t.date }]);
+  }
+  // Evidence: the same amount charged twice at least ~3 weeks apart.
+  const acceptedCatalog = new Set([...catalogCharges].filter(([, charges]) => charges.some((a, i) => charges.some((b, j) => i !== j
+    && Math.abs(a.amount - b.amount) <= Math.max(0.05, a.amount * 0.05) && Math.abs(daysBetween(a.date, b.date)) >= 20))).map(([key]) => key));
+  const resolveInfo = (raw: string) => {
+    const candidate = matchMerchant(raw);
+    return needsPlanEvidence(candidate) && !acceptedCatalog.has(candidate!.merchantKey) ? undefined : candidate;
+  };
+
   for (const t of transactions) {
     const normalized = normalizeMerchant(t.merchantRaw);
     if (isInternalMovement(normalized)) continue;
     // A private transfer is never matched to a merchant, even if a person's
     // name coincides with a brand ("Transfer to Claude Dupont" is not Claude).
-    const info = isPrivateTransfer(normalized) ? undefined : matchMerchant(t.merchantRaw);
+    const info = isPrivateTransfer(normalized) ? undefined : resolveInfo(t.merchantRaw);
     const spendCategory = spendingCategoryFor(t, normalized, info);
     if (spendCategory) spendingByCategory[spendCategory] += convert(t.amount, t.currency, meta.displayCurrency) ?? t.amount;
     const key = info?.merchantKey ?? normalized;
@@ -272,7 +289,7 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
       mustAsk.push({ merchantKey: key, name: nameFor.get(key)!, reason: 'transfer to a private person, never auto-classified' });
       continue;
     }
-    const info = matchMerchant(txs[0]!.merchantRaw);
+    const info = resolveInfo(txs[0]!.merchantRaw);
     const descriptionGuess = mostCommon(txs.map((transaction) => inferBillingModelHint(transaction.merchantRaw)?.model).filter((value): value is BillingModel => !!value));
     const statementModel = mostCommon(txs.map((transaction) => transaction.billingModelHint).filter((value): value is BillingModel => !!value));
     const statedBankCategory = mostCommon(txs.map((transaction) => transaction.bankCategoryHint).filter((value): value is BankCategoryHint => !!value));

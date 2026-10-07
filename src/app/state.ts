@@ -5,6 +5,7 @@
 import type { BillingModel, Frequency, Item, Usage } from '../engine/types';
 import { detect, type DetectionResult, type ImportMeta } from '../engine/detect';
 import type { QuickPick } from './catalog';
+import { convert } from '../engine/rates';
 
 export type Step =
   | 'landing'
@@ -33,6 +34,8 @@ export type State = {
   rotationRemindersEnabled: boolean;
   /** Names-only merchant research and the anonymous AI analyst. On by default. */
   aiRecognition: boolean;
+  /** Country for the tap list, guessed on the device, changeable. */
+  country?: string;
   /** Analyst notes by item id: one human sentence, never an amount. */
   analystNotes: Record<string, { reason?: string; moveTo?: 'subscription' | 'bill' | 'spending'; displayCategory?: Item['displayCategory'] }>;
 };
@@ -79,6 +82,7 @@ export type Action =
   | { type: 'unlock' }
   | { type: 'reset' }
   | { type: 'setAiRecognition'; enabled: boolean }
+  | { type: 'setCountry'; country: string }
   | { type: 'analystNotes'; notes: State['analystNotes'] }
   | { type: 'hydrate'; state: State };
 
@@ -149,7 +153,7 @@ export function reducer(state: State, action: Action): State {
         merchantKey: action.pick.merchantKey,
         category: action.pick.category,
         displayCategory: action.pick.displayCategory,
-        price: action.pick.price,
+        price: convert(action.pick.price, action.pick.currency ?? 'EUR', state.currency) ?? action.pick.price,
         frequency: action.pick.frequency,
         source: 'quickpick',
         estimate: true,
@@ -220,6 +224,9 @@ export function reducer(state: State, action: Action): State {
 
     case 'unlock':
       return { ...state, unlocked: true, step: 'cutlist' };
+    case 'setCountry':
+      return { ...state, country: action.country };
+
     case 'setAiRecognition':
       return { ...state, aiRecognition: action.enabled };
 

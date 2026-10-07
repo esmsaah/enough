@@ -2,6 +2,7 @@
 // Section 6 of ENOUGH_BRIEF.md. Pure: no UI, no network.
 
 import type { BillingModel, Category, DisplayCategory, OverlapGroup, SpendingCategory } from './types';
+import { catalogMerchants } from './catalog';
 
 export type MerchantInfo = {
   merchantKey: string;
@@ -19,7 +20,7 @@ export type MerchantInfo = {
   /** Shops, cafes, fuel: totals only, never a subscription or habit row. */
   spendingCategory?: SpendingCategory;
   /** 'builtin' = curated here, 'research' = learned by the merchant research API. */
-  origin?: 'builtin' | 'research';
+  origin?: 'builtin' | 'research' | 'catalog';
 };
 
 export type KnownPlan = { price: number; currency: string; interval: 'monthly' | 'yearly' };
@@ -179,7 +180,7 @@ export function clearResearchedMerchants(): void {
   RESEARCHED.length = 0;
 }
 
-export function matchMerchant(raw: string): MerchantInfo | undefined {
+function matchCurated(raw: string): MerchantInfo | undefined {
   const folded = foldMerchant(stripStatementNoise(raw));
   const candidates: Array<{ alias: string; def: MerchantDef }> = [];
   for (const def of [...MERCHANTS, ...RESEARCHED]) {
@@ -193,4 +194,33 @@ export function matchMerchant(raw: string): MerchantInfo | undefined {
     }
   }
   return undefined;
+}
+
+// Researched catalog: indexed by first alias word so 1,300 entries stay fast.
+let catalogIndex: Map<string, Array<{ alias: string; info: MerchantInfo }>> | undefined;
+function catalogLookup(folded: string): MerchantInfo | undefined {
+  if (!catalogIndex) {
+    catalogIndex = new Map();
+    for (const { aliases, ...info } of catalogMerchants(foldMerchant)) {
+      for (const alias of aliases) {
+        const first = alias.split(' ')[0]!;
+        const list = catalogIndex.get(first) ?? [];
+        list.push({ alias, info: { ...info, origin: 'catalog' } as MerchantInfo });
+        catalogIndex.set(first, list);
+      }
+    }
+    for (const list of catalogIndex.values()) list.sort((a, b) => b.alias.length - a.alias.length);
+  }
+  let best: { alias: string; info: MerchantInfo } | undefined;
+  for (const token of new Set(folded.split(' '))) {
+    for (const candidate of catalogIndex.get(token) ?? []) {
+      if ((!best || candidate.alias.length > best.alias.length) && containsWord(folded, candidate.alias)) best = candidate;
+    }
+  }
+  return best?.info;
+}
+
+/** Curated map and researched profiles first, then the country catalog. */
+export function matchMerchant(raw: string): MerchantInfo | undefined {
+  return matchCurated(raw) ?? catalogLookup(foldMerchant(stripStatementNoise(raw)));
 }
