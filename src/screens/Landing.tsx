@@ -3,8 +3,8 @@
 // navy price band, ground footer. Follows the B2 handoff; no invented styles.
 import { useState, type DragEvent } from 'react';
 import { useStore } from '../app/store';
-import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { QUICK_PICKS } from '../app/catalog';
+import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { importStatement } from '../app/statementImport';
 import { researchMerchants } from '../app/merchantResearch';
 import '../styles/landing-fonts.css';
@@ -19,13 +19,12 @@ export function Landing() {
   const [uploading, setUploading] = useState(false);
 
   const start = () => dispatch({ type: 'goto', step: 'quickstart' });
-  const upload = () => dispatch({ type: 'goto', step: 'addstatement' });
-
   const startWith = (key: string) => {
-    const pick = QUICK_PICKS.find((p) => p.merchantKey === key);
+    const pick = QUICK_PICKS.find((item) => item.merchantKey === key);
     if (pick) dispatch({ type: 'toggleQuickPick', pick });
     start();
   };
+  const upload = () => dispatch({ type: 'goto', step: 'addstatement' });
 
   const onDrop = async (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -63,18 +62,18 @@ export function Landing() {
         <div className="b2-hero__inner">
         <div className="b2-hero__copy">
             <p className="b2-eyebrow">Your subscriptions, audited once.</p>
-            <h1 className="b2-h1">Tap what<span className="b2-mobile-break"><br /></span> you pay for.</h1>
+            <h1 className="b2-h1">Tap what<span className="b2-desktop-break"><br /></span><span className="b2-mobile-break"><br /></span> you pay for.</h1>
             <p className="b2-sub">
               Netflix, gym, phone, that app you forgot about. See what it all costs you a year, and what to cut.
             </p>
 
-            <p className="b2-eyebrow b2-eyebrow--chips">Tap one to start</p>
-            <div className="b2-chips">
-              <button type="button" className="b2-chip" onClick={() => startWith('netflix')}><span aria-hidden="true">+</span> Netflix</button>
-              <button type="button" className="b2-chip" onClick={() => startWith('spotify')}><span aria-hidden="true">+</span> Spotify</button>
-              <button type="button" className="b2-chip" onClick={() => startWith('gym')}><span aria-hidden="true">+</span> Gym</button>
-              <button type="button" className="b2-chip" onClick={() => startWith('phone')}><span aria-hidden="true">+</span> Phone plan</button>
-              <button type="button" className="b2-more" onClick={start}>and 40 more</button>
+            <p className="b2-eyebrow b2-hero__tap-label">Tap one to start</p>
+            <div className="b2-quick-picks" aria-label="Quick start choices">
+              <button type="button" onClick={() => startWith('netflix')}>+ Netflix</button>
+              <button type="button" onClick={() => startWith('spotify')}>+ Spotify</button>
+              <button type="button" onClick={() => startWith('gym')}>+ Gym</button>
+              <button type="button" onClick={() => startWith('phone')}>+ Phone plan</button>
+              <button type="button" className="b2-quick-picks__more" onClick={start}>and 40 more</button>
             </div>
 
             <div className="b2-cta-row">
@@ -90,7 +89,7 @@ export function Landing() {
       </section>
 
       {/* 3 — Trust */}
-      <section className="b2-section b2-section--ground" id="trust">
+      <section className="b2-section b2-section--ground b2-section--trust" id="trust">
         <div className="b2-section__inner">
           <p className="b2-eyebrow b2-eyebrow--ink">Your statements</p>
           <h2 className="b2-h2">Your statements, your phone.</h2>
@@ -125,6 +124,8 @@ export function Landing() {
         </div>
       </section>
 
+      <hr className="b2-section-divider" />
+
       {/* 4 — How it works */}
       <section className="b2-section b2-section--ground" id="how">
         <div className="b2-section__inner">
@@ -136,8 +137,8 @@ export function Landing() {
               <span className="b2-rule" aria-hidden="true" />
               <p className="b2-step__n">Step 01</p>
               <div className="b2-tile">
-                <span className="b2-tile-chip is-on">Netflix</span>
-                <span className="b2-tile-chip is-on">Gym</span>
+                <span className="b2-tile-chip is-on"><span aria-hidden="true">✓ </span>Netflix</span>
+                <span className="b2-tile-chip is-on"><span aria-hidden="true">✓ </span>Gym</span>
                 <span className="b2-tile-chip">iCloud+</span>
               </div>
               <h3 className="b2-step__title">Pick what you pay for.</h3>
@@ -158,9 +159,8 @@ export function Landing() {
             <li className="b2-step">
               <span className="b2-rule" aria-hidden="true" />
               <p className="b2-step__n">Step 03</p>
-              <div className="b2-tile b2-tile--center">
-              <span className="b2-gym"><s>€480</s><b className="b2-mark">€288</b></span>
-                <span className="b2-tile__label">pay per visit</span>
+              <div className="b2-tile b2-tile--price">
+                <span className="b2-gym"><s>€480</s><b className="b2-mark">€288</b></span>
               </div>
               <h3 className="b2-step__title">See what to cut.</h3>
               <p className="b2-step__text">Cut, keep or pay per use, with the yearly money next to each.</p>
@@ -174,21 +174,27 @@ export function Landing() {
         <div className="b2-section__inner b2-price-band__inner">
           <p className="b2-eyebrow">The price</p>
           <span className="b2-rule b2-rule--white" aria-hidden="true" />
-          <p className="b2-price-huge">{PRICE} once.</p>
-          <p className="b2-price-sub">Ironically, not a subscription. No account either.</p>
-          <button type="button" className="b2-btn b2-btn--lime" onClick={start}>Start tapping</button>
+          <div className="b2-price-band__body">
+            <div>
+              <p className="b2-price-huge">{PRICE} once.</p>
+              <p className="b2-price-sub">Ironically, not a subscription. No account either.</p>
+            </div>
+            <button type="button" className="b2-btn b2-btn--lime" onClick={start}>Start tapping</button>
+          </div>
         </div>
       </section>
 
       {/* 6 — Footer */}
       <footer className="b2-section b2-section--ground b2-footer">
         <div className="b2-section__inner">
-          <p className="b2-footer__logo">Enough.</p>
-          <p className="b2-footer__by">Made by one person who also had too many subscriptions.</p>
+          <div className="b2-footer__brand">
+            <p className="b2-footer__logo">Enough.</p>
+            <p className="b2-footer__by">Made by one person who also had too many subscriptions.</p>
+          </div>
           <nav className="b2-footer__links">
             <a href="#top">About</a>
             <a href="#trust">Privacy</a>
-            <a href="#how">How it works</a>
+            <a href="#top">Terms</a>
           </nav>
         </div>
       </footer>
@@ -229,11 +235,11 @@ function ReceiptCard() {
 function StatementSlip() {
   return (
     <div className="b2-slip" aria-label="Your statement, redacted on your phone">
-      <div className="b2-slip__line"><span className="b2-slip__k">Name</span><span className="b2-bar">REMOVED</span></div>
-      <div className="b2-slip__line"><span className="b2-slip__k">IBAN</span><span className="b2-bar">REMOVED</span></div>
+      <div className="b2-slip__line"><span className="b2-slip__k">Name</span><span className="b2-redaction"><span className="b2-bar" /><span className="b2-removed">REMOVED</span></span></div>
+      <div className="b2-slip__line"><span className="b2-slip__k">IBAN</span><span className="b2-redaction"><span className="b2-bar" /><span className="b2-removed">REMOVED</span></span></div>
       <hr className="b2-rsep" />
-      <div className="b2-slip__row"><span>03/04 Spotify</span><span>€10.99</span></div>
-      <div className="b2-slip__row"><span>05/04 Dropbox</span><span>€11.99</span></div>
+      <div className="b2-slip__row"><span>12 Sep&nbsp;&nbsp; NETFLIX.COM</span><span>€15.99</span></div>
+      <div className="b2-slip__row"><span>18 Sep&nbsp;&nbsp; FIT ZONE DOO</span><span>€40.00</span></div>
     </div>
   );
 }
