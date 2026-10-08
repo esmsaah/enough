@@ -60,6 +60,8 @@ export function QuickStart() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [addOpen, setAddOpen] = useState(false);
   const [custom, setCustom] = useState({ name: '', price: '', period: 'monthly' as 'monthly' | 'yearly', dc: 'Entertainment' as DisplayCategory });
+  const [askFor, setAskFor] = useState<QuickPick | null>(null);
+  const [askAmount, setAskAmount] = useState('');
   const selected = new Set(state.items.filter((i) => i.source === 'quickpick').map((i) => i.merchantKey));
   const ownItems = state.items.filter((i) => i.source === 'manual');
   const backStep = state.statement ? 'found' : 'landing';
@@ -87,8 +89,23 @@ export function QuickStart() {
   }, [country]);
   const results = useMemo(() => searchCatalog(query), [query]);
 
+  function onChip(p: QuickPick) {
+    if (selected.has(p.merchantKey)) { dispatch({ type: 'toggleQuickPick', pick: p }); return; } // remove
+    if (p.askPrice) { setAskFor(p); setAskAmount(''); return; } // ask the amount first
+    dispatch({ type: 'toggleQuickPick', pick: p }); // known price → add with the estimate
+  }
+
+  function addAsked() {
+    if (!askFor) return;
+    const price = Number(askAmount);
+    if (!price) return;
+    dispatch({ type: 'addPricedPick', pick: askFor, price });
+    setAskFor(null);
+    setAskAmount('');
+  }
+
   const chip = (p: QuickPick) => (
-    <Chip key={p.merchantKey} selected={selected.has(p.merchantKey)} onClick={() => dispatch({ type: 'toggleQuickPick', pick: p })}>
+    <Chip key={p.merchantKey} selected={selected.has(p.merchantKey)} onClick={() => onChip(p)}>
       {p.name}
     </Chip>
   );
@@ -121,6 +138,22 @@ export function QuickStart() {
         </label>
 
         <input className="search-input" type="search" placeholder="Search for anything you pay for" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Search services" />
+
+        {askFor && (
+          <div className="card">
+            <label style={{ fontWeight: 700 }}>How much do you pay for {askFor.name}?</label>
+            <p className="muted" style={{ fontSize: 13, margin: '2px 0 8px' }}>Prices vary a lot, so just tell us yours.</p>
+            <div className="row" style={{ gap: 8 }}>
+              <input className="amount-input mono" inputMode="decimal" autoFocus value={askAmount} placeholder="0"
+                onChange={(e) => setAskAmount(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') addAsked(); }} />
+              <span className="muted">/{askFor.frequency === 'yearly' ? 'yr' : 'mo'} · {state.currency}</span>
+            </div>
+            <div className="row" style={{ gap: 12, marginTop: 10 }}>
+              <Button variant="secondary" onClick={() => setAskFor(null)}>Cancel</Button>
+              <Button full disabled={!Number(askAmount)} onClick={addAsked}>Add {askFor.name}</Button>
+            </div>
+          </div>
+        )}
 
         {query.trim().length >= 2 ? (
           <section>

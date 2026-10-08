@@ -837,16 +837,5 @@
     "currency": "USD",
     "frequency": "monthly",
     "overlapGroup": "cloud"
-  },
-  {
-    "merchantKey": "ynab",
-    "name": "YNAB",
-    "group": "Finance",
-    "displayCategory": "Other",
-    "category": "digital",
-    "price": 9.08,
-    "currency": "USD",
-    "frequency": "monthly",
-    "yearlyPrice": 109
   }
 ]

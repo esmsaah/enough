@@ -62,6 +62,7 @@ export type Action =
   | { type: 'acceptStatement' }
   | { type: 'confirmPossible'; merchantKey: string; frequency: 'monthly' | 'yearly' | 'oneTime' }
   | { type: 'toggleQuickPick'; pick: QuickPick }
+  | { type: 'addPricedPick'; pick: QuickPick; price: number } // tapped item, price entered by the person (in display currency)
   | { type: 'addManual'; item: Omit<Item, 'id'> }
   | { type: 'removeItem'; id: string }
   | { type: 'setPrice'; id: string; price: number }
@@ -162,6 +163,28 @@ export function reducer(state: State, action: Action): State {
         cancelUrl: action.pick.cancelUrl,
         yearlyPrice: action.pick.yearlyPrice,
         billingModel: action.pick.billingModel, // 'usage' keeps utilities as fixed costs
+      } as Item;
+      return { ...state, items: [...state.items, item] };
+    }
+
+    case 'addPricedPick': {
+      // The person entered their own amount, in the display currency — no conversion.
+      const p = action.pick;
+      const item: Item = {
+        id: newId(),
+        name: p.name,
+        merchantKey: p.merchantKey,
+        category: p.category,
+        displayCategory: p.displayCategory,
+        price: action.price,
+        frequency: p.frequency,
+        source: 'quickpick',
+        estimate: true,
+        currency: state.currency,
+        overlapGroup: p.overlapGroup,
+        cancelUrl: p.cancelUrl,
+        yearlyPrice: p.yearlyPrice,
+        billingModel: p.billingModel,
       } as Item;
       return { ...state, items: [...state.items, item] };
     }

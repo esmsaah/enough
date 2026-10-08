@@ -54,6 +54,11 @@ const FALLBACK: Record<string, number> = {
 };
 const FALLBACK_DEFAULT = 9.99;
 
+// Globally niche / US-skewed brands to keep OUT of the default tap list.
+// They are still reachable via "Add your own". (Finance-as-subscription is thin
+// everywhere — most people use their free banking app, not a paid budgeting app.)
+const DROP_FROM_CORE = new Set(['ynab']);
+
 const slug = (s: string) => s.toLowerCase().replace(/\s*\(.*?\)\s*/g, ' ').replace(/[^a-z0-9+ ]/g, '').replace(/\s+/g, ' ').trim();
 const num = (s: string) => { const n = Number(String(s).replace(/[^0-9.]/g, '')); return Number.isFinite(n) && n > 0 ? n : undefined; };
 const round2 = (n: number) => Math.round((n + Number.EPSILON) * 100) / 100;
@@ -65,6 +70,7 @@ const byKey = new Map<string, any>();
 for (const r of rows) {
   const rename = RENAME[r.name.trim()];
   const merchantKey = rename ? rename[0] : slug(r.name);
+  if (DROP_FROM_CORE.has(merchantKey)) continue;
   const name = rename ? rename[1] : r.name.replace(/\s*\(.*?\)\s*/g, ' ').trim();
   const group = GROUP(r.category.trim());
   const displayCategory = DISPLAY[group] ?? 'Other';

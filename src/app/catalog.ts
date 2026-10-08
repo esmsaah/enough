@@ -17,6 +17,7 @@ export type QuickPick = {
   currency?: string; // currency of price, default EUR
   group?: string; // tap-list group
   priceUnknown?: boolean; // catalog has no typical price: person enters it
+  askPrice?: boolean; // price varies too much to estimate (gym, lessons): ask on tap
   billingModel?: import('../engine/types').BillingModel; // 'usage' = fixed cost (utilities), never recommended for cutting
 };
 

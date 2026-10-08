@@ -21,17 +21,21 @@ import localCoreData from './localCore.data.json';
 // ---------------------------------------------------------------------------
 export const GLOBAL_CORE: QuickPick[] = [
   ...(globalCoreData as QuickPick[]),
-  // Non-digital memberships (in person) — universal, generic. Gym front and centre.
-  { merchantKey: 'gym', name: 'Gym', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'yoga studio', name: 'Yoga studio', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'pilates studio', name: 'Pilates studio', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 120, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'swimming pool', name: 'Swimming / pool', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'martial arts', name: 'Martial arts', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 80, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'dance classes', name: 'Dance classes', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 70, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'sports club', name: 'Sports / tennis club', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 50, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'music lessons', name: 'Music lessons', group: 'Learning', displayCategory: 'Learning', category: 'membership', price: 100, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'kids activity', name: "Kids' activity", group: 'Kids & Family', displayCategory: 'Kids & Family', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'phone', name: 'Phone plan', group: 'Phone & Internet', displayCategory: 'Bills & Utilities', category: 'bill', price: 25, currency: 'USD', frequency: 'monthly' },
+  // Non-digital memberships (in person) — universal, generic. Price varies a lot
+  // per place, so we ASK the person rather than assume (askPrice).
+  { merchantKey: 'gym', name: 'Gym', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'yoga studio', name: 'Yoga studio', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'pilates studio', name: 'Pilates studio', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 120, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'swimming pool', name: 'Swimming / pool', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'martial arts', name: 'Martial arts', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 80, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'dance classes', name: 'Dance classes', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 70, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'sports club', name: 'Sports / tennis club', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 50, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'music lessons', name: 'Music lessons', group: 'Learning', displayCategory: 'Learning', category: 'membership', price: 100, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'kids activity', name: "Kids' activity", group: 'Kids & Family', displayCategory: 'Kids & Family', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'phone', name: 'Phone plan', group: 'Phone & Internet', displayCategory: 'Bills & Utilities', category: 'bill', price: 25, currency: 'USD', frequency: 'monthly', askPrice: true },
+  // NOTE: regional fintech (Revolut, Wise, N26, Payoneer) is deliberately NOT in
+  // the global core — availability is country-specific (e.g. Revolut/N26 are not
+  // offered in Serbia or BiH). These come only from verified LOCAL research.
   // Adult (18+) — real recurring spend people forget. Discreet labels; these can
   // be hidden from the share card and report.
   { merchantKey: 'onlyfans', name: 'OnlyFans', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 15, currency: 'USD', frequency: 'monthly' },
@@ -78,6 +82,10 @@ function keepLocal(e: CatalogEntry): boolean {
   if (e.gen) return false; // brand-less generics (rent, electricity) live in the cash/yearly step
   if (e.g === 'Insurance') return false; // generic insurance is a yearly-bill question, not a chip
   if (isBroadcasterChannel(e)) return false; // free channels are not subscriptions
+  // In-person memberships from the noisy catalog are unreliable (random local
+  // gyms mixed with mis-categorised entries). The curated generic membership
+  // types cover these everywhere; real local gyms come from clean research.
+  if (catalogCategory(e) === 'membership') return false;
   if (CORE_KEYS.has(e.k)) return false; // the curated core already covers it
   return true;
 }
