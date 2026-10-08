@@ -21,7 +21,16 @@ import localCoreData from './localCore.data.json';
 // ---------------------------------------------------------------------------
 export const GLOBAL_CORE: QuickPick[] = [
   ...(globalCoreData as QuickPick[]),
+  // Non-digital memberships (in person) — universal, generic. Gym front and centre.
   { merchantKey: 'gym', name: 'Gym', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'yoga studio', name: 'Yoga studio', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'pilates studio', name: 'Pilates studio', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 120, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'swimming pool', name: 'Swimming / pool', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'martial arts', name: 'Martial arts', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 80, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'dance classes', name: 'Dance classes', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 70, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'sports club', name: 'Sports / tennis club', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 50, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'music lessons', name: 'Music lessons', group: 'Learning', displayCategory: 'Learning', category: 'membership', price: 100, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'kids activity', name: "Kids' activity", group: 'Kids & Family', displayCategory: 'Kids & Family', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly' },
   { merchantKey: 'phone', name: 'Phone plan', group: 'Phone & Internet', displayCategory: 'Bills & Utilities', category: 'bill', price: 25, currency: 'USD', frequency: 'monthly' },
   // Adult (18+) — real recurring spend people forget. Discreet labels; these can
   // be hidden from the share card and report.

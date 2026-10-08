@@ -62,13 +62,14 @@ export const QUICK_PICKS: QuickPick[] = [
 
 /** Cash-entry chips for screen 6 (offline / cash costs). */
 export const CASH_CHIPS: Array<{ name: string; displayCategory: DisplayCategory; category: Category }> = [
-  { name: 'Gym', displayCategory: 'Fitness & Health', category: 'membership' },
-  { name: 'Hairdresser', displayCategory: 'Other', category: 'habit' },
-  { name: "Kids' training", displayCategory: 'Kids & Family', category: 'membership' },
-  { name: 'Lessons', displayCategory: 'Learning', category: 'membership' },
-  { name: 'Cleaning', displayCategory: 'Other', category: 'bill' },
-  { name: 'Parking', displayCategory: 'Transport', category: 'bill' },
+  { name: 'Hairdresser / barber', displayCategory: 'Other', category: 'habit' },
+  { name: 'Nails / manicure', displayCategory: 'Other', category: 'habit' },
+  { name: 'Beauty / skincare', displayCategory: 'Other', category: 'habit' },
+  { name: 'Massage', displayCategory: 'Other', category: 'habit' },
+  { name: 'Cleaning', displayCategory: 'Other', category: 'habit' },
+  { name: 'Babysitter / nanny', displayCategory: 'Kids & Family', category: 'habit' },
   { name: 'Coffee', displayCategory: 'Other', category: 'habit' },
+  { name: 'Parking', displayCategory: 'Transport', category: 'habit' },
 ];
 
 export const YEARLY_CHIPS: Array<{ name: string; displayCategory: DisplayCategory; category: Category }> = [

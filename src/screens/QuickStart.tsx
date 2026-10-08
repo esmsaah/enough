@@ -10,21 +10,37 @@ import { useStore } from '../app/store';
 import { Button, Chip, ProgressBar } from '../components/ui';
 import type { Category, DisplayCategory, Item } from '../engine/types';
 
+// Sub-group order inside the Subscriptions section (digital only).
 const GROUP_ORDER = [
   'Entertainment', 'Music', 'Social', 'AI & Software', 'Work & Freelance', 'Cloud & Storage',
   'Gaming', 'News & Media', 'Learning', 'Fitness & Health', 'Dating', 'Adult', 'VPN & Security',
-  'Shopping & Delivery', 'Finance', 'Phone & Internet', 'Transport', 'Insurance',
-  'Kids & Family', 'Everyday costs', 'Utilities', 'Housing', 'Other',
+  'Shopping & Delivery', 'Finance', 'Everyday costs', 'Other',
 ];
 const SHOWN_PER_GROUP = 6;
+const SHOWN_FLAT = 10;
 
-// Fixed, usage-based costs the person can't switch away from. Shown last, for a
-// full picture only — the audit never recommends cutting them.
-const FIXED_GROUPS = new Set(['Utilities', 'Housing']);
-const FIXED_NOTE: Record<string, string> = {
-  Utilities: "Optional — we can't cut these, but add them to see your full monthly cost.",
-  Housing: 'Optional — fixed costs, shown for the full picture.',
-};
+// The five cost TYPES. Each tap gets bucketed into one, which also decides how
+// the audit treats it (membership = pay-per-visit; fixed = never cut; etc.).
+type SectionKey = 'Subscriptions' | 'Memberships (in person)' | 'Bills you can switch' | 'Fixed costs';
+const SECTION_DEFS: Array<{ key: SectionKey; sub: boolean; note?: string }> = [
+  { key: 'Subscriptions', sub: true },
+  { key: 'Memberships (in person)', sub: false },
+  { key: 'Bills you can switch', sub: false },
+  { key: 'Fixed costs', sub: false, note: "Optional — we can't cut these, but add them to see your full monthly cost." },
+];
+const SWITCHABLE_BILL_GROUPS = new Set(['Phone & Internet', 'Insurance']);
+const FIXED_BILL_GROUPS = new Set(['Utilities', 'Housing', 'Transport']);
+
+const TV_LICENCE = /\b(tv licen[cs]e|tv fee|licen[cs]e fee|rtv|rts|rundfunk|gez|pretplata|canon rai)\b/i;
+
+function sectionFor(p: QuickPick): SectionKey {
+  if (p.category === 'membership') return 'Memberships (in person)';
+  // A TV/radio licence is a fixed fee you can't switch away from.
+  if (TV_LICENCE.test(p.name)) return 'Fixed costs';
+  if (p.billingModel === 'usage' || FIXED_BILL_GROUPS.has(p.group ?? '')) return 'Fixed costs';
+  if (p.category === 'bill' || SWITCHABLE_BILL_GROUPS.has(p.group ?? '')) return 'Bills you can switch';
+  return 'Subscriptions';
+}
 
 const DISPLAY_CATEGORIES: DisplayCategory[] = [
   'Entertainment', 'AI & Software', 'Cloud & Storage', 'News & Media', 'Learning',
@@ -48,13 +64,26 @@ export function QuickStart() {
   const ownItems = state.items.filter((i) => i.source === 'manual');
   const backStep = state.statement ? 'found' : 'landing';
 
-  const groups = useMemo(() => {
-    const byGroup = new Map<string, QuickPick[]>();
+  const sections = useMemo(() => {
+    const bySection = new Map<SectionKey, QuickPick[]>();
     for (const pick of tapListForCountry(country)) {
-      const group = pick.group ?? 'Other';
-      byGroup.set(group, [...(byGroup.get(group) ?? []), pick]);
+      const s = sectionFor(pick);
+      bySection.set(s, [...(bySection.get(s) ?? []), pick]);
     }
-    return GROUP_ORDER.filter((g) => byGroup.has(g)).map((g) => ({ name: g, picks: byGroup.get(g)! }));
+    const out: Array<{ key: string; note?: string; flat: boolean; subgroups: Array<{ name: string; picks: QuickPick[] }> }> = [];
+    for (const def of SECTION_DEFS) {
+      const list = bySection.get(def.key) ?? [];
+      if (list.length === 0) continue;
+      if (def.sub) {
+        const byG = new Map<string, QuickPick[]>();
+        for (const p of list) byG.set(p.group ?? 'Other', [...(byG.get(p.group ?? 'Other') ?? []), p]);
+        const subgroups = GROUP_ORDER.filter((g) => byG.has(g)).map((g) => ({ name: g, picks: byG.get(g)! }));
+        out.push({ key: def.key, flat: false, subgroups });
+      } else {
+        out.push({ key: def.key, note: def.note, flat: true, subgroups: [{ name: def.key, picks: list }] });
+      }
+    }
+    return out;
   }, [country]);
   const results = useMemo(() => searchCatalog(query), [query]);
 
@@ -100,24 +129,30 @@ export function QuickStart() {
               ? <div className="chip-wrap">{results.map(chip)}</div>
               : <p className="muted">Nothing found — add it with “+ Add your own” below.</p>}
           </section>
-        ) : groups.map(({ name, picks }) => {
-          const open = expanded[name];
-          const shown = open ? picks : picks.slice(0, SHOWN_PER_GROUP);
-          return (
-            <section key={name}>
-              <h2>{name}</h2>
-              {FIXED_GROUPS.has(name) && <p className="muted" style={{ marginTop: -4, fontSize: 13 }}>{FIXED_NOTE[name]}</p>}
-              <div className="chip-wrap">
-                {shown.map(chip)}
-                {picks.length > SHOWN_PER_GROUP && (
-                  <button type="button" className="link-button" onClick={() => setExpanded((e) => ({ ...e, [name]: !open }))}>
-                    {open ? 'Show less' : `+${picks.length - SHOWN_PER_GROUP} more`}
-                  </button>
-                )}
-              </div>
-            </section>
-          );
-        })}
+        ) : sections.map((sec) => (
+          <div key={sec.key} className="tap-section">
+            <h2>{sec.key}</h2>
+            {sec.note && <p className="muted" style={{ marginTop: -4, fontSize: 13 }}>{sec.note}</p>}
+            {sec.subgroups.map((sg) => {
+              const limit = sec.flat ? SHOWN_FLAT : SHOWN_PER_GROUP;
+              const open = expanded[sg.name];
+              const shown = open ? sg.picks : sg.picks.slice(0, limit);
+              return (
+                <section key={sg.name}>
+                  {!sec.flat && <h3 className="tap-subhead">{sg.name}</h3>}
+                  <div className="chip-wrap">
+                    {shown.map(chip)}
+                    {sg.picks.length > limit && (
+                      <button type="button" className="link-button" onClick={() => setExpanded((e) => ({ ...e, [sg.name]: !open }))}>
+                        {open ? 'Show less' : `+${sg.picks.length - limit} more`}
+                      </button>
+                    )}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        ))}
 
         {/* Add your own — the escape hatch so the tap path is complete everywhere */}
         <section>

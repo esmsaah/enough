@@ -1,0 +1,93 @@
+name,statement_aliases,type,category,typical_monthly_price,currency,yearly_plan_price,regions,popularity_rank,overlaps_with,cancel_url,price_verified,cancel_verified,notes
+Jio (JioFiber),JIO|RELIANCE JIO,bill,Phone & Internet,999.00,INR,,IN,5,Airtel Xstream Fiber|BSNL Fiber|Vi,,yes,no,"popular 150 Mbps monthly plan 999 INR + GST per https://www.jio.com/selfcare/plans/fiber/fiber-prepaid-plans-list/?category=Monthly, Oct 2026"
+Airtel Xstream Fiber,AIRTEL|BHARTI AIRTEL,bill,Phone & Internet,499.00,INR,,IN,5,Jio (JioFiber)|BSNL Fiber|Vi,,yes,no,"40 Mbps plan 499 INR/mo per https://www.airtel.in/plans/broadband, Oct 2026"
+BSNL Fiber,BSNL|BHARAT SANCHAR NIGAM,bill,Phone & Internet,599.00,INR,,IN,4,Jio (JioFiber)|Airtel Xstream Fiber|Vi,,yes,no,"Fiber Basic Plus 599 INR/month up to 100 Mbps per https://eservices.bsnl.co.in/, Oct 2026"
+Vi (Vodafone Idea),VI|VODAFONE IDEA,bill,Phone & Internet,,INR,,IN,3,Jio|Airtel|BSNL,,no,no,no confirmed monthly plan price on official page this run
+Tata Play,TATA PLAY|TATA SKY,subscription,Entertainment,,INR,,IN,3,Zee5|JioHotstar|Sun Direct,,no,no,official site lists per-pack pricing only; no single typical monthly pack price confirmed this run
+Zee5,ZEE5|ZEE5 PREMIUM,subscription,Entertainment,,INR,,IN,3,SonyLIV|JioHotstar|Tata Play,,no,no,1-month pricing found only in promo context on official subscription page; standard monthly plan price not confirmed this run; official helpcenter lists 12-month plans from 1499 INR
+JioHotstar,JIOHOTSTAR|HOTSTAR,subscription,Entertainment,,INR,1499.00,IN,4,Zee5|SonyLIV|Netflix India,,yes,no,"official subscribe page shows 1-year Premium 1499 INR per https://www.hotstar.com/in/subscribe/get-started, Oct 2026; monthly tiers exist but prices not extractable this run"
+SonyLIV,SONYLIV|SONY LIV,subscription,Entertainment,399.00,INR,1499.00,IN,3,Zee5|JioHotstar,,yes,no,"LIV Premium 399 INR/mo and 1499 INR/yr per https://www.sonyliv.com/subscription, Oct 2026"
+Cult.fit (Cult),CULTFIT|CULT.FIT|CUREFIT,membership,Fitness & Health,1066.00,INR,,IN,4,Gold's Gym India|Anytime Fitness India,,yes,no,"ELITE PLUS cult pass all-centers India 1066 INR per month + taxes (onwards) per https://www.cult.fit/cult/cult-pass/gurgaon/Cult-Gym-City-Center-150,-Noida/2392, Oct 2026; city- and tier-dependent"
+Tata Power Delhi,TATA POWER|TATA POWER DELHI,bill,Utilities,,INR,,IN,3,BSES Rajdhani|BSES Yamuna|MSEDCL,,no,no,usage-based per-unit tariff; no monthly amount on official page
+Mahanagar Gas (PNG),MGL|MAHANAGAR GAS,bill,Utilities,,INR,,IN,3,Indraprastha Gas|GAIL Gas,,no,no,domestic PNG billed per SCM consumed; no monthly amount on official page
+Delhi Jal Board,DJB|DELHI JAL BOARD,bill,Utilities,,INR,,IN,3,Mumbai BMC Water|Bangalore BWSSB,,no,no,metered per-kl water tariff; no monthly amount on official page
+LIC (Life Insurance Corporation),LIC|LIC OF INDIA,bill,Insurance,,INR,,IN,5,HDFC Life|SBI Life|Star Health,,no,no,premium product- and quote-dependent; no fixed monthly price on official page
+Star Health Insurance,STAR HEALTH|STAR HEALTH AND ALLIED INSURANCE,bill,Insurance,,INR,,IN,3,HDFC Ergo|Niva Bupa|Care Health,,no,no,quote-based premium; no fixed monthly price on official page
+BEST Bus Pass (Mumbai),BEST|BEST UNDERTAKING,bill,Transport,,INR,,IN,2,NMMT|TMT|MSRTC,,no,no,monthly unlimited pass exists but current official rate not confirmed this run
+Telkomsel IndiHome,TELKOMSEL|INDIHOME,bill,Phone & Internet,310000.00,IDR,,ID,5,First Media|XL Axiata|Indosat,,yes,no,"from Rp310.000/bulan per https://www.telkomsel.com/indihome, Oct 2026"
+XL Axiata (XL Home),XL AXIATA|XL HOME,bill,Phone & Internet,,IDR,,ID,4,Telkomsel IndiHome|Indosat|First Media,,no,no,official home page lists promo pricing; typical monthly plan price not confirmed this run
+Indosat (IM3),INDOSAT|IM3|INDOSAT OOREDOO HUTCHISON,bill,Phone & Internet,,IDR,,ID,4,Telkomsel|XL Axiata|Smartfren,,no,no,no confirmed monthly plan price on official page this run
+First Media,FIRST MEDIA|FIRSTMEDIA,bill,Phone & Internet,,IDR,,ID,3,Telkomsel IndiHome|XL Axiata|MyRepublic,,no,no,no confirmed monthly plan price on official page this run
+Smartfren,SMARTFREN,bill,Phone & Internet,,IDR,,ID,3,Telkomsel|Indosat|XL Axiata,,no,no,no confirmed monthly plan price on official page this run
+Iconnet (Icon+ / PLN),ICONNET|ICON PLUS|ICON+,bill,Phone & Internet,,IDR,,ID,3,Telkomsel IndiHome|First Media|MyRepublic,,no,no,no confirmed monthly plan price on official page this run
+PLN (State Electricity),PLN|PT PLN PERSERO,bill,Utilities,,IDR,,ID,5, ,,no,no,usage-based per-kWh tariff; no monthly bill amount on official page
+PAM Jaya (Jakarta Water),PAM JAYA,bill,Utilities,,IDR,,ID,3, ,,no,no,volumetric per-liter tariff; no monthly amount on official page
+PGN (Pertamina Gas Negara),PGN|PERTAMINA GAS NEGARA,bill,Utilities,,IDR,,ID,3, ,,no,no,per-m3 city gas tariff; no monthly amount on official page
+Vidio,VIDIO|VIDIO PREMIUM,subscription,Entertainment,,IDR,,ID,4,Vision+|RCTI+|Netflix Indonesia,,no,no,official support pages list multi-month and add-on prices but no extractable single monthly tier this run
+Vision+,VISION+|VISION PLUS|MNC VISION,subscription,Entertainment,,IDR,,ID,3,Vidio|RCTI+,,no,no,official pages show conflicting monthly figures for tiers; directly billed monthly amount unverified this run
+BPJS Kesehatan,BPJS KESEHATAN|BPJS,bill,Insurance,,IDR,,ID,5,Sinarmas (Asuransi Sinar Mas)|Jiwasraya,,no,no,"official iuran page shows no amounts this run; premium set by government regulation, class-based"
+Celebrity Fitness,CELEBRITY FITNESS,membership,Fitness & Health,560000.00,IDR,,ID,3,Fitness First Indonesia|Gold's Gym Indonesia,,yes,no,"full membership from IDR 560K per month per https://www.celebrityfitness.com/id/en/New-Membership, Oct 2026"
+Sinarmas (Asuransi Sinar Mas),SINARMAS|ASURANSI SINAR MAS,bill,Insurance,,IDR,,ID,2,Jiwasraya|BPJS Kesehatan,,no,no,quote-based premium; no fixed monthly price on official page
+Jiwasraya,JIWASRAYA|PT ASURANSI JIWASRAYA,bill,Insurance,,IDR,,ID,2,Sinarmas (Asuransi Sinar Mas)|BPJS Kesehatan,,no,no,policy-dependent premium; no fixed monthly price on official page
+NTT docomo (ahamo),NTT DOCOMO|DOCOMO|AHAMO,bill,Phone & Internet,2970.00,JPY,,JP,5,Rakuten Mobile|au (KDDI)|SoftBank,,yes,no,"ahamo 2970 yen incl. tax for 30GB (40GB from Aug 2026) per https://ahamo.com/special/lp/001.html, Oct 2026"
+au (KDDI),AU|KDDI,bill,Phone & Internet,,JPY,,JP,4,NTT docomo|Rakuten Mobile|SoftBank,,no,no,no confirmed current plan price on official page this run
+Rakuten Mobile,RAKUTEN MOBILE,bill,Phone & Internet,3278.00,JPY,,JP,4,NTT docomo (ahamo)|LINEMO|povo,,yes,no,"Rakuten SAIKYO unlimited 3278 yen/month incl. tax (2980 yen pre-tax); 3GB 1078 yen, 3-20GB 2178 yen per https://network.mobile.rakuten.co.jp/fee/saikyo-plan/detail/, Oct 2026"
+NURO Hikari,NURO|NURO HIKARI|SO-NET,bill,Phone & Internet,3530.00,JPY,,JP,4,NTT East FLET'S Hikari|au Hikari|SoftBank Hikari,,yes,no,"NURO Hikari M 3530 yen/month for first 24 months with 2-year discount per https://www.nuro.jp/hikari/mansion/price/, Oct 2026"
+NTT East FLET'S Hikari,NTT EAST|FLET'S HIKARI,bill,Phone & Internet,6270.00,JPY,,JP,4,NURO Hikari|au Hikari|SoftBank Hikari,,yes,no,"FLET'S Hikari monthly charge 6270 yen per https://flets.com/english/index.html, Oct 2026"
+NHK Reception Fee,NHK|NHK RECEIVING FEE,bill,Entertainment,1100.00,JPY,12276.00,JP,5,NHK On Demand,,yes,no,"terrestrial contract 1100 yen/month and 12276 yen 12-month advance per https://www.nhk.or.jp/corporateinfo/viewer/receivingfee/, Oct 2026"
+U-NEXT,U-NEXT|UNEXT,subscription,Entertainment,2189.00,JPY,,JP,4,ABEMA Premium|FOD Premium|Hulu Japan,,yes,no,"2189 yen incl. tax per https://www.video.unext.jp/lp/introduction, Oct 2026"
+ABEMA Premium,ABEMA|ABEMA PREMIUM,subscription,Entertainment,1180.00,JPY,,JP,4,U-NEXT|FOD Premium|Hulu Japan,,yes,no,"1180 yen incl. tax per ABEMA official outlet https://times.abema.tv/visions/articles/-/10272093 and Google Play listing, Oct 2026; ad-supported tier 580 yen also official"
+FOD Premium,FOD|FOD PREMIUM|FUJI TV ON DEMAND,subscription,Entertainment,1320.00,JPY,,JP,3,U-NEXT|ABEMA Premium|Hulu Japan,,yes,no,"Standard Course monthly 1320 yen incl. tax per official FAQ https://news.fod.fujitv.co.jp/faq, Oct 2026; ad-supported Light Course 976 yen"
+TIPNESS,TIPNESS,membership,Fitness & Health,4980.00,JPY,,JP,3,Konami Sports Club|Curves Japan,,yes,no,"4980 yen/month plan at Yokohama club per official club page https://tip.tipness.co.jp, Oct 2026; prices vary by club"
+TEPCO (Tokyo Electric),TEPCO|TOKYO ELECTRIC POWER,bill,Utilities,,JPY,,JP,5,Tokyo Gas|Tokyo Waterworks,,no,no,usage-based per-kWh grid tariff; no monthly amount on official page
+Tokyo Gas,TOKYO GAS,bill,Utilities,,JPY,,JP,4,TEPCO|Tokyo Waterworks,,no,no,usage-based per-m3 gas tariff; no monthly amount on official page
+Tokyo Waterworks Bureau,TOKYO WATERWORKS|BUREAU OF WATERWORKS TOKYO,bill,Utilities,,JPY,,JP,4,Tokyo Gas|TEPCO,,no,no,usage-based per-m3 water tariff; no monthly amount on official page
+Japan Post Insurance (Kampo),JAPAN POST INSURANCE|KAMPO,bill,Insurance,,JPY,,JP,3,Dai-ichi Life|Sony Life|T&D,,no,no,policy-dependent premium; no fixed monthly price on official page
+Suica Commuter Pass (JR East),SUICA|JR EAST,bill,Transport,,JPY,,JP,4,PASMO|Tokyo Metro Pass,,no,no,monthly commuter pass (teiki) exists but price is route-specific; no single amount on official page
+SK Telecom,SK TELECOM|SKT,bill,Phone & Internet,,KRW,,KR,5,KT|LG U+,,no,no,no confirmed current plan price on official page this run
+KT,KT|KT CORP,bill,Phone & Internet,,KRW,,KR,5,SK Telecom|LG U+,,no,no,official shop pages show promo-discounted plan prices only; no confirmed typical monthly price this run
+LG U+,LG U+|LGUPLUS,bill,Phone & Internet,85000.00,KRW,,KR,4,SK Telecom|KT,,yes,no,"5G Premier Essential 85000 KRW/month per https://www.lguplus.com/mobile/plan/mplan/5g-all/5g-unlimited/LPZ0000409, Oct 2026"
+SK Broadband,SK BROADBAND|SKB,bill,Phone & Internet,,KRW,,KR,4,KT Internet|LG U+ Internet,,no,no,no confirmed current internet plan price on official page this run
+KEPCO (Korea Electric Power),KEPCO|KOREA ELECTRIC POWER,bill,Utilities,,KRW,,KR,5,Arisu (Seoul Water)|city gas utilities,,no,no,usage-based tiered per-kWh tariff with base charge; no monthly amount on official page
+Arisu (Seoul Waterworks),ARISU|SEOUL WATERWORKS,bill,Utilities,,KRW,,KR,3,KEPCO|city gas utilities,,no,no,usage-based per-m3 water tariff; no monthly amount on official page
+KBS TV Reception Fee,KBS|KBS RECEPTION FEE,bill,Entertainment,2500.00,KRW,,KR,5, ,,yes,no,"2500 KRW per month per official KBS page https://kbsagain.kbs.co.kr/goji/m.html, Oct 2026; collected via electricity bill"
+Tving,TVING,subscription,Entertainment,13500.00,KRW,,KR,4,Wavve|Netflix Korea|Coupang Play,,yes,no,"Standard 13500 KRW/month (ad Standard 5500, Premium 17000) per https://www.tving.com/bill/subscription/plan, Oct 2026"
+Wavve,WAVVE,subscription,Entertainment,,KRW,,KR,3,Tving|Netflix Korea,,no,no,official voucher page did not yield prices this run; no confirmed monthly tier price
+Coupang Wow Membership,COUPANG|COUPANG WOW,subscription,Other,7890.00,KRW,,KR,4,Naver Plus|Kakao benefits,,yes,no,"monthly fee 7890 KRW per Coupang official newsroom https://news.coupang.com/archives/44584/, Oct 2026; includes Coupang Play streaming"
+Seoul Climate Card,CLIMATE CARD|SEOUL CLIMATE CARD,bill,Transport,62000.00,KRW,,KR,4,T-money|Ttareungi,,yes,no,"30-day pass 62000 KRW (65000 KRW with Ttareungi included) per https://english.seoul.go.kr/policy/transportation/climate-card/, Oct 2026"
+Naver Plus,NAVER|NAVER PLUS,subscription,Other,,KRW,,KR,3,Coupang Wow|Kakao benefits,,no,no,no confirmed monthly membership price on official page this run
+Samsung Fire & Marine Insurance,SAMSUNG FIRE|SAMSUNG FIRE AND MARINE,bill,Insurance,,KRW,,KR,4,Hyundai Insurance|KB Insurance|DB Insurance,,no,no,quote-based premium; no fixed monthly price on official page
+Hyundai Marine & Fire Insurance,HYUNDAI INSURANCE|HYUNDAI MARINE,bill,Insurance,,KRW,,KR,3,Samsung Fire & Marine|KB Insurance,,no,no,quote-based premium; no fixed monthly price on official page
+DB Insurance,DB INSURANCE|DB SONBO,bill,Insurance,,KRW,,KR,3,Samsung Fire & Marine|Hyundai Insurance,,no,no,quote-based premium; no fixed monthly price on official page
+Globe At Home (GFiber),GLOBE|GLOBE AT HOME|GFIBER,bill,Phone & Internet,,PHP,,PH,5,PLDT Home Fiber|Converge|DITO,,no,no,"official page lists GFiber plan tiers and a 599-peso Fiber WiFi offer; monthly billing period not explicitly stated beside plan amounts, price left blank"
+PLDT Home Fiber,PLDT|PLDT HOME,bill,Phone & Internet,1299.00,PHP,,PH,5,Globe At Home|Converge|Sky Cable,,yes,no,"Fiber Unli 1299 entry plan per https://www.pldthome.com/fiber, Oct 2026"
+Converge ICT (Bida Fiber),CONVERGE|CONVERGE ICT|BIDA FIBER,bill,Phone & Internet,888.00,PHP,,PH,4,Globe At Home|PLDT Home|Sky Cable,,yes,no,"BIDA Fiber 888 PHP/mo per https://www.convergeict.com/bidafiber, Oct 2026"
+Smart (Signature Postpaid),SMART|SMART COMMUNICATIONS,bill,Phone & Internet,,PHP,,PH,5,Globe Postpaid|DITO Postpaid,,no,no,"official page lists postpaid plan tiers; monthly billing period and currency not explicitly stated beside amounts, price left blank"
+DITO Telecommunity,DITO|DITO TELECOMMUNITY,bill,Phone & Internet,,PHP,,PH,3,Smart|Globe,,no,no,no confirmed monthly plan price on official page this run
+Meralco,MERALCO|MANILA ELECTRIC,bill,Utilities,,PHP,,PH,5,Maynilad Water|Manila Water,,no,no,usage-based per-kWh distribution tariff; no monthly amount on official page
+Maynilad Water,MAYNILAD|MAYNILAD WATER SERVICES,bill,Utilities,,PHP,,PH,4,Manila Water|Meralco,,no,no,usage-based per-cu.m water tariff; no monthly amount on official page
+Manila Water,MANILA WATER|MANILA WATER COMPANY,bill,Utilities,,PHP,,PH,4,Maynilad Water|Meralco,,no,no,usage-based per-cu.m water tariff; no monthly amount on official page
+iWantTFC,IWANTTFC|IWANT TFC|ABS-CBN,subscription,Entertainment,,PHP,,PH,3,Vivamax|Netflix Philippines,,no,no,official site shows no PH pricing this run; App Store listings show USD pricing for non-PH regions
+Vivamax,VIVAMAX|VMX,subscription,Entertainment,169.00,PHP,,PH,3,iWantTFC|Netflix Philippines,,yes,no,"1-month subscription PHP 169 per official help page https://www.vivamax.net/help, Oct 2026"
+Cignal TV,CIGNAL|CIGNAL TV,subscription,Entertainment,290.00,PHP,,PH,3,Sky Cable|G Sat|Vivamax,,yes,no,"Plan 290 at 290 PHP/month per official Cignal portal https://mycignal.ph/ComparePlans, Oct 2026"
+Slimmers World,SLIMMERS WORLD,membership,Fitness & Health,3000.00,PHP,,PH,2,Anytime Fitness Philippines|Fitness First Philippines,,yes,no,"3000 PHP per month plan (4200 PHP tier also listed) per https://slimmersworld.com.ph/memberships/, Oct 2026"
+PhilHealth,PHILHEALTH|PHIC,bill,Insurance,,PHP,,PH,5,Maxicare|MediCard,,no,no,premium is income-based percentage of declared income; no fixed monthly amount on official page
+Maxicare Healthcare,MAXICARE|MAXICARE HEALTHCARE,bill,Insurance,,PHP,,PH,3,MediCard|PhilHealth,,no,no,plan-based HMO premium; no fixed monthly price on official page
+MediCard Philippines,MEDICARD,bill,Insurance,,PHP,,PH,3,Maxicare|PhilHealth,,no,no,plan-based HMO premium; no fixed monthly price on official page
+PTCL Broadband,PTCL|PTCL LTD,bill,Phone & Internet,2999.00,PKR,,PK,4,Transworld|Stormfiber|Optix,,yes,no,"DSL unlimited packages from 2999 PKR per https://ptcl.com.pk/Home/PageDetail?ItemId=122&linkId=976, Oct 2026"
+Jazz (PMCL),JAZZ|PMCL,bill,Phone & Internet,1000.00,PKR,,PK,5,Zong|Telenor Pakistan|Ufone,,yes,no,"postpaid Monthly Premium 10 GB offer at 1000 PKR per https://jazz.com.pk/postpaid/data-Offers, Oct 2026"
+Zong 4G,ZONG|ZONG 4G|CMPAK,bill,Phone & Internet,2300.00,PKR,,PK,5,Jazz|Telenor Pakistan|Ufone,,yes,no,"Monthly Pro package 50 GB at 2300 PKR per https://www.zong.com.pk/prepaid/monthly-pro, Oct 2026"
+Telenor Pakistan,TELENOR|TELENOR PAKISTAN,bill,Phone & Internet,,PKR,,PK,4,Jazz|Zong|Ufone,,no,no,no confirmed typical monthly package price on official page this run
+Ufone 4G,UFONE|UFONE 4G|PTML,bill,Phone & Internet,,PKR,,PK,3,Jazz|Zong|Telenor Pakistan,,no,no,no confirmed typical monthly package price on official page this run
+K-Electric,K-ELECTRIC|KE,bill,Utilities,,PKR,,PK,4,IESCO|LESCO|SSGC,,no,no,usage-based residential tariff (A-1); no monthly amount on official page
+IESCO (Islamabad Electric),IESCO|ISLAMABAD ELECTRIC SUPPLY,bill,Utilities,,PKR,,PK,3,K-Electric|LESCO|FESCO,,no,no,usage-based residential tariff; no monthly amount on official page
+SNGPL (Sui Northern Gas),SNGPL|SUI NORTHERN GAS,bill,Utilities,,PKR,,PK,4,SSGC|K-Electric,,no,no,metered per-m3 gas tariff with slabs; no monthly amount on official page
+SSGC (Sui Southern Gas),SSGC|SUI SOUTHERN GAS,bill,Utilities,,PKR,,PK,3,SNGPL|K-Electric,,no,no,metered per-m3 gas tariff; no monthly amount on official page
+WASA Lahore (Water),WASA|WASA LAHORE,bill,Utilities,,PKR,,PK,2,KW&SB Karachi|K-Electric,,no,no,usage-based water tariff; no monthly amount on official page
+PTV Licence Fee,PTV|PTV LICENCE FEE|TV FEE,bill,Entertainment,35.00,PKR,,PK,4,tapmad|Tamasha,,yes,no,"35 PKR for domestic consumers charged in electricity bills per Ministry of Energy FAQ https://www.power.gov.pk/Detail/YThmNWQ5OGQtZGY5NC00NDk0LTgzN2MtZThhZTEzMTY5NTg2, Oct 2026; DISCO bills are monthly per same page"
+tapmad,TAPMAD|TAPMAD TV,subscription,Entertainment,499.00,PKR,4500.00,PK,2,Tamasha|PTV licence fee,,yes,no,"monthly 499 PKR and annual 4500 PKR per official terms https://www.tapmad.com/legal-center/terms, Oct 2026"
+Tamasha,TAMASHA|TAMASHA JAZZ,subscription,Entertainment,120.00,PKR,,PK,3,tapmad|Jazz TV,,yes,no,"monthly offer 120 PKR incl. tax for 30 days per https://jazz.com.pk/mobile-apps/tamasha, Oct 2026"
+State Life Insurance,STATE LIFE|SLIC,bill,Insurance,,PKR,,PK,3,EFU Life|Jubilee Life,,no,no,policy-dependent premium; no fixed monthly price on official page
+EFU Life,EFU|EFU LIFE ASSURANCE,bill,Insurance,,PKR,,PK,2,State Life|Jubilee Life,,no,no,quote-based premium; no fixed monthly price on official page
+Jubilee Life Insurance,JUBILEE|JUBILEE LIFE,bill,Insurance,,PKR,,PK,2,State Life|EFU Life,,no,no,quote-based premium; no fixed monthly price on official page
+Shapes (Fitness Pakistan),SHAPES|SHAPES FITNESS,membership,Fitness & Health,,PKR,,PK,3,Structure Health & Fitness|local independent gyms,,no,no,Pakistani gym chain; no official published monthly membership price found this run

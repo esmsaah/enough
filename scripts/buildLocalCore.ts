@@ -68,9 +68,13 @@ for (const file of files) {
       region,
       pop: Number(r.popularity_rank) || 0,
     };
-    // Utilities and housing are fixed, usage-based costs the person can't switch
-    // away from — mark them so the engine never recommends cutting them.
-    if (group === 'Utilities' || group === 'Housing') pick.billingModel = 'usage';
+    // Fixed costs the person can't switch away from (engine never cuts these):
+    // utilities, housing, transport passes, and the TV/radio licence fee
+    // (which research files list under Entertainment as a bill).
+    const isLicenceFee = group === 'Entertainment' && (r.type || '').trim() === 'bill';
+    if (group === 'Utilities' || group === 'Housing' || group === 'Transport' || isLicenceFee) {
+      pick.billingModel = 'usage';
+    }
     if (yearly) pick.yearlyPrice = yearly;
     if (r.cancel_url && r.cancel_url.trim()) pick.cancelUrl = r.cancel_url.trim();
 
