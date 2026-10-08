@@ -1,15 +1,7 @@
-# Cloudflare Pages project config (functions/ = API, dist/ = app)
 name = "enough"
-pages_build_output_dir = "dist"
-compatibility_date = "2026-09-01"
+compatibility_date = "2026-10-08"
 
-[[d1_databases]]
-binding = "DB"
-database_name = "enough"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
-
-# Secrets (set in Cloudflare dashboard, never in this file):
-#   ANTHROPIC_API_KEY
-# Optional variables:
-#   ANTHROPIC_MODEL       default claude-haiku-4-5
-#   AI_DAILY_BUDGET_USD   default 5
+# Static site: serve the built SPA from dist/. No Worker script (no `main`).
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
