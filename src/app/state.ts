@@ -161,6 +161,7 @@ export function reducer(state: State, action: Action): State {
         overlapGroup: action.pick.overlapGroup,
         cancelUrl: action.pick.cancelUrl,
         yearlyPrice: action.pick.yearlyPrice,
+        billingModel: action.pick.billingModel, // 'usage' keeps utilities as fixed costs
       } as Item;
       return { ...state, items: [...state.items, item] };
     }

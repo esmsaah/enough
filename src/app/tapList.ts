@@ -12,6 +12,7 @@
 import { CATALOG, catalogCategory, type CatalogEntry } from '../engine/catalog';
 import { pickFromCatalog, type QuickPick } from './catalog';
 import globalCoreData from './globalCore.data.json';
+import localCoreData from './localCore.data.json';
 
 // ---------------------------------------------------------------------------
 // (a) Curated global core — built from research/global.csv (verified prices
@@ -22,6 +23,13 @@ export const GLOBAL_CORE: QuickPick[] = [
   ...(globalCoreData as QuickPick[]),
   { merchantKey: 'gym', name: 'Gym', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly' },
   { merchantKey: 'phone', name: 'Phone plan', group: 'Phone & Internet', displayCategory: 'Bills & Utilities', category: 'bill', price: 25, currency: 'USD', frequency: 'monthly' },
+  // Adult (18+) — real recurring spend people forget. Discreet labels; these can
+  // be hidden from the share card and report.
+  { merchantKey: 'onlyfans', name: 'OnlyFans', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 15, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'fansly', name: 'Fansly', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 10, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'pornhub premium', name: 'Pornhub Premium', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 9.99, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'brazzers', name: 'Brazzers', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 17.99, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'xhamster', name: 'xHamster', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 9.99, currency: 'USD', frequency: 'monthly' },
 ];
 
 
@@ -65,12 +73,23 @@ function keepLocal(e: CatalogEntry): boolean {
   return true;
 }
 
+// Researched local layer (research/local_*.csv → scripts/buildLocalCore.ts).
+// For a country we have researched, these replace the noisy catalog locals.
+const LOCAL_RESEARCHED = localCoreData as Array<QuickPick & { region: string }>;
+const RESEARCHED_BY_COUNTRY = new Map<string, QuickPick[]>();
+for (const p of LOCAL_RESEARCHED) {
+  const { region, ...pick } = p;
+  RESEARCHED_BY_COUNTRY.set(region, [...(RESEARCHED_BY_COUNTRY.get(region) ?? []), pick]);
+}
+
 // ---------------------------------------------------------------------------
-// The tap list for a country: curated core + cleaned local entries.
+// The tap list for a country: curated core + local layer.
+// Local layer = researched locals when we have them, else cleaned catalog.
 // ---------------------------------------------------------------------------
 export function tapListForCountry(country: string): QuickPick[] {
   const code = country.toUpperCase();
-  const local = CATALOG
+  const researched = RESEARCHED_BY_COUNTRY.get(code);
+  const local = researched ?? CATALOG
     .filter((e) => e.r.includes(code))
     .map(cleaned)
     .filter(keepLocal)

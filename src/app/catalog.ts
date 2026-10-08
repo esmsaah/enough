@@ -17,6 +17,7 @@ export type QuickPick = {
   currency?: string; // currency of price, default EUR
   group?: string; // tap-list group
   priceUnknown?: boolean; // catalog has no typical price: person enters it
+  billingModel?: import('../engine/types').BillingModel; // 'usage' = fixed cost (utilities), never recommended for cutting
 };
 
 export const QUICK_PICKS: QuickPick[] = [

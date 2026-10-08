@@ -12,11 +12,19 @@ import type { Category, DisplayCategory, Item } from '../engine/types';
 
 const GROUP_ORDER = [
   'Entertainment', 'Music', 'Social', 'AI & Software', 'Work & Freelance', 'Cloud & Storage',
-  'Gaming', 'News & Media', 'Learning', 'Fitness & Health', 'Dating', 'VPN & Security',
-  'Shopping & Delivery', 'Finance', 'Phone & Internet', 'Utilities', 'Transport',
-  'Insurance', 'Kids & Family', 'Everyday costs', 'Housing', 'Other',
+  'Gaming', 'News & Media', 'Learning', 'Fitness & Health', 'Dating', 'Adult', 'VPN & Security',
+  'Shopping & Delivery', 'Finance', 'Phone & Internet', 'Transport', 'Insurance',
+  'Kids & Family', 'Everyday costs', 'Utilities', 'Housing', 'Other',
 ];
 const SHOWN_PER_GROUP = 6;
+
+// Fixed, usage-based costs the person can't switch away from. Shown last, for a
+// full picture only — the audit never recommends cutting them.
+const FIXED_GROUPS = new Set(['Utilities', 'Housing']);
+const FIXED_NOTE: Record<string, string> = {
+  Utilities: "Optional — we can't cut these, but add them to see your full monthly cost.",
+  Housing: 'Optional — fixed costs, shown for the full picture.',
+};
 
 const DISPLAY_CATEGORIES: DisplayCategory[] = [
   'Entertainment', 'AI & Software', 'Cloud & Storage', 'News & Media', 'Learning',
@@ -98,6 +106,7 @@ export function QuickStart() {
           return (
             <section key={name}>
               <h2>{name}</h2>
+              {FIXED_GROUPS.has(name) && <p className="muted" style={{ marginTop: -4, fontSize: 13 }}>{FIXED_NOTE[name]}</p>}
               <div className="chip-wrap">
                 {shown.map(chip)}
                 {picks.length > SHOWN_PER_GROUP && (

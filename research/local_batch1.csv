@@ -1,0 +1,104 @@
+name,statement_aliases,type,category,typical_monthly_price,currency,yearly_plan_price,regions,popularity_rank,overlaps_with,cancel_url,price_verified,cancel_verified,notes
+Xfinity,XFINITY|COMCAST XFINITY|XFINITY INTERNET,bill,Phone & Internet,45.00,USD,,US,5,AT&T Fiber|Spectrum|Verizon Fios,,yes,no,"300 Mbps $45/mo for 5 years per https://www.xfinity.com/learn/internet-service, Oct 2026"
+AT&T Fiber,ATT*FIBER|AT&T INTERNET|ATT BILL PAYMENT,bill,Phone & Internet,50.00,USD,,US,4,Xfinity|Spectrum|Verizon Fios,,yes,no,"unlimited 300 Mbps $50/mo per https://www.att.com/internet/fiber/, Oct 2026"
+Verizon Fios,VERIZON FIOS|VERIZON INTERNET|VZ FIOS,bill,Phone & Internet,30.00,USD,,US,4,Xfinity|AT&T Fiber|Spectrum,,yes,no,"Fios 300 Mbps $30/mo with Auto Pay per https://www.verizon.com/home/internet/, Oct 2026"
+Spectrum,SPECTRUM|CHARTER COMMUNICATIONS|TWC,bill,Phone & Internet,30.00,USD,,US,4,Xfinity|AT&T Fiber|Verizon Fios,,yes,no,"Internet 100 $30/mo for 1 year per https://www.spectrum.com/internet, Oct 2026"
+T-Mobile,T-MOBILE|TMOBILE.COM|T-MOBILE USA,bill,Phone & Internet,35.00,USD,,US,5,Verizon|AT&T|Spectrum Mobile,,yes,no,"Essentials Saver 1 line $35/mo per https://www.t-mobile.com/cell-phone-plans Broadband Facts, Oct 2026"
+Con Edison,CON EDISON|CONED|CONEDISON,bill,Utilities,112.75,USD,,US,4,PG&E|National Grid,,yes,no,"avg monthly residential bill 280 kWh 2025 per https://www.coned.com/-/media/files/coned/documents/rates/electric/average-monthly-electric-bills.pdf, Oct 2026"
+PG&E,PG&E|PACIFIC GAS AND ELECTRIC,bill,Utilities,,USD,,US,3,Con Edison|National Grid,,no,no,no official monthly amount found; usage-based tariff
+National Grid,NATIONAL GRID|NG-USA,bill,Utilities,,USD,,US,3,Con Edison|PG&E,,no,no,no official monthly amount found; usage-based tariff
+Hulu,HULU|HULU.COM,subscription,Entertainment,12.99,USD,,US,4,YouTube TV|Sling TV|Peacock,,yes,no,"starting at $12.99/mo per https://www.hulu.com/welcome, Oct 2026"
+YouTube TV,GOOGLE*YOUTUBE TV|YOUTUBE TV,subscription,Entertainment,82.99,USD,,US,4,Hulu + Live TV|Sling TV|FuboTV,,yes,no,"Base Plan $82.99/mo per https://tv.youtube.com/welcome/ and https://support.google.com/youtubetv/answer/9285852, Oct 2026"
+Peacock,PEACOCK|PEACOCKTV|NBC UNIVERSAL,subscription,Entertainment,12.99,USD,,US,3,Hulu|YouTube TV,,yes,no,"Premium $12.99/mo per https://www.peacocktv.com/help/help/article/price-increase, Oct 2026"
+Sling TV,SLING TV|SLING.COM|DISH NETWORK,subscription,Entertainment,45.99,USD,,US,3,YouTube TV|Hulu + Live TV|Philo,,yes,no,"Sling Orange/Blue $45.99/mo per https://www.sling.com, Oct 2026"
+Philo,PHILO|PHILO.COM,subscription,Entertainment,25.00,USD,,US,2,Sling TV|YouTube TV,,yes,no,"Essential $25/month per https://www.philo.com, Oct 2026"
+Planet Fitness,PLANET FITNESS|PFIP LLC,membership,Fitness & Health,15.00,USD,,US,5,LA Fitness|Crunch Fitness|Equinox,,yes,no,"Classic from $15/mo, Black Card $24.99 per https://www.planetfitness.com/gym-memberships/, Oct 2026"
+LA Fitness,LA FITNESS|LAFITNESS,membership,Fitness & Health,34.99,USD,,US,3,Planet Fitness|24 Hour Fitness|Equinox,,yes,no,"official signup pages show $24.99-$34.99/mo by location per https://www.lafitness.com, Oct 2026"
+Equinox,EQUINOX|EQUINOX HOLDINGS,membership,Fitness & Health,,USD,,US,2,Planet Fitness|LA Fitness,,no,no,club-specific pricing; no published monthly price on official page
+GEICO,GEICO|GEICO AUTO|GEICO INDIRA,bill,Insurance,,USD,,US,4,State Farm|Progressive|Allstate,,no,no,quote-based premium; no fixed monthly price published
+State Farm,STATE FARM|STATEFARM INS PREM,bill,Insurance,,USD,,US,4,GEICO|Progressive|Allstate,,no,no,quote-based premium; no fixed monthly price published
+BT Broadband,BT GROUP|BT.COM|BT BROADBAND,bill,Phone & Internet,35.99,GBP,,GB,4,Sky|Virgin Media|EE Broadband,,yes,no,"Full Fibre 100 £35.99/mo per https://www.bt.com/broadband/deals, Oct 2026"
+Sky TV,SKY DIGITAL|SKY SUBSCRIPTIONS|SKY UK,subscription,Entertainment,24.00,GBP,,GB,4,Virgin Media TV|BT TV|NOW,,yes,no,"Sky Ultimate TV from £24/mo, 24-month term, per https://www.sky.com/tv, Oct 2026"
+Virgin Media Broadband,VIRGIN MEDIA|VIRGIN MEDIA PAYMENTS,bill,Phone & Internet,22.99,GBP,,GB,3,Sky|BT Broadband|EE Broadband,,yes,no,"M125 Fibre £22.99/mo for 24 months then £62 per https://www.virginmedia.com/broadband/packages, Oct 2026"
+EE Broadband,EE LTD|EVERYTHING EVERYWHERE|EE BROADBAND,bill,Phone & Internet,26.99,GBP,,GB,3,BT Broadband|Sky|Virgin Media,,yes,no,"Full Fibre 100 £26.99/mo per https://ee.co.uk/broadband, Oct 2026"
+Vodafone UK Mobile,VODAFONE LTD|VODAFONE UK,bill,Phone & Internet,,GBP,,GB,4,EE|O2|Three UK,,no,no,no plan price confirmed on official page this run
+Three UK Mobile,THREE|H3G UK|THREE UK,bill,Phone & Internet,23.00,GBP,,GB,4,EE|Vodafone UK|O2,,yes,no,"SIM-only £23.00/mo rising to £25.30 from 1 Apr 2027 per https://www.three.co.uk/shop/sim-only/pay-monthly, Oct 2026"
+British Gas,BRITISH GAS|CENTRICA,bill,Utilities,,GBP,,GB,4,EDF Energy|E.ON UK|OVO Energy,,no,no,usage-based tariff; no fixed monthly amount on official page
+EDF Energy,EDF ENERGY|EDF ENERGY CUSTOMERS,bill,Utilities,,GBP,,GB,3,British Gas|E.ON UK|OVO Energy,,no,no,usage-based tariff; no fixed monthly amount on official page
+E.ON UK,E.ON UK|EON ENERGY,bill,Utilities,,GBP,,GB,3,British Gas|EDF Energy|OVO Energy,,no,no,usage-based tariff; no fixed monthly amount on official page
+OVO Energy,OVO ENERGY|OVO ENERGY LTD,bill,Utilities,,GBP,,GB,3,British Gas|EDF Energy|E.ON UK,,no,no,price cap quoted annually for typical home; no monthly amount on official page
+Thames Water,THAMES WATER|THAMES WATER UTILITIES,bill,Utilities,,GBP,,GB,4,Severn Trent|Anglian Water,,no,no,metered per-m3 charging; no monthly amount on official page
+TV Licence,TV LICENSING|TV LICENCE PAYMENT,bill,Entertainment,,GBP,180.00,GB,5,Sky TV|BBC iPlayer free tier,,yes,no,"£180/year from 1 April 2026 per https://www.gov.uk/government/news/cost-of-tv-licence-fee-set-for-202627, Oct 2026; no official monthly amount"
+Council Tax,COUNCIL TAX|LOCAL AUTHORITY,bill,Housing,,GBP,,GB,5,Rent,,no,no,"band-dependent; set by local authority, no national monthly amount"
+ITVX Premium,ITVX|ITV PREMIUM,subscription,Entertainment,5.99,GBP,59.99,GB,3,Channel 4+|NOW|Netflix,,yes,no,"£5.99/mo or £59.99/yr per https://www.itv.com/watch/itvx-premium and https://help.itv.com, Oct 2026"
+Channel 4+,CHANNEL 4|C4 SUBSCRIPTION,subscription,Entertainment,3.99,GBP,39.99,GB,3,ITVX Premium|NOW,,yes,no,"£3.99/mo or £39.99/yr per https://www.channel4.com/plus, Oct 2026"
+NOW Entertainment,NOW TV|NOW MEMBERSHIP|SKY NOW,subscription,Entertainment,7.99,GBP,,GB,2,Sky TV|ITVX Premium,,yes,no,"Entertainment Membership £7.99/mo per https://www.nowtv.com/gb/help/article/entertainment-membership, Oct 2026"
+PureGym,PUREGYM|PUREGYM LTD,membership,Fitness & Health,17.99,GBP,,GB,4,The Gym Group|David Lloyd,,yes,no,"from £17.99/mo + joining fee per https://www.puregym.com/membership-options/, Oct 2026"
+The Gym Group,THE GYM GROUP|GYM GROUP LTD,membership,Fitness & Health,19.99,GBP,,GB,3,PureGym|JD Gyms,,yes,no,"monthly plans from £19.99 + £10 joining fee per https://www.thegymgroup.com/gym-memberships/monthly-memberships/, Oct 2026"
+David Lloyd Clubs,DAVID LLOYD|DAVID LLOYD LEISURE,membership,Fitness & Health,,GBP,,GB,2,Virgin Active|PureGym,,no,no,club-specific pricing; no published monthly price on official page
+TfL Travelcard,TFL|TRANSPORT FOR LONDON,bill,Transport,,GBP,,GB,4,National Rail season ticket,,no,no,official page confirms monthly travelcard exists but shows no price
+Aviva,AVIVA|AVIVA INSURANCE,bill,Insurance,,GBP,,GB,3,Admiral|Direct Line|AXA UK,,no,no,quote-based premium; monthly payment available but no fixed price
+Admiral,ADVISOR note placeholder,bill,Insurance,,GBP,,GB,3,Aviva|Direct Line,,no,no,quote-based premium; no fixed monthly price
+Telekom DSL,TELEKOM|DEUTSCHE TELEKOM|DTAG,bill,Phone & Internet,29.91,EUR,,DE,4,Vodafone DSL|O2 DSL|1&1,,yes,no,"100 MBit/s avg 29.91 EUR/mo per https://www.telekom.de/dsl, Oct 2026"
+Vodafone DSL,VODAFONE DE|VODAFONE GMBH,bill,Phone & Internet,19.99,EUR,,DE,4,Telekom DSL|O2 DSL|1&1,,yes,no,"DSL 16 MBit/s 19.99 EUR/mo per https://www.vodafone.de/privat/internet/dsl.html, Oct 2026"
+O2 DSL,O2|TELEFONICA O2 DE,bill,Phone & Internet,,EUR,,DE,3,Telekom DSL|Vodafone DSL,,no,no,no confirmed plan price on official page this run
+Rundfunkbeitrag,RUNDFUNKBEITRAG|GEZ|ARD ZDF DEUTSCHLANDFUNK,bill,Entertainment,18.36,EUR,,DE,5,WOW|RTL+,,yes,no,"18.36 EUR per month per household per https://www.rundfunkbeitrag.de/buergerinnen-und-buerger/informationen/zahlung, Oct 2026"
+E.ON Strom,E-ON|E.ON DEUTSCHLAND,bill,Utilities,,EUR,,DE,4,EnBW|Vattenfall,,no,no,usage-based tariff; no monthly amount on official page
+EnBW,ENBW|ENBW AG,bill,Utilities,,EUR,,DE,3,E.ON Strom|Vattenfall,,no,no,usage-based tariff; kWh rates only on official page
+Berliner Wasserbetriebe,BWB|BERLINER WASSERBETRIEBE,bill,Utilities,,EUR,,DE,3,E.ON Strom|EnBW,,no,no,per-m3 volumetric price 1.813 EUR/m3; no monthly amount
+WOW (Sky Deutschland),WOW TV|SKY DEUTSCHLAND|WOWTV.DE,subscription,Entertainment,5.98,EUR,,DE,3,RTL+|Netflix|DAZN,,yes,no,"Filme & Serien Jahresabo 5.98 EUR/mo per https://www.wowtv.de/, Oct 2026"
+RTL+,RTL+|RTLPLUS|RTL GERMANY,subscription,Entertainment,5.99,EUR,,DE,3,WOW|Netflix,,yes,no,"Basic 5.99 EUR/Monat per https://www.vodafone.de/featured/article/was-kostet-rtl-plus-welches-abo-lohnt-sich-213475, Oct 2026"
+McFit,MCFIT|MCFIT GMBH,membership,Fitness & Health,29.90,EUR,,DE,3,Clever Fit|Basic-Fit DE,,yes,no,"12-month Standard 29.90 EUR/mo per https://www.mcfit.com/mitgliedschaft, Oct 2026"
+Clever Fit,CLEVER-FIT|CLEVERFIT,membership,Fitness & Health,,EUR,,DE,2,McFit|Basic-Fit DE,,no,no,"billed per 4 weeks (24.90/34.90 EUR per 4 weeks per https://www.clever-fit.com, Oct 2026); no monthly amount"
+Basic-Fit Germany,BASIC-FIT|BASIC FIT DE,membership,Fitness & Health,,EUR,,DE,2,McFit|Clever Fit,,no,no,"billed per 4 weeks (Comfort 24.99 EUR/4 weeks per https://www.basic-fit.com/de-de/preise, Oct 2026); no monthly amount"
+Allianz Deutschland,ALLIANZ|ALLIANZ DEUTSCHLAND,bill,Insurance,,EUR,,DE,3,HUK-Coburg|AXA Deutschland,,no,no,quote-based; liability from under 4 EUR/mo stated but no exact monthly price
+HUK-Coburg,HUK-COBURG|HUK,bill,Insurance,,EUR,,DE,3,Allianz Deutschland|AXA Deutschland,,no,no,product-dependent contributions; no single monthly price
+Deutschlandticket,DEUTSCHLANDTICKET|DB VERTRIEB,subscription,Transport,63.00,EUR,,DE,4,BVG Monatskarte|regional transit passes,,yes,no,"63 EUR/month since 1 Jan 2026 per https://www.bahn.de/angebot/regio/deutschland-ticket, Oct 2026"
+BVG Monatskarte,BVG|BERLINER VERKEHRSBETRIEBE,bill,Transport,113.00,EUR,,DE,3,Deutschlandticket|S-Bahn Berlin,,yes,no,"Monatskarte from 113.00 EUR per https://www.bvg.de/de/abos-und-tickets/alle-tickets, Oct 2026"
+Orange Livebox,ORANGE|ORANGE FRANCE|FT/OL,bill,Phone & Internet,29.99,EUR,,FR,4,SFR Box|Bbox|Freebox,,yes,no,"fibre 29.99 EUR/mois, 12-month engagement per https://boutique.orange.fr/internet/offres-fibre, Oct 2026"
+SFR Box,SFR|SFR SA|SFR FIBRE,bill,Phone & Internet,27.99,EUR,,FR,4,Orange Livebox|Bbox|Freebox,,yes,no,"box internet from 27.99 EUR/mois per https://www.sfr.fr/offre-internet, Oct 2026"
+Bbox (Bouygues),BOUYGUES TELECOM|BOUYGUES,bill,Phone & Internet,27.99,EUR,,FR,3,Orange Livebox|SFR Box|Freebox,,yes,no,"Bbox from 27.99 EUR/mois per https://www.bouyguestelecom.fr/offres-internet, Oct 2026"
+Freebox (Free),FREE|ILIAD|FREE SAS,bill,Phone & Internet,39.99,EUR,,FR,3,Orange Livebox|SFR Box|Bbox,,yes,no,"Freebox Ultra Essentiel 39.99 EUR/mois first year per https://www.free.fr/freebox/freebox-ultra-essentiel, Oct 2026"
+EDF (Tarif Bleu),EDF|ELECTRICITE DE FRANCE,bill,Utilities,,EUR,,FR,5,Engie|TotalEnergies,,no,no,per-kWh and power-based subscription grid; no monthly bill amount
+Engie Électricité,ENGIE|ENGIE FRANCE,bill,Utilities,,EUR,,FR,4,EDF|TotalEnergies,,no,no,TRVE per-kWh 0.2001 EUR base; no monthly bill amount
+Veolia Eau,VEOLIA EAU|VEOLIA,bill,Utilities,,EUR,,FR,3,Eau du Grand Lyon|Suez,,no,no,per-m3 pricing set per commune; no monthly amount
+Canal+,CANAL+|CANAL PLUS|CANALPLUS,subscription,Entertainment,19.99,EUR,,FR,3,Netflix|Prime Video|Molotov,,yes,no,"from 19.99 EUR/mois per https://boutique.canalplus.com/offres-packagees/, Oct 2026"
+Molotov,MOLOTOV|MOLOTOV.TV,subscription,Entertainment,10.99,EUR,,FR,2,Canal+|Netflix,,yes,no,"Molotov Extended 0.99 EUR first month then 10.99 EUR/mois per https://extended.molotov.tv/, Oct 2026"
+Basic-Fit France,BASIC-FIT|BASIC FIT FRANCE,membership,Fitness & Health,,EUR,,FR,3,Neoness|CMG Sports Club,,no,no,"billed per 4 weeks (Comfort 24.99 EUR/4 semaines per https://www.basic-fit.com/fr-fr/prix, Oct 2026); no monthly amount"
+Neoness,NEONESS|NEONESS CLUB,membership,Fitness & Health,,EUR,,FR,2,Basic-Fit France|CMG Sports Club,,no,no,"billed per 4 weeks (29.99 EUR/4 semaines per https://www.neoness.fr/abonnements, Oct 2026); no monthly amount"
+AXA France (Auto),AXA|AXA FRANCE,bill,Insurance,14.60,EUR,,FR,3,MAIF|Allianz France,,yes,no,"auto insurance from 14.60 EUR/mois per https://www.axa.fr/assurance-auto/.html, Oct 2026"
+MAIF,MAIF|MAIF ASSURANCES,bill,Insurance,,EUR,,FR,3,AXA France|Allianz France,,no,no,quote-based premium; no fixed monthly price on official page
+La Poste Mobile,LA POSTE MOBILE|LAPOSTEMOBILE,bill,Phone & Internet,,EUR,,FR,2,Orange Mobile|SFR Mobile|Free Mobile,,no,no,no confirmed plan price on official page this run
+Navigo (Île-de-France Mobilités),NAVIGO|ILE DE FRANCE MOBILITES|RATP,bill,Transport,,EUR,,FR,4,SNCF season ticket|Paris metro tickets,,no,no,"official tariffs page not retrievable; 2026 press reports 90.80 EUR/month all zones (lefigaro.fr/legisocial.fr, Oct 2026) - unconfirmed on provider page"
+Bell Internet,BELL CANADA|BELL|BELL INTERNET,bill,Phone & Internet,69.95,CAD,,CA,4,Rogers Internet|Telus Internet|Videotron,,yes,no,"Bell Internet $69.95/mo per https://www.bell.ca/Bell_Internet/Products/Bell-Internet, Oct 2026"
+Rogers Internet,ROGERS|ROGERS CABLE|ROGERS COMMUNICATIONS,bill,Phone & Internet,75.00,CAD,,CA,4,Bell Internet|Telus Internet|Videotron,,yes,no,"no-contract plans from $75/mo per https://www.rogers.com/internet/offers, Oct 2026"
+Telus Internet,TELUS|TELUS COMMUNICATIONS,bill,Phone & Internet,90.00,CAD,,CA,4,Bell Internet|Rogers Internet|Videotron,,yes,no,"regular price $90/mo after 24-month term per https://www.telus.com/en/deals-and-bundles/save-on-internet-plans, Oct 2026"
+Videotron Internet,VIDEOTRON|VIDEOTRON LTE,bill,Phone & Internet,68.00,CAD,,CA,3,Bell Internet|Telus Internet|Rogers Internet,,yes,no,"100 Mbps plan current offer 68 CAD/mois per https://www.videotron.com/internet/100-mbits, Oct 2026"
+Crave,CRAVE|CRAVE TV|BELL MEDIA,subscription,Entertainment,,CAD,,CA,3,CBC Gem Premium|Netflix Canada,,no,no,"official subscribe page requires JS; bell.ca promo page shows $11.99 and $22.00/mo plans (Oct 2026), plan mapping unverified"
+CBC Gem Premium,CBC GEM|CBC|CBC PREMIUM,subscription,Entertainment,5.99,CAD,,CA,2,Crave|Netflix Canada,,yes,no,"Premium $5.99/month plus taxes per https://cbchelp.cbc.ca/hc/en-ca/articles/115003515893, Oct 2026"
+GoodLife Fitness,GOODLIFE FITNESS|GOODLIFE,membership,Fitness & Health,,CAD,,CA,4,Fit4Less|Crunch Canada,,no,no,club-specific pricing; no published monthly price on official page
+Fit4Less,FIT4LESS|FIT 4 LESS,membership,Fitness & Health,,CAD,,CA,3,GoodLife Fitness|Planet Fitness Canada,,no,no,"billed bi-weekly (4Less $7.99, Black Card $13.99 per 2 weeks per https://www.fit4less.ca/membership, Oct 2026); no monthly amount"
+Hydro-Québec,HYDRO-QUEBEC|HQ DISTRIBUTION,bill,Utilities,,CAD,,CA,5,Hydro One|Enbridge Gas,,no,no,Rate D per-kWh; no monthly bill amount on official page
+Hydro One,HYDRO ONE|HYDRO ONE NETWORKS,bill,Utilities,,CAD,,CA,3,Hydro-Québec|Enbridge Gas,,no,no,"monthly service charge $42.20-$85.46 is delivery component only; full bill usage-based per https://www.hydroone.com/rates-and-billing, Oct 2026"
+Enbridge Gas (Ontario),ENBRIDGE GAS|ENBRIDGE,bill,Utilities,,CAD,,CA,3,Hydro One|Hydro-Québec,,no,no,"customer charge $28.91/month is fixed component only; gas usage billed per-m3 per enbridgegas.com rate sheets, Oct 2026"
+TTC Monthly Pass,TTC|TORONTO TRANSIT COMMISSION,bill,Transport,143.00,CAD,,CA,3,GO Transit|UP Express,,yes,no,"Adult monthly pass $143.00 per https://cdn.ttc.ca/Fares-and-passes, Oct 2026"
+STM Monthly Pass,STM|SOCIETE DE TRANSPORT DE MONTREAL,bill,Transport,110.00,CAD,,CA,3,RTL|EXO,,yes,no,"Monthly All Modes A $110.00 per https://www.stm.info/en, Oct 2026"
+Intact Insurance,INTACT INSURANCE|INTACT,bill,Insurance,,CAD,,CA,3,Desjardins Insurance|Aviva Canada,,no,no,quote-based premium; no fixed monthly price
+Desjardins Insurance,DESJARDINS|DESJARDINS ASSURANCES,bill,Insurance,,CAD,,CA,3,Intact Insurance|Aviva Canada,,no,no,quote-based premium; no fixed monthly price
+Telstra nbn,TELSTRA|TELSTRA CORP,bill,Phone & Internet,97.00,AUD,,AU,4,Optus nbn|TPG|Aussie Broadband,,yes,no,"Basic nbn $97/mth (increased from $93) per https://www.telstra.com.au/consumer-advice/price-changes, Oct 2026"
+Optus nbn,OPTUS|SINGTEL OPTUS,bill,Phone & Internet,73.00,AUD,,AU,4,Telstra nbn|TPG|Aussie Broadband,,yes,no,"nbn plans $73/month for 12 months per https://www.optus.com.au/internet/nbn, Oct 2026"
+AGL Energy,AGL|AGL ENERGY,bill,Utilities,,AUD,,AU,4,Origin Energy|EnergyAustralia,,no,no,usage-based tariff; no monthly amount on official page
+Origin Energy,ORIGIN ENERGY|ORIGIN,bill,Utilities,,AUD,,AU,4,AGL Energy|EnergyAustralia,,no,no,usage-based tariff; no monthly amount on official page
+EnergyAustralia,ENERGYAUSTRALIA|EA ENERGY,bill,Utilities,,AUD,,AU,3,AGL Energy|Origin Energy,,no,no,annual reference price quoted; no monthly amount on official page
+Sydney Water,SYDNEY WATER|SW WATER CORPORATION,bill,Utilities,,AUD,,AU,4,SA Water|Yarra Valley Water,,no,no,"typical quarterly charge $387.03 per 92-day quarter for a house per https://www.sydneywater.com.au, Oct 2026; no monthly amount"
+Binge,BINGE|BINGE COM AU|FOXTEL,subscription,Entertainment,19.00,AUD,,AU,3,Stan|Kayo Sports|Netflix Australia,,yes,no,"Standard $19/mo (Basic from $10, Premium $22) per https://binge.com.au/en-AU/start, Oct 2026"
+Kayo Sports,KAYO SPORTS|KAYO,subscription,Entertainment,29.99,AUD,,AU,3,Binge|Optus Sport|Foxtel,,yes,no,"Standard $29.99/mo, Premium $45.99/mo from 5 Feb 2026 per https://kayosports.com.au/help/s/article/How-much-does-a-Kayo-subscription-cost, Oct 2026"
+Stan,STAN|STAN.COM.AU|STAN ENTERTAINMENT,subscription,Entertainment,17.00,AUD,,AU,3,Binge|Netflix Australia,,yes,no,"Standard $17/mo (Basic $12, Premium $22) per https://help.stan.com.au/hc/en-us/articles/115005777028, Oct 2026"
+Optus Sport,OPTUS SPORT|OPTUS,subscription,Entertainment,9.99,AUD,,AU,2,Kayo Sports|Binge|Foxtel,,yes,no,"$9.99 per month added to Optus account per https://www.optus.com.au/support/answer/optus_sport_subscription_payment_options_20257, Oct 2026"
+Foxtel,FOXTEL|FOXTEL MANAGEMENT,subscription,Entertainment,,AUD,,AU,2,Binge|Kayo Sports,,no,no,no confirmed package price on official page this run
+Anytime Fitness Australia,ANYTIME FITNESS|ANYTIME FITNESS AUSTRALIA,membership,Fitness & Health,,AUD,,AU,3,Jetts Fitness|Fitness First Australia,,no,no,"billed weekly (RRP $24.95/week since 1 Jul 2024 per https://www.anytimefitness.com/en-au/offer-terms, Oct 2026); no monthly amount"
+Jetts Fitness,JETTS|JETTS FITNESS AUSTRALIA,membership,Fitness & Health,,AUD,,AU,3,Anytime Fitness Australia|Fitness First Australia,,no,no,club-varying weekly pricing; no published monthly price on official page
+NRMA Membership,NRMA|NRMA MEMBERSHIP|IAG,membership,Other,10.29,AUD,,AU,3,RACV|RACQ roadside memberships,,yes,no,"$10.29 per month for first 12 months per https://www.mynrma.com.au/join-bundle, Oct 2026"
+Medibank Private Health,MEDIBANK|MEDIBANK PRIVATE,bill,Insurance,,AUD,,AU,4,Bupa|HCF|NIB,,no,no,quote-based premium; no fixed monthly price
+Opal Card (Transport for NSW),OPAL|TRANSPORT FOR NSW|OPAL TOP UP,bill,Transport,,AUD,,AU,4,Myki|Translink go card,,no,no,pay-per-ride with weekly cap; no monthly pass price on official page
+Myki (PTV Victoria),MYKI|PTV|PUBLIC TRANSPORT VICTORIA,bill,Transport,,AUD,,AU,3,Opal Card|Translink go card,,no,no,no monthly pass price confirmed on official page this run
