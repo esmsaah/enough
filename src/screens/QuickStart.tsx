@@ -21,19 +21,31 @@ const SHOWN_FLAT = 10;
 
 // The five cost TYPES. Each tap gets bucketed into one, which also decides how
 // the audit treats it (membership = pay-per-visit; fixed = never cut; etc.).
-type SectionKey = 'Subscriptions' | 'Memberships (in person)' | 'Bills you can switch' | 'Fixed costs';
+type SectionKey = 'Subscriptions' | 'Memberships (in person)' | 'Everyday & personal' | 'Bills you can switch' | 'Fixed costs';
 const SECTION_DEFS: Array<{ key: SectionKey; sub: boolean; note?: string }> = [
   { key: 'Subscriptions', sub: true },
   { key: 'Memberships (in person)', sub: false },
+  { key: 'Everyday & personal', sub: false, note: 'Often paid in cash — just estimate what you spend, we do the maths.' },
   { key: 'Bills you can switch', sub: false },
   { key: 'Fixed costs', sub: false, note: "Optional — we can't cut these, but add them to see your full monthly cost." },
 ];
 const SWITCHABLE_BILL_GROUPS = new Set(['Phone & Internet', 'Insurance']);
 const FIXED_BILL_GROUPS = new Set(['Utilities', 'Housing', 'Transport']);
 
+// How a cost is naturally said → its share of a month (so we can store a monthly price).
+const CADENCES: Array<{ key: NonNullable<QuickPick['defaultCadence']>; label: string; perMonth: number }> = [
+  { key: 'week', label: 'a week', perMonth: 52 / 12 },
+  { key: 'month', label: 'a month', perMonth: 1 },
+  { key: '2months', label: 'every 2 months', perMonth: 1 / 2 },
+  { key: '3months', label: 'every 3 months', perMonth: 1 / 3 },
+  { key: '6months', label: 'twice a year', perMonth: 1 / 6 },
+  { key: 'year', label: 'a year', perMonth: 1 / 12 },
+];
+
 const TV_LICENCE = /\b(tv licen[cs]e|tv fee|licen[cs]e fee|rtv|rts|rundfunk|gez|pretplata|canon rai)\b/i;
 
 function sectionFor(p: QuickPick): SectionKey {
+  if (p.group === 'Everyday & personal') return 'Everyday & personal';
   if (p.category === 'membership') return 'Memberships (in person)';
   // A TV/radio licence is a fixed fee you can't switch away from.
   if (TV_LICENCE.test(p.name)) return 'Fixed costs';
@@ -62,6 +74,7 @@ export function QuickStart() {
   const [custom, setCustom] = useState({ name: '', price: '', period: 'monthly' as 'monthly' | 'yearly', dc: 'Entertainment' as DisplayCategory });
   const [askFor, setAskFor] = useState<QuickPick | null>(null);
   const [askAmount, setAskAmount] = useState('');
+  const [askCadence, setAskCadence] = useState<NonNullable<QuickPick['defaultCadence']>>('month');
   const selected = new Set(state.items.filter((i) => i.source === 'quickpick').map((i) => i.merchantKey));
   const ownItems = state.items.filter((i) => i.source === 'manual');
   const backStep = state.statement ? 'found' : 'landing';
@@ -91,15 +104,17 @@ export function QuickStart() {
 
   function onChip(p: QuickPick) {
     if (selected.has(p.merchantKey)) { dispatch({ type: 'toggleQuickPick', pick: p }); return; } // remove
-    if (p.askPrice) { setAskFor(p); setAskAmount(''); return; } // ask the amount first
+    if (p.askPrice) { setAskFor(p); setAskAmount(''); setAskCadence(p.defaultCadence ?? 'month'); return; } // ask the amount first
     dispatch({ type: 'toggleQuickPick', pick: p }); // known price → add with the estimate
   }
 
   function addAsked() {
     if (!askFor) return;
-    const price = Number(askAmount);
-    if (!price) return;
-    dispatch({ type: 'addPricedPick', pick: askFor, price });
+    const amount = Number(askAmount);
+    if (!amount) return;
+    const perMonth = CADENCES.find((c) => c.key === askCadence)?.perMonth ?? 1;
+    const monthly = Math.round((amount * perMonth + Number.EPSILON) * 100) / 100; // store a monthly price
+    dispatch({ type: 'addPricedPick', pick: askFor, price: monthly });
     setAskFor(null);
     setAskAmount('');
   }
@@ -139,21 +154,32 @@ export function QuickStart() {
 
         <input className="search-input" type="search" placeholder="Search for anything you pay for" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Search services" />
 
-        {askFor && (
-          <div className="card">
-            <label style={{ fontWeight: 700 }}>How much do you pay for {askFor.name}?</label>
-            <p className="muted" style={{ fontSize: 13, margin: '2px 0 8px' }}>Prices vary a lot, so just tell us yours.</p>
-            <div className="row" style={{ gap: 8 }}>
-              <input className="amount-input mono" inputMode="decimal" autoFocus value={askAmount} placeholder="0"
-                onChange={(e) => setAskAmount(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') addAsked(); }} />
-              <span className="muted">/{askFor.frequency === 'yearly' ? 'yr' : 'mo'} · {state.currency}</span>
+        {askFor && (() => {
+          const amount = Number(askAmount) || 0;
+          const perMonth = CADENCES.find((c) => c.key === askCadence)?.perMonth ?? 1;
+          const yearly = amount * perMonth * 12;
+          return (
+            <div className="card">
+              <label style={{ fontWeight: 700 }}>How much do you pay for {askFor.name}?</label>
+              <p className="muted" style={{ fontSize: 13, margin: '2px 0 10px' }}>
+                No need to know the yearly total — just how it feels. {askFor.example ? `(${askFor.example})` : ''}
+              </p>
+              <div className="row" style={{ gap: 8, alignItems: 'center' }}>
+                <span className="muted">{state.currency}</span>
+                <input className="amount-input mono" inputMode="decimal" autoFocus value={askAmount} placeholder="0"
+                  onChange={(e) => setAskAmount(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') addAsked(); }} />
+                <select aria-label="How often" value={askCadence} onChange={(e) => setAskCadence(e.target.value as NonNullable<QuickPick['defaultCadence']>)}>
+                  {CADENCES.map((c) => <option key={c.key} value={c.key}>{c.label}</option>)}
+                </select>
+              </div>
+              {yearly > 0 && <p className="muted" style={{ fontSize: 13, marginTop: 8 }}>≈ {formatMoney(yearly, state.currency, { round: true })} a year</p>}
+              <div className="row" style={{ gap: 12, marginTop: 10 }}>
+                <Button variant="secondary" onClick={() => setAskFor(null)}>Cancel</Button>
+                <Button full disabled={!amount} onClick={addAsked}>Add {askFor.name}</Button>
+              </div>
             </div>
-            <div className="row" style={{ gap: 12, marginTop: 10 }}>
-              <Button variant="secondary" onClick={() => setAskFor(null)}>Cancel</Button>
-              <Button full disabled={!Number(askAmount)} onClick={addAsked}>Add {askFor.name}</Button>
-            </div>
-          </div>
-        )}
+          );
+        })()}
 
         {query.trim().length >= 2 ? (
           <section>

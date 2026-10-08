@@ -18,6 +18,8 @@ export type QuickPick = {
   group?: string; // tap-list group
   priceUnknown?: boolean; // catalog has no typical price: person enters it
   askPrice?: boolean; // price varies too much to estimate (gym, lessons): ask on tap
+  defaultCadence?: 'week' | 'month' | '2months' | '3months' | '6months' | 'year'; // how people naturally think of this cost
+  example?: string; // a hint shown in the ask field, e.g. "e.g. 15 every 2 months"
   billingModel?: import('../engine/types').BillingModel; // 'usage' = fixed cost (utilities), never recommended for cutting
 };
 

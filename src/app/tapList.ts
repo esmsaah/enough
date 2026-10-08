@@ -21,18 +21,27 @@ import localCoreData from './localCore.data.json';
 // ---------------------------------------------------------------------------
 export const GLOBAL_CORE: QuickPick[] = [
   ...(globalCoreData as QuickPick[]),
-  // Non-digital memberships (in person) — universal, generic. Price varies a lot
-  // per place, so we ASK the person rather than assume (askPrice).
-  { merchantKey: 'gym', name: 'Gym', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly', askPrice: true },
-  { merchantKey: 'yoga studio', name: 'Yoga studio', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly', askPrice: true },
-  { merchantKey: 'pilates studio', name: 'Pilates studio', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 120, currency: 'USD', frequency: 'monthly', askPrice: true },
-  { merchantKey: 'swimming pool', name: 'Swimming / pool', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly', askPrice: true },
-  { merchantKey: 'martial arts', name: 'Martial arts', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 80, currency: 'USD', frequency: 'monthly', askPrice: true },
-  { merchantKey: 'dance classes', name: 'Dance classes', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 70, currency: 'USD', frequency: 'monthly', askPrice: true },
-  { merchantKey: 'sports club', name: 'Sports / tennis club', group: 'Fitness & Health', displayCategory: 'Fitness & Health', category: 'membership', price: 50, currency: 'USD', frequency: 'monthly', askPrice: true },
-  { merchantKey: 'music lessons', name: 'Music lessons', group: 'Learning', displayCategory: 'Learning', category: 'membership', price: 100, currency: 'USD', frequency: 'monthly', askPrice: true },
-  { merchantKey: 'kids activity', name: "Kids' activity", group: 'Kids & Family', displayCategory: 'Kids & Family', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly', askPrice: true },
+  // Non-digital memberships (in person) — universal CATEGORIES, not brands, so
+  // they work in every country. Price varies hugely, so we ASK (askPrice).
+  { merchantKey: 'gym', name: 'Gym', group: 'Memberships', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'fitness classes', name: 'Fitness classes (yoga, pilates…)', group: 'Memberships', displayCategory: 'Fitness & Health', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'sports hobby', name: 'Sport or hobby club', group: 'Memberships', displayCategory: 'Fitness & Health', category: 'membership', price: 50, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'swimming pool', name: 'Swimming / pool', group: 'Memberships', displayCategory: 'Fitness & Health', category: 'membership', price: 40, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'martial arts', name: 'Martial arts', group: 'Memberships', displayCategory: 'Fitness & Health', category: 'membership', price: 80, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'dance', name: 'Dance', group: 'Memberships', displayCategory: 'Fitness & Health', category: 'membership', price: 70, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'tutoring', name: 'Private tutoring / coaching', group: 'Memberships', displayCategory: 'Learning', category: 'membership', price: 100, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'music art lessons', name: 'Music or art lessons', group: 'Memberships', displayCategory: 'Learning', category: 'membership', price: 100, currency: 'USD', frequency: 'monthly', askPrice: true },
+  { merchantKey: 'kids activity', name: "Kids' activity", group: 'Memberships', displayCategory: 'Kids & Family', category: 'membership', price: 60, currency: 'USD', frequency: 'monthly', askPrice: true },
   { merchantKey: 'phone', name: 'Phone plan', group: 'Phone & Internet', displayCategory: 'Bills & Utilities', category: 'bill', price: 25, currency: 'USD', frequency: 'monthly', askPrice: true },
+  // Everyday & personal — the regular discretionary spend people forget, often in
+  // cash. Universal categories; ask amount + how often, with an example.
+  { merchantKey: 'hairdresser', name: 'Hairdresser / barber', group: 'Everyday & personal', displayCategory: 'Other', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: '2months', example: 'e.g. 15 every 2 months' },
+  { merchantKey: 'nails beauty', name: 'Nails / beauty', group: 'Everyday & personal', displayCategory: 'Other', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 20 a month' },
+  { merchantKey: 'massage spa', name: 'Massage / spa', group: 'Everyday & personal', displayCategory: 'Other', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 40 a visit, once a month' },
+  { merchantKey: 'ride hailing', name: 'Taxi / ride-hailing (Uber, Bolt…)', group: 'Everyday & personal', displayCategory: 'Transport', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 40 a month' },
+  { merchantKey: 'coffee eating out', name: 'Coffee / eating out', group: 'Everyday & personal', displayCategory: 'Other', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'week', example: 'e.g. 15 a week' },
+  { merchantKey: 'cleaner', name: 'Cleaner / house help', group: 'Everyday & personal', displayCategory: 'Other', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 50 a month' },
+  { merchantKey: 'nanny', name: 'Nanny / childcare', group: 'Everyday & personal', displayCategory: 'Kids & Family', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 200 a month' },
   // NOTE: regional fintech (Revolut, Wise, N26, Payoneer) is deliberately NOT in
   // the global core — availability is country-specific (e.g. Revolut/N26 are not
   // offered in Serbia or BiH). These come only from verified LOCAL research.
