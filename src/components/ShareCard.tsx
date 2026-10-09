@@ -30,12 +30,12 @@ export function ShareCard({ currency, yearlyTotal = 0, saving = 0, doneSaving = 
     const height = square ? 1080 : 1920;
     canvas.width = width;
     canvas.height = height;
-    context.fillStyle = '#14204a';
+    context.fillStyle = '#0e3b32';
     context.fillRect(0, 0, width, height);
     context.fillStyle = '#ffffff';
     context.font = `800 ${square ? 44 : 56}px Archivo, system-ui, sans-serif`;
     context.fillText('Enough.', square ? 96 : 110, square ? 120 : 210);
-    context.fillStyle = '#a9b1d6';
+    context.fillStyle = '#9fc2b6';
     context.font = `500 ${square ? 24 : 34}px ui-monospace, SFMono-Regular, Menlo, monospace`;
     const top = goodShape ? 'I CHECKED WHAT I PAY FOR' : textOnly ? 'WHAT I FOUND' : tone === 'Proud' ? `OUT OF ${total.toUpperCase()} A YEAR` : 'EVERY MONTH, ADDED UP';
     context.fillText(top, square ? 96 : 110, square ? 260 : 480);
@@ -53,16 +53,16 @@ export function ShareCard({ currency, yearlyTotal = 0, saving = 0, doneSaving = 
           : 'a year on things I pay for every month.';
     drawWrapped(context, caption, square ? 96 : 110, square ? 600 : 1040, width - (square ? 192 : 220), square ? 62 : 82);
     if (!textOnly && !goodShape) {
-      context.fillStyle = '#d4ee8a';
+      context.fillStyle = '#c8f0dc';
       const result = doneSaving ? `${found} cut today.` : `${found} isn't earning its place.`;
       context.font = `800 ${square ? 44 : 62}px Archivo, system-ui, sans-serif`;
       drawWrapped(context, result, square ? 96 : 110, square ? 800 : 1310, width - (square ? 192 : 220), square ? 64 : 84);
     } else if (goodShape) {
-      context.fillStyle = '#d4ee8a';
+      context.fillStyle = '#c8f0dc';
       context.font = `800 ${square ? 56 : 76}px Archivo, system-ui, sans-serif`;
       context.fillText('Nothing to cut.', square ? 96 : 110, square ? 800 : 1310);
     }
-    context.fillStyle = '#a9b1d6';
+    context.fillStyle = '#9fc2b6';
     context.fillRect(square ? 96 : 110, height - (square ? 115 : 155), width - (square ? 192 : 220), 2);
     context.font = `500 ${square ? 20 : 28}px ui-monospace, SFMono-Regular, Menlo, monospace`;
     context.fillText("KNOW WHAT'S WORTH PAYING FOR", square ? 96 : 110, height - (square ? 68 : 92));

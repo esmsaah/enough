@@ -24,7 +24,7 @@
   padding: 18px 20px; width: 100vw; max-width: none; margin-left: calc(50% - 50vw);
 }
 .b2-logo { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: #fff; text-decoration: none; letter-spacing: -0.01em; }
-.b2-logo__dot { color: var(--lime); }
+.b2-logo__dot { color: #FF8A65; }
 .b2-nav { display: flex; gap: 20px; }
 .b2-nav a { color: var(--muted-on-navy); text-decoration: underline; text-underline-offset: 4px; font-size: 15px; font-weight: 600; }
 .b2-nav a:hover { color: #fff; }
@@ -39,7 +39,9 @@
 .b2-hero__tap-label { margin: 22px 0 8px; font-size: 10px; }
 .b2-quick-picks { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .b2-quick-picks button { min-height: 34px; border: 1px solid rgba(255,255,255,.68); border-radius: 999px; background: transparent; color: #fff; padding: 0 12px; font: 600 13px var(--font-display); cursor: pointer; }
-.b2-quick-picks button:hover { background: rgba(255,255,255,.12); }
+.b2-quick-picks button { transition: background .15s ease, color .15s ease, border-color .15s ease; }
+.b2-quick-picks button:not(.b2-quick-picks__more):hover,
+.b2-quick-picks button:not(.b2-quick-picks__more):focus { background: #C8F0DC; color: #101014; border-color: #C8F0DC; }
 .b2-quick-picks .b2-quick-picks__more { border: 0; padding: 0 4px; text-decoration: underline; text-underline-offset: 3px; color: var(--muted-on-navy); }
 
 .b2-cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; }
@@ -51,10 +53,10 @@
 
 /* Buttons — 56px, radius 6. Lime on navy, indigo on light. */
 .b2-btn { height: 56px; padding: 0 26px; border-radius: 6px; border: none; font-family: var(--font-display); font-weight: 800; font-size: 17px; cursor: pointer; transition: background 0.1s ease; }
-.b2-btn--lime { background: var(--lime); color: var(--navy); }
-.b2-btn--lime:hover { background: #c6e36f; }
-.b2-btn--indigo { background: var(--indigo); color: #fff; }
-.b2-btn--indigo:hover { background: var(--indigo-dark); }
+.b2-btn--lime { background: #FF8A65; color: #101014; }
+.b2-btn--lime:hover { background: #FF7650; }
+.b2-btn--indigo { background: #0E3B32; color: #fff; }
+.b2-btn--indigo:hover { background: #072A22; }
 
 /* ---- Receipt ---- */
 .b2-hero__aside { display: flex; justify-content: center; }
