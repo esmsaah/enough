@@ -89,24 +89,26 @@ export function QuickPicks() {
       </div>
 
       <div className="footer qs-band">
-        <div className="qs-band__row">
-          <div className="qs-band__picked">
-            <span className="qs-badge">{count}</span>
-            <span className="qs-band__text">
-              <span className="qs-band__sofar">picked<span className="qs-band__sofar-ext"> so far,</span></span>
-              <span className="qs-band__year">{formatMoney(audit.yearlyTotal, cur, { round: true })}<span className="qs-band__unit"> a year</span></span>
-              <span className="qs-band__month">{formatMoney(monthly, cur, { round: true })} a month</span>
-            </span>
+        <div className="qs-band__inner">
+          <div className="qs-band__row">
+            <div className="qs-band__picked">
+              <span className="qs-badge">{count}</span>
+              <span className="qs-band__text">
+                <span className="qs-band__sofar">picked<span className="qs-band__sofar-ext"> so far,</span></span>
+                <span className="qs-band__year">{formatMoney(audit.yearlyTotal, cur, { round: true })}<span className="qs-band__unit"> a year</span></span>
+                <span className="qs-band__month">{formatMoney(monthly, cur, { round: true })} a month</span>
+              </span>
+            </div>
+            <button type="button" className="qs-next" disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>
+              Continue
+            </button>
           </div>
-          <button type="button" className="qs-next" disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>
-            Continue
+          <button type="button" className="qs-add" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/><path d="M14 3v6h6" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/></svg>
+            Or add a bank statement
           </button>
+          <p className="qs-optional">Optional. PDF, Excel, CSV or a photo, read on your device. We never ask for your bank login.</p>
         </div>
-        <button type="button" className="qs-add" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/><path d="M14 3v6h6" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/></svg>
-          Or add a bank statement
-        </button>
-        <p className="qs-optional">Optional. PDF, CSV or a photo, read on your phone. We never ask for your bank login.</p>
       </div>
     </>
   );

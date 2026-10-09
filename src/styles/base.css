@@ -363,28 +363,38 @@ p { margin: 8px 0; }
 .qs-progress__count { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
 .screen .chip-wrap .chip { min-height: 44px; }
 
-.qs-band { background: var(--navy); color: #fff; border-top: 0; display: flex; flex-direction: column; gap: 10px; }
-.qs-band__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.qs-band__picked { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.qs-badge { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 999px; background: var(--lime); color: var(--ink); font-family: var(--font-mono); font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; }
-.qs-band__text { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
-.qs-band__sofar { font-weight: 700; font-size: 15px; }
+.footer.qs-band {
+  position: sticky; z-index: 10; bottom: 0; width: 100vw; max-width: none;
+  margin-left: calc(50% - 50vw); padding: 0; border: 0; border-radius: 0;
+  background: var(--navy); color: #fff; backdrop-filter: none;
+}
+.qs-band__inner { width: 100%; max-width: 1200px; margin: 0 auto; padding: 10px 20px calc(10px + env(safe-area-inset-bottom)); }
+.qs-band__row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap; }
+.qs-band__picked { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.qs-badge { flex: 0 0 auto; width: 26px; height: 26px; margin-top: 1px; border-radius: 999px; background: var(--lime); color: var(--ink); font-family: var(--font-mono); font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; }
+.qs-band__text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.qs-band__sofar { font-weight: 600; font-size: 14px; }
 .qs-band__sofar-ext { display: none; }
-.qs-band__year { font-family: var(--font-display); font-weight: 800; font-size: 26px; letter-spacing: -.01em; }
+.qs-band__year { font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: -.01em; }
 .qs-band__unit { font-size: 17px; font-weight: 700; }
 .qs-band__month { font-family: var(--font-mono); font-size: 14px; color: var(--muted-on-navy); }
-.qs-next { height: 52px; padding: 0 22px; border: 0; border-radius: 6px; background: #FF8A65; color: #101014; font-family: var(--font-display); font-weight: 800; font-size: 16px; cursor: pointer; }
+.qs-next { flex: 1 0 100%; width: 100%; height: 52px; padding: 0 22px; border: 0; border-radius: 6px; background: #FF8A65; color: #101014; font-family: var(--font-display); font-weight: 800; font-size: 16px; cursor: pointer; }
 .qs-next:hover { background: #FF7650; }
 .qs-next:disabled { opacity: .5; cursor: default; }
-.qs-add { align-self: flex-start; display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; color: #fff; font: inherit; font-weight: 600; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 0; }
-.qs-optional { margin: 0; color: var(--muted-on-navy); font-size: 13px; }
+.qs-add { align-self: flex-start; min-height: 38px; margin-top: 3px; display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; color: #fff; font: inherit; font-weight: 600; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 0; }
+.qs-optional { margin: 0; color: var(--muted-on-navy); font-size: 13px; line-height: 1.35; }
 
 @media (min-width: 901px) {
-  .qs-band__row { flex-wrap: nowrap; }
+  .footer.qs-band { width: min(100vw, 1100px); margin-left: 0; }
+  .qs-band__inner { padding: 12px 40px 14px; }
+  .qs-band__row { align-items: center; flex-wrap: nowrap; }
+  .qs-band__picked { align-items: center; }
   .qs-band__text { flex-direction: row; align-items: baseline; gap: 8px; }
   .qs-band__sofar-ext { display: inline; }
   .qs-band__year { display: none; }
   .qs-band__month { font-size: 14px; color: #fff; }
+  .qs-next { flex: 0 0 auto; width: auto; min-width: 150px; height: 54px; }
+  .qs-add { margin-top: 1px; min-height: 34px; }
   .qs-optional { font-size: 14px; }
 }
 
