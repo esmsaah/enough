@@ -66,7 +66,7 @@ function analysisFor(dc: DisplayCategory): Category {
 }
 
 export function QuickStart() {
-  const { state, dispatch, audit } = useStore();
+  const { state, dispatch } = useStore();
   const country = state.country ?? guessCountry();
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
@@ -77,9 +77,7 @@ export function QuickStart() {
   const [askCadence, setAskCadence] = useState<NonNullable<QuickPick['defaultCadence']>>('month');
   const selected = new Set(state.items.filter((i) => i.source === 'quickpick').map((i) => i.merchantKey));
   const ownItems = state.items.filter((i) => i.source === 'manual');
-  const cur = state.currency;
   const count = selected.size + ownItems.length;
-  const monthly = audit.yearlyTotal / 12;
 
   const sections = useMemo(() => {
     const bySection = new Map<SectionKey, QuickPick[]>();
@@ -252,25 +250,10 @@ export function QuickStart() {
         </section>
       </div>
 
-      <div className="footer qs-band">
-        <div className="qs-band__row">
-          <div className="qs-band__picked">
-            <span className="qs-badge">{count}</span>
-            <span className="qs-band__text">
-              <span className="qs-band__sofar">picked<span className="qs-band__sofar-ext"> so far,</span></span>
-              <span className="qs-band__year">{formatMoney(audit.yearlyTotal, cur, { round: true })}<span className="qs-band__unit"> a year</span></span>
-              <span className="qs-band__month">{formatMoney(monthly, cur, { round: true })} a month</span>
-            </span>
-          </div>
-          <button type="button" className="qs-next" disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'anythingElse' })}>
-            Next, how often you use them
-          </button>
-        </div>
-        <button type="button" className="qs-add" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/><path d="M14 3v6h6" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/></svg>
-          Or add a bank statement
-        </button>
-        <p className="qs-optional">Optional. PDF, CSV or a photo, read on your phone. We never ask for your bank login.</p>
+      <div className="footer">
+        <Button full disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'anythingElse' })}>
+          Next, how often you use them
+        </Button>
       </div>
     </>
   );

@@ -84,7 +84,7 @@ export function QuickPicks() {
           {picks.map((p) => (
             <Chip key={p.merchantKey} selected={selected.has(p.merchantKey)} onClick={() => onChip(p)}>{p.name}</Chip>
           ))}
-          <button type="button" className="qp-something" onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>+ Something else</button>
+          <button type="button" className="qp-something" onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>+ Add more</button>
         </div>
       </div>
 
