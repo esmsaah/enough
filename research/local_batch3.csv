@@ -1,0 +1,299 @@
+name,statement_aliases,type,category,typical_monthly_price,currency,yearly_plan_price,regions,popularity_rank,overlaps_with,cancel_url,price_verified,cancel_verified,notes
+Telia,TELIA,subscription,Phone & Internet,399,SEK,,SE,5,,,yes,no,Home broadband from 399 kr/man (campaign; ordinary from 649 kr/man); source https://www.telia.se/erbjudanden/bredband checked 10/2026; popularity_rank qualitative (5=most common)
+Tele2,TELE2,subscription,Phone & Internet,239,SEK,,SE,4,,,yes,no,Mobilt bredband Bas up to 100 Mbit/s; 239 kr/man for 24 months (ordinary 399 kr/man); source https://www.tele2.se/bredband/mobilt-bredband checked 10/2026
+Tre (3),TRE (3),subscription,Phone & Internet,229,SEK,,SE,4,,,yes,no,Mobile plan 6 GB; 229 kr/man with 24-month binding; source https://www.tre.se/handla/mobilabonnemang checked 10/2026
+Telenor Sverige,TELENOR SVERIGE,subscription,Phone & Internet,,SEK,,SE,3,,,no,no,Mobile and broadband; plan prices via price lists and checkout; source https://www.telenor.se checked 10/2026
+Bahnhof,BAHNHOF,subscription,Phone & Internet,,SEK,,SE,2,,,no,no,Fiber ISP; current prices shown at signup (Mina sidor); source https://bahnhof.se checked 10/2026
+Vattenfall,VATTENFALL,bill,Utilities,,SEK,,SE,4,,,no,no,Electricity retailer; fixed/variable contracts priced per kWh plus fixed fee; source https://www.vattenfall.se/elavtal/elpriser/prislista/ checked 10/2026
+E.ON Sverige,E.ON SVERIGE,bill,Utilities,,SEK,,SE,3,,,no,no,Electricity and district heating; priced per kWh; official website https://www.eon.se
+Ellevio,ELLEVIO,bill,Utilities,,SEK,,SE,3,,,no,no,Electricity grid operator (network fees on the power bill); capacity-based charges; official website https://www.ellevio.se
+Stockholm Exergi,STOCKHOLM EXERGI,bill,Utilities,,SEK,,SE,3,,,no,no,Stockholm district heating; billed by consumption; official website https://www.stockholmexergi.se
+Public service-avgift (SVT/SR/UR),PUBLIC SERVICE-AVGIFT (SVT/SR/UR),bill,Entertainment,,SEK,1184,SE,4,,,yes,no,"Radio/TV fee successor charged via income tax since 2019; income year 2026 maximum 1,184 SEK per person and year (1% of income; threshold 118,400 SEK); source https://www.skatteverket.se/publicserviceavgift checked 10/2026"
+Viaplay,VIAPLAY,subscription,Entertainment,79,SEK,,SE,4,,,yes,no,Film & Serier med reklam 79 kr/man with 6-month binding (99 kr/man without); source https://help.viaplay.com/sv/package-info/ checked 10/2026
+TV4 Play Plus,TV4 PLAY PLUS,subscription,Entertainment,,SEK,,SE,4,,,no,no,"Streaming (TV4); TV4's own launch announcement listed TV4 Play+ 59 kr with ads (dated 14 August, year not stated); no current TV4-owned pricing page verified - price not recorded; source https://commercial.tv4.se/aktuellt/nu-ar-nya-tv4-play-har/ checked 10/2026"
+SATS,SATS,membership,Fitness & Health,,SEK,,SE,5,,,no,no,Gym chain; membership price depends on club and tier; source https://www.sats.se/vara-medlemskap checked 10/2026
+Nordic Wellness,NORDIC WELLNESS,membership,Fitness & Health,599,SEK,,SE,3,,,yes,no,Membership from 599 kr/man (access to all clubs in Sweden; club-specific pricing applies); source https://nordicwellness.se/medlemskap/sverige/sverige/ checked 10/2026
+Fitness24Seven Sverige,FITNESS24SEVEN SVERIGE,membership,Fitness & Health,299,SEK,,SE,4,,,yes,no,Membership 299 kr/man per official pricing page (monthly memberships from 269 kr also published); source https://se.fitness24seven.com/alltid-bast-pris/ checked 10/2026
+Actic,ACTIC,membership,Fitness & Health,,SEK,,SE,2,,,no,no,Gym chain; membership prices at club; official website https://www.actic.se
+Lansforsakringar,LANSFORSAKRINGAR,bill,Insurance,,SEK,,SE,5,,,no,no,Home insurance (hemforsakring); price calculated individually; monthly payment via autogiro confirmed ('Om du betalar via autogiro kan du ocksa valja att betala per manad') per official product fact sheet; source https://skanekund.lansforsakringar.se/extern/Attachments/01520_26_Hemforsakring_Produktfaktablad_IDD_TGA.pdf checked 10/2026
+Folksam,FOLKSAM,bill,Insurance,,SEK,,SE,4,,,no,no,Home insurance; quote-based; official website https://www.folksam.se
+Trygg-Hansa,TRYGG-HANSA,bill,Insurance,,SEK,,SE,3,,,no,no,Home insurance; quote-based; official website https://www.trygghansa.se
+If Sverige,IF SVERIGE,bill,Insurance,,SEK,,SE,4,,,no,no,Home insurance; quote-based; official website https://www.if.se
+Telenor Norge,TELENOR NORGE,subscription,Phone & Internet,329,NOK,,NO,5,,,yes,no,Forskudd 2 GB monthly plan 329 kr/md; source https://www.telenor.no/mobilabonnement/priser/ checked 10/2026; popularity_rank qualitative (5=most common)
+Telia Norge,TELIA NORGE,subscription,Phone & Internet,449,NOK,,NO,4,,,yes,no,Unlimited data from 449 kr/md (under-30 rate; 499 kr/md standard); source https://www.telia.no/mobilabonnement/ checked 10/2026
+ice,ICE,subscription,Phone & Internet,299,NOK,,NO,3,,,yes,no,18 GB plan 299 kr/mnd (249 kr under 29 years); source https://www.ice.no/mobilabonnement/18-gb/ checked 10/2026
+Altibox,ALTIBOX,subscription,Phone & Internet,899,NOK,,NO,3,,,yes,no,Fiber internet+TV package; Altibox XL 899 kr per month (official fiber access signup form); source https://skjema.altibox.no/fiberaksess/ checked 10/2026
+Fortum Norge (ex-Hafslund Strom),FORTUM NORGE (EX-HAFSLUND STROM),bill,Utilities,,NOK,,NO,4,,,no,no,Electricity retailer (Hafslund Strom merged into Fortum); spot/fixed contracts per kWh; source https://www.fortum.com/no/strom/stromavtale/kampanje/hafslund-strom-blir-fortum checked 10/2026
+Lyse,LYSE,bill,Utilities,,NOK,,NO,3,,,no,no,Power and grid company (Stavanger region); billed per kWh; official website https://www.lyse.no
+Elvia,ELVIA,bill,Utilities,,NOK,,NO,3,,,no,no,Grid operator (Viken); capacity-based network fees; official website https://www.elvia.no
+TV 2 Play,TV 2 PLAY,subscription,Entertainment,109,NOK,,NO,4,,,yes,no,Start package from 109 kr/mnd (Standard from 189); source https://play.tv2.no/pakker checked 10/2026
+Viaplay Norge,VIAPLAY NORGE,subscription,Entertainment,,NOK,,NO,3,,,no,no,Streaming; prices vary by campaign on official pages; source https://viaplay.no/no-nb/ checked 10/2026
+SATS Norge,SATS NORGE,membership,Fitness & Health,,NOK,,NO,5,,,no,no,Gym chain; price depends on club and membership tier; source https://www.sats.no/vare-medlemskap checked 10/2026
+Fitness24Seven Norge,FITNESS24SEVEN NORGE,membership,Fitness & Health,349,NOK,,NO,3,,,yes,no,Membership 349 kr/mnd per official pricing page (monthly memberships from 319 kr also published); source https://no.fitness24seven.com/alltid-den-beste-prisen/ checked 10/2026
+Gjensidige,GJENSIDIGE,bill,Insurance,,NOK,,NO,4,,,no,no,Home insurance (boligforsikring); quote-based; source https://www.gjensidige.no/forsikring/boligforsikring checked 10/2026
+Tryg Norge,TRYG NORGE,bill,Insurance,,NOK,,NO,3,,,no,no,Home insurance; 10% online discount; quote-based; source https://www.tryg.no/forsikringer/bolig-og-innbo/husforsikring checked 10/2026
+If Norge,IF NORGE,bill,Insurance,,NOK,,NO,3,,,no,no,Home insurance; quote-based; official website https://www.if.no
+DNB Forsikring,DNB FORSIKRING,bill,Insurance,,NOK,,NO,3,,,no,no,Home insurance; quote-based; official website https://www.dnb.no
+YouSee (TDC),YOUSEE (TDC),subscription,Phone & Internet,299,DKK,,DK,5,,,yes,no,Internet from 299 kr/md (new-customer offer 99 kr/md first 6 months); source https://www.yousee.dk/bredband checked 10/2026; popularity_rank qualitative (5=most common)
+Telenor Danmark,TELENOR DANMARK,subscription,Phone & Internet,,DKK,,DK,4,,,no,no,Mobile and broadband; prices at checkout; source https://www.telenor.dk checked 10/2026
+Telia Danmark,TELIA DANMARK,subscription,Phone & Internet,,DKK,,DK,4,,,no,no,Mobile and broadband; prices at checkout; official website https://www.telia.dk
+3 Danmark,3 DANMARK,subscription,Phone & Internet,,DKK,,DK,3,,,no,no,Mobile and broadband; prices at checkout; official website https://www.3.dk
+Hiper,HIPER,subscription,Phone & Internet,,DKK,,DK,2,,,no,no,Fiber ISP; prices at signup; official website https://www.hiper.dk
+Norlys,NORLYS,bill,Utilities,,DKK,,DK,4,,,no,no,Energy group; MaanedsEl fixed-price-per-kWh contract; consumption-based; source https://norlys.dk/el/maanedsel/ checked 10/2026
+EWII,EWII,bill,Utilities,,DKK,,DK,2,,,no,no,Energy and water utility (Jutland); consumption-based; official website https://www.ewii.dk
+TV 2 Play Danmark,TV 2 PLAY DANMARK,subscription,Entertainment,69,DKK,,DK,4,,,yes,no,Basis package 69 kr/md (99 kr/md without ads); source https://checkout.play.tv2.dk checked 10/2026
+Viaplay Danmark,VIAPLAY DANMARK,subscription,Entertainment,269,DKK,,DK,3,,,yes,no,Dansk Fodbold Film & Serier med reklamer 269 kr/md (Premium 549 kr/md); source https://help.viaplay.com/da/package-info/ checked 10/2026
+Fitness World,FITNESS WORLD,membership,Fitness & Health,429,DKK,,DK,4,,,yes,no,"Unlimited membership from 429 kr/md (official homepage, current brand confirmed on site); source https://www.fitnessworld.dk checked 10/2026"
+Fresh Fitness,FRESH FITNESS,membership,Fitness & Health,,DKK,,DK,2,,,no,no,Low-cost gym chain; prices at signup; official website https://www.freshfitness.dk
+Fitness dk,FITNESS DK,membership,Fitness & Health,,DKK,,DK,2,,,no,no,Gym chain; prices at club; official website https://www.fitnessdk.dk
+Tryg Danmark,TRYG DANMARK,bill,Insurance,,DKK,,DK,4,,,no,no,Home insurance (indbo); monthly payment option instead of annual confirmed ('Du kan i de fleste tilfaelde valge at betale manedligt') per official customer service page; quote-based; source https://tryg.dk/kundeservice/regning-og-betaling checked 10/2026
+Alka,ALKA,bill,Insurance,,DKK,,DK,3,,,no,no,Home insurance; quote-based; official website https://www.alka.dk
+Topdanmark,TOPDANMARK,bill,Insurance,,DKK,,DK,3,,,no,no,Home insurance; quote-based; official website https://www.topdanmark.dk
+Codan,CODAN,bill,Insurance,,DKK,,DK,2,,,no,no,Home insurance; quote-based; official website https://www.codan.dk
+Elisa,ELISA,subscription,Phone & Internet,,EUR,,FI,5,,,no,no,Major operator; subscription prices via webshop (site requires JS); source https://www.elisa.fi checked 10/2026; popularity_rank qualitative (5=most common)
+Telia Finland,TELIA FINLAND,subscription,Phone & Internet,,EUR,,FI,4,,,no,no,Mobile and broadband; official PDF price lists published; source https://www.telia.fi checked 10/2026
+DNA,DNA,subscription,Phone & Internet,26.99,EUR,,FI,4,,,yes,no,"Huoleton Plus 20M 26,99 EUR/kk for 12 months (thereafter 30,99 EUR/kk); source https://www.dna.fi/liittymat checked 10/2026"
+Helen,HELEN,bill,Utilities,,EUR,,FI,4,,,no,no,Helsinki electricity and district heating; fixed-term contracts priced per kWh; source https://www.helen.fi/sahko/sahkosopimus/maaraaikainen-sahkosopimus checked 10/2026
+Fortum Suomi,FORTUM SUOMI,bill,Utilities,,EUR,,FI,4,,,no,no,Electricity retailer; spot/fixed contracts per kWh; source https://www.fortum.com/fi/sahkoa/sahkoa-kotiin/sahkosopimus-ja-hintavertailu checked 10/2026
+HSY (Helsinki Region Environmental Services),HSY (HELSINKI REGION ENVIRONMENTAL SERVICES),bill,Utilities,,EUR,,FI,3,,,no,no,Metropolitan water and waste management; consumption-based; official website https://www.hsy.fi
+YLE broadcasting tax (ylevero),YLE BROADCASTING TAX (YLEVERO),bill,Entertainment,,EUR,160,FI,4,,,yes,no,TV/radio fee successor: income-based public broadcasting tax collected with income taxes; 0-160 EUR per year (2.5% of income over threshold) per Finnish Tax Administration; source https://www.vero.fi/tietoa-verohallinnosta/uutishuone/esitys_ja_opetusmateriaali/ylevero/ checked 10/2026
+Ruutu+,RUUTU+,subscription,Entertainment,9.99,EUR,,FI,4,,,yes,no,"Ruutu+ with ads 9,99 EUR/kk (Premium +6 EUR/kk extra); source https://asiakastuki.ruutu.fi/article/152-ruudun-hinnasto checked 10/2026"
+MTV Katsomo+,MTV KATSOMO+,subscription,Entertainment,,EUR,,FI,4,,,no,no,Streaming (MTV); sold via operator webshops with customer prices; MTV's own pricing not published on an accessible official page - price not recorded; source https://kauppa.dna.fi/tv/kanavapaketit-ja-suoratoistopalvelut/mtv-katsomo+-viihde checked 10/2026
+ELIXIA (SATS Group),ELIXIA (SATS GROUP),membership,Fitness & Health,,EUR,,FI,4,,,no,no,Gym chain; current price shown in Omat sivut; source https://www.elixia.fi checked 10/2026
+Fitness24Seven Finland,FITNESS24SEVEN FINLAND,membership,Fitness & Health,,EUR,,FI,2,,,no,no,24h gym chain; prices at signup; official website https://www.fitness24seven.fi
+If Suomi,IF SUOMI,bill,Insurance,,EUR,,FI,3,,,no,no,Home insurance; quote-based; official website https://www.if.fi
+OP Insurance (Pohjola),OP INSURANCE (POHJOLA),bill,Insurance,,EUR,,FI,4,,,no,no,Home insurance; quote-based; official website https://www.op.fi
+Lahitapiola,LAHITAPIOLA,bill,Insurance,,EUR,,FI,3,,,no,no,Home insurance; quote-based; official website https://www.lahitapiola.fi
+Fennia,FENNIA,bill,Insurance,,EUR,,FI,2,,,no,no,Home insurance; quote-based; official website https://www.fennia.fi
+Siminn,SIMINN,subscription,Phone & Internet,15200,ISK,,IS,5,,,yes,no,"Home internet Netaskrift 1 Gb/s 15,200 kr per month (official price list); source https://adstod.siminn.is/home/verdskra checked 10/2026; popularity_rank qualitative (5=most common)"
+Nova,NOVA,subscription,Phone & Internet,,ISK,,IS,4,,,no,no,Mobile and home internet (AlltSaman bundles); prices via verdska/signup; source https://www.nova.is checked 10/2026
+Hringdu,HRINGDU,subscription,Phone & Internet,,ISK,,IS,2,,,no,no,Icelandic telecom operator; prices at signup; official website https://www.hringdu.is
+Stod 2 (Syn),STOD 2 (SYN),subscription,Entertainment,,ISK,,IS,4,,,no,no,Icelandic TV platform (SÝN Sjónvarp channel packages; distinct from SÝN+ streaming); package prices in official verdska; billing period not stated on the page - price not recorded; source https://www.syn.is/verdskra/sjonvarp checked 10/2026
+Syn+,SYN+,subscription,Entertainment,,ISK,,IS,3,,,no,no,Icelandic streaming service by Sýn; subscription packages via syn.is; source https://www.syn.is/sjonvarp/synplus checked 10/2026
+RUV utvarpsgjald,RUV UTVARPSGJALD,bill,Entertainment,,ISK,22200,IS,4,,,yes,no,"Broadcasting fee: 22,200 ISK per person for 2026, charged with the tax assessment (income threshold applies; split into three due dates); source https://www.skatturinn.is/einstaklingar/framtal-og-alagning/alagningarsedill-og-forsendur/2026 checked 10/2026"
+Veitur (Orkuveita Reykjavikur),VEITUR (ORKUVEITA REYKJAVIKUR),bill,Utilities,,ISK,,IS,5,,,no,no,Reykjavik area electricity hot water and water/sewer; consumption-based (official verdska); source https://www.veitur.is/verdskrar checked 10/2026
+HS Veitur,HS VEITUR,bill,Utilities,,ISK,,IS,3,,,no,no,South Iceland utility (electricity distribution); consumption-based; source https://www.hsveitur.is checked 10/2026
+Orkusalan,ORKUSALAN,bill,Utilities,,ISK,,IS,2,,,no,no,Icelandic electricity retailer for homes; consumption-based; source https://www.orkusalan.is/heimili checked 10/2026
+Sorpa,SORPA,bill,Utilities,,ISK,,IS,3,,,no,no,Capital area waste collection and recycling company (households pay waste fees); official website https://www.sorpa.is
+World Class,WORLD CLASS,membership,Fitness & Health,10850,ISK,,IS,5,,,yes,no,"Major gym chain; subscription price from 10,850 kr per month; source https://www.worldclass.is checked 10/2026"
+VIS,VIS,bill,Insurance,,ISK,,IS,4,,,no,no,Icelandic insurer; home insurance quoted online; source https://vis.is/heimilistrygging checked 10/2026
+TM,TM,bill,Insurance,,ISK,,IS,3,,,no,no,Icelandic insurer; quote-based; official website https://www.tm.is
+Sjova,SJOVA,bill,Insurance,,ISK,,IS,3,,,no,no,Icelandic insurer; quote-based; official website https://www.sjova.is
+Vordur,VORDUR,bill,Insurance,,ISK,,IS,2,,,no,no,Icelandic insurer; quote-based; official website https://www.vordur.is
+Grameenphone,GRAMEENPHONE,subscription,Phone & Internet,899,BDT,,BD,5,,,yes,no,Unlimited internet package up to 15 Mbps; TK 899/30 days; source https://www.grameenphone.com/personal/plans-offers/internet-packages checked 10/2026
+Banglalink WiFi,BANGLALINK WIFI,subscription,Phone & Internet,1800,BDT,,BD,4,,,yes,no,"Home WiFi ULTRA plan unlimited; TK 1,800/30 days; source https://banglalinkwifi.banglalink.net/en?hash=plans checked 10/2026"
+Link3,LINK3,subscription,Phone & Internet,899,BDT,,BD,3,,,yes,no,Home fiber up to 50 Mbps; BDT 899/month including VAT; source https://link3.net/packages checked 10/2026
+Amber IT,AMBER IT,subscription,Phone & Internet,1200,BDT,,BD,2,,,yes,no,"Home internet 15 Mbps package 1,200 BDT/month (PRIMARY+ 125 Mbps unlimited 1,200 BDT + 5% VAT); source https://amberit.com.bd/ checked 10/2026"
+Robi,ROBI,subscription,Phone & Internet,,BDT,,BD,5,,,no,no,Mobile operator and home broadband (RobiWifi); package prices vary by area and campaign; source https://www.robi.com.bd checked 10/2026
+Teletalk,TELETALK,subscription,Phone & Internet,,BDT,,BD,2,,,no,no,State-owned mobile operator; prepaid-focused packages; official website https://www.teletalk.com.bd
+DESCO,DESCO,bill,Utilities,,BDT,,BD,4,,,no,no,Dhaka Electricity Supply Company; prepaid/postpaid electricity billed per kWh; source https://www.desco.org.bd checked 10/2026
+DPDC,DPDC,bill,Utilities,,BDT,,BD,3,,,no,no,Dhaka Power Distribution Company; electricity billed per kWh; source https://www.dpdc.org.bd checked 10/2026
+Titas Gas,TITAS GAS,bill,Utilities,,BDT,,BD,4,,,no,no,Major gas distribution company; consumption-based (prepaid meters common); source https://www.titasgas.org.bd checked 10/2026
+Dhaka WASA,DHAKA WASA,bill,Utilities,,BDT,,BD,4,,,no,no,Dhaka water and sewerage; consumption-based; source https://www.dwasa.org.bd checked 10/2026
+Hoichoi,HOICHOI,subscription,Entertainment,500,BDT,700,BD,4,,,yes,no,Bengali streaming service sold in Bangladesh; Bangladesh plan BDT 500 monthly or BDT 700 yearly (official FAQ); source https://www.hoichoi.tv/faq checked 10/2026
+Chorki,CHORKI,subscription,Entertainment,,BDT,1075,BD,3,,,yes,no,"Bangladeshi streaming; official subscribe page lists 3-month BDT 347 and 12-month BDT 1,075 incl VAT/SD (monthly tier not shown); source https://www.chorki.net/subscribe checked 10/2026"
+Guardian Life Insurance,GUARDIAN LIFE INSURANCE,bill,Insurance,,BDT,,BD,3,,,no,no,Local life insurer; health and life plans quote-based; source https://guardianlife.com.bd checked 10/2026
+Green Delta Insurance,GREEN DELTA INSURANCE,bill,Insurance,,BDT,,BD,2,,,no,no,Local general insurer (motor/health/travel); quote-based; source https://www.green-delta.com checked 10/2026
+Pragati Insurance,PRAGATI INSURANCE,bill,Insurance,,BDT,,BD,2,,,no,no,Local non-life insurer; quote-based; source https://www.pragatiinsurance.com checked 10/2026
+Viettel,VIETTEL,subscription,Phone & Internet,195000,VND,,VN,5,,,yes,no,"FTTH 300Mb package 195,000d/month (outer districts; 235,000d inner Hanoi/HCM) per Viettel digital services sales portal; source https://dichvusoviettel.vn/internet/ checked 10/2026"
+VNPT (Vinaphone),VNPT (VINAPHONE),subscription,Phone & Internet,190000,VND,,VN,5,,,yes,no,"FTTH home packages; GDS from 190,000d/month; source https://vnpt.com.vn/tu-van/goi-mang-vnpt-gia-dinh.html checked 10/2026"
+FPT Telecom,FPT TELECOM,subscription,Phone & Internet,220000,VND,,VN,4,,,yes,no,"Combo Internet-TV V.VIP from 220,000d/month (official fpt.vn homepage offer); source https://fpt.vn/ checked 10/2026"
+MobiFone,MOBIFONE,subscription,Phone & Internet,,VND,,VN,3,,,no,no,Mobile operator with home WiFi (MobiHome); plan prices via signup; source https://www.mobifone.vn checked 10/2026
+CMC Telecom,CMC TELECOM,subscription,Phone & Internet,,VND,,VN,2,,,no,no,Vietnamese ISP; consumer fiber plans quoted at signup; source https://cmctelecom.vn checked 10/2026
+EVN,EVN,bill,Utilities,,VND,,VN,5,,,no,no,Electricity of Vietnam; billed per kWh with tiered rates; source https://www.evn.com.vn checked 10/2026
+SAWACO,SAWACO,bill,Utilities,,VND,,VN,3,,,no,no,Saigon Water Corporation; consumption-based; source https://sawaco.com.vn checked 10/2026
+FPT Play,FPT PLAY,subscription,Entertainment,80000,VND,,VN,4,,,yes,no,"Streaming Premium plan 80,000d/month incl VAT; source https://fpt.vn/truyen-hinh-fpt-play/goi-premium checked 10/2026"
+VTVcab ON,VTVCAB ON,subscription,Entertainment,,VND,,VN,3,,,no,no,"VTVcab OTT TV service; OTT package price not published (official Hanoi distributor page lists digital HD TV from 130,000d/thang for the cable service); source https://on.vtvcab.vn checked 10/2026"
+SCTV,SCTV,subscription,Entertainment,,VND,,VN,3,,,no,no,Saigontourist cable TV; subscription packages via dealers; source https://www.sctv.com.vn checked 10/2026
+California Fitness & Yoga,CALIFORNIA FITNESS & YOGA,membership,Fitness & Health,399000,VND,,VN,4,,,yes,no,"Major gym chain; DUES monthly membership from 399,000d with 12-month commitment; source https://fit.cali.vn/dues/ checked 10/2026"
+Elite Fitness,ELITE FITNESS,membership,Fitness & Health,,VND,,VN,2,,,no,no,Gym chain (Hanoi/HCM); membership prices at club; source https://elitefitness.com.vn checked 10/2026
+Bao Viet,BAO VIET,bill,Insurance,,VND,,VN,4,,,no,no,Local insurer; health/life premiums quote-based; source https://www.baoviet.com.vn checked 10/2026
+Bao Minh,BAO MINH,bill,Insurance,,VND,,VN,2,,,no,no,Local non-life insurer (motor/health); quote-based; source https://baominh.com.vn checked 10/2026
+PVI,PVI,bill,Insurance,,VND,,VN,2,,,no,no,Local non-life insurer; quote-based; source https://www.pvi.com.vn checked 10/2026
+AIS Fibre,AIS FIBRE,subscription,Phone & Internet,269,THB,,TH,5,,,yes,no,Home fibre 50Mbps condo package; 269 baht/month; source https://www.ais.th/en/consumers/fibre/package checked 10/2026
+True (TrueOnline),TRUE (TRUEONLINE),subscription,Phone & Internet,599,THB,,TH,5,,,yes,no,Home internet 500/500 Mbps; 599 baht/month at 24-month contract; source https://www.true.th/en/trueonline/packages checked 10/2026
+3BB (Triple T Broadband),3BB (TRIPLE T BROADBAND),subscription,Phone & Internet,,THB,,TH,3,,,no,no,Home fibre broadband; plans quoted at signup; source https://www.3bb.co.th checked 10/2026
+MEA,MEA,bill,Utilities,,THB,,TH,4,,,no,no,Metropolitan Electricity Authority (Bangkok); billed per kWh tiered; source https://www.mea.or.th checked 10/2026
+PEA,PEA,bill,Utilities,,THB,,TH,4,,,no,no,Provincial Electricity Authority (outside Bangkok); billed per kWh tiered; source https://www.pea.co.th checked 10/2026
+MWA,MWA,bill,Utilities,,THB,,TH,3,,,no,no,Metropolitan Waterworks Authority (Bangkok tap water); consumption-based; source https://www.mwa.co.th checked 10/2026
+TrueID+,TRUEID+,subscription,Entertainment,59,THB,599,TH,4,,,yes,no,TrueID+ monthly auto-renewal 59 baht (annual 599 baht); source https://help.trueid.net/th-th/detail/ABX0MraRYPlB checked 10/2026
+AIS Play,AIS PLAY,subscription,Entertainment,199,THB,,TH,4,,,yes,no,PLAY ALL package 199 baht/month (auto-renews 299 after 12 months); source https://www.ais.th/en/consumers/entertainment/ais-play/play-all checked 10/2026
+Jetts Fitness Thailand,JETTS FITNESS THAILAND,membership,Fitness & Health,1500,THB,,TH,3,,,yes,no,"24h gym chain (Southeast Asia); official campaign first month 1,000 baht then 1,500 baht/month (min 3 months); source https://www.jetts.co.th/join-online-campaign-en/ checked 10/2026"
+Fitness First Thailand,FITNESS FIRST THAILAND,membership,Fitness & Health,,THB,,TH,3,,,no,no,Gym chain; membership rates at club; source https://www.fitnessfirst.co.th checked 10/2026
+Virgin Active Thailand,VIRGIN ACTIVE THAILAND,membership,Fitness & Health,,THB,,TH,2,,,no,no,Premium gym chain; club-specific pricing; source https://www.virginactive.co.th checked 10/2026
+Muang Thai Life,MUANG THAI LIFE,bill,Insurance,,THB,,TH,3,,,no,no,"Thai life insurer; premiums from 20,000 baht/year - annual payment; source https://www.muangthai.co.th checked 10/2026"
+AIA Thailand,AIA THAILAND,bill,Insurance,,THB,,TH,4,,,no,no,Health/life insurance (locally incorporated listed insurer); annual premiums quote-based; source https://www.aia.co.th checked 10/2026
+Krungthai-AXA,KRUNGTHAI-AXA,bill,Insurance,,THB,,TH,3,,,no,no,Insurance JV; premiums quote-based; source https://www.krungthai-axa.com checked 10/2026
+Bangkok Insurance,BANGKOK INSURANCE,bill,Insurance,,THB,,TH,2,,,no,no,Local non-life insurer (motor etc.); quote-based; source https://www.bangkokinsurance.com checked 10/2026
+Movistar Argentina,MOVISTAR ARGENTINA,subscription,Phone & Internet,,ARS,,AR,5,,,no,no,"Fibra 300 Megas plan with 50% off for 12 months; official page displays $1,751/mes promo price whose current validity is uncertain - price not recorded; source https://www.movistar.com.ar/internet/a checked 10/2026"
+Personal (Telecom Argentina),PERSONAL (TELECOM ARGENTINA),subscription,Phone & Internet,27000,ARS,,AR,5,,,yes,no,"Internet 300MB; $27,000 final per month (71% off 6 months; list $91,860); source https://www.personal.com.ar/internet checked 10/2026"
+Telecentro,TELECENTRO,subscription,Phone & Internet,,ARS,,AR,3,,,no,no,"Argentine cable/internet operator; residential plan prices require address check (official site's Negocios section shows 300MB at $16,699/month promo sin impuestos - not a residential price); source https://telecentro.com.ar/negocios/ checked 10/2026"
+Claro Argentina,CLARO ARGENTINA,subscription,Phone & Internet,,ARS,,AR,4,,,no,no,Consumer fiber plans sold with promotional discounts; prices shown at checkout; source https://www.claro.com.ar checked 10/2026
+Edenor,EDENOR,bill,Utilities,,ARS,,AR,4,,,no,no,Electricity distributor (north of Buenos Aires metro); tariff per kWh (official tariff table Jan 2026); source https://www.edenor.com/files/2026-01/Cuadro-tarifario-enero-2026.pdf checked 10/2026
+Edesur,EDESUR,bill,Utilities,,ARS,,AR,3,,,no,no,Electricity distributor (south of Buenos Aires metro); tariff per kWh; source https://www.edesur.com.ar checked 10/2026
+Metrogas,METROGAS,bill,Utilities,,ARS,,AR,3,,,no,no,Natural gas distributor (Buenos Aires metro); tariff per m3 tiered; source https://www.metrogas.com.ar/hogares/cuadros-tarifarios/ checked 10/2026
+AySA,AYSA,bill,Utilities,,ARS,,AR,4,,,no,no,Water and sewerage (Buenos Aires metro); consumption-based; source https://www.aysa.com.ar checked 10/2026
+Flow,FLOW,subscription,Entertainment,,ARS,,AR,4,,,no,no,"Argentina's streaming/cable TV service (Telecom); official plans page shows Flow Full list $41,560 with 53% off first 6 months but billing frequency not explicitly stated - price not recorded; source https://www.personal.com.ar/flow/planes checked 10/2026"
+Megatlon,MEGATLON,membership,Fitness & Health,,ARS,,AR,4,,,no,no,Gym chain; monthly/semi-annual/annual memberships via direct debit - prices club-specific; source https://megatlon.com checked 10/2026
+SportClub,SPORTCLUB,membership,Fitness & Health,,ARS,,AR,3,,,no,no,"Gym chain with 1,000+ centers; membership prices at club; source https://www.sportclub.com.ar checked 10/2026"
+OSDE,OSDE,bill,Insurance,,ARS,,AR,5,,,no,no,Major private health insurer (prepaga); monthly plan prices vary by plan/age and are distributed via aggregators - not published on own site; source https://www.osde.com.ar checked 10/2026
+Swiss Medical,SWISS MEDICAL,bill,Insurance,,ARS,,AR,4,,,no,no,Private health insurer (prepaga); plan prices via quote; source https://www.swissmedical.com.ar checked 10/2026
+Medife,MEDIFE,bill,Insurance,,ARS,,AR,3,,,no,no,Private health coverage (prepaga); plan prices via quote; source https://www.medife.com.ar checked 10/2026
+Sancor Salud,SANCOR SALUD,bill,Insurance,,ARS,,AR,3,,,no,no,Private health coverage; plan prices via quote; source https://www.sancorsalud.com.ar checked 10/2026
+Vodacom,VODACOM,subscription,Phone & Internet,399,ZAR,,ZA,5,,,yes,no,Home Internet 200GB + 5G router; R399 p/m over 36 months; source https://now.vodacom.co.za/home-internet/affordable-fibre-and-5g-home-internet-deals-in-south-africa/ checked 10/2026
+MTN,MTN,subscription,Phone & Internet,,ZAR,,ZA,5,,,no,no,Uncapped Home Internet plans sold month-to-month; current prices at plan selection; source https://www.mtn.co.za checked 10/2026
+Telkom,TELKOM,subscription,Phone & Internet,695,ZAR,,ZA,4,,,yes,no,Core Fibre 50-100Mbps; from R695 on contract; source https://www.telkom.co.za/telkom-fibre-educational checked 10/2026
+Cell C,CELL C,subscription,Phone & Internet,,ZAR,,ZA,3,,,no,no,Mobile operator; plan prices at checkout; source https://www.cellc.co.za checked 10/2026
+Rain,RAIN,subscription,Phone & Internet,679,ZAR,,ZA,3,,,yes,no,Unlimited 5G home wifi; from R679 month-to-month; source https://www.rain.co.za checked 10/2026
+Eskom,ESKOM,bill,Utilities,,ZAR,,ZA,5,,,no,no,National electricity utility; billed per kWh (municipal resellers in many areas); source https://www.eskom.co.za checked 10/2026
+City of Cape Town Utilities,CITY OF CAPE TOWN UTILITIES,bill,Utilities,,ZAR,,ZA,3,,,no,no,Municipal electricity/water/sanitation/rates bill; consumption-based; source https://www.capetown.gov.za checked 10/2026
+Showmax,SHOWMAX,subscription,Entertainment,99,ZAR,,ZA,4,,,yes,no,Entertainment All Devices R99/month (Mobile R50; Entertainment+Premier League R150); source https://www.showmax.com/za/plans/all-monthly checked 10/2026
+DStv,DSTV,subscription,Entertainment,469,ZAR,,ZA,4,,,yes,no,Compact package R469 pm via decoder and streaming (streaming-only R299); source https://www.dstv.com/en-za/buy/dstv-packages/dstv-compact checked 10/2026
+SABC TV Licence,SABC TV LICENCE,bill,Entertainment,,ZAR,265,ZA,4,,,yes,no,Domestic TV licence R265 per year; source https://www.sanews.gov.za/south-africa/pay-your-tv-licence checked 10/2026
+Virgin Active,VIRGIN ACTIVE,membership,Fitness & Health,,ZAR,,ZA,4,,,no,no,Gym chain; club-specific monthly rates published per club on official site; source https://www.virginactive.co.za/memberships checked 10/2026
+Viva Gym,VIVA GYM,membership,Fitness & Health,,ZAR,,ZA,2,,,no,no,Low-cost gym chain (Western/Eastern Cape and Gauteng); prices at signup; source https://www.vivagym.co.za checked 10/2026
+Planet Fitness,PLANET FITNESS,membership,Fitness & Health,,ZAR,,ZA,3,,,no,no,Gym chain; club-specific pricing; source https://www.planetfitness.co.za checked 10/2026
+Discovery Health Medical Scheme,DISCOVERY HEALTH MEDICAL SCHEME,bill,Insurance,,ZAR,,ZA,5,,,no,no,Major medical scheme; contributions vary by plan and income band; source https://www.discovery.co.za checked 10/2026
+Bonitas,BONITAS,bill,Insurance,1603,ZAR,,ZA,4,,,yes,no,"Medical scheme; BonStart 2026 monthly contribution R1,603 main member; source https://www.bonitas.co.za/our-plans-2026/ checked 10/2026"
+Momentum Health,MOMENTUM HEALTH,bill,Insurance,,ZAR,,ZA,3,,,no,no,Medical scheme; contributions by plan; source https://www.momentum.co.za checked 10/2026
+Bestmed,BESTMED,bill,Insurance,,ZAR,,ZA,2,,,no,no,Medical scheme; contributions by plan; source https://www.bestmed.co.za checked 10/2026
+Santam,SANTAM,bill,Insurance,,ZAR,,ZA,3,,,no,no,Major short-term insurer (motor/home); quote-based premiums; source https://www.santam.co.za checked 10/2026
+MiWay,MIWAY,bill,Insurance,,ZAR,,ZA,2,,,no,no,Direct short-term insurer; quote-based; source https://www.miway.co.za checked 10/2026
+Kyivstar,KYIVSTAR,subscription,Phone & Internet,200,UAH,,UA,5,,,yes,no,Home internet Basovyi 100 Mbps; 200 UAH/month; source https://kyivstar.ua/home-internet/basic checked 10/2026
+Vodafone Ukraine,VODAFONE UKRAINE,subscription,Phone & Internet,700,UAH,,UA,4,,,yes,no,Contract tariff Ultra; base price 700 UAH/month (promo 510 UAH first 6 months); source https://www.vodafone.ua/tariffs/contract/new-customer/ultra checked 10/2026
+lifecell,LIFECELL,subscription,Phone & Internet,,UAH,,UA,3,,,no,no,Mobile operator; consumer tariff prices via plan selection; source https://www.lifecell.ua checked 10/2026
+Volia,VOLIA,subscription,Phone & Internet,,UAH,,UA,3,,,no,no,Kyiv cable/internet operator; current tariffs published as official PDFs; source https://volia.com checked 10/2026
+FREENET (O3),FREENET (O3),subscription,Phone & Internet,,UAH,,UA,2,,,no,no,Ukrainian ISP operated by O3; plans via signup; source https://o3.ua checked 10/2026
+DTEK,DTEK,bill,Utilities,,UAH,,UA,4,,,no,no,"Electricity supply to end consumers (DTEK Grids retail, Kyiv and regional distributors); billed per kWh; source https://www.dtek.com checked 10/2026"
+Naftogaz,NAFTOGAZ,bill,Utilities,,UAH,,UA,4,,,no,no,Natural gas supply to households; billed per m3; source https://www.naftogaz.com checked 10/2026
+Kyivvodokanal,KYIVVODOKANAL,bill,Utilities,,UAH,,UA,3,,,no,no,Kyiv water and wastewater; consumption-based; official website https://vodokanal.com.ua
+Kyivteploenergo,KYIVTEPLOENERGO,bill,Utilities,,UAH,,UA,3,,,no,no,Kyiv municipal heating; billed by consumption (Gcal); official website https://kyivteploenergo.com.ua
+Kyivstar TV,KYIVSTAR TV,subscription,Entertainment,120,UAH,,UA,4,,,yes,no,Basic tariff UAH 120/month (260+ channels; Family tariff UAH 150); source https://tv.kyivstar.ua/en checked 10/2026
+MEGOGO,MEGOGO,subscription,Entertainment,174,UAH,,UA,4,,,yes,no,Ukrainian-origin streaming service; TV+Kino plan from 174 UAH/month; source https://megogo.net/ua/kino_i_tv checked 10/2026
+Sport Life,SPORT LIFE,membership,Fitness & Health,1200,UAH,,UA,4,,,yes,no,"Major gym chain; All Inclusive (pool+SPA+fitness) 1,200 UAH/month; source https://rc.sportlife.ua checked 10/2026"
+ARX,ARX,bill,Insurance,,UAH,,UA,3,,,no,no,"Insurer (auto liability, CASCO, health); quote-based; source https://arx.com.ua checked 10/2026"
+UNIQA Ukraine,UNIQA UKRAINE,bill,Insurance,,UAH,,UA,2,,,no,no,Insurer (motor/health); quote-based; official website https://www.uniqa.com.ua
+Oranta,ORANTA,bill,Insurance,,UAH,,UA,2,,,no,no,Ukrainian insurer (motor/property); quote-based; official website https://www.oranta.com.ua
+Movistar,MOVISTAR|TELEFONICA,subscription,Phone & Internet,19.90,EUR,,ES,5,Orange|Vodafone|Digi,,yes,no,Fibra 300Mb; 12-month promo then EUR 30; IVA incl; source https://www.movistar.es/fibra-optica/ checked 10/2026
+Orange Espana,ORANGE|ORANGE ESPANA|MASORANGE,subscription,Phone & Internet,20.00,EUR,,ES,4,Movistar|Vodafone|Digi,,yes,no,Fibra 300Mb + fijo; 12-month offer then EUR 30; source https://www.orange.es/tarifas/internet-en-casa checked 10/2026
+Vodafone Espana,VODAFONE|VODAFONE ESPANA,subscription,Phone & Internet,20.00,EUR,,ES,4,Movistar|Orange|Digi,,yes,no,Fibra 600Mb; discounted for 12 months (list EUR 30); source https://www.vodafone.es/c/particulares/es/productos-y-servicios/fibra-optica-adsl/ checked 10/2026
+Yoigo,YOIGO,subscription,Phone & Internet,19.90,EUR,,ES,3,,,yes,no,Fibra 600Mb + fijo; 12 months then EUR 29.90; source https://www.yoigo.com/ checked 10/2026
+Pepephone,PEPEPHONE,subscription,Phone & Internet,35.00,EUR,,ES,3,,,yes,no,Fibra 600Mb + 1 movil 50GB; sin permanencia; source https://www.pepephone.com/adsl-fibra-movil/el-movil-con-fibra-mas-ajustado checked 10/2026
+Iberdrola,IBERDROLA,bill,Utilities,,EUR,,ES,5,Endesa|Naturgy|Holaluz,,no,no,Electricity retailer; plans priced per kWh (e.g. Plan Online desde 0.1499 EUR/kWh) - no fixed monthly fee; source https://www.iberdrola.es/luz/tarifas checked 10/2026
+Naturgy,NATURGY|GAS NATURAL FENOSA,bill,Utilities,,EUR,,ES,4,Iberdrola|Endesa,,no,no,Electricity and gas retailer; priced per kWh; source https://www.naturgy.es/hogar/luz_y_gas/tarifa_por_uso checked 10/2026
+Endesa,ENDESA|ENDESA CLIENTES,bill,Utilities,,EUR,,ES,4,Iberdrola|Naturgy,,no,no,Electricity and gas retailer; priced per kWh; source https://www.endesa.com/es/luz-y-gas/luz checked 10/2026
+Atresplayer Premium,ATRESPLAYER|ATRESPLAYER PREMIUM|ATRESMEDIA,subscription,Entertainment,5.99,EUR,59.99,ES,4,Movistar Plus+|Filmin|Mitele Plus,,yes,no,Plan Premium con anuncios; annual plan EUR 59.99; source https://suscripcion.atresplayer.com/hazte-premium/nac/primer/ checked 10/2026
+Mitele Plus,MITELE PLUS,subscription,Entertainment,,EUR,,ES,3,,,no,no,Mediaset Espana streaming; price not published on official subscription page; source https://www.mitele.es/suscripciones/ checked 10/2026
+Filmin,FILMIN|FILMIN ES,subscription,Entertainment,9.99,EUR,99.00,ES,2,Movistar Plus+|Atresplayer Premium,,yes,no,Monthly EUR 9.99 or annual EUR 99; source https://ayuda.filmin.es/es/support/solutions/articles/47001262197-suscripciones-y-precios checked 10/2026
+Basic-Fit,BASIC-FIT,membership,Fitness & Health,,EUR,,ES,4,,,no,no,Comfort plan EUR 24.99 billed every 4 weeks (13 payments/year) - not a calendar-month price; source https://www.basic-fit.com/es-es/precio checked 10/2026
+VivaGym,VIVAGYM|VIVAGYM CLUB,membership,Fitness & Health,,EUR,,ES,3,Basic-Fit Spain|Metropolitan|DIR,,no,no,Cuotas adapt to each club; official site directs to club pages for pricing; source https://www.vivagym.com/es-es/cuotas/ checked 10/2026
+Metropolitan,METROPOLITAN,membership,Fitness & Health,,EUR,,ES,2,,,no,no,Gym chain; no published price on official site; source https://www.metropolitan.es checked 10/2026
+Altafit,ALTAFIT,membership,Fitness & Health,37.90,EUR,,ES,2,,,yes,no,Mensual cuota EUR 37.90 on official club enrollment page (varies by club); source https://altafit-fuengirola.provis.es/Public/ProcesoAlta/PasoSeleccionCuota.aspx checked 10/2026
+Sanitas,SANITAS,bill,Insurance,33.60,EUR,,ES,5,,,yes,no,Health insurance; Sanitas Avanza desde EUR 33.60/mes; source https://www.sanitas.es/seguros/seguros-medicos-privados checked 10/2026
+Mapfre,MAPFRE|MAPFRE ESPANA,bill,Insurance,,EUR,,ES,5,Mutua Madrilena|Allianz Espana|AXA Espana,,no,no,Car insurance desde EUR 160/ano on official site; personalized quote; source https://www.mapfre.es/particulares/seguros-de-coche/ checked 10/2026
+Linea Directa,LINEA DIRECTA,bill,Insurance,14.00,EUR,,ES,3,,,yes,no,Car insurance payable monthly; desde EUR 14/mes; source https://www.lineadirecta.com/seguros-coche/ventajas/pago-mensual-seguro-coche.html checked 10/2026
+TIM,TIM|TELECOM ITALIA,subscription,Phone & Internet,27.90,EUR,,IT,5,Iliad|Fastweb|Vodafone Italia,,yes,no,Fibra home broadband EUR 27.90/mese (from EUR 24.90 online); source https://www.tim.it/fisso-e-mobile/fibra-e-adsl checked 10/2026
+Vodafone Italia,VODAFONE ITALIA|VODAFONE IT,subscription,Phone & Internet,24.90,EUR,,IT,4,TIM|Iliad|Fastweb,,yes,no,IperFibra FTTH; costo ricorrente EUR 24.90/mese; source https://www.vodafone.it/portal/Privati/Tariffe-e-Prodotti/IperFibra--ADSL-e-Telefono/Dettagli-contratto-fibra-new2 checked 10/2026
+WindTre,WINDTRE,subscription,Phone & Internet,24.99,EUR,,IT,4,,,yes,no,Fibra fino a 2.5 Gbps; EUR 24.99/mese prime 12 mesi; source https://www.windtre.it/offerte-fibra/internet-wifi-a-casa checked 10/2026
+Fastweb,FASTWEB,subscription,Phone & Internet,27.95,EUR,,IT,4,TIM|Iliad|Vodafone Italia,,yes,no,Fastweb Casa fibra EUR 27.95/mese; source https://www.fastweb.it/index/ checked 10/2026
+Iliad Italia,ILIAD|ILIAD ITALIA,subscription,Phone & Internet,26.99,EUR,,IT,5,TIM|Fastweb|Vodafone Italia,,yes,no,Fibra senza iliadbox EUR 26.99/mese (official price brochure valid from 30/12/2025); source https://cdn001.iliad.it/strapi/brochure_prezzi_fibra_senza_iliadbox_iliadnetneutrality_dal_30_12_2025_f92255fddf.pdf checked 10/2026
+ho. mobile,HO. MOBILE,subscription,Phone & Internet,5.95,EUR,,IT,3,,,yes,no,100 GB + unlimited minutes EUR 5.95/mese; source https://www.ho-mobile.it/ checked 10/2026
+Enel Energia,ENEL|ENEL ENERGIA,bill,Utilities,,EUR,,IT,5,A2A|Hera|ACEA,,no,no,Electricity and gas retailer; priced per kWh (e.g. 0.179 EUR/kWh promo); source https://www.enel.it/it-it/promozioni checked 10/2026
+A2A,A2A|A2A ENERGIA,bill,Utilities,,EUR,,IT,3,Enel|Hera|Edison,,no,no,Multi-utility electricity and gas for households; consumption-based; source https://www.a2a.it checked 10/2026
+Edison,EDISON,bill,Utilities,,EUR,,IT,3,,,no,no,Gas and electricity retailer for households; consumption-based; source https://www.edison.it checked 10/2026
+Hera,HERA|HERA COMM,bill,Utilities,,EUR,,IT,2,A2A|Enel|ACEA,,no,no,Multi-utility electricity gas water waste; consumption-based; source https://www.gruppohera.it checked 10/2026
+Canone RAI,CANONE RAI|CANONE TV|RAI,bill,Entertainment,,EUR,90.00,IT,5,,,yes,no,TV licence fee 2026: EUR 90/year (canone tv ordinario) billed via electricity bill; source https://www.canone.rai.it/Ordinari/Novita.aspx checked 10/2026
+Mediaset Infinity+,INFINITY+|MEDIASET INFINITY,subscription,Entertainment,7.99,EUR,,IT,4,DAZN Italia|Netflix Italia,,yes,no,Infinity+ premium plan EUR 7.99/mese senza vincoli (official Mediaset page); source https://mediasetinfinity.mediaset.it/news/mediasetinfinity/promo/mediaset-infinity-tv-generalista-champions_SE000000000102_tn23594 checked 10/2026
+NOW (Sky Italia),NOW (SKY ITALIA),subscription,Entertainment,19.99,EUR,,IT,3,,,yes,no,Sport Pass EUR 19.99/mese listino with 12-month commitment (promo: 12 months for the price of 8); source https://www.nowtv.it/offerta-now checked 10/2026
+B.FIT,B.FIT,membership,Fitness & Health,65.00,EUR,780.00,IT,2,,,yes,no,Matinee plan EUR 65/mese (EUR 780/anno); source https://www.bfit.it/it/formuleeprezzi checked 10/2026
+ConTe.it,CONTE.IT,bill,Insurance,,EUR,,IT,3,,,no,no,Direct car insurance; annual premium payable in installments (official help page describes semestrale frazionamento); quote-based; source https://www.conte.it checked 10/2026
+KPN,KPN,subscription,Phone & Internet,42.50,EUR,,NL,5,Odido|VodafoneZiggo|Simyo,,yes,no,Combivoordeel Thuis internet 100 Mbit/s EUR 42.50/month (see KPN tariff page for conditions); source https://www.kpn.com/thuis/tarieven checked 10/2026
+Ziggo,VODAFONEZIGGO|ZIGGO|VODAFONE NL,subscription,Phone & Internet,34.95,EUR,,NL,4,KPN|Odido|Simyo,,yes,no,Internet & TV EUR 34.95 p.m. for 12 months at 2-year contract; source https://www.ziggo.nl/aanbiedingen checked 10/2026
+Odido,ODIDO|T-MOBILE NL,subscription,Phone & Internet,25.00,EUR,,NL,4,KPN|VodafoneZiggo|Simyo,,yes,no,Internet first 12 months EUR 25 p.m. then EUR 36.50; 2-year contract; source https://www.odido.nl/internet checked 10/2026
+Essent,ESSENT,bill,Utilities,,EUR,,NL,4,Eneco|Vattenfall,,no,no,Electricity and gas retailer; consumption-based variable tariff; source https://www.essent.nl checked 10/2026
+Eneco,ENECO,bill,Utilities,,EUR,,NL,4,Essent|Vattenfall|Budget Energie,,no,no,Electricity and gas retailer; consumption-based; source https://www.eneco.nl checked 10/2026
+Vattenfall,VATTENFALL,bill,Utilities,,EUR,,NL,3,,,no,no,Electricity and gas retailer; consumption-based; source https://www.vattenfall.nl checked 10/2026
+Vitens,VITENS,bill,Utilities,,EUR,,NL,4,Waternet|Brabant Water,,no,no,Drinking water (regional); consumption-based; source https://www.vitens.nl checked 10/2026
+Basic-Fit Nederland,BASIC-FIT,membership,Fitness & Health,,EUR,,NL,5,SportCity|Fit For Free,,no,no,Comfort EUR 24.99 per 4 weken (Jaar membership) - not a calendar-month price; source https://www.basic-fit.com/nl-nl/prijzen checked 10/2026
+TrainMore,TRAINMORE,membership,Fitness & Health,44.00,EUR,,NL,2,,,yes,no,Memberships starting from EUR 44/month (1-year); source https://trainmore.com/en-NL/deal/ checked 10/2026
+Videoland,VIDEOLAND,subscription,Entertainment,6.99,EUR,,NL,4,Netflix Nederland|NPO Start|Pathe Thuis,,yes,no,Basis pakket EUR 6.99/month (Plus 11.99; Premium 14.99); maandelijks opzegbaar; source https://www.videoland.com/abonnementen checked 10/2026
+NS Dal Voordeel,NS DAL VOORDEEL,subscription,Transport,6.35,EUR,,NL,5,,,yes,no,NS Flex Dal Voordeel 40% off-peak discount EUR 6.35/month; source https://www.ns.nl/abonnementen/dal-voordeel checked 10/2026
+Zilveren Kruis,ZILVEREN KRUIS,bill,Insurance,159.25,EUR,,NL,5,CZ|Menzis|VGZ,,yes,no,Basis Zeker basic health insurance 2026 (most chosen plan) EUR 159.25/month; source https://www.zilverenkruis.nl/overons/pers/premie-2026 checked 10/2026
+VGZ,VGZ,bill,Insurance,149.90,EUR,,NL,4,,,yes,no,Basis Keuze basic health insurance 2026 EUR 149.90/month; source https://www.vgz.nl/zorgverzekering/premie-overzicht checked 10/2026
+Menzis,MENZIS,bill,Insurance,151.25,EUR,,NL,3,CZ|Zilveren Kruis|VGZ,,yes,no,Basis Voordelig basic health insurance 2026 EUR 151.25/month; source https://www.menzis.nl/zorgverzekering/premies/premie-2026 checked 10/2026
+DSW Zorgverzekering,DSW ZORGVERZEKERING,bill,Insurance,158.50,EUR,,NL,3,,,yes,no,Basic health insurance 2026 EUR 158.50/month (same premium for all); source https://www.dsw.nl/consumenten/zorgverzekering/basisverzekering checked 10/2026
+CZ,CZ|CZ DIRECT,bill,Insurance,159.99,EUR,,NL,4,Zilveren Kruis|Menzis|VGZ,,yes,no,Zorg-op-maat basic health insurance 2026 EUR 159.99/month; source https://www.cz.nl/premie-zorg-op-maat checked 10/2026
+Orange Polska,ORANGE POLSKA|ORANGE,subscription,Phone & Internet,50.00,PLN,,PL,5,Play|Plus|T-Mobile Polska,,yes,no,Abonament komorkowy 5G bez limitow; from 50 zl/mies.; source https://www.orange.pl checked 10/2026
+Play,PLAY|P4,subscription,Phone & Internet,,PLN,,PL,5,Orange Polska|Plus|T-Mobile Polska,,no,no,Home internet 5G 25 zl/mies. + VAT (VAT-exclusive published price); mobile plans promo-based; source https://www.play.pl checked 10/2026
+Plus,PLUS|POLKOMTEL,subscription,Phone & Internet,40.00,PLN,,PL,4,Orange Polska|Play|Netia,,yes,no,Swiatlowod od 40 zl/mies. po rabatach; 24-month contract; source https://www.plus.pl/swiatlowod checked 10/2026
+T-Mobile Polska,T-MOBILE POLSKA,subscription,Phone & Internet,45.00,PLN,,PL,4,Orange Polska|Play|Plus,,yes,no,Kolejny (additional) mobile subscription 45 zl/mies. with discounts - offer for existing customers; source https://www.t-mobile.pl/abonament-komorkowy checked 10/2026
+nju mobile,NJU MOBILE,subscription,Phone & Internet,31.00,PLN,,PL,3,,,yes,no,nju abonament od 31 zl/mies. (60 GB); source https://www.njumobile.pl/kampania/abonament checked 10/2026
+PGE,PGE,bill,Utilities,,PLN,,PL,4,Enea|Tauron|Orlen Gaz,,no,no,Electricity retailer; priced per kWh; source https://www.pge.pl checked 10/2026
+Tauron,TAURON,bill,Utilities,,PLN,,PL,3,PGE|Enea,,no,no,Electricity retailer for households; priced per kWh; source https://www.tauron.pl checked 10/2026
+Enea,ENEA,bill,Utilities,,PLN,,PL,3,PGE|Tauron,,no,no,Electricity retailer for households; priced per kWh; source https://www.enea.pl checked 10/2026
+Orlen (PGNiG),PGNIG|ORLEN GAZ,bill,Utilities,,PLN,,PL,4,Tauron|Enea|PGE,,no,no,Gas (former PGNiG) and energy; priced per kWh/m3; source https://www.orlen.pl checked 10/2026
+Abonament RTV,ABONAMENT RTV|POCZTA POLSKA,bill,Entertainment,30.50,PLN,,PL,4,Player.pl|Polsat Box Go,,yes,no,Radio and TV licence fee 2026: 30.50 zl/month for radio+TV (radio only 9.50); source https://www.gov.pl/web/krrit/krrit-zdecydowala-o-wysokosci-abonamentu-rtv-obowiazujacego-w-2026-r-na-mozliwie-najnizszym-poziomie checked 10/2026
+Canal+ Polska,CANAL+ POLSKA,subscription,Entertainment,29.00,PLN,,PL,4,,,yes,no,Streaming SERIALE i FILMY 29 zl/mies. (SUPER SPORT 69; TELEWIZJA INTERNETOWA 19); source https://pl.canalplus.com/oferta-online checked 10/2026
+Player.pl,PLAYER.PL|PLAYER,subscription,Entertainment,15.00,PLN,,PL,4,Polsat Box Go|Netflix Polska,,yes,no,PLAYER z reklamami 15 zl / 30 dni; source https://pomoc.player.pl/article/dostepne-pakiety checked 10/2026
+Polsat Box Go,POLSAT BOX GO|CYFROWY POLSAT,subscription,Entertainment,15.00,PLN,,PL,3,Player.pl|Netflix Polska,,yes,no,Polsat Lovers package 15 zl / 30 dni; source https://polsatboxgo.pl checked 10/2026
+Zdrofit,ZDROFIT,membership,Fitness & Health,,PLN,,PL,3,CityFit|Platinium,,no,no,Premium gym chain; recurring membership pricing is club-specific (official club pages publish only auto-expiring 28-day passes e.g. 389.99 zl); source https://zdrofit.pl/kluby-fitness/warszawa-varso/karnety checked 10/2026
+Smart Gym,SMART GYM,membership,Fitness & Health,149.00,PLN,,PL,2,,,yes,no,OPEN samoodnawialny (self-renewing) 149 zl per calendar month; source https://smartgym.club/cennik checked 10/2026
+PZU,PZU,bill,Insurance,91.00,PLN,,PL,5,Warta|Allianz Polska|Generali Polska,,yes,no,Car insurance OC+AC+NNW+Assistance od 91 zl miesiecznie; source https://www.pzu.pl/kampania/auto/ubezpieczenie-auto checked 10/2026
+Warta,WARTA,bill,Insurance,,PLN,,PL,4,PZU|Allianz Polska,,no,no,Car/home insurance; quote-based; source https://www.warta.pl checked 10/2026
+Link4,LINK4,bill,Insurance,,PLN,,PL,3,,,no,no,Direct car insurance; quote-based; source https://www.link4.pl checked 10/2026
+stc,STC,subscription,Phone & Internet,287.50,SAR,,SA,5,Mobily|Zain KSA|Salam,,yes,no,Baity Fiber Basic home internet package listed at 287.5 SAR on official stc page; source https://www.stc.com.sa/en/personal/homepackages/baity-fiber-packages.html checked 10/2026
+Mobily,MOBILY,subscription,Phone & Internet,230.00,SAR,,SA,4,STC|Zain KSA|Salam,,yes,no,Home Fiber Postpaid 200; starting from 230 SAR/month VAT incl; source https://www.mobily.com.sa/web/en/personal/home/fiber-postpaid/fiber-postpaid checked 10/2026
+Zain KSA,ZAIN|ZAIN KSA,subscription,Phone & Internet,199.00,SAR,,SA,4,STC|Mobily|Salam,,yes,no,Fiber Home Lite 199 SAR per month; source https://eshop.sa.zain.com/en/home checked 10/2026
+Salam,SALAM,subscription,Phone & Internet,,SAR,,SA,2,STC|Mobily|Zain KSA,,no,no,Saudi home internet provider (5G HomeFi and fiber); official site lists 5G home internet at 140 with billing period not stated; source https://www.salam.sa checked 10/2026
+Saudi Electricity Company,SEC|SAUDI ELECTRICITY,bill,Utilities,,SAR,,SA,5,National Water Company,,no,no,Electricity; consumption-based slab tariff; source https://www.se.com.sa checked 10/2026
+National Water Company,NWC|NATIONAL WATER,bill,Utilities,,SAR,,SA,4,Saudi Electricity Company,,no,no,Water and wastewater; consumption-based; source https://www.nwc.com.sa checked 10/2026
+Shahid VIP,SHAHID|SHAHID VIP|MBC,subscription,Entertainment,44.99,SAR,,SA,4,Netflix MENA|stc TV|StarzPlay,,yes,no,MBC streaming; Shahid VIP package 44.99 SAR/month VAT incl (Sports VIP 69.99) via official stc direct-billing page; source https://www.stc.com.sa/en/personal/lifestyle/direct-billing/shahid-vip.html checked 10/2026
+stc tv,STC TV|JAWWY TV,subscription,Entertainment,25.00,SAR,,SA,3,Shahid VIP|Netflix MENA,,yes,no,Classic plan 25 SAR/month VAT incl (Lite 15; Premium 60); source https://www.stctv.com/en/faq checked 10/2026
+Fitness Time,FITNESS TIME,membership,Fitness & Health,,SAR,,SA,4,Body Masters|B_FIT,,no,no,Gym chain; membership prices club/category-based; source https://www.fitnesstime.com.sa checked 10/2026
+Body Masters,BODY MASTERS,membership,Fitness & Health,,SAR,,SA,3,Fitness Time|B_FIT,,no,no,Gym chain; prices not published online; source https://www.bodymasters.com.sa checked 10/2026
+Bupa Arabia,BUPA|BUPA ARABIA,bill,Insurance,,SAR,,SA,4,Tawuniya|Al Rajhi Takaful,,no,no,Health insurance; annual premium quote-based (bank installment plans available via partners); source https://www.bupa.com.sa checked 10/2026
+Tawuniya,TAWUNIYA,bill,Insurance,,SAR,,SA,4,Bupa Arabia|Al Rajhi Takaful|Malath,,no,no,Motor insurance premium payable in 3-6 monthly installments per official page; quote-based; source https://tawuniya.com/inv/our_business_lines/mobility_insurance.html checked 10/2026
+Al Rajhi Takaful,AL RAJHI TAKAFUL,bill,Insurance,,SAR,,SA,3,Tawuniya|Bupa Arabia|Malath,,no,no,Motor and health insurance; quote-based; source https://www.alrajhitakaful.com checked 10/2026
+Malath,MALATH,bill,Insurance,,SAR,,SA,2,Tawuniya|Bupa Arabia,,no,no,Vehicle and health insurance; quote-based; source https://www.malath.com.sa checked 10/2026
+Alinma Tokio Marine,ALINMA TOKIO MARINE,bill,Insurance,,SAR,,SA,2,,,no,no,Insurance; quote-based; source https://www.alinmatokiomarine.com checked 10/2026
+Etisalat (e&),ETISALAT|E&,subscription,Phone & Internet,311.00,AED,,AE,5,du,,yes,no,eLife Unlimited Starter home internet AED 311/month (5% VAT excluded); 24-month commitment; source https://www.eand.ae/en/c/home/plans/details/elife-unlimited-plans/unlimited-starter.html checked 10/2026
+du,DU|DU UAE,subscription,Phone & Internet,272.00,AED,,AE,5,Etisalat e&,,yes,no,du Home starting AED 272/month; source https://www.du.ae/personal/at-home checked 10/2026
+Virgin Mobile UAE,VIRGIN MOBILE UAE,subscription,Phone & Internet,,AED,,AE,2,,,no,no,du-based MVNO; app-only plans (6/12-month); prices in-app; source https://www.virginmobile.ae checked 10/2026
+DEWA,DEWA|DEWA DUBAI,bill,Utilities,,AED,,AE,5,ADDC|SEWA|Empower,,no,no,Dubai electricity and water; consumption-based slab tariff; source https://www.dewa.gov.ae checked 10/2026
+ADDC,ADDC|ABU DHABI DISTRIBUTION COMPANY,bill,Utilities,,AED,,AE,4,DEWA|SEWA,,no,no,Abu Dhabi electricity and water distribution; consumption-based; source https://www.addc.gov.ae checked 10/2026
+SEWA,SEWA,bill,Utilities,,AED,,AE,3,DEWA|ADDC,,no,no,Sharjah electricity water and gas; consumption-based; source https://www.sewa.gov.ae checked 10/2026
+Empower,EMPOWER,bill,Utilities,,AED,,AE,3,Emicool|Tabreed,,no,no,Dubai district cooling; billed to consumers through building accounts; consumption-based; source https://www.empower.ae checked 10/2026
+STARZPLAY,STARZPLAY,subscription,Entertainment,40.00,AED,,AE,3,,,yes,no,Regional streaming; AED 40/month as shown on du official page (STARZPLAY own site not fetchable); source https://www.du.ae/personal/mobile/pay-with-du/starz-play checked 10/2026
+OSN+,OSN|OSN PLUS,subscription,Entertainment,48.99,AED,,AE,3,Shahid VIP UAE|Netflix UAE|StarzPlay,,yes,no,Standard plan AED 48.99/month (Premium 64.99); source https://partner.osnplus.com/ae/du/en checked 10/2026
+Fitness First UAE,FITNESS FIRST UAE,membership,Fitness & Health,,AED,,AE,4,,,no,no,Membership rates vary by club/package; not published online; source https://uae.fitnessfirstme.com/membership-options checked 10/2026
+GymNation,GYMNATION,membership,Fitness & Health,,AED,,AE,3,Wellfit|Fitness First UAE|Warehouse Gym,,no,no,Low-cost 24/7 chain; fees shown per club at signup; source https://gymnation.com/en-ae/gymsnearme/gymmembership/ checked 10/2026
+Daman,DAMAN|NATIONAL HEALTH INSURANCE COMPANY,bill,Insurance,,AED,,AE,4,Orient Insurance|ADNIC|Sukoon,,no,no,Health insurance; annual premium quoted; bank installment plans via partners; source https://www.damaninsurance.ae checked 10/2026
+Sukoon,SUKOON,bill,Insurance,,AED,,AE,3,,,no,no,Dubai-based insurer; motor/home/health; quote-based; source https://www.sukoon.com checked 10/2026
+ADNIC,ADNIC,bill,Insurance,,AED,,AE,2,,,no,no,Abu Dhabi National Insurance; motor/medical/home; quote-based; source https://www.adnic.ae checked 10/2026
+Careem Plus,CAREEM PLUS,subscription,Transport,19.00,AED,,AE,4,,,yes,no,Super-app subscription AED 19/month; source https://help.careem.com/hc/en-us/articles/1500005969762-What-is-Careem-Plus checked 10/2026
+Digi Fibra,DIGI|DIGI SPAIN|DIGIMOBIL,bill,Phone & Internet,25.00,EUR,,ES,4,Movistar|Orange|Vodafone,,yes,no,"300 Mb 25 EUR/mes (1 Gb 30 EUR/mes) per https://www.digimobil.es/fibra-optica/smart/2gb, Oct 2026"
+Movistar Plus+,MOVISTAR PLUS|MOVISTAR+,subscription,Entertainment,9.99,EUR,,ES,4,Atresplayer Premium|Filmin|Netflix Spain,,yes,no,"9,99 EUR/mes imp. incl. per https://contratar.movistarplus.es/ and https://www.movistarplus.es/planes (also 4,99 EUR tier), Oct 2026"
+Abono Transportes Madrid (CRTM),CRTM|ABONO TRANSPORTES,bill,Transport,32.70,EUR,,ES,4,Metro Madrid|EMT Madrid|Cercanias,,yes,no,"30-day pass Zona A ordinary fare 32,70 EUR per official 2026 CRTM tariff order https://www.crtm.es/media/s1qi0nmo/bocm-20251231-precios_transporte.pdf, Oct 2026; zone- and discount-dependent"
+T-usual Barcelona (T-mobilitat),T-MOBILITAT|T-USUAL,bill,Transport,22.80,EUR,,ES,4,T-casual|FGC|Rodalies,,yes,no,"T-usual 1 zone 22,80 EUR for 30 days per https://t-mobilitat.cat/en/web/t-mobilitat/fares/t-usual, Oct 2026"
+Canal de Isabel II,CANAL DE ISABEL II,bill,Utilities,,EUR,,ES,3,Aguas de Barcelona|Aqualia,,no,no,metered per-m3 water tariff; price not verified this run
+Mutua Madrilena,MUTUA MADRILENA|MUTUA,bill,Insurance,,EUR,,ES,3,Mapfre|Allianz Espana,,no,no,quote-based premium; monthly billing not verified this run
+ATM Milano (Monthly Pass),ATM|ATM MILANO,bill,Transport,39.00,EUR,,IT,4,Trenord|ATAC Roma,,yes,no,"abbonamento mensile 39 EUR per https://www.atm.it/IT/VIAGGIACONNOI/ABBONAMENTI/Pagine/Tipologie.aspx, Oct 2026"
+ATAC Roma (Monthly Pass),ATAC|ATAC ROMA,bill,Transport,35.00,EUR,,IT,4,ATM Milano|Trenitalia,,yes,no,"Mensile Roma personale 35,00 EUR per https://www.atac.roma.it/biglietti-e-abbonamenti, Oct 2026"
+FitActive,FITACTIVE,membership,Fitness & Health,,EUR,,IT,2,Basic-Fit Italia|Virgin Active Italia,,no,no,Italian gym chain; no official published monthly membership price found this run
+ACEA,ACEA|ACEA ENERGIA,bill,Utilities,,EUR,,IT,4,A2A|Hera|Enel,,no,no,usage-based electricity and Rome water tariffs; price not verified this run
+Generali Italia,GENERALI|ASSICURAZIONI GENERALI,bill,Insurance,,EUR,,IT,4,UnipolSai|Allianz Italia|AXA Italia,,no,no,quote-based premium; monthly billing not verified this run
+UnipolSai,UNIPOLSAI|UNIPOL GRUPPO,bill,Insurance,,EUR,,IT,3,Generali Italia|Allianz Italia,,no,no,quote-based premium; monthly billing not verified this run
+Simyo,SIMYO,bill,Phone & Internet,,EUR,,NL,2,KPN|Odido|VodafoneZiggo,,no,no,price not verified this run
+NS Flex (Dutch Railways),NS|NEDERLANDSE SPOORWEGEN|NS FLEX,bill,Transport,,EUR,,NL,4,GVB|Connexxion|EBS,,no,no,monthly NS Flex season subscriptions exist; price not verified this run
+SportCity,SPORTCITY,membership,Fitness & Health,,EUR,,NL,3,Basic-Fit NL|Fit For Free,,no,no,"billed per 4 weeks (from 27,99 EUR per 4 weeks per https://www.sportcity.nl/lidmaatschap, Oct 2026); 4-week billing, no monthly amount"
+Netia,NETIA,bill,Phone & Internet,,PLN,,PL,3,Orange Polska|Plus|T-Mobile Polska,,no,no,consumer household price not verified this run (60 zl figure appeared only in a business-section article on netia.pl)
+ZTM Warszawa (30-Day Ticket),ZTM|ZTM WARSZAWA,bill,Transport,110.00,PLN,,PL,4,Metro Warszawa|WKD|ZTM Krakow,,yes,no,"Imienny bilet 30-dniowy strefa 1 normalny 110 zl per https://www.wtp.waw.pl/ceny-i-rodzaje-biletow/bilety-dlugookresowe/, Oct 2026"
+CityFit,CITYFIT,membership,Fitness & Health,119.95,PLN,,PL,4,Zdrofit|Platinium|Smart Gym,,yes,no,"od 119,95 zl placone co miesiac (club-dependent, 139,95 zl Warsaw clubs) per https://cityfit.pl/, Oct 2026"
+MPWiK Warszawa (Water),MPWIK,bill,Utilities,,PLN,,PL,3,Aquanet|MPWiK Krakow,,no,no,metered per-m3 water and sewage tariff; price not verified this run
+Riyadh Metro / Darb,RIYADH METRO|DARB,bill,Transport,,SAR,,SA,3,SAPTCO,,no,no,30-day passes exist but official price not verified on operator pages this run
+Shahid VIP UAE,SHAHID|SHAHID VIP|MBC,subscription,Entertainment,,AED,,AE,3,OSN+|Netflix UAE,,no,no,regional platform sold in UAE; official UAE-specific pricing not verified on Shahid's own page this run
+Anghami,ANGHAMI|ANGHAMI PLUS,subscription,Entertainment,,AED,,AE,2,OSN+,,no,no,regional music platform; UAE monthly price not verified this run
+Wellfit,WELLFIT,membership,Fitness & Health,,AED,,AE,3,GymNation|Warehouse Gym,,no,no,club- and plan-specific pricing; monthly price not verified this run
+Emicool,EMICOOL,bill,Utilities,,AED,,AE,2,Empower|Tabreed,,no,no,consumption-based district cooling charges; price not verified this run
+Orient Insurance,ORIENT INSURANCE,bill,Insurance,,AED,,AE,3,Daman|Sukoon|ADNIC,,no,no,quote-based premium; monthly billing not verified this run
+RTA Dubai (30-Day Pass),RTA|RTA DUBAI|DUBAI METRO,bill,Transport,350.00,AED,,AE,4,Sharjah transport|Abu Dhabi transport,,yes,no,"Regular 30 Day Pass all zones 350 AED (1 zone 140, 2 zones 230) per official RTA guide https://www.rta.ae/links/promotions/rta-dubai-connector-eng.pdf, Oct 2026"

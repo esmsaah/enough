@@ -34,6 +34,9 @@ const round2 = (n: number) => Math.round((n + Number.EPSILON) * 100) / 100;
 const normRegion = (r: string) => (r.trim().toUpperCase() === 'GB' ? 'UK' : r.trim().toUpperCase());
 
 function analysis(type: string, group: string): 'digital' | 'membership' | 'bill' {
+  // Research sheets sometimes label health insurers as memberships. The app's
+  // category model treats insurance as a bill so it gets the bill flow.
+  if (group === 'Insurance') return 'bill';
   if (type === 'bill') return 'bill';
   if (type === 'membership') return 'membership';
   return BILL_GROUPS.has(group) ? 'bill' : 'digital'; // subscription in a bill-ish group = a bill
