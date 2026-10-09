@@ -3,7 +3,6 @@
 // navy price band, ground footer. Follows the B2 handoff; no invented styles.
 import { useState, type DragEvent } from 'react';
 import { useStore } from '../app/store';
-import { QUICK_PICKS } from '../app/catalog';
 import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { importStatement } from '../app/statementImport';
 import { researchMerchants } from '../app/merchantResearch';
@@ -18,12 +17,10 @@ export function Landing() {
   const [uploadError, setUploadError] = useState('');
   const [uploading, setUploading] = useState(false);
 
-  const start = () => dispatch({ type: 'goto', step: 'quickstart' });
-  const startWith = (key: string) => {
-    const pick = QUICK_PICKS.find((item) => item.merchantKey === key);
-    if (pick) dispatch({ type: 'toggleQuickPick', pick });
-    start();
-  };
+  // Go to the gentle first-pick screen. Nothing is preselected — the person
+  // chooses on the next screen (prices vary by country, so none are assumed).
+  const start = () => dispatch({ type: 'goto', step: 'picks' });
+  const startWith = (_key: string) => start();
   const upload = () => dispatch({ type: 'goto', step: 'addstatement' });
 
   const onDrop = async (e: DragEvent<HTMLDivElement>) => {

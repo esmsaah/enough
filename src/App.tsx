@@ -3,6 +3,7 @@ import { AnythingElse } from './screens/AnythingElse';
 import { CutList } from './screens/CutList';
 import { GoodShape } from './screens/GoodShape';
 import { Landing } from './screens/Landing';
+import { QuickPicks } from './screens/QuickPicks';
 import { AddStatement } from './screens/AddStatement';
 import { WhatWeKeep } from './screens/WhatWeKeep';
 import { FoundItems } from './screens/FoundItems';
@@ -18,6 +19,8 @@ function Flow() {
   switch (state.step) {
     case 'landing':
       return <Landing />;
+    case 'picks':
+      return <QuickPicks />;
     case 'addstatement':
       return <AddStatement />;
     case 'keep':
@@ -53,7 +56,7 @@ export function App() {
 function AppFrame() {
   const { state } = useStore();
   const showDesktopHeader = state.step !== 'landing';
-  const showReceipt = ['quickstart', 'addstatement', 'keep', 'found', 'anythingElse', 'usage', 'cutlist'].includes(state.step);
+  const showReceipt = ['picks', 'quickstart', 'addstatement', 'keep', 'found', 'anythingElse', 'usage', 'cutlist'].includes(state.step);
   return (
     <div className={`app${showReceipt ? ' app--with-receipt' : ''}${state.step === 'landing' ? ' app--landing' : ''}`}>
       {showDesktopHeader && <DesktopHeader />}

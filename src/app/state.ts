@@ -9,6 +9,7 @@ import { convert } from '../engine/rates';
 
 export type Step =
   | 'landing'
+  | 'picks'
   | 'addstatement'
   | 'keep'
   | 'found'

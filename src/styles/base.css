@@ -387,3 +387,9 @@ p { margin: 8px 0; }
   .qs-band__month { font-size: 14px; color: #fff; }
   .qs-optional { font-size: 14px; }
 }
+
+/* Quick picks (screen 2) */
+.qp-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; color: var(--muted); margin: 10px 0 2px; }
+.qp-chips { margin-top: 18px; gap: 10px; }
+.qp-something { min-height: 44px; padding: 8px 16px; border: 1.5px dashed var(--dash); border-radius: 999px; background: transparent; color: var(--muted); font-weight: 600; font-size: 15px; cursor: pointer; }
+.qp-something:hover { border-color: var(--ink); color: var(--ink); }
