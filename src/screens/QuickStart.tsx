@@ -77,7 +77,9 @@ export function QuickStart() {
   const [askCadence, setAskCadence] = useState<NonNullable<QuickPick['defaultCadence']>>('month');
   const selected = new Set(state.items.filter((i) => i.source === 'quickpick').map((i) => i.merchantKey));
   const ownItems = state.items.filter((i) => i.source === 'manual');
-  const backStep = state.statement ? 'found' : 'landing';
+  const cur = state.currency;
+  const count = selected.size + ownItems.length;
+  const monthly = audit.yearlyTotal / 12;
 
   const sections = useMemo(() => {
     const bySection = new Map<SectionKey, QuickPick[]>();
@@ -141,8 +143,8 @@ export function QuickStart() {
   return (
     <>
       <div className="screen">
-        <ProgressBar step={1} total={4} />
-        <h1>What do you pay for?</h1>
+        <div className="qs-progress"><ProgressBar step={1} total={3} /><span className="qs-progress__count">1 / 3</span></div>
+        <h1>Which of these do you pay for?</h1>
         <p className="muted">Tap everything that sounds familiar. You can fix prices and add more later.</p>
 
         <label className="country-line">
@@ -250,17 +252,25 @@ export function QuickStart() {
         </section>
       </div>
 
-      <div className="footer">
-        <div className="total-line">
-          <span className="muted">{selected.size + ownItems.length} selected · per year</span>
-          <span className="amount">{formatMoney(audit.yearlyTotal, state.currency, { round: true })}</span>
+      <div className="footer qs-band">
+        <div className="qs-band__row">
+          <div className="qs-band__picked">
+            <span className="qs-badge">{count}</span>
+            <span className="qs-band__text">
+              <span className="qs-band__sofar">picked<span className="qs-band__sofar-ext"> so far,</span></span>
+              <span className="qs-band__year">{formatMoney(audit.yearlyTotal, cur, { round: true })}<span className="qs-band__unit"> a year</span></span>
+              <span className="qs-band__month">{formatMoney(monthly, cur, { round: true })} a month</span>
+            </span>
+          </div>
+          <button type="button" className="qs-next" disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'anythingElse' })}>
+            Next, how often you use them
+          </button>
         </div>
-        <div className="row" style={{ gap: 12 }}>
-          <Button variant="secondary" onClick={() => dispatch({ type: 'goto', step: backStep })}>Back</Button>
-          <Button full disabled={selected.size + ownItems.length === 0} onClick={() => dispatch({ type: 'goto', step: 'anythingElse' })}>
-            Continue
-          </Button>
-        </div>
+        <button type="button" className="qs-add" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/><path d="M14 3v6h6" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/></svg>
+          Or add a bank statement
+        </button>
+        <p className="qs-optional">Optional. PDF, CSV or a photo, read on your phone. We never ask for your bank login.</p>
       </div>
     </>
   );

@@ -1,9 +1,9 @@
 /* Enough — design tokens. Section 12 of ENOUGH_BRIEF.md. Use nothing else. */
 :root {
-  --navy: #0e3b32; /* dark background: landing, result header, share card */
-  --indigo: #0b6b53; /* action / links on light, keep, pen circles */
-  --indigo-dark: #072a22;
-  --lime: #c8f0dc; /* found money / green accent, max once per screen */
+  --navy: #12363a; /* dark background: landing, result header, share card */
+  --indigo: #0f6b66; /* action / links on light, keep, pen circles */
+  --indigo-dark: #0b2629;
+  --lime: #cfede6; /* found money / green accent, max once per screen */
   --coral-pen: #d2452a; /* strike-throughs, stamps, handwritten notes */
   --coral-text: #c4320f; /* cut labels on light ground */
   --amber: #f2b544;
@@ -13,7 +13,7 @@
   --white: #ffffff;
   --ink: #101014;
   --muted: #5b5b66;
-  --muted-on-navy: #9fc2b6;
+  --muted-on-navy: #a3c4c2;
   --line: #dedcd5;
   --dash: #bdbcb3;
 
