@@ -49,7 +49,7 @@ export function QuickPicks() {
 
   return (
     <>
-      <div className="screen">
+      <div className="screen screen--quick-picks">
         <div className="qs-progress"><ProgressBar step={1} total={3} /><span className="qs-progress__count">1 / 3</span></div>
         <p className="qp-eyebrow">STEP 1 · PICK</p>
         <h1>Which of these do you pay for?</h1>
