@@ -50,6 +50,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     spendingByCategory: state.statement?.spendingByCategory,
     spendingCurrency: state.statement?.meta.displayCurrency,
     pinnedVideoItemIds: state.rotationPinnedIds,
+    profile: state.profile,
+    ...(state.statement?.fees ? {
+      ...(state.statement.fees.fxYearly !== undefined ? { statementFxFeeYearly: state.statement.fees.fxYearly } : {}),
+      ...(state.statement.fees.bankYearly !== undefined ? { statementBankFeeYearly: state.statement.fees.bankYearly } : {}),
+    } : {}),
   });
   return <StoreContext.Provider value={{ state, dispatch, audit }}>{children}</StoreContext.Provider>;
 }

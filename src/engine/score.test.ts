@@ -324,3 +324,77 @@ describe('rule 8 — yearly price from the map is EUR, converted per currency', 
     expect(audit.recommendations.find((r) => r.itemId === 'x')!.action).toBe('cancel');
   });
 });
+
+describe('cloud overlap — consolidate into one cheaper plan (§7)', () => {
+  it('Dropbox 2 TB + Google One 100 GB → one Google One 2 TB when combined storage < 2 TB', () => {
+    const dropbox = item({ id: 'dbx', name: 'Dropbox', merchantKey: 'dropbox', displayCategory: 'Cloud & Storage', overlapGroup: 'cloud', usage: 'sometimes', wouldMiss: true, price: 11.99, storageUsedGb: 1200 });
+    const gone = item({ id: 'g1', name: 'Google One', merchantKey: 'google one', displayCategory: 'Cloud & Storage', overlapGroup: 'cloud', usage: 'sometimes', wouldMiss: true, price: 1.99, storageUsedGb: 90 });
+    const audit = runAudit([dropbox, gone]);
+    const winner = audit.recommendations.find((r) => r.itemId === 'dbx')!; // most expensive carries the saving
+    expect(winner.action).toBe('removeOverlap');
+    expect(winner.reason).toContain('Google One 2 TB');
+    expect(winner.potentialYearlySaving).toBeCloseTo((11.99 + 1.99 - 9.99) * 12, 1);
+    const other = audit.recommendations.find((r) => r.itemId === 'g1')!;
+    expect(other.verdict).toBe('keep');
+    expect(other.potentialYearlySaving).toBe(0);
+    // Money found is counted once, on the winner only.
+    expect(audit.potentialYearlySaving).toBeCloseTo((11.99 + 1.99 - 9.99) * 12, 1);
+  });
+
+  it('without storage answers, falls back to the keep-most-used overlap rule', () => {
+    const a = item({ id: 'a', name: 'iCloud+', merchantKey: 'icloud', overlapGroup: 'cloud', usage: 'sometimes', wouldMiss: true, price: 2.99 });
+    const b = item({ id: 'b', name: 'Dropbox', merchantKey: 'dropbox', overlapGroup: 'cloud', usage: 'sometimes', wouldMiss: true, price: 11.99 });
+    const audit = runAudit([a, b]);
+    expect(audit.recommendations.find((r) => r.itemId === 'b')!.action).toBe('removeOverlap');
+  });
+});
+
+describe('AI overlap — never auto-cut (§7)', () => {
+  it('same uses → "one could do both" (look again, no money claimed)', () => {
+    const chatgpt = item({ id: 'c', name: 'ChatGPT', merchantKey: 'chatgpt', displayCategory: 'AI & Software', overlapGroup: 'ai', usage: 'sometimes', wouldMiss: true, price: 20, uses: ['writing', 'research'] });
+    const claude = item({ id: 'cl', name: 'Claude', merchantKey: 'claude', displayCategory: 'AI & Software', overlapGroup: 'ai', usage: 'sometimes', wouldMiss: true, price: 20, uses: ['writing', 'coding'] });
+    const audit = runAudit([chatgpt, claude]);
+    for (const r of audit.recommendations) {
+      expect(r.verdict).toBe('lookAgain');
+      expect(r.action).toBe('removeOverlap');
+      expect(r.potentialYearlySaving).toBe(0);
+    }
+    expect(audit.potentialYearlySaving).toBe(0); // AI is never counted as money found
+  });
+
+  it('different uses → keep both, never cut', () => {
+    const chatgpt = item({ id: 'c2', name: 'ChatGPT', merchantKey: 'chatgpt', displayCategory: 'AI & Software', overlapGroup: 'ai', usage: 'always', price: 20, uses: ['coding'] });
+    const midjourney = item({ id: 'm', name: 'Midjourney', merchantKey: 'midjourney', displayCategory: 'AI & Software', overlapGroup: 'ai', usage: 'always', price: 10, uses: ['images'] });
+    const audit = runAudit([chatgpt, midjourney]);
+    for (const r of audit.recommendations) expect(r.verdict).toBe('keep');
+  });
+});
+
+describe('amount source — exact vs estimate totals (§5)', () => {
+  it('splits the yearly total into statement-backed and estimated parts', () => {
+    const exact = item({ id: 'e', name: 'Netflix', source: 'statement', estimate: false, price: 10, usage: 'always' });
+    const guess = item({ id: 'g', name: 'Spotify', source: 'quickpick', estimate: true, price: 10, usage: 'always' });
+    const audit = runAudit([exact, guess]);
+    expect(audit.yearlyTotal).toBeCloseTo(240, 2);
+    expect(audit.exactYearlyTotal).toBeCloseTo(120, 2);
+    expect(audit.estimateYearlyTotal).toBeCloseTo(120, 2);
+  });
+});
+
+describe('hidden costs and reminders flow through the audit (§7)', () => {
+  it('surfaces hidden costs without counting them as money found', () => {
+    const keep = item({ id: 'k', name: 'Netflix', usage: 'always', price: 20, catalogPrice: 13.99 });
+    const audit = runAudit([keep], { profile: { bankFeeMonthly: 5 } });
+    expect(audit.potentialYearlySaving).toBe(0); // nothing cut; hidden costs never count
+    const kinds = audit.hiddenCosts.map((h) => h.kind);
+    expect(kinds).toContain('bankFee');
+    expect(kinds).toContain('priceAboveCatalog');
+    expect(audit.hiddenCostYearlyTotal).toBeGreaterThan(0);
+  });
+
+  it('builds a yearly-renewal reminder from item data', () => {
+    const domain = item({ id: 'd', name: 'Domain', frequency: 'yearly', price: 12, usage: 'always', renewalMonth: 3 });
+    const audit = runAudit([domain], { createdAt: '2026-01-10' });
+    expect(audit.reminders.some((r) => r.kind === 'renewal' && r.itemId === 'd')).toBe(true);
+  });
+});

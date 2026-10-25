@@ -56,6 +56,9 @@ export type Source = 'statement' | 'quickpick' | 'manual' | 'cash';
 
 export type Usage = 'always' | 'sometimes' | 'almostNever';
 
+/** What a person uses an AI assistant for (overlap rule, §7). */
+export type AiUse = 'writing' | 'coding' | 'research' | 'images' | 'study' | 'workDocs';
+
 export type Item = {
   id: string;
   name: string; // display name, e.g. "FitZone Gym"
@@ -83,6 +86,12 @@ export type Item = {
   importance?: 1 | 2 | 3 | 4 | 5;
   overlapsWith?: string[]; // item ids
   overlapGroup?: OverlapGroup; // set by the engine when an overlap is detected
+  preferredInOverlap?: string; // music/video overlap answer: the item id to keep, or 'same'
+  storageUsedGb?: number; // cloud overlap: how much the person actually uses
+  uses?: AiUse[]; // AI overlap: what the person uses this assistant for
+  renewalMonth?: number; // 1–12, for a yearly plan: the month it renews (reminder)
+  trialEndsOn?: string; // ISO date a free/intro trial turns into a paid charge (reminder)
+  catalogPrice?: number; // typical monthly price from the catalog, in this item's currency (price-above-catalog warning)
   duplicateOf?: string; // set for a second charge of the same service
   flaggedForReminder?: boolean;
   done?: boolean; // person marked the action as done
@@ -117,6 +126,39 @@ export type Recommendation = {
   approx?: boolean; // saving relies on a converted (approximate) figure
 };
 
+/**
+ * One-off profile answers (section 5). All optional. On the statement path,
+ * foreignCurrency and bankFeeMonthly are computed from the statement and skipped.
+ */
+export type Profile = {
+  foreignCurrency?: 'never' | 'sometimes' | 'often';
+  bankFeeMonthly?: 0 | 2 | 5 | 'unknown';
+  delivery?: { frequency: 'weekly' | 'sometimes' | 'never'; typicalAmount?: number };
+  taxi?: { frequency: 'weekly' | 'sometimes' | 'never'; typicalAmount?: number };
+  recentTrials?: Array<{ merchantKey: string; startDate: string }>;
+  cashItems?: Array<{ label: string; monthly: number }>;
+};
+
+/** A cost worth knowing about but never counted as money found (section 7). */
+export type HiddenCost = {
+  kind: 'fx' | 'bankFee' | 'habit' | 'cash' | 'smallSubs' | 'priceAboveCatalog';
+  label: string;
+  yearly?: number; // in display currency; omitted when unknown (advice only)
+  estimate: boolean;
+  note: string; // one plain sentence
+  itemId?: string; // set for item-specific advice (price above catalog)
+  currency: string;
+};
+
+/** A date to remind the person about (section 7). Shown, never counted. */
+export type Reminder = {
+  kind: 'renewal' | 'trial';
+  label: string;
+  date: string; // ISO date the reminder should fire (before the charge)
+  note: string;
+  itemId?: string;
+};
+
 export type Audit = {
   /** Digital subscriptions and memberships; the only items scored for verdicts. */
   items: Item[];
@@ -127,8 +169,15 @@ export type Audit = {
   habits: Item[];
   recommendations: Recommendation[];
   yearlyTotal: number;
+  /** Of yearlyTotal, the part backed by exact statement amounts. */
+  exactYearlyTotal: number;
+  /** Of yearlyTotal, the part that rests on estimates (answers/catalog). */
+  estimateYearlyTotal: number;
   habitYearlyTotal: number;
   potentialYearlySaving: number;
+  hiddenCosts: HiddenCost[];
+  hiddenCostYearlyTotal: number; // sum of known hidden costs; advice, never money found
+  reminders: Reminder[];
   paywall: boolean; // section 7: shown only if a cut/lookAgain exists AND saving >= threshold
   goodShape: boolean; // nothing worth paying for
   currency: string; // display currency

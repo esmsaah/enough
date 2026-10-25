@@ -2,7 +2,7 @@
 // A small reducer over the engine's Item[]. The audit itself is derived by
 // runAudit; this only holds the inputs and where the person is in the flow.
 
-import type { BillingModel, Frequency, Item, Usage } from '../engine/types';
+import type { AiUse, BillingModel, Frequency, Item, Profile, Usage } from '../engine/types';
 import { detect, type DetectionResult, type ImportMeta } from '../engine/detect';
 import type { QuickPick } from './catalog';
 import { convert } from '../engine/rates';
@@ -39,6 +39,8 @@ export type State = {
   country?: string;
   /** Analyst notes by item id: one human sentence, never an amount. */
   analystNotes: Record<string, { reason?: string; moveTo?: 'subscription' | 'bill' | 'spending'; displayCategory?: Item['displayCategory'] }>;
+  /** One-off profile answers (section 5). On the statement path, FX and bank fee are skipped. */
+  profile: Profile;
 };
 
 export const initialState: State = {
@@ -54,6 +56,7 @@ export const initialState: State = {
   rotationRemindersEnabled: false,
   aiRecognition: true,
   analystNotes: {},
+  profile: {},
 };
 
 export type Action =
@@ -74,6 +77,12 @@ export type Action =
   | { type: 'setVisits'; id: string; visits: number }
   | { type: 'setSingleVisit'; id: string; price: number }
   | { type: 'setCompareState'; id: string; compareState: Item['compareState'] }
+  | { type: 'setPreferredInOverlap'; id: string; preferred: string } // item id to keep, or 'same'
+  | { type: 'setStorageUsed'; id: string; storageUsedGb: number }
+  | { type: 'setAiUses'; id: string; uses: AiUse[] }
+  | { type: 'setRenewalMonth'; id: string; renewalMonth: number }
+  | { type: 'setTrialEnds'; id: string; trialEndsOn: string }
+  | { type: 'setProfile'; profile: Partial<Profile> }
   | { type: 'toggleReminder'; id: string }
   | { type: 'toggleDone'; id: string }
   | { type: 'setReportEmail'; email: string }
@@ -160,6 +169,7 @@ export function reducer(state: State, action: Action): State {
         source: 'quickpick',
         estimate: true,
         currency: state.currency,
+        ...(action.pick.price > 0 && !action.pick.priceUnknown ? { catalogPrice: convert(action.pick.price, action.pick.currency ?? 'EUR', state.currency) ?? action.pick.price } : {}),
         overlapGroup: action.pick.overlapGroup,
         cancelUrl: action.pick.cancelUrl,
         yearlyPrice: action.pick.yearlyPrice,
@@ -182,6 +192,7 @@ export function reducer(state: State, action: Action): State {
         source: 'quickpick',
         estimate: true,
         currency: state.currency,
+        ...(p.price > 0 && !p.priceUnknown ? { catalogPrice: convert(p.price, p.currency ?? 'EUR', state.currency) ?? p.price } : {}),
         overlapGroup: p.overlapGroup,
         cancelUrl: p.cancelUrl,
         yearlyPrice: p.yearlyPrice,
@@ -212,6 +223,18 @@ export function reducer(state: State, action: Action): State {
       return { ...state, items: patch(state.items, action.id, { singleVisitPrice: action.price }) };
     case 'setCompareState':
       return { ...state, items: patch(state.items, action.id, { compareState: action.compareState }) };
+    case 'setPreferredInOverlap':
+      return { ...state, items: patch(state.items, action.id, { preferredInOverlap: action.preferred }) };
+    case 'setStorageUsed':
+      return { ...state, items: patch(state.items, action.id, { storageUsedGb: action.storageUsedGb }) };
+    case 'setAiUses':
+      return { ...state, items: patch(state.items, action.id, { uses: action.uses }) };
+    case 'setRenewalMonth':
+      return { ...state, items: patch(state.items, action.id, { renewalMonth: action.renewalMonth }) };
+    case 'setTrialEnds':
+      return { ...state, items: patch(state.items, action.id, { trialEndsOn: action.trialEndsOn }) };
+    case 'setProfile':
+      return { ...state, profile: { ...state.profile, ...action.profile } };
     case 'toggleReminder':
       return {
         ...state,

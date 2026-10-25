@@ -7,17 +7,26 @@
 // rotate), so scoring takes the whole item list, precomputes those
 // relationships once, then decides each item against the ordered rules.
 
+import { cheapestCloudPlan } from './cloudPlans';
+import { computeHiddenCosts } from './hidden';
 import { convert } from './rates';
+import { buildReminders } from './reminders';
 import type {
   ActionType,
   Audit,
   Item,
   OverlapGroup,
+  Profile,
   Recommendation,
   SpendingCategory,
   StreamingRotationPlan,
   Verdict,
 } from './types';
+
+/** An amount is "exact" only when it came straight from the statement. */
+export function isExactAmount(item: Pick<Item, 'source' | 'estimate'>): boolean {
+  return item.source === 'statement' && !item.estimate;
+}
 
 /** Minimum potential yearly saving to show a paywall, expressed in EUR. It is
  *  converted into the audit's display currency before comparison. */
@@ -66,27 +75,29 @@ function verdictFor(action: ActionType, hasNumber: boolean): Verdict {
   return 'lookAgain';
 }
 
+type CloudConsolidation = { winnerId: string; saving: number; planName: string; memberIds: Set<string> };
+
 type Context = {
   /** id of the item kept in each duplicate group; every other member is an extra */
   duplicateExtras: Set<string>;
   /** for a member being cut for overlap: the name of the item kept in its group */
   overlapKeptName: Map<string, string>;
   overlapLosers: Set<string>;
+  /** cloud items that collapse into one cheaper plan (§7 cloud overlap) */
+  cloudConsolidation?: CloudConsolidation;
+  /** AI assistants used for the same thing → "one could do both" (never cut) */
+  aiSameUses: Set<string>;
   byId: Map<string, Item>;
 };
-
-/** Groups rule 3 acts on. Video is handled separately by rule 4. */
-const RULE3_GROUPS: OverlapGroup[] = ['music', 'cloud', 'ai'];
 
 function buildContext(items: Item[]): Context {
   const byId = new Map(items.map((i) => [i.id, i]));
   const duplicateExtras = new Set<string>();
   const overlapKeptName = new Map<string, string>();
   const overlapLosers = new Set<string>();
+  const aiSameUses = new Set<string>();
 
   // --- Duplicates: the same service charged more than once (rule 2). ---
-  // Group by merchantKey (fall back to lowercased name). The first occurrence
-  // is the primary; every later one is an extra flagged for a family plan.
   // Only known merchants (a merchantKey) can be "the same service charged
   // twice". Manual/cash items with generic names never dup-group.
   const dupGroups = new Map<string, Item[]>();
@@ -99,28 +110,70 @@ function buildContext(items: Item[]): Context {
   }
   for (const group of dupGroups.values()) {
     if (group.length < 2) continue;
-    // Keep the most used; ties keep the first in list order (deterministic).
     const primary = [...group].sort((a, b) => usageRank(b) - usageRank(a))[0]!;
     for (const item of group) {
       if (item.id !== primary.id) duplicateExtras.add(item.id);
     }
   }
 
-  // --- Overlap groups music/cloud/ai (rule 3). ---
-  for (const grp of RULE3_GROUPS) {
-    const members = items.filter(
-      (i) => i.overlapGroup === grp && !duplicateExtras.has(i.id),
-    );
-    if (members.length < 2) continue;
-    const kept = pickKept(members);
-    for (const m of members) {
-      if (m.id === kept.id) continue;
-      overlapLosers.add(m.id);
-      overlapKeptName.set(m.id, kept.name);
+  // --- Music overlap: keep the preferred (or most used), cut the other. ---
+  addGenericOverlap(items, 'music', duplicateExtras, overlapLosers, overlapKeptName);
+
+  // --- Cloud overlap: consolidate into one cheaper plan when we know storage;
+  //     otherwise fall back to the same keep-most-used-cut-other rule. ---
+  const cloudMembers = items.filter((i) => i.overlapGroup === 'cloud' && !duplicateExtras.has(i.id));
+  let cloudConsolidation: CloudConsolidation | undefined;
+  if (cloudMembers.length >= 2 && cloudMembers.every((i) => typeof i.storageUsedGb === 'number')) {
+    const combinedStorage = cloudMembers.reduce((s, i) => s + (i.storageUsedGb ?? 0), 0);
+    const currentMonthly = cloudMembers.reduce((s, i) => s + monthlyEquivalent(i), 0);
+    const plan = cheapestCloudPlan(combinedStorage, cloudMembers[0]!.currency);
+    if (plan && plan.monthly < currentMonthly) {
+      const winner = [...cloudMembers].sort((a, b) => yearlyCost(b) - yearlyCost(a))[0]!;
+      cloudConsolidation = {
+        winnerId: winner.id,
+        saving: round2((currentMonthly - plan.monthly) * 12),
+        planName: plan.name,
+        memberIds: new Set(cloudMembers.map((i) => i.id)),
+      };
+    }
+  }
+  if (!cloudConsolidation) {
+    addGenericOverlap(items, 'cloud', duplicateExtras, overlapLosers, overlapKeptName);
+  }
+
+  // --- AI overlap: never auto-cut. If two assistants are used for the same
+  //     thing, flag "one could do both" (look again, no money claimed). ---
+  const aiMembers = items.filter((i) => i.overlapGroup === 'ai' && !duplicateExtras.has(i.id));
+  if (aiMembers.length >= 2) {
+    const byUse = new Map<string, string[]>();
+    for (const m of aiMembers) for (const use of m.uses ?? []) byUse.set(use, [...(byUse.get(use) ?? []), m.id]);
+    for (const sharers of byUse.values()) {
+      if (sharers.length >= 2) for (const id of sharers) aiSameUses.add(id);
     }
   }
 
-  return { duplicateExtras, overlapKeptName, overlapLosers, byId };
+  return { duplicateExtras, overlapKeptName, overlapLosers, aiSameUses, byId, ...(cloudConsolidation ? { cloudConsolidation } : {}) };
+}
+
+/** Keep the preferred (or most used) member of an overlap group, mark the rest losers. */
+function addGenericOverlap(
+  items: Item[],
+  group: OverlapGroup,
+  duplicateExtras: Set<string>,
+  overlapLosers: Set<string>,
+  overlapKeptName: Map<string, string>,
+): void {
+  const members = items.filter((i) => i.overlapGroup === group && !duplicateExtras.has(i.id));
+  if (members.length < 2) return;
+  // Honour the person's overlap answer: a specific item id to keep, or 'same'.
+  const pref = members.map((m) => m.preferredInOverlap).find((p) => p !== undefined);
+  if (pref === 'same') return; // "I'd miss both the same" → look again, cut nothing here
+  const kept = (pref && members.find((m) => m.id === pref)) || pickKept(members);
+  for (const m of members) {
+    if (m.id === kept.id) continue;
+    overlapLosers.add(m.id);
+    overlapKeptName.set(m.id, kept.name);
+  }
 }
 
 /** Most used wins; ties go to the cheaper one (by yearly cost). */
@@ -195,7 +248,23 @@ export function scoreItem(item: Item, ctx: Context): Recommendation {
     return rec('familyPlan', yc, 'Charged twice — one plan or a family plan is cheaper.');
   }
 
-  // Rule 3 — overlap groups (music, cloud, AI). Keep the most used, drop the rest.
+  // Rule 3a — cloud overlap: collapse two cloud plans into one cheaper plan.
+  if (ctx.cloudConsolidation) {
+    const c = ctx.cloudConsolidation;
+    if (item.id === c.winnerId) {
+      return rec('removeOverlap', c.saving, `One ${c.planName} covers both — cheaper than paying for two.`);
+    }
+    if (c.memberIds.has(item.id)) {
+      return rec('keep', 0, 'Covered by the single cloud plan you’d switch to.');
+    }
+  }
+
+  // Rule 3b — AI assistants used for the same thing: one could do both. Never cut.
+  if (ctx.aiSameUses.has(item.id)) {
+    return rec('removeOverlap', 0, 'You use them for the same things — one could do both.');
+  }
+
+  // Rule 3c — music / cloud-fallback overlap. Keep the preferred/most used, drop the rest.
   if (ctx.overlapLosers.has(item.id)) {
     const keptName = ctx.overlapKeptName.get(item.id) ?? 'another service';
     return rec('removeOverlap', yc, `Overlaps with ${keptName}, which you use more.`);
@@ -270,6 +339,13 @@ export function runAudit(
     spendingByCategory?: Partial<Record<SpendingCategory, number>>;
     spendingCurrency?: string;
     pinnedVideoItemIds?: string[];
+    profile?: Profile;
+    /** Non-local card spend over a year, in the spending currency. */
+    foreignSpendYearly?: number;
+    /** Exact yearly FX fee read from the statement, in the spending currency. */
+    statementFxFeeYearly?: number;
+    /** Exact yearly bank fee read from the statement, in the spending currency. */
+    statementBankFeeYearly?: number;
   } = {},
 ): Audit {
   const currency = opts.displayCurrency ?? mostCommonCurrency(items) ?? 'EUR';
@@ -299,6 +375,8 @@ export function runAudit(
   const recommendations = subscriptions.map((i) => scoreItem(i, ctx));
 
   const yearlyTotal = round2(subscriptions.reduce((s, i) => s + yearlyCost(i), 0));
+  const exactYearlyTotal = round2(subscriptions.filter(isExactAmount).reduce((s, i) => s + yearlyCost(i), 0));
+  const estimateYearlyTotal = round2(yearlyTotal - exactYearlyTotal);
   const billYearlyTotal = round2(bills.reduce((s, i) => s + yearlyCost(i), 0));
   const habitYearlyTotal = round2(habits.reduce((s, i) => s + yearlyCost(i), 0));
   const cutVideoIds = new Set(recommendations.filter((rec) => rec.verdict === 'cut').map((rec) => rec.itemId));
@@ -319,6 +397,24 @@ export function runAudit(
   const hasActionable = recommendations.some((r) => r.verdict !== 'keep') || (rotationPlan?.yearlySaving ?? 0) > videoSavings;
   const paywall = hasActionable && potentialYearlySaving >= paywallThreshold(currency);
 
+  // Hidden costs and reminders: shown to inform, never added to money found.
+  const toDisplay = (n?: number): number | undefined =>
+    n === undefined ? undefined
+      : opts.spendingCurrency && opts.spendingCurrency !== currency ? (convert(n, opts.spendingCurrency, currency) ?? n)
+      : n;
+  const createdAt = opts.createdAt ?? new Date().toISOString().slice(0, 10);
+  const hiddenCosts = computeHiddenCosts({
+    currency,
+    subscriptions,
+    ...(opts.profile ? { profile: opts.profile } : {}),
+    ...(toDisplay(opts.foreignSpendYearly) !== undefined ? { foreignSpendYearly: toDisplay(opts.foreignSpendYearly) } : {}),
+    ...(toDisplay(opts.statementFxFeeYearly) !== undefined ? { statementFxFeeYearly: toDisplay(opts.statementFxFeeYearly) } : {}),
+    ...(toDisplay(opts.statementBankFeeYearly) !== undefined ? { statementBankFeeYearly: toDisplay(opts.statementBankFeeYearly) } : {}),
+    smallSubThreshold: convert(5, 'EUR', currency) ?? 5,
+  });
+  const hiddenCostYearlyTotal = round2(hiddenCosts.reduce((s, h) => s + (h.yearly ?? 0), 0));
+  const reminders = buildReminders(subscriptions, opts.profile, createdAt);
+
   return {
     items: subscriptions,
     bills,
@@ -328,13 +424,18 @@ export function runAudit(
     habits,
     recommendations,
     yearlyTotal,
+    exactYearlyTotal,
+    estimateYearlyTotal,
     habitYearlyTotal,
     potentialYearlySaving,
+    hiddenCosts,
+    hiddenCostYearlyTotal,
+    reminders,
     paywall,
     goodShape: !paywall,
     currency,
     unlocked: opts.unlocked ?? false,
-    createdAt: opts.createdAt ?? new Date().toISOString().slice(0, 10),
+    createdAt,
   };
 }
 

@@ -83,7 +83,7 @@ export function classifyByKeyword(
 /** Money moved between your own balances or currencies: never spending. */
 export function isInternalMovement(normalizedMerchant: string): boolean {
   if (/\b(naknada|provizija|fee)\b/.test(normalizedMerchant)) return false;
-  return /\b(konverzija|konverzijaoperativni|exchange|conversion|currency exchange|umbuchung|umrechnung|change de devises|interni prenos|own account|vlastiti racun)\b/.test(normalizedMerchant);
+  return /\b(konverzija|konverzijaoperativni|exchange|conversion|currency exchange|umbuchung|umrechnung|change de devises|interni prenos|own account|vlastiti racun|troskovi ucinjeni|credit card payment|kreditna kartica|podizanje gotovog novca|cash withdrawal|bankomat|bargeldauszahlung|geldautomat)\b/.test(normalizedMerchant);
 }
 
 export function isIgnoredMerchant(normalizedMerchant: string): boolean {
@@ -99,7 +99,7 @@ export function isPrivateTransfer(normalizedMerchant: string): boolean {
     return true;
   }
   // Balkan payment-order phrasing: "nalog za prenos <name>", "prenos <name>", …
-  if (/^(nalog za (prenos|placanje|isplatu)|interni prenos|trajni nalog|prenos|prijenos|placanje prema|uplata za)\b/.test(s)) {
+  if (/^(nalog za (prenos|placanje|isplatu)|interni prenos|trajni nalog|prenos|prijenos|placanje prema|uplata za|kreditni transfer)\b/.test(s)) {
     return true;
   }
   return false;

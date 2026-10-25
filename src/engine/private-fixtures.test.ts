@@ -78,3 +78,17 @@ describe('local private Wise PDF, 12 months (never committed)', () => {
     expect(result.spendingByCategory.Shopping).toBeGreaterThan(result.spendingByCategory.Groceries);
   });
 });
+
+describe('local private Croatian bank PDF (never committed)', () => {
+  const ZABA = join(PRIVATE, 'hr_zaba_real.pdf');
+  it.skipIf(!existsSync(ZABA))('reads Priljev/Odljev columns and removes the holder name printed on every row', async () => {
+    const { pdfItemsFromTextContent } = await import('./pdf');
+    const pdf = await pdfjs.getDocument({ data: new Uint8Array(readFileSync(ZABA)), useSystemFonts: true, disableFontFace: true }).promise;
+    const pages: PdfPage[] = [];
+    for (let n = 1; n <= pdf.numPages; n++) pages.push(pdfItemsFromTextContent((await (await pdf.getPage(n)).getTextContent()).items));
+    const parsed = transactionsFromPdfPages(pages);
+    expect(parsed.transactions.length).toBeGreaterThan(20);
+    expect(parsed.redactedCategories).toContain('account holder name');
+    expect(parsed.transactions.some((t) => /kupovina|\d{1,2}\.\d{1,2}\.\d{4}/i.test(t.merchantRaw))).toBe(false);
+  });
+});

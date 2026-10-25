@@ -36,13 +36,13 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
     lines.forEach((line, i) => {
       const descriptionX = headingX(line, /description|narrative|details|opis|libelle|verwendungszweck|erlauterung|erläuterung|buchungstext|beschreibung|descripcion|concepto|omschrijving|descrizione|causale|descricao|aciklama|popis|tresc|szczegoly/i);
       const h = compactHeader(line.text);
-      if (descriptionX === undefined || !/(?:moneyout|moneyin|paidout|paidin|withdraw|deposit|debit|credit|amount|iznos|betrag|haben|soll|duguje|potrazuje|rashod|prihod|uplate|isplate|uplata|isplata|priliv|odliv)/.test(h)) return;
+      if (descriptionX === undefined || !/(?:moneyout|moneyin|paidout|paidin|withdraw|deposit|debit|credit|amount|iznos|betrag|haben|soll|duguje|potrazuje|rashod|prihod|uplate|isplate|uplata|isplata|priliv|odliv|priljev|odljev|ausgang|eingang)/.test(h)) return;
       // A date caption can be split across multiple nearby text lines. Treat
       // captions as hints and bind them to columns by x position.
       const nearby = lines.map((candidate, candidateIndex) => ({ candidate, candidateIndex }))
         .filter(({ candidate }) => Math.abs(candidate.y - line.y) <= 48);
       const nearbyCells = nearby.flatMap(({ candidate }) => candidate.cells.map((cell) => ({ cell, y: candidate.y })));
-      const dateLabels = nearbyCells.filter(({ cell }) => /(?:date|datum|fecha|data|tarih)/.test(compactHeader(cell.str)))
+      const dateLabels = nearbyCells.filter(({ cell }) => /(?:date|datum|fecha|data|tarih|datval|datknj)/.test(compactHeader(cell.str)))
         .map(({ cell, y }) => {
           const sublabel = nearbyCells.filter(({ cell: sibling, y: siblingY }) =>
             sibling !== cell && Math.abs(sibling.x - cell.x) <= 70 && Math.abs(siblingY - y) <= 18
@@ -52,16 +52,16 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
         });
       const valueDate = dateLabels.find(({ label }) => /(?:valute|value|valeur|valor|valuta)/.test(label));
       const postingDate = dateLabels.find(({ label }) => /(?:knjizen|booking|posted|posting|booked|schrift)/.test(label));
-      const directDateX = headingX(line, /date|datum|fecha|data|tarih/i);
+      const directDateX = headingX(line, /date|datum|fecha|data|tarih|datval|datknj/i);
       const dateX = valueDate?.x ?? directDateX ?? postingDate?.x;
       const fallbackDateX = valueDate && postingDate ? postingDate.x : undefined;
       if (dateX === undefined) return;
-      const outX = headingX(line, /moneyout|paidout|withdrawal|withdrawn|debit|soll|duguje|rashod|isplate|isplata|odliv|teret|出金/i);
-      const inX = headingX(line, /moneyin|paidin|deposit|credit|haben|potrazuje|prihod|uplate|uplata|priliv|入金/i);
+      const outX = headingX(line, /moneyout|paidout|withdrawal|withdrawn|debit|soll|duguje|rashod|isplate|isplata|odliv|odljev|teret|出金/i);
+      const inX = headingX(line, /moneyin|paidin|deposit|credit|haben|potrazuje|prihod|uplate|uplata|priliv|priljev|入金/i);
       const balanceX = headingX(line, /balance|saldo|stanje/i);
       const singleAmountX = headingX(line, /amount|transactionamount|iznos|betrag/i);
       if (outX === undefined && inX === undefined && singleAmountX === undefined) return;
-      const finalHeaderLine = Math.max(i, ...nearby.filter(({ candidate }) => candidate.cells.some((cell) => /(?:date|datum|fecha|data|tarih)/.test(compactHeader(cell.str)))).map(({ candidateIndex }) => candidateIndex));
+      const finalHeaderLine = Math.max(i, ...nearby.filter(({ candidate }) => candidate.cells.some((cell) => /(?:date|datum|fecha|data|tarih|datval|datknj)/.test(compactHeader(cell.str)))).map(({ candidateIndex }) => candidateIndex));
       const genericLayout = fallbackDateX !== undefined || [outX, inX, singleAmountX].some((x) => x !== undefined && x < descriptionX);
       headers.push({ page: p, line: finalHeaderLine, dateX, fallbackDateX, descriptionX, outX, inX, balanceX, singleAmountX, genericLayout });
     });
@@ -198,7 +198,9 @@ export function transactionsFromPdfPages(pages: PdfPage[]): PdfParseResult {
   // same-day/same-value transactions with different descriptions.
   const seen = new Set<string>();
   balanceCheck = validateBalances(rows);
-  const safeRows = rows.filter((row) => row.amount > 0).map((row) => ({ ...row, standing: standingOrders.has(row), description: redactDescription(cleanMerchant(row.description)) }));
+  const holderWords = repeatedTrailingWords(rows.filter((row) => row.amount > 0).map((row) => cleanMerchant(row.description)));
+  if (holderWords.size) categories.add('account holder name');
+  const safeRows = rows.filter((row) => row.amount > 0).map((row) => ({ ...row, standing: standingOrders.has(row), description: redactDescription(cleanMerchant(stripWords(cleanMerchant(row.description), holderWords))) }));
   const transactions = safeRows.filter((row) => {
     const key = `${row.date}\0${row.description}\0${row.amount}`;
     if (seen.has(key)) return false;
@@ -336,7 +338,7 @@ function normalizeHeader(value: string): string {
 function isTableHeader(value: string): boolean {
   const compact = compactHeader(value);
   return /(?:description|narrative|details|opis|libelle|verwendungszweck|erlauterung|erläuterung|buchungstext|beschreibung|descripcion|concepto|omschrijving|descrizione|causale|descricao|aciklama|popis|tresc|szczegoly)/.test(compact)
-    && /(?:moneyout|moneyin|paidout|paidin|withdraw|deposit|debit|credit|haben|soll|duguje|potrazuje|rashod|prihod|uplate|isplate|uplata|isplata|odliv|priliv)/.test(compact);
+    && /(?:moneyout|moneyin|paidout|paidin|withdraw|deposit|debit|credit|haben|soll|duguje|potrazuje|rashod|prihod|uplate|isplate|uplata|isplata|odliv|priliv|odljev|priljev|ausgang|eingang)/.test(compact);
 }
 
 function completeDate(raw: string, year: number): string {
@@ -443,8 +445,38 @@ function isSubline(value: string): boolean { return /^(?:vpa|utr|ref|rrn|auth|to
 
 function isOpeningOrSummary(value: string): boolean { return /\b(brought forward|carried forward|opening balance|closing balance|balance summary|pending|stanje na racunu|pocetno stanje|prethodno stanje|kontostand|alter kontostand|neuer kontostand|saldo anterior|solde)\b/i.test(normalizeHeader(value)); }
 
+/**
+ * Words that sit at the END of most descriptions are the account holder's name
+ * (some banks print it on every card payment). Merchants come first, so a
+ * frequent merchant is never removed by this.
+ */
+function repeatedTrailingWords(descriptions: string[]): Set<string> {
+  if (descriptions.length < 4) return new Set();
+  const counts = new Map<string, number>();
+  for (const description of descriptions) {
+    const tail = description.split(/\s+/).slice(-4).map((word) => word.replace(/[^\p{L}]/gu, '')).filter((word) => word.length >= 3);
+    for (const word of new Set(tail.map((w) => w.toUpperCase()))) counts.set(word, (counts.get(word) ?? 0) + 1);
+  }
+  return new Set([...counts].filter(([, n]) => n >= Math.max(3, descriptions.length * 0.4)).map(([word]) => word));
+}
+
+function stripWords(value: string, words: Set<string>): string {
+  if (!words.size) return value;
+  return value.split(/\s+/).filter((word) => !words.has(word.replace(/[^\p{L}]/gu, '').toUpperCase())).join(' ').trim();
+}
+
 function cleanMerchant(value: string): string {
   let result = value.replace(/\s+/g, ' ').trim();
+  // Bank reference codes ("B0012345 "), card-purchase verbs, card numbers,
+  // a trailing ISO country code and foreign-currency conversion notes.
+  // Leftovers when a whole row arrives as one text item: leading dates, trailing amount.
+  result = result.replace(/^(?:\d{1,2}[./-]\d{1,2}[./-]\d{2,4}\.?\s+)+/, '').replace(/\s+[-+]?\d[\d.,']*[.,]\d{2}[-+]?$/, '');
+  result = result.replace(/^(?:[A-Z]\d{5,}\s+)+/, '');
+  result = result.replace(/^(?:[A-Z]\s*\d*\s+)?(?:kupovina|kartično plaćanje|karticno placanje|plaćanje karticom|placanje karticom|purchase|card purchase|achat|compra|acquisto|einkauf)\s+/i, '');
+  result = result.replace(/\bbroj kartice:?\s*\S+/gi, '');
+  result = result.replace(/\s+[A-Z]{3}\s+[\d.,]+\s+(?:te[cč]aj|kurs|exchange rate|wechselkurs).*$/i, '');
+  result = result.replace(/\s+(?:te[cč]aj|kurs|exchange rate|wechselkurs)\b.*$/i, '');
+  result = result.replace(/\s+(?:HR|BA|RS|SI|ME|MK|AL|XK|DE|AT|CH|IT|FR|ES|NL|BE|GB|IE|US|CZ|SK|HU|PL|RO|BG|GR|TR)$/, '');
   result = result.replace(/^card transaction\s+\S+\s+\S+(?:\s+(?:cd|d))?\s+/i, '');
   result = result.replace(/^(?:upi|neft|ach|imps|pos|atm|rtgs|sip)\s*\/\s*(?:dr|debit)\s*\/\s*/i, '');
   result = result.replace(/^(?:upi|neft|ach|imps|pos|atm|rtgs|sip)\s+(?:dr|debit)\s+/i, '');

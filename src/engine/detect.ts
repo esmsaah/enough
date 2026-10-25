@@ -58,6 +58,13 @@ export type DetectionResult = {
   mustAsk: Array<{ merchantKey: string; name: string; reason: string }>;
   ignored: Array<{ merchantKey: string; name: string }>;
   needMoreData: boolean; // fewer than 2 months of data
+  fees?: StatementFees; // exact fees read from the statement, annualized (section 7 hidden costs)
+};
+
+/** Exact fees read from fee rows/columns, annualized to a year, in display currency. */
+export type StatementFees = {
+  fxYearly?: number; // foreign-currency / conversion fees
+  bankYearly?: number; // account / maintenance fees
 };
 
 export type PossibleDoubleCharge = {
@@ -450,7 +457,48 @@ export function detect(transactions: Transaction[], meta: ImportMeta, asOf = lat
     mustAsk,
     ignored,
     needMoreData: meta.monthsSpan < 2,
+    ...(() => {
+      const fees = computeStatementFees(transactions, meta);
+      return fees.fxYearly !== undefined || fees.bankYearly !== undefined ? { fees } : {};
+    })(),
   };
+}
+
+// Fee rows look like these. We only count money actually charged as a fee, not
+// a merchant that happens to have "fee" in its name — the keywords are specific
+// (foreign exchange / conversion, and bank account/maintenance fees in several
+// languages: naknada, provizija, Kontoführung, gebühr, frais, comisión...).
+// Keywords are matched after diacritics are stripped, so plain-ASCII forms here
+// cover accented spellings (kontofuhrung ← Kontoführung, comision ← comisión).
+const FX_FEE = /\b(fx fee|foreign exchange|foreign currency fee|currency conversion|conversion fee|exchange rate fee|non[- ]?sterling|auslandseinsatz)\b/;
+// No \b anchors: German compounds (Kontoführungsgebühr) have no internal word
+// boundary, and these stems are distinctive enough not to match merchant names.
+const BANK_FEE = /account fee|monthly fee|maintenance fee|service charge|service fee|naknad|provizij|kontofuhrung|kontogebuhr|gebuhr|frais (?:de (?:tenue|gestion)|bancaires)|comision|bank charge/;
+
+function stripForFee(value: string): string {
+  return value.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
+
+/**
+ * Sum fee rows and annualize them over the statement span. Returns exact yearly
+ * fees in the display currency. Only matches rows with money out (amount > 0).
+ */
+export function computeStatementFees(transactions: Transaction[], meta: ImportMeta): StatementFees {
+  let fx = 0;
+  let bank = 0;
+  for (const t of transactions) {
+    if (t.amount <= 0) continue;
+    const desc = stripForFee(t.merchantRaw);
+    const amount = convert(t.amount, t.currency, meta.displayCurrency) ?? t.amount;
+    if (FX_FEE.test(desc)) fx += amount;
+    else if (BANK_FEE.test(desc)) bank += amount;
+  }
+  // Annualize: a statement shorter than a year is scaled up; a longer one down.
+  const factor = meta.monthsSpan >= 1 ? 12 / meta.monthsSpan : 1;
+  const out: StatementFees = {};
+  if (fx > 0) out.fxYearly = round2(fx * factor);
+  if (bank > 0) out.bankYearly = round2(bank * factor);
+  return out;
 }
 
 function spendingCategoryFor(

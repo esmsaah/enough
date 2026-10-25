@@ -106,6 +106,7 @@ const NOISE_TOKENS = [
  *  Keeps "+" so "disney+" survives. Result is space-separated word tokens. */
 export function foldMerchant(raw: string): string {
   return raw
+    .replace(/[đĐ]/g, 'dj').replace(/[ßẞ]/g, 'ss').replace(/[łŁ]/g, 'l').replace(/[øØ]/g, 'o')
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .toLowerCase()
