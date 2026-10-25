@@ -21,8 +21,8 @@
   --line: #dedcd5;
   --dash: #bdbcb3;
 
-  --font-display: 'Archivo', system-ui, sans-serif; /* stretch 110-125%, weight 700-800 */
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace; /* amounts, dates */
+  --font-display: 'Enough B2 Archivo', 'Archivo', system-ui, sans-serif; /* stretch 62-125%, weight 100-900 */
+  --font-mono: 'Enough B2 Mono', 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace; /* amounts, dates */
   --font-hand: 'Caveat', 'Segoe Script', cursive; /* notes of four words or fewer */
 
   --radius: 6px;
