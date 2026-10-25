@@ -2,7 +2,11 @@
 :root {
   --navy: #12363a; /* dark background: landing, result header, share card */
   --indigo: #0f6b66; /* action / links on light, keep, pen circles */
+  --indigo-hover: #0b524e; /* button / link hover on light */
   --indigo-dark: #0b2629;
+  --coral: #ff8a65; /* main button on petrol */
+  --coral-hover: #ff7650;
+  --chip-border: #b9b6ac; /* unselected chip / segmented-control border */
   --lime: #cfede6; /* found money / green accent, max once per screen */
   --coral-pen: #d2452a; /* strike-throughs, stamps, handwritten notes */
   --coral-text: #c4320f; /* cut labels on light ground */

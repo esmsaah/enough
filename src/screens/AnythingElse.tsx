@@ -1,104 +1,112 @@
-// Screen 6 — Anything else? Section 8. Optional yearly + cash costs, clear Skip.
+// Screen — Extras (step 3, "Anything we can't see?"). Optional one-off profile
+// answers the statement can't show on the tap path: foreign-currency card fees,
+// a monthly bank fee, delivery/taxi habits, a recent free trial, and cash costs.
+// Each feeds the hidden-costs engine; all are skippable.
 import { useState } from 'react';
-import { CASH_CHIPS, YEARLY_CHIPS } from '../app/catalog';
+import { CASH_CHIPS } from '../app/catalog';
+import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
-import { Button, Chip } from '../components/ui';
-import type { Item } from '../engine/types';
+import { BoardChip, FlowHeader, Seg } from '../components/board';
+
+const DELIVERY_AMOUNTS = [10, 15, 25];
 
 export function AnythingElse() {
   const { state, dispatch } = useStore();
-  const [openYearly, setOpenYearly] = useState<string | null>(null);
+  const p = state.profile;
   const [openCash, setOpenCash] = useState<string | null>(null);
-  const [amount, setAmount] = useState('');
+  const [cashAmount, setCashAmount] = useState('');
+  const cashItems = p.cashItems ?? [];
 
-  function addYearly(name: string) {
-    const chip = YEARLY_CHIPS.find((c) => c.name === name)!;
-    const price = Number(amount);
-    if (!price) return;
-    const item: Omit<Item, 'id'> = {
-      name, category: chip.category, displayCategory: chip.displayCategory,
-      price, frequency: 'yearly', source: 'manual', estimate: true, currency: state.currency,
-    };
-    dispatch({ type: 'addManual', item });
-    setOpenYearly(null); setAmount('');
-  }
-  function addCash(name: string) {
-    const chip = CASH_CHIPS.find((c) => c.name === name)!;
-    const price = Number(amount);
-    if (!price) return;
-    const item: Omit<Item, 'id'> = {
-      name, category: chip.category, displayCategory: chip.displayCategory,
-      price, frequency: 'monthly', source: 'cash', estimate: true, currency: state.currency,
-    };
-    dispatch({ type: 'addManual', item });
-    setOpenCash(null); setAmount('');
+  function addCash(label: string) {
+    const monthly = Number(cashAmount);
+    if (!monthly) return;
+    dispatch({ type: 'setProfile', profile: { cashItems: [...cashItems.filter((c) => c.label !== label), { label, monthly }] } });
+    setOpenCash(null);
+    setCashAmount('');
   }
 
   return (
-    <>
-      <div className="screen">
-        <h1>Anything else?</h1>
-        <p className="muted">Optional. These are easy to forget because they don't show up monthly.</p>
+    <div className="board">
+      <FlowHeader step={3} onBack={() => dispatch({ type: 'goto', step: 'usage' })} />
+      <div className="flow-body flow-col" style={{ padding: '8px 20px 0' }}>
+        <span className="lab">Step 3 · Extras</span>
+        <h1 className="h1" style={{ fontSize: 36, marginTop: 12 }}>Anything we can't see?</h1>
+        <p className="sub" style={{ marginTop: 12 }}>A few quick ones. Skip any of them.</p>
 
-        <h2>Anything you pay yearly?</h2>
-        <p className="muted" style={{ fontSize: 13, marginTop: 0 }}>Insurance, a domain, a licence, a membership.</p>
-        <div className="chip-wrap">
-          {YEARLY_CHIPS.map((c) => (
-            <Chip key={c.name} selected={openYearly === c.name} onClick={() => { setOpenYearly(c.name); setOpenCash(null); setAmount(''); }}>
-              {c.name}
-            </Chip>
-          ))}
-        </div>
-        {openYearly && (
-          <div className="card">
-            <label className="muted" style={{ fontSize: 13 }}>{openYearly} — amount per year ({state.currency})</label>
-            <div className="row" style={{ marginTop: 8 }}>
-              <input className="amount-input mono" inputMode="decimal" autoFocus value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0" />
-              <Button onClick={() => addYearly(openYearly)}>Add</Button>
-            </div>
+        <div style={{ marginTop: 16 }}>
+          {/* Foreign currency */}
+          <div className="q">
+            <div className="t">Pay in another currency? <span>Card fees add up</span></div>
+            <Seg value={p.foreignCurrency}
+              options={[{ value: 'never', label: 'Never' }, { value: 'sometimes', label: 'Sometimes' }, { value: 'often', label: 'Often' }]}
+              onChange={(v) => dispatch({ type: 'setProfile', profile: { foreignCurrency: v } })} />
           </div>
-        )}
 
-        <h2>Anything you pay in cash?</h2>
-        <p className="muted" style={{ fontSize: 13, marginTop: 0 }}>Gym, hairdresser, kids' training, lessons, cleaning, parking, coffee. Marked as an estimate.</p>
-        <div className="chip-wrap">
-          {CASH_CHIPS.map((c) => (
-            <Chip key={c.name} selected={openCash === c.name} onClick={() => { setOpenCash(c.name); setOpenYearly(null); setAmount(''); }}>
-              {c.name}
-            </Chip>
-          ))}
-        </div>
-        {openCash && (
-          <div className="card">
-            <label className="muted" style={{ fontSize: 13 }}>{openCash} — amount per month ({state.currency})</label>
-            <div className="row" style={{ marginTop: 8 }}>
-              <input className="amount-input mono" inputMode="decimal" autoFocus value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0" />
-              <Button onClick={() => addCash(openCash)}>Add</Button>
-            </div>
+          {/* Bank fee */}
+          <div className="q">
+            <div className="t">Bank monthly fee?</div>
+            <Seg value={p.bankFeeMonthly === undefined ? undefined : String(p.bankFeeMonthly)}
+              options={[{ value: '0', label: 'No' }, { value: '2', label: '~€2' }, { value: '5', label: '~€5' }, { value: 'unknown', label: 'Not sure' }]}
+              onChange={(v) => dispatch({ type: 'setProfile', profile: { bankFeeMonthly: v === 'unknown' ? 'unknown' : (Number(v) as 0 | 2 | 5) } })} />
           </div>
-        )}
 
-        {state.items.some((i) => i.source === 'manual' || i.source === 'cash') && (
-          <>
-            <h2>Added</h2>
-            {state.items.filter((i) => i.source === 'manual' || i.source === 'cash').map((i) => (
-              <div className="row card" key={i.id}>
-                <span className="row__name">{i.name} <span className="muted" style={{ fontWeight: 400 }}>· estimate</span></span>
-                <Button variant="ghost" onClick={() => dispatch({ type: 'removeItem', id: i.id })}>Remove</Button>
+          {/* Delivery / taxi */}
+          <div className="q">
+            <div className="t">Delivery or taxi?</div>
+            <Seg value={p.delivery?.frequency}
+              options={[{ value: 'never', label: 'Rarely' }, { value: 'sometimes', label: 'Sometimes' }, { value: 'weekly', label: 'Weekly' }]}
+              onChange={(v) => dispatch({ type: 'setProfile', profile: { delivery: { frequency: v, ...(p.delivery?.typicalAmount ? { typicalAmount: p.delivery.typicalAmount } : {}) } } })} />
+            {p.delivery && p.delivery.frequency !== 'never' && (
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                <span className="lab" style={{ alignSelf: 'center', marginRight: 4 }}>Usually</span>
+                {DELIVERY_AMOUNTS.map((a) => (
+                  <BoardChip key={a} label={formatMoney(a, state.currency)} selected={p.delivery?.typicalAmount === a}
+                    onClick={() => dispatch({ type: 'setProfile', profile: { delivery: { frequency: p.delivery!.frequency, typicalAmount: a } } })} />
+                ))}
               </div>
-            ))}
-          </>
-        )}
-      </div>
+            )}
+          </div>
 
-      <div className="footer">
-        <div className="row" style={{ gap: 12 }}>
-          <Button variant="secondary" onClick={() => dispatch({ type: 'goto', step: state.statement ? 'found' : 'quickstart' })}>Back</Button>
-          <Button full onClick={() => dispatch({ type: 'goto', step: 'usage' })}>
-            {state.items.some((i) => i.source === 'manual' || i.source === 'cash') ? 'Continue' : 'Skip'}
-          </Button>
+          {/* Recent trial */}
+          <div className="q">
+            <div className="t">Free trial lately?</div>
+            <Seg value={p.recentTrials && p.recentTrials.length > 0 ? 'yes' : p.recentTrials ? 'no' : undefined}
+              options={[{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }]}
+              onChange={(v) => dispatch({ type: 'setProfile', profile: { recentTrials: v === 'yes' ? (p.recentTrials && p.recentTrials.length ? p.recentTrials : []) : [] } })} />
+          </div>
+
+          {/* Cash */}
+          <div className="q">
+            <div className="t">Paid in cash?</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {CASH_CHIPS.map((c) => {
+                const added = cashItems.find((ci) => ci.label === c.name);
+                return (
+                  <BoardChip key={c.name} label={c.name} selected={!!added}
+                    price={added ? `${formatMoney(added.monthly, state.currency)}/mo` : undefined}
+                    onClick={() => {
+                      if (added) { dispatch({ type: 'setProfile', profile: { cashItems: cashItems.filter((ci) => ci.label !== c.name) } }); return; }
+                      setOpenCash(openCash === c.name ? null : c.name); setCashAmount('');
+                    }} />
+                );
+              })}
+            </div>
+            {openCash && (
+              <div className="field" style={{ maxWidth: 260 }}>
+                <span className="m" style={{ color: 'var(--muted)' }}>{state.currency}</span>
+                <input className="m" inputMode="decimal" autoFocus placeholder={`${openCash} a month`} value={cashAmount}
+                  onChange={(e) => setCashAmount(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') addCash(openCash); }} />
+                <button type="button" className="btn" style={{ minHeight: 36, padding: '0 14px', fontSize: 14 }} disabled={!Number(cashAmount)} onClick={() => addCash(openCash)}>Add</button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </>
+
+      <div className="flow-foot flow-col" style={{ alignItems: 'center', gap: 4 }}>
+        <button type="button" className="btn full" onClick={() => dispatch({ type: 'goto', step: 'result' })}>Show my result</button>
+        <button type="button" className="ghost" onClick={() => dispatch({ type: 'goto', step: 'result' })}>Skip all</button>
+      </div>
+    </div>
   );
 }

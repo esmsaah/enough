@@ -7,7 +7,9 @@ import { tapListForCountry } from '../app/tapList';
 import { COUNTRIES, countryFlag, countryName, guessCountry } from '../app/country';
 import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
-import { Button, Chip, ProgressBar } from '../components/ui';
+import { Button } from '../components/ui';
+import { BoardChip, FlowHeader, SearchIcon, StatementIcon } from '../components/board';
+import { yearlyCost } from '../engine/score';
 import type { Category, DisplayCategory, Item } from '../engine/types';
 
 // Sub-group order inside the Subscriptions section (digital only).
@@ -75,9 +77,11 @@ export function QuickStart() {
   const [askFor, setAskFor] = useState<QuickPick | null>(null);
   const [askAmount, setAskAmount] = useState('');
   const [askCadence, setAskCadence] = useState<NonNullable<QuickPick['defaultCadence']>>('month');
-  const selected = new Set(state.items.filter((i) => i.source === 'quickpick').map((i) => i.merchantKey));
+  const pickedByKey = new Map(state.items.filter((i) => i.source === 'quickpick').map((i) => [i.merchantKey, i]));
+  const selected = new Set(pickedByKey.keys());
   const ownItems = state.items.filter((i) => i.source === 'manual');
   const count = selected.size + ownItems.length;
+  const yearlyTotal = state.items.reduce((sum, i) => sum + yearlyCost(i), 0);
 
   const sections = useMemo(() => {
     const bySection = new Map<SectionKey, QuickPick[]>();
@@ -119,11 +123,18 @@ export function QuickStart() {
     setAskAmount('');
   }
 
-  const chip = (p: QuickPick) => (
-    <Chip key={p.merchantKey} selected={selected.has(p.merchantKey)} onClick={() => onChip(p)}>
-      {p.name}
-    </Chip>
-  );
+  const chip = (p: QuickPick) => {
+    const picked = pickedByKey.get(p.merchantKey);
+    return (
+      <BoardChip
+        key={p.merchantKey}
+        label={p.name}
+        selected={!!picked}
+        price={picked && picked.price > 0 ? formatMoney(picked.price, state.currency) : undefined}
+        onClick={() => onChip(p)}
+      />
+    );
+  };
 
   function addOwn() {
     const name = custom.name.trim();
@@ -139,20 +150,29 @@ export function QuickStart() {
   }
 
   return (
-    <>
-      <div className="screen">
-        <div className="qs-progress"><ProgressBar step={1} total={3} /><span className="qs-progress__count">1 / 3</span></div>
-        <h1>Which of these do you pay for?</h1>
-        <p className="muted">Tap everything that sounds familiar. You can fix prices and add more later.</p>
+    <div className="board">
+      <FlowHeader step={1} onBack={() => dispatch({ type: 'goto', step: 'landing' })} />
+      <div className="flow-body flow-col" style={{ padding: '8px 20px 24px' }}>
+        <span className="lab">Step 1 · Pick</span>
+        <h1 className="h1" style={{ fontSize: 36, marginTop: 12 }}>Which of these do you pay for?</h1>
+        <p className="sub" style={{ marginTop: 12 }}>Tap the ones you have. Skip what you're not sure about.</p>
 
-        <label className="country-line">
-          <span>Showing services in {countryFlag(country)}</span>
-          <select value={country} onChange={(e) => dispatch({ type: 'setCountry', country: e.target.value })} aria-label="Country">
-            {[...COUNTRIES, 'GLOBAL'].map((code) => <option key={code} value={code}>{countryName(code)}</option>)}
-          </select>
-        </label>
-
-        <input className="search-input" type="search" placeholder="Search for anything you pay for" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Search services" />
+        <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <label className="r" style={{ fontSize: 14, color: 'var(--muted)' }}>
+            <span>Showing services in {countryFlag(country)} {countryName(country)}</span>
+            <span style={{ position: 'relative', color: 'var(--indigo)' }}>
+              Change
+              <select value={country} onChange={(e) => dispatch({ type: 'setCountry', country: e.target.value })} aria-label="Change country"
+                style={{ position: 'absolute', inset: 0, width: '100%', opacity: 0, cursor: 'pointer' }}>
+                {[...COUNTRIES, 'GLOBAL'].map((code) => <option key={code} value={code}>{countryName(code)}</option>)}
+              </select>
+            </span>
+          </label>
+          <div className="field">
+            <SearchIcon />
+            <input type="search" placeholder="Search 1,300 services" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Search services" />
+          </div>
+        </div>
 
         {askFor && (() => {
           const amount = Number(askAmount) || 0;
@@ -181,80 +201,90 @@ export function QuickStart() {
           );
         })()}
 
-        {query.trim().length >= 2 ? (
-          <section>
-            <h2>Results</h2>
-            {results.length
-              ? <div className="chip-wrap">{results.map(chip)}</div>
-              : <p className="muted">Nothing found — add it with “+ Add your own” below.</p>}
-          </section>
-        ) : sections.map((sec) => (
-          <div key={sec.key} className="tap-section">
-            <h2>{sec.key}</h2>
-            {sec.note && <p className="muted" style={{ marginTop: -4, fontSize: 13 }}>{sec.note}</p>}
-            {sec.subgroups.map((sg) => {
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginTop: 4 }}>
+          {query.trim().length >= 2 ? (
+            <section className="sec">
+              <span className="lab">Results</span>
+              {results.length
+                ? <div className="chips">{results.map(chip)}</div>
+                : <p className="sub" style={{ fontSize: 14 }}>Nothing found — add it with “Add your own” below.</p>}
+            </section>
+          ) : sections.flatMap((sec) =>
+            sec.subgroups.map((sg) => {
               const limit = sec.flat ? SHOWN_FLAT : SHOWN_PER_GROUP;
               const open = expanded[sg.name];
               const shown = open ? sg.picks : sg.picks.slice(0, limit);
               return (
-                <section key={sg.name}>
-                  {!sec.flat && <h3 className="tap-subhead">{sg.name}</h3>}
-                  <div className="chip-wrap">
+                <section key={`${sec.key}:${sg.name}`} className="sec">
+                  <span className="lab">{sec.flat ? sec.key : sg.name}</span>
+                  {sec.flat && sec.note && <p className="sub" style={{ fontSize: 13, margin: '-4px 0 0' }}>{sec.note}</p>}
+                  <div className="chips">
                     {shown.map(chip)}
                     {sg.picks.length > limit && (
-                      <button type="button" className="link-button" onClick={() => setExpanded((e) => ({ ...e, [sg.name]: !open }))}>
+                      <button type="button" className="chip more" onClick={() => setExpanded((e) => ({ ...e, [sg.name]: !open }))}>
                         {open ? 'Show less' : `+${sg.picks.length - limit} more`}
                       </button>
                     )}
                   </div>
                 </section>
               );
-            })}
-          </div>
-        ))}
-
-        {/* Add your own — the escape hatch so the tap path is complete everywhere */}
-        <section>
-          <h2>Don't see it?</h2>
-          {ownItems.length > 0 && (
-            <div className="chip-wrap" style={{ marginBottom: 10 }}>
-              {ownItems.map((i) => (
-                <span key={i.id} className="chip chip--on" style={{ display: 'inline-flex', gap: 8, alignItems: 'center' }}>
-                  {i.name}
-                  <button type="button" aria-label={`Remove ${i.name}`} onClick={() => dispatch({ type: 'removeItem', id: i.id })} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 16, lineHeight: 1 }}>×</button>
-                </span>
-              ))}
-            </div>
+            }),
           )}
-          {addOpen ? (
-            <div className="card">
-              <input className="amount-input" style={{ marginBottom: 8 }} autoFocus placeholder="Name (e.g. HBO Max, local gym)" value={custom.name} onChange={(e) => setCustom({ ...custom, name: e.target.value })} />
-              <div className="row" style={{ gap: 8 }}>
-                <input className="amount-input mono" inputMode="decimal" placeholder="Amount" value={custom.price} onChange={(e) => setCustom({ ...custom, price: e.target.value })} />
-                <select aria-label="Period" value={custom.period} onChange={(e) => setCustom({ ...custom, period: e.target.value as 'monthly' | 'yearly' })}>
-                  <option value="monthly">/mo</option>
-                  <option value="yearly">/yr</option>
+
+          {/* Add your own — the escape hatch so the tap path is complete everywhere */}
+          <section className="sec">
+            <span className="lab">Don't see it?</span>
+            {ownItems.length > 0 && (
+              <div className="chips">
+                {ownItems.map((i) => (
+                  <span key={i.id} className="chip on">
+                    {i.name}
+                    <button type="button" aria-label={`Remove ${i.name}`} onClick={() => dispatch({ type: 'removeItem', id: i.id })} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 16, lineHeight: 1, padding: 0 }}>×</button>
+                  </span>
+                ))}
+              </div>
+            )}
+            {addOpen ? (
+              <div className="card">
+                <input className="amount-input" style={{ marginBottom: 8 }} autoFocus placeholder="Name (e.g. HBO Max, local gym)" value={custom.name} onChange={(e) => setCustom({ ...custom, name: e.target.value })} />
+                <div className="row" style={{ gap: 8 }}>
+                  <input className="amount-input mono" inputMode="decimal" placeholder="Amount" value={custom.price} onChange={(e) => setCustom({ ...custom, price: e.target.value })} />
+                  <select aria-label="Period" value={custom.period} onChange={(e) => setCustom({ ...custom, period: e.target.value as 'monthly' | 'yearly' })}>
+                    <option value="monthly">/mo</option>
+                    <option value="yearly">/yr</option>
+                  </select>
+                </div>
+                <select aria-label="Category" style={{ marginTop: 8, width: '100%' }} value={custom.dc} onChange={(e) => setCustom({ ...custom, dc: e.target.value as DisplayCategory })}>
+                  {DISPLAY_CATEGORIES.map((dc) => <option key={dc} value={dc}>{dc}</option>)}
                 </select>
+                <div className="row" style={{ gap: 12, marginTop: 10 }}>
+                  <Button variant="secondary" onClick={() => setAddOpen(false)}>Cancel</Button>
+                  <Button full disabled={!custom.name.trim() || !Number(custom.price)} onClick={addOwn}>Add</Button>
+                </div>
               </div>
-              <select aria-label="Category" style={{ marginTop: 8, width: '100%' }} value={custom.dc} onChange={(e) => setCustom({ ...custom, dc: e.target.value as DisplayCategory })}>
-                {DISPLAY_CATEGORIES.map((dc) => <option key={dc} value={dc}>{dc}</option>)}
-              </select>
-              <div className="row" style={{ gap: 12, marginTop: 10 }}>
-                <Button variant="secondary" onClick={() => setAddOpen(false)}>Cancel</Button>
-                <Button full disabled={!custom.name.trim() || !Number(custom.price)} onClick={addOwn}>Add</Button>
-              </div>
-            </div>
-          ) : (
-            <button type="button" className="link-button" onClick={() => setAddOpen(true)}>+ Add your own</button>
-          )}
-        </section>
+            ) : (
+              <button type="button" className="chip more" onClick={() => setAddOpen(true)}>+ Add your own</button>
+            )}
+          </section>
+        </div>
       </div>
 
-      <div className="footer">
-        <Button full disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'anythingElse' })}>
-          Next, how often you use them
-        </Button>
+      <div className="flow-foot flow-col">
+        <div className="r">
+          <span className="lab" style={{ color: 'var(--ink)' }}>{count} picked</span>
+          <span className="m" style={{ fontSize: 15 }}>
+            <b style={{ fontFamily: 'var(--font-display)', fontSize: 20 }}>{formatMoney(yearlyTotal, state.currency)}</b> a year
+          </span>
+        </div>
+        <button type="button" className="btn full" disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'usage' })}>
+          Next, check them
+        </button>
+        <button type="button" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}
+          style={{ alignSelf: 'center', display: 'inline-flex', gap: 8, alignItems: 'center', fontSize: 15, padding: '4px 0', background: 'none', border: 0, color: 'var(--indigo)', cursor: 'pointer' }}>
+          <StatementIcon />Or add a bank statement
+        </button>
+        <span style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center' }}>Optional. PDF, CSV or a photo, read on your phone.</span>
       </div>
-    </>
+    </div>
   );
 }

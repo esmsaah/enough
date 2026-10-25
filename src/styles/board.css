@@ -1,0 +1,106 @@
+/* Enough — board design system (latest design reference).
+ * The exact component language from the design boards (QuickStart, Usage,
+ * Result, CutList, …), mapped onto the palette tokens. Scoped under `.board`
+ * so screens can migrate to it one at a time without fighting legacy styles.
+ * Palette: petrol big moments, teal actions, mint money (once per screen),
+ * coral main button on petrol, coral-pen strikes. Archivo + IBM Plex Mono only. */
+
+.board {
+  font-family: var(--font-display);
+  background: var(--ground);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+.board a { color: var(--indigo); }
+.board a:hover { color: var(--indigo-hover); }
+.board button { font-family: inherit; }
+
+/* Type */
+.board .m { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.board .lab { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); }
+.board .h1 { margin: 0; font-weight: 800; font-stretch: 115%; letter-spacing: -1.2px; line-height: 1; font-size: 36px; }
+.board .sub { margin: 0; font-size: 16px; line-height: 1.5; color: var(--muted); }
+
+/* Buttons */
+.board .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: var(--button-h); padding: 0 28px; border-radius: var(--radius); border: 0;
+  background: var(--indigo); color: var(--white); font-weight: 700; font-size: 17px;
+  text-decoration: none; box-sizing: border-box; cursor: pointer;
+}
+.board .btn:hover { background: var(--indigo-hover); color: var(--white); }
+.board .btn.warm { background: var(--coral); color: var(--ink); }
+.board .btn.warm:hover { background: var(--coral-hover); color: var(--ink); }
+.board .btn.full { width: 100%; }
+.board .btn:disabled { opacity: .45; cursor: not-allowed; }
+.board .ghost { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; font-size: 15px; padding: 10px 0; background: none; border: 0; cursor: pointer; }
+.board .ondark { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Chips */
+.board .chip {
+  display: inline-flex; align-items: center; gap: 8px; height: var(--tap);
+  padding: 0 16px 0 12px; border-radius: 22px; border: 1.5px solid var(--chip-border);
+  background: transparent; color: var(--ink); font-size: 15px; font-weight: 500;
+  cursor: pointer; box-sizing: border-box; text-decoration: none;
+}
+.board .chip:hover { border-color: var(--indigo); }
+.board .chip.on { background: var(--indigo); border-color: var(--indigo); color: var(--white); font-weight: 600; }
+.board .chip.more { border-style: dashed; color: var(--muted); }
+.board .chip .p { font-family: var(--font-mono); font-size: 12px; font-weight: 400; opacity: .85; }
+.board .chip svg { flex-shrink: 0; }
+
+/* Segmented control */
+.board .seg { display: flex; border: 1.5px solid var(--chip-border); border-radius: var(--radius); overflow: hidden; }
+.board .seg button { flex: 1 1 0; min-height: var(--tap); padding: 0 10px; border: 0; border-left: 1.5px solid var(--chip-border); background: transparent; color: var(--ink); font-size: 15px; font-weight: 500; cursor: pointer; }
+.board .seg button:first-child { border-left: 0; }
+.board .seg button.on { background: var(--indigo); color: var(--white); font-weight: 600; }
+.board .seg button.skip { color: var(--muted); }
+
+/* Stepper */
+.board .stp { display: inline-flex; align-items: center; gap: 14px; }
+.board .stp button { width: var(--tap); height: var(--tap); border-radius: var(--radius); border: 1.5px solid var(--chip-border); background: transparent; font-size: 20px; color: var(--ink); cursor: pointer; }
+.board .stp b { font-family: var(--font-mono); font-size: 22px; font-weight: 600; min-width: 84px; text-align: center; }
+
+/* Question block */
+.board .q { display: flex; flex-direction: column; gap: 12px; padding: 18px 0; border-top: 1px solid var(--line); }
+.board .q .t { font-size: 17px; font-weight: 700; line-height: 1.3; }
+.board .q .t span { font-weight: 400; color: var(--muted); font-size: 14px; }
+
+/* Source tag (exact | estimate) */
+.board .tag { display: inline-block; font-family: var(--font-mono); font-size: 9px; letter-spacing: 1px; padding: 1px 4px; border: 1px solid currentColor; border-radius: 2px; line-height: 1.3; vertical-align: middle; }
+.board .tag.ex { color: var(--indigo); }
+.board .tag.es { color: #8a877c; }
+
+/* Rows & fields */
+.board .r { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.board .field { display: flex; align-items: center; gap: 10px; min-height: 48px; box-sizing: border-box; padding: 0 14px; border: 1.5px solid var(--chip-border); border-radius: var(--radius); background: var(--paper); color: var(--ink); font-size: 16px; width: 100%; }
+.board .field input { border: 0; background: transparent; font: inherit; color: inherit; width: 100%; outline: none; }
+.board .field ::placeholder { color: var(--muted); }
+
+/* ---- Flow header: back + 4-step progress + label ---- */
+.board .flow-head { flex-shrink: 0; display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 0 20px 0 8px; }
+.board .flow-head__back { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; color: var(--ink); background: none; border: 0; cursor: pointer; }
+.board .flow-head__bar { flex-grow: 1; display: flex; gap: 4px; }
+.board .flow-head__seg { flex: 1 1 0; height: 4px; border-radius: 2px; background: var(--line); }
+.board .flow-head__seg.on { background: var(--indigo); }
+.board .flow-head__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+
+/* ---- Body region & sticky footer ---- */
+.board .flow-body { flex: 1 1 auto; }
+.board .flow-foot {
+  flex-shrink: 0; position: sticky; bottom: 0; padding: 14px 20px 18px;
+  border-top: 1.5px solid var(--ink); background: var(--ground);
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+/* Section with top rule + label */
+.board .sec { display: flex; flex-direction: column; gap: 12px; padding-top: 20px; border-top: 1px solid var(--line); }
+.board .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Desktop boards are 1440 px wide; center the flow column on wide screens. */
+@media (min-width: 900px) {
+  .board .flow-col { max-width: 560px; margin: 0 auto; width: 100%; }
+}

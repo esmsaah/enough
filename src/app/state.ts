@@ -70,6 +70,7 @@ export type Action =
   | { type: 'addManual'; item: Omit<Item, 'id'> }
   | { type: 'removeItem'; id: string }
   | { type: 'setPrice'; id: string; price: number }
+  | { type: 'setFrequency'; id: string; frequency: Frequency }
   | { type: 'setDisplayCategory'; id: string; displayCategory: Item['displayCategory'] }
   | { type: 'setClassification'; id: string; category: Item['category']; displayCategory: Item['displayCategory'] }
   | { type: 'setUsage'; id: string; usage: Usage }
@@ -209,6 +210,8 @@ export function reducer(state: State, action: Action): State {
 
     case 'setPrice':
       return { ...state, items: patch(state.items, action.id, { price: action.price }) };
+    case 'setFrequency':
+      return { ...state, items: patch(state.items, action.id, { frequency: action.frequency }) };
     case 'setDisplayCategory':
       return { ...state, items: patch(state.items, action.id, { displayCategory: action.displayCategory }) };
     case 'setClassification':
