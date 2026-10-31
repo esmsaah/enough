@@ -54,8 +54,8 @@ export function App() {
 function AppFrame() {
   const { state } = useStore();
   const showDesktopHeader = state.step !== 'landing';
-  // The side receipt starts on the Check step (and the statement path, which has its own amounts).
-  const showReceipt = ['addstatement', 'keep', 'found', 'usage', 'anythingElse', 'cutlist'].includes(state.step);
+  // Desktop side receipt: from the Pick step on (on Pick it lists picks as "to check", no total).
+  const showReceipt = ['quickstart', 'picks', 'addstatement', 'keep', 'found', 'usage', 'anythingElse', 'cutlist'].includes(state.step);
   return (
     <div className={`app${showReceipt ? ' app--with-receipt' : ''}${state.step === 'landing' ? ' app--landing' : ''}`}>
       {showDesktopHeader && <DesktopHeader />}

@@ -9,6 +9,7 @@ import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { Button } from '../components/ui';
 import { BoardChip, FlowHeader, SearchIcon, StatementIcon } from '../components/board';
+import { BoardReceipt } from '../components/ReceiptPanel';
 import type { Category, DisplayCategory, Item } from '../engine/types';
 
 // Sub-group order inside the Subscriptions section (digital only).
@@ -72,6 +73,7 @@ export function QuickStart() {
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [addOpen, setAddOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const [custom, setCustom] = useState({ name: '', price: '', period: 'monthly' as 'monthly' | 'yearly', dc: 'Entertainment' as DisplayCategory });
   const [askFor, setAskFor] = useState<QuickPick | null>(null);
   const [askAmount, setAskAmount] = useState('');
@@ -267,19 +269,38 @@ export function QuickStart() {
         </div>
       </div>
 
-      <div className="flow-foot flow-col">
-        <div className="r">
-          <span className="lab" style={{ color: 'var(--ink)' }}>{count} picked</span>
-        </div>
-        <button type="button" className="btn full" disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'usage' })}>
-          Next, check them
+      {/* Slim sticky bar: count (opens the picked sheet) on the left, Next on the right. */}
+      <div className="pick-bar">
+        <button type="button" className="pick-bar__count" onClick={() => setSheetOpen(true)} aria-haspopup="dialog" aria-expanded={sheetOpen}>
+          <ChevronUp /><b>{count}</b> picked
         </button>
-        <button type="button" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}
-          style={{ alignSelf: 'center', display: 'inline-flex', gap: 8, alignItems: 'center', fontSize: 15, padding: '4px 0', background: 'none', border: 0, color: 'var(--indigo)', cursor: 'pointer' }}>
-          <StatementIcon />Or add a bank statement
-        </button>
-        <span style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center' }}>Optional. PDF, CSV or a photo, read on your phone.</span>
+        <button type="button" className="btn" disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'usage' })}>Next</button>
       </div>
+
+      {sheetOpen && (
+        <div className="sheet" role="dialog" aria-label="Picked services">
+          <button type="button" className="sheet__scrim" aria-label="Close" onClick={() => setSheetOpen(false)} />
+          <div className="sheet__panel">
+            <span className="sheet__handle" aria-hidden="true" />
+            <BoardReceipt items={state.items} currency={state.currency} showTotal={false} title="Picked" />
+            <div className="sheet__actions">
+              <button type="button" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}
+                style={{ display: 'inline-flex', gap: 8, alignItems: 'center', fontSize: 15, padding: '6px 0', background: 'none', border: 0, color: 'var(--indigo)', cursor: 'pointer' }}>
+                <StatementIcon />Or add a bank statement
+              </button>
+              <button type="button" className="ghost" onClick={() => setSheetOpen(false)}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+  );
+}
+
+function ChevronUp() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6 15l6-6 6 6" />
+    </svg>
   );
 }

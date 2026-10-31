@@ -104,3 +104,32 @@
 @media (min-width: 900px) {
   .board .flow-col { max-width: 560px; margin: 0 auto; width: 100%; }
 }
+
+/* ---- Receipt (paper, torn edges, mono) — side panel & mobile sheet ---- */
+.receipt { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink); }
+.receipt__edge { display: block; width: 100%; height: 8px; color: var(--paper); }
+.receipt__body { background: var(--paper); padding: 2px 18px 12px; }
+.receipt__head { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0 6px; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+.receipt__row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 8px 0; border-top: 1px dashed var(--dash); font-size: 13px; }
+.receipt__row span:first-child { overflow-wrap: anywhere; }
+.receipt__row span:last-child { white-space: nowrap; }
+.receipt__row--tocheck span:last-child { color: var(--muted); }
+.receipt__total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 8px; padding-top: 10px; border-top: 1.5px solid var(--ink); }
+.receipt__total span { font-size: 13px; font-weight: 700; }
+.receipt__total b { font-family: var(--font-display); font-weight: 800; font-size: 20px; }
+.receipt__foot { margin: 12px 0 2px; text-align: center; font-size: 10px; letter-spacing: 1px; color: var(--muted); }
+
+/* ---- Slim Pick bar (mobile): one row, count + Next ---- */
+.pick-bar { position: sticky; bottom: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; padding: 0 16px; border-top: 1.5px solid var(--ink); background: var(--ground); }
+.pick-bar__count { display: inline-flex; align-items: center; gap: 8px; background: none; border: 0; font-family: var(--font-mono); font-size: 13px; letter-spacing: .4px; color: var(--ink); cursor: pointer; padding: 8px 4px; }
+.pick-bar__count b { font-family: var(--font-display); font-weight: 800; font-size: 17px; }
+.pick-bar .btn { min-height: 44px; padding: 0 26px; }
+.pick-bar .btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ---- Bottom sheet for the picked receipt ---- */
+.sheet { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; }
+.sheet__scrim { position: absolute; inset: 0; background: rgba(16,16,20,.45); border: 0; cursor: pointer; }
+.sheet__panel { position: relative; width: 100%; max-height: 78vh; overflow: auto; background: var(--paper); }
+.sheet__handle { display: block; width: 40px; height: 4px; border-radius: 2px; background: var(--dash); margin: 10px auto 0; }
+.sheet__actions { display: flex; flex-direction: column; gap: 6px; align-items: center; padding: 4px 18px 20px; background: var(--paper); }
+@media (min-width: 901px) { .sheet { align-items: center; justify-content: center; } .sheet__panel { max-width: 360px; } }
