@@ -71,6 +71,7 @@ export type Action =
   | { type: 'removeItem'; id: string }
   | { type: 'setPrice'; id: string; price: number }
   | { type: 'setFrequency'; id: string; frequency: Frequency }
+  | { type: 'setPriceConfirmed'; id: string; confirmed: boolean }
   | { type: 'setDisplayCategory'; id: string; displayCategory: Item['displayCategory'] }
   | { type: 'setClassification'; id: string; category: Item['category']; displayCategory: Item['displayCategory'] }
   | { type: 'setUsage'; id: string; usage: Usage }
@@ -209,9 +210,12 @@ export function reducer(state: State, action: Action): State {
       return { ...state, items: state.items.filter((i) => i.id !== action.id) };
 
     case 'setPrice':
-      return { ...state, items: patch(state.items, action.id, { price: action.price }) };
+      // Changing the price on the Check card counts as confirming it.
+      return { ...state, items: patch(state.items, action.id, { price: action.price, priceConfirmed: true }) };
     case 'setFrequency':
-      return { ...state, items: patch(state.items, action.id, { frequency: action.frequency }) };
+      return { ...state, items: patch(state.items, action.id, { frequency: action.frequency, priceConfirmed: true }) };
+    case 'setPriceConfirmed':
+      return { ...state, items: patch(state.items, action.id, { priceConfirmed: action.confirmed }) };
     case 'setDisplayCategory':
       return { ...state, items: patch(state.items, action.id, { displayCategory: action.displayCategory }) };
     case 'setClassification':

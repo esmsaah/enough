@@ -23,7 +23,10 @@ export function Usage() {
   const left = items.length - idx - 1;
 
   const back = () => (idx === 0 ? dispatch({ type: 'goto', step: 'quickstart' }) : setIdx(idx - 1));
-  const next = () => (atLast ? dispatch({ type: 'goto', step: 'anythingElse' }) : setIdx(idx + 1));
+  const advance = () => (atLast ? dispatch({ type: 'goto', step: 'anythingElse' }) : setIdx(idx + 1));
+  // Next confirms this item's price (it joins the receipt with its amount); Skip moves on, leaving it "to check".
+  const next = () => { dispatch({ type: 'setPriceConfirmed', id: i.id, confirmed: true }); advance(); };
+  const skip = () => advance();
 
   return (
     <div className="board">
@@ -110,7 +113,7 @@ export function Usage() {
       </div>
 
       <div className="flow-foot flow-col" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 12, alignItems: 'center', borderTop: 0 }}>
-        <button type="button" className="ghost" style={{ padding: '14px 8px' }} onClick={next}>Skip</button>
+        <button type="button" className="ghost" style={{ padding: '14px 8px' }} onClick={skip}>Skip</button>
         <button type="button" className="btn" onClick={next} disabled={!isAnswered(i)}>Next</button>
         <span style={{ gridColumn: '1 / -1', textAlign: 'center', fontSize: 13, color: 'var(--muted)' }}>
           {left > 0 ? `Tap through. ${left} left, about a minute.` : 'Last one.'}

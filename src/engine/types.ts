@@ -74,6 +74,8 @@ export type Item = {
   extraPurchases?: { charges: number; total: number; label?: string };
   source: Source;
   estimate: boolean; // true for cash and manual guesses
+  priceConfirmed?: boolean; // the person confirmed or changed the price on the Check card
+
   lastCharge?: string; // ISO date, from statement
   nextCharge?: string; // predicted
   usage?: Usage;

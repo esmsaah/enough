@@ -3,7 +3,6 @@ import { AnythingElse } from './screens/AnythingElse';
 import { CutList } from './screens/CutList';
 import { GoodShape } from './screens/GoodShape';
 import { Landing } from './screens/Landing';
-import { QuickPicks } from './screens/QuickPicks';
 import { AddStatement } from './screens/AddStatement';
 import { WhatWeKeep } from './screens/WhatWeKeep';
 import { FoundItems } from './screens/FoundItems';
@@ -19,16 +18,15 @@ function Flow() {
   switch (state.step) {
     case 'landing':
       return <Landing />;
-    case 'picks':
-      return <QuickPicks />;
+    case 'picks': // legacy step removed from the flow; land on the full Pick list
+    case 'quickstart':
+      return <QuickStart />;
     case 'addstatement':
       return <AddStatement />;
     case 'keep':
       return <WhatWeKeep />;
     case 'found':
       return <FoundItems />;
-    case 'quickstart':
-      return <QuickStart />;
     case 'anythingElse':
       return <AnythingElse />;
     case 'usage':
@@ -56,7 +54,8 @@ export function App() {
 function AppFrame() {
   const { state } = useStore();
   const showDesktopHeader = state.step !== 'landing';
-  const showReceipt = ['picks', 'quickstart', 'addstatement', 'keep', 'found', 'anythingElse', 'usage', 'cutlist'].includes(state.step);
+  // The side receipt starts on the Check step (and the statement path, which has its own amounts).
+  const showReceipt = ['addstatement', 'keep', 'found', 'usage', 'anythingElse', 'cutlist'].includes(state.step);
   return (
     <div className={`app${showReceipt ? ' app--with-receipt' : ''}${state.step === 'landing' ? ' app--landing' : ''}`}>
       {showDesktopHeader && <DesktopHeader />}

@@ -3,6 +3,9 @@
 // navy price band, ground footer. Follows the B2 handoff; no invented styles.
 import { useState, type DragEvent } from 'react';
 import { useStore } from '../app/store';
+import { QUICK_PICKS } from '../app/catalog';
+import { withLocalPrice } from '../app/localPrices';
+import { guessCountry } from '../app/country';
 import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { importStatement } from '../app/statementImport';
 import { researchMerchants } from '../app/merchantResearch';
@@ -17,10 +20,16 @@ export function Landing() {
   const [uploadError, setUploadError] = useState('');
   const [uploading, setUploading] = useState(false);
 
-  // Go to the gentle first-pick screen. Nothing is preselected — the person
-  // chooses on the next screen (prices vary by country, so none are assumed).
-  const start = () => dispatch({ type: 'goto', step: 'picks' });
-  const startWith = (_key: string) => start();
+  // Go straight to the full Pick list (country, search, groups).
+  const start = () => dispatch({ type: 'goto', step: 'quickstart' });
+  // A landing chip preselects that service on the Pick list, then opens it.
+  const startWith = (key: string) => {
+    const pick = QUICK_PICKS.find((p) => p.merchantKey === key);
+    if (pick && !state.items.some((i) => i.merchantKey === key)) {
+      dispatch({ type: 'toggleQuickPick', pick: withLocalPrice(pick, state.country ?? guessCountry()) });
+    }
+    start();
+  };
   const upload = () => dispatch({ type: 'goto', step: 'addstatement' });
 
   const onDrop = async (e: DragEvent<HTMLDivElement>) => {

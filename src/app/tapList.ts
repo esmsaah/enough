@@ -11,6 +11,7 @@
 
 import { CATALOG, catalogCategory, type CatalogEntry } from '../engine/catalog';
 import { pickFromCatalog, type QuickPick } from './catalog';
+import { withLocalPrice } from './localPrices';
 import globalCoreData from './globalCore.data.json';
 import localCoreData from './localCore.data.json';
 
@@ -128,7 +129,8 @@ export function tapListForCountry(country: string): QuickPick[] {
   for (const p of [...GLOBAL_CORE, ...local]) {
     if (seen.has(p.merchantKey)) continue;
     seen.add(p.merchantKey);
-    out.push(p);
+    // Verified per-country prices (e.g. Netflix) override the generic default.
+    out.push(withLocalPrice(p, code));
   }
   return out;
 }

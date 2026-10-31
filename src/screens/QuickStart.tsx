@@ -9,7 +9,6 @@ import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { Button } from '../components/ui';
 import { BoardChip, FlowHeader, SearchIcon, StatementIcon } from '../components/board';
-import { yearlyCost } from '../engine/score';
 import type { Category, DisplayCategory, Item } from '../engine/types';
 
 // Sub-group order inside the Subscriptions section (digital only).
@@ -81,7 +80,6 @@ export function QuickStart() {
   const selected = new Set(pickedByKey.keys());
   const ownItems = state.items.filter((i) => i.source === 'manual');
   const count = selected.size + ownItems.length;
-  const yearlyTotal = state.items.reduce((sum, i) => sum + yearlyCost(i), 0);
 
   const sections = useMemo(() => {
     const bySection = new Map<SectionKey, QuickPick[]>();
@@ -272,9 +270,6 @@ export function QuickStart() {
       <div className="flow-foot flow-col">
         <div className="r">
           <span className="lab" style={{ color: 'var(--ink)' }}>{count} picked</span>
-          <span className="m" style={{ fontSize: 15 }}>
-            <b style={{ fontFamily: 'var(--font-display)', fontSize: 20 }}>{formatMoney(yearlyTotal, state.currency)}</b> a year
-          </span>
         </div>
         <button type="button" className="btn full" disabled={count === 0} onClick={() => dispatch({ type: 'goto', step: 'usage' })}>
           Next, check them
