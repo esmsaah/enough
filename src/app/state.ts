@@ -81,6 +81,8 @@ export type Action =
   | { type: 'setWouldMiss'; id: string; wouldMiss: boolean }
   | { type: 'setVisits'; id: string; visits: number }
   | { type: 'setSingleVisit'; id: string; price: number }
+  | { type: 'setWatchAtOnce'; id: string; n: number }
+  | { type: 'setHouseholdOwn'; id: string; value: boolean }
   | { type: 'setContract'; id: string; contract: 'none' | 'contract' | 'unsure'; contractEnds?: string }
   | { type: 'setCompareState'; id: string; compareState: Item['compareState'] }
   | { type: 'setPreferredInOverlap'; id: string; preferred: string } // item id to keep, or 'same'
@@ -125,7 +127,13 @@ export function reducer(state: State, action: Action): State {
       return { ...state, statement: action.result, currency: action.result.meta.displayCurrency, step: 'keep' };
 
     case 'acceptStatement': {
-      const candidates = [...actionItems(state.statement)];
+      // Known services charged at least twice (or charged twice by mistake) are
+      // included by default: people skip "confirm" lists, and a double charge
+      // must reach the result. They can still remove anything with "Not mine".
+      const autoPossibles = (state.statement?.possibleRecurring ?? [])
+        .filter((c) => (c.category === 'digital' || c.category === 'membership' || c.category === 'bill') && (c.charges >= 2 || c.possibleDuplicateCharge))
+        .map((c) => possibleToItem(c, c.frequency === 'yearly' ? 'yearly' : 'monthly'));
+      const candidates = [...actionItems(state.statement), ...autoPossibles];
       // A re-run over more statements replaces earlier statement findings, so
       // an item reclassified by the new data (e.g. a shop) does not linger.
       const candidateKeys = new Set(candidates.map((item) => item.merchantKey));
@@ -144,19 +152,7 @@ export function reducer(state: State, action: Action): State {
       const found = state.statement?.possibleRecurring.find((candidate) => candidate.merchantKey === action.merchantKey);
       if (!found || state.items.some((item) => item.merchantKey === found.merchantKey)) return state;
       if (action.frequency !== 'monthly' && action.frequency !== 'yearly' && action.frequency !== 'oneTime') return state;
-      const oneTime = action.frequency === 'oneTime';
-      const billingModel: BillingModel = oneTime ? 'oneTime' : (found.billingModel ?? action.frequency);
-      const frequency: Frequency = action.frequency;
-      const nextCharge = oneTime ? undefined : addChargeDate(found.lastCharge, frequency);
-      const item = detectedItemToInput(found, frequency);
-      return {
-        ...state,
-        items: [...state.items, {
-          id: newId(), ...item, frequency, billingModel,
-          ...(oneTime ? { category: 'habit' as const, displayCategory: 'Other' as const } : {}),
-          ...(nextCharge ? { nextCharge } : {}),
-        }],
-      };
+      return { ...state, items: [...state.items, possibleToItem(found, action.frequency)] };
     }
 
     case 'toggleQuickPick': {
@@ -237,6 +233,10 @@ export function reducer(state: State, action: Action): State {
       return { ...state, items: patch(state.items, action.id, { wouldMiss: action.wouldMiss }) };
     case 'setVisits':
       return { ...state, items: patch(state.items, action.id, { visitsPerMonth: action.visits }) };
+    case 'setWatchAtOnce':
+      return { ...state, items: patch(state.items, action.id, { watchAtOnce: action.n }) };
+    case 'setHouseholdOwn':
+      return { ...state, items: patch(state.items, action.id, { householdOwn: action.value }) };
     case 'setContract':
       return { ...state, items: patch(state.items, action.id, { contract: action.contract, ...(action.contractEnds ? { contractEnds: action.contractEnds } : {}) }) };
     case 'setSingleVisit':
@@ -390,4 +390,17 @@ function gymTypical(merchantKey: string, state: State): number | undefined {
   if (merchantKey !== 'gym') return undefined;
   const eur = typicalGymEur(state.country ?? guessCountry());
   return eur === undefined ? undefined : Math.round((convert(eur, 'EUR', state.currency) ?? eur) * 100) / 100;
+}
+
+/** A "possible recurring" statement finding turned into an item. */
+function possibleToItem(found: DetectionResult['possibleRecurring'][number], frequency: 'monthly' | 'yearly' | 'oneTime'): Item {
+  const oneTime = frequency === 'oneTime';
+  const billingModel: BillingModel = oneTime ? 'oneTime' : (found.billingModel ?? frequency);
+  const nextCharge = oneTime ? undefined : addChargeDate(found.lastCharge, frequency);
+  const item = detectedItemToInput(found, frequency);
+  return {
+    id: newId(), ...item, frequency, billingModel,
+    ...(oneTime ? { category: 'habit' as const, displayCategory: 'Other' as const } : {}),
+    ...(nextCharge ? { nextCharge } : {}),
+  } as Item;
 }

@@ -139,9 +139,21 @@ function buildContext(items: Item[]): Context {
     addGenericOverlap(items.map((i) => (isYouTubePremium(i) ? { ...i, overlapGroup: 'music' as const } : i)), 'music', duplicateExtras, overlapLosers, overlapKeptName);
   }
 
+  // --- Bundles: Microsoft 365 Personal/Family already includes 1 TB of OneDrive.
+  //     Dropbox or Google One next to it is a second cloud. (iCloud stays: iPhone
+  //     backups only go to iCloud.) The Basic plan (100 GB, ~€2) is not counted.
+  const ms365 = items.find((i) => (i.merchantKey === 'microsoft 365' || i.merchantKey === 'microsoft') && monthlyEquivalent(i) >= (convert(4, 'EUR', i.currency) ?? 4));
+  if (ms365) {
+    for (const c of items) {
+      if (c.id === ms365.id || duplicateExtras.has(c.id) || !['dropbox', 'google one'].includes(c.merchantKey ?? '')) continue;
+      overlapLosers.add(c.id);
+      overlapKeptName.set(c.id, `Microsoft 365 already includes 1 TB of OneDrive storage. If your files fit in 1 TB, ${c.name} is a second cloud you pay for.`);
+    }
+  }
+
   // --- Cloud overlap: consolidate into one cheaper plan when we know storage;
   //     otherwise fall back to the same keep-most-used-cut-other rule. ---
-  const cloudMembers = items.filter((i) => i.overlapGroup === 'cloud' && !duplicateExtras.has(i.id));
+  const cloudMembers = items.filter((i) => i.overlapGroup === 'cloud' && !duplicateExtras.has(i.id) && !overlapLosers.has(i.id));
   let cloudConsolidation: CloudConsolidation | undefined;
   if (cloudMembers.length >= 2 && cloudMembers.every((i) => typeof i.storageUsedGb === 'number')) {
     const combinedStorage = cloudMembers.reduce((s, i) => s + (i.storageUsedGb ?? 0), 0);
@@ -183,7 +195,7 @@ function addGenericOverlap(
   overlapLosers: Set<string>,
   overlapKeptName: Map<string, string>,
 ): void {
-  const members = items.filter((i) => i.overlapGroup === group && !duplicateExtras.has(i.id));
+  const members = items.filter((i) => i.overlapGroup === group && !duplicateExtras.has(i.id) && !overlapLosers.has(i.id));
   if (members.length < 2) return;
   // Honour the person's overlap answer: a specific item id to keep, or 'same'.
   const pref = members.map((m) => m.preferredInOverlap).find((p) => p !== undefined);
@@ -384,6 +396,10 @@ export function runAudit(
     billAlternative?: (item: Item) => { name: string; monthly: number; currency: string } | undefined;
     /** The cheapest plan of the same service, monthly price in `currency`. */
     cheaperPlan?: (item: Item) => { name: string; monthly: number; currency: string } | undefined;
+    /** A Duo/Family plan for two people who each pay their own account. */
+    sharePlan?: (item: Item) => { name: string; monthly: number; currency: string; people: number } | undefined;
+    /** Months the statement covers, to turn spending totals into a year. */
+    spendingMonths?: number;
   } = {},
 ): Audit {
   const currency = opts.displayCurrency ?? mostCommonCurrency(items) ?? 'EUR';
@@ -475,8 +491,11 @@ export function runAudit(
   });
   const hiddenCostYearlyTotal = round2(hiddenCosts.reduce((s, h) => s + (h.yearly ?? 0), 0));
   const reminders = buildReminders(subscriptions, opts.profile, createdAt);
-  const advice = buildAdvice(subscriptions, bills, habits, recommendations, currency, opts);
-  const grandYearlyTotal = round2(yearlyTotal + billYearlyTotal + habitYearlyTotal);
+  const advice = buildAdvice(subscriptions, bills, habits, recommendations, currency, { ...opts, spendingByCategory });
+  // Statement "habits" are everyday spending (groceries, cafes, rides), not recurring
+  // costs: they appear as spending advice, never in the year's recurring total.
+  const toldHabits = habits.filter((h) => h.source !== 'statement');
+  const grandYearlyTotal = round2(yearlyTotal + billYearlyTotal + toldHabits.reduce((s, h) => s + yearlyCost(h), 0));
 
   return {
     items: subscriptions,
@@ -543,22 +562,58 @@ function buildAdvice(
   opts: {
     billAlternative?: (item: Item) => { name: string; monthly: number; currency: string } | undefined;
     cheaperPlan?: (item: Item) => { name: string; monthly: number; currency: string } | undefined;
+    sharePlan?: (item: Item) => { name: string; monthly: number; currency: string; people: number } | undefined;
+    spendingMonths?: number;
+    spendingByCategory?: Record<SpendingCategory, number>;
   },
 ): Advice[] {
   const out: Advice[] = [];
   const toCur = (n: number, from: string) => (from.toUpperCase() === currency.toUpperCase() ? n : convert(n, from, currency) ?? n);
 
-  // Lever 7 — a cheaper plan of the same service, for something kept but used only sometimes.
+  // Lever 7 — a cheaper plan of the same service: fewer screens than they pay for,
+  // or a lighter plan for something used only sometimes.
   for (const item of subscriptions) {
     const rec = recommendations.find((r) => r.itemId === item.id);
-    if (!rec || rec.action !== 'keep' || item.usage !== 'sometimes' || !opts.cheaperPlan) continue;
+    if (!rec || rec.action !== 'keep' || !opts.cheaperPlan) continue;
+    if (item.usage !== 'sometimes' && item.watchAtOnce === undefined) continue;
     const alt = opts.cheaperPlan(item);
     if (!alt) continue;
     const altMonthly = toCur(alt.monthly, alt.currency);
     const diff = round2((monthlyEquivalent(item) - altMonthly) * 12);
     if (diff <= 0) continue;
+    const why = item.watchAtOnce !== undefined
+      ? `${item.watchAtOnce === 1 ? 'Only you watch' : `Up to ${item.watchAtOnce} people watch`} at the same time, and ${alt.name} covers that.`
+      : 'You use it sometimes.';
     out.push({ kind: 'cheaperPlan', itemId: item.id, name: item.name, currency, estimate: true, yearly: yearlyCost(item), yearlyDiff: diff,
-      note: `You use it sometimes. ${alt.name} is ${fmt(altMonthly, currency)} a month and would keep about ${fmt(diff, currency)} a year.` });
+      note: `${why} ${alt.name} is ${fmt(altMonthly, currency)} a month and would keep about ${fmt(diff, currency)} a year.` });
+  }
+
+  // Two separate accounts in one home → one Duo/Family plan.
+  for (const item of subscriptions) {
+    if (!item.householdOwn || !opts.sharePlan) continue;
+    const alt = opts.sharePlan(item);
+    if (!alt) continue;
+    const altMonthly = toCur(alt.monthly, alt.currency);
+    const diff = round2((monthlyEquivalent(item) * 2 - altMonthly) * 12);
+    if (diff <= 0) continue;
+    out.push({ kind: 'sharePlan', itemId: item.id, name: item.name, currency, estimate: true, yearlyDiff: diff,
+      note: `Two accounts cost ${fmt(monthlyEquivalent(item) * 2, currency)} a month. ${alt.name} covers ${alt.people === 2 ? 'both of you' : `up to ${alt.people} people`} for ${fmt(altMonthly, currency)}, about ${fmt(diff, currency)} a year less for your home.` });
+  }
+
+  // Spending the statement shows outside subscriptions, as a yearly figure.
+  if (opts.spendingByCategory && opts.spendingMonths && opts.spendingMonths >= 1) {
+    const perYear = 12 / opts.spendingMonths;
+    const tips: Partial<Record<SpendingCategory, string>> = {
+      Delivery: 'Picking up the same order yourself skips the delivery fee and the service charge.',
+      'Cafes & eating out': 'Not a problem to fix, just the real size of it. A monthly amount you choose keeps it in view.',
+      Transport: 'If most of it is taxis and ride-hailing, a monthly public transport pass is often cheaper for regular trips.',
+    };
+    for (const [cat, tip] of Object.entries(tips) as Array<[SpendingCategory, string]>) {
+      const yearly = round2((opts.spendingByCategory[cat] ?? 0) * perYear);
+      if (yearly < (convert(100, 'EUR', currency) ?? 100)) continue;
+      out.push({ kind: 'spending', itemId: `spend-${cat}`, name: cat, currency, estimate: opts.spendingMonths < 12, yearly,
+        note: `About ${fmt(yearly / 12, currency)} a month, ${fmt(yearly, currency)} a year from your statement. ${tip}` });
+    }
   }
 
   // Lever 9 — bills nobody has compared in a while.
@@ -577,7 +632,9 @@ function buildAdvice(
   }
 
   // Lever 11 — habits, shown as a yearly total so the size is visible. No euros claimed.
+  // With a statement, its spending categories already cover these, so skip statement habits.
   for (const h of habits) {
+    if (h.source === 'statement' && opts.spendingMonths) continue;
     const yearly = yearlyCost(h);
     if (yearly <= 0) continue;
     out.push({ kind: 'habit', itemId: h.id, name: h.name, currency, estimate: true, yearly,

@@ -5,6 +5,7 @@ import { AUDIT_PRICE_EUR, formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { FlowHeader, StatementIcon } from '../components/board';
 import { isExactAmount } from '../engine/score';
+import { Discoveries } from '../components/Discoveries';
 import type { ActionType } from '../engine/types';
 
 const ACTION_LABEL: Record<ActionType, string> = {
@@ -27,7 +28,7 @@ export function Result() {
     .sort((a, b) => b.potentialYearlySaving - a.potentialYearlySaving);
   const net = Math.max(0, audit.grandYearlyTotal - audit.potentialYearlySaving);
   const monthly = audit.grandYearlyTotal / 12;
-  const count = audit.items.length + audit.bills.length + audit.habits.length;
+  const count = audit.items.length + audit.bills.length + audit.habits.filter((h) => h.source !== 'statement').length;
   const lead = actionable[0];
   const leadItem = lead ? audit.items.find((i) => i.id === lead.itemId) : undefined;
   const moreChanges = Math.max(0, actionable.length - 1);
@@ -58,6 +59,8 @@ export function Result() {
       </section>
 
       <div className="flow-body flow-col" style={{ padding: '28px 20px 32px', display: 'flex', flexDirection: 'column', gap: 32 }}>
+        <Discoveries audit={audit} />
+
         {/* Money found — first change shown, the rest blurred behind the paywall. */}
         <section style={{ display: 'flex', flexDirection: 'column' }}>
           <span className="lab">Money found</span>

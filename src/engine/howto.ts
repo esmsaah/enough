@@ -139,6 +139,10 @@ export function howToForAdvice(a: Advice): string {
       return `In your ${a.name} account, choose Change plan.`;
     case 'habit':
       return 'Set yourself a monthly amount for it and check it once a month. No need to stop, just to see it.';
+    case 'sharePlan':
+      return `One of you switches to the shared plan and invites the other. Then the second account is cancelled.`;
+    case 'spending':
+      return '';
   }
 }
 

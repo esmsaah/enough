@@ -5,13 +5,15 @@ import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { FlowHeader, StatementIcon } from '../components/board';
 import { AdviceList } from '../components/AdviceList';
+import { Discoveries, discoveries } from '../components/Discoveries';
 import { isExactAmount, yearlyCost } from '../engine/score';
 
 export function GoodShape() {
   const { state, audit, dispatch } = useStore();
   const cur = audit.currency;
-  const kept = [...audit.items, ...audit.bills, ...audit.habits].filter((i) => yearlyCost(i) > 0).sort((a, b) => yearlyCost(b) - yearlyCost(a));
-  const hasTips = audit.advice.length > 0;
+  const kept = [...audit.items, ...audit.bills, ...audit.habits.filter((h) => h.source !== 'statement')].filter((i) => yearlyCost(i) > 0).sort((a, b) => yearlyCost(b) - yearlyCost(a));
+  const tipCount = audit.advice.length + discoveries(audit).length;
+  const hasTips = tipCount > 0;
 
   return (
     <div className="board">
@@ -20,8 +22,8 @@ export function GoodShape() {
       <section style={{ flexShrink: 0, background: 'var(--navy)', color: 'var(--white)', padding: '28px 20px 32px', display: 'flex', flexDirection: 'column', gap: 12 }}>
         <span className="lab" style={{ color: 'var(--muted-on-navy)' }}>Your year in recurring costs</span>
         <span style={{ fontSize: 56, lineHeight: 0.9, fontWeight: 800, fontStretch: '118%', letterSpacing: '-2px' }}>{formatMoney(audit.grandYearlyTotal, cur)}</span>
-        <span style={{ fontSize: 22, fontWeight: 700, marginTop: 6 }}>{hasTips ? 'Nothing to cancel.' : "You're in good shape."}</span>
-        <span style={{ fontSize: 15, color: 'var(--muted-on-navy)' }}>{hasTips ? `There's nothing to buy. ${audit.advice.length === 1 ? 'One thing is' : `${audit.advice.length} things are`} still worth a look.` : "Everything is earning its place, so there's nothing to buy."}</span>
+        <span style={{ fontSize: 22, fontWeight: 700, marginTop: 6 }}>{kept.length === 0 && state.statement ? 'Not enough months yet.' : hasTips ? 'Nothing to cancel.' : "You're in good shape."}</span>
+        <span style={{ fontSize: 15, color: 'var(--muted-on-navy)' }}>{kept.length === 0 && state.statement ? 'Repeating payments show up from the second month on.' : hasTips ? `There's nothing to buy. ${tipCount === 1 ? 'One thing is' : `${tipCount} things are`} still worth a look.` : "Everything is earning its place, so there's nothing to buy."}</span>
       </section>
 
       <div className="flow-body flow-col" style={{ padding: '28px 20px 32px', display: 'flex', flexDirection: 'column', gap: 28 }}>
@@ -29,7 +31,17 @@ export function GoodShape() {
           <span className="tag ex">EXACT</span> from your statement <span className="tag es">ESTIMATE</span> from your answers
         </div>
 
-        <section style={{ display: 'flex', flexDirection: 'column' }}>
+        {kept.length === 0 && state.statement && (
+          <div style={{ border: '1.5px dashed var(--line)', borderRadius: 'var(--radius)', padding: 16, fontSize: 15, lineHeight: 1.5 }}>
+            We didn't find payments that repeat in this statement. One month is often too short: add two or three more months, or tap the services you pay for.
+            <div style={{ display: 'flex', gap: 12, marginTop: 10, flexWrap: 'wrap' }}>
+              <button type="button" className="btn" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}>Add more months</button>
+              <button type="button" className="btn btn--secondary" onClick={() => dispatch({ type: 'goto', step: 'quickstart' })}>Tap what I pay for</button>
+            </div>
+          </div>
+        )}
+
+        {kept.length > 0 && <section style={{ display: 'flex', flexDirection: 'column' }}>
           <span className="lab">Kept</span>
           <div className="r" style={{ marginTop: 8, paddingBottom: 10, borderBottom: '1.5px solid var(--ink)' }}>
             <span style={{ fontSize: 22, fontWeight: 800, fontStretch: '112%' }}>{kept.length} {kept.length === 1 ? 'thing' : 'things'}</span>
@@ -47,7 +59,9 @@ export function GoodShape() {
               </div>
             );
           })}
-        </section>
+        </section>}
+
+        <Discoveries audit={audit} />
 
         <AdviceList advice={audit.advice} cur={cur} />
 

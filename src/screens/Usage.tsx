@@ -8,7 +8,7 @@ import { useStore } from '../app/store';
 import { FlowHeader, Seg, Stepper } from '../components/board';
 import { isUtility, yearlyCost } from '../engine/score';
 import type { Item } from '../engine/types';
-import { personalPlans } from '../app/localPrices';
+import { personalPlans, planShape } from '../app/localPrices';
 import { guessCountry } from '../app/country';
 import { convert } from '../engine/rates';
 
@@ -25,6 +25,7 @@ export function Usage() {
   const atLast = idx >= items.length - 1;
   const left = items.length - idx - 1;
   const plans = i.category === 'digital' && i.merchantKey ? personalPlans(i.merchantKey, state.country ?? guessCountry()) : [];
+  const shape = planShape(i.merchantKey, state.country ?? guessCountry());
   // A statement amount usually matches one plan exactly: preselect it.
   const inItemCur = (p: { monthly: number; currency: string }) => (p.currency === i.currency ? p.monthly : convert(p.monthly, p.currency, i.currency) ?? p.monthly);
   const planShown = i.planName ?? plans.find((p) => Math.abs(inItemCur(p) - i.price) <= Math.max(0.06, i.price * 0.02))?.name;
@@ -89,6 +90,24 @@ export function Usage() {
                     options={[{ value: 'always', label: 'Every week' }, { value: 'sometimes', label: 'Sometimes' }, { value: 'almostNever', label: 'Almost never' }]}
                     onChange={(u) => dispatch({ type: 'setUsage', id: i.id, usage: u })} />
                 </div>
+                {/* Questions whose answers the person can't turn into a saving alone:
+                    the right plan size and a shared plan for the home. */}
+                {shape.screens && (
+                  <div className="q">
+                    <div className="t">How many people watch at the same time?</div>
+                    <Seg value={i.watchAtOnce === undefined ? undefined : String(i.watchAtOnce)}
+                      options={[{ value: '1', label: 'Just me' }, { value: '2', label: '2' }, { value: '4', label: '3 or more' }]}
+                      onChange={(v) => dispatch({ type: 'setWatchAtOnce', id: i.id, n: Number(v) })} />
+                  </div>
+                )}
+                {shape.shared && (
+                  <div className="q">
+                    <div className="t">Does someone at home pay for their own {i.name}?</div>
+                    <Seg value={i.householdOwn === undefined ? undefined : i.householdOwn ? 'yes' : 'no'}
+                      options={[{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }]}
+                      onChange={(v) => dispatch({ type: 'setHouseholdOwn', id: i.id, value: v === 'yes' })} />
+                  </div>
+                )}
                 {i.usage === 'sometimes' && (
                   <div className="q">
                     <div className="t">Would you miss it?</div>

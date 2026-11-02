@@ -47,7 +47,7 @@ const KEYWORD_RULES: KeywordRule[] = [
   {
     category: 'habit',
     displayCategory: 'Transport',
-    words: ['taxi', 'cab', 'uber', 'bolt', 'parking', 'parkiranje'],
+    words: ['taxi', 'cab', 'uber', 'bolt', 'parking', 'parkiranje', 'ceste', 'autoceste', 'autoput', 'putevi', 'naplatna', 'toll', 'maut'],
   },
   {
     category: 'habit',
@@ -83,6 +83,8 @@ export function classifyByKeyword(
 /** Money moved between your own balances or currencies: never spending. */
 export function isInternalMovement(normalizedMerchant: string): boolean {
   if (/\b(naknada|provizija|fee)\b/.test(normalizedMerchant)) return false;
+  // Paying bills or sending money at the post office: a pass-through, not a cost of its own.
+  if (/\b(bh posta|posta srbije|hrvatska posta|hp posta|posta crne gore|posta slovenije|makedonska posta|posta e kosoves|posta shqiptare)\b/.test(normalizedMerchant)) return true;
   return /\b(konverzija|konverzijaoperativni|exchange|conversion|currency exchange|umbuchung|umrechnung|change de devises|interni prenos|own account|vlastiti racun|troskovi ucinjeni|credit card payment|kreditna kartica|podizanje gotovog novca|cash withdrawal|bankomat|bargeldauszahlung|geldautomat)\b/.test(normalizedMerchant);
 }
 

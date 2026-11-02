@@ -7,6 +7,7 @@ import { useStore } from '../app/store';
 import { clearEverything } from '../app/storage';
 import { FlowHeader } from '../components/board';
 import { AdviceList } from '../components/AdviceList';
+import { Discoveries } from '../components/Discoveries';
 import { isExactAmount } from '../engine/score';
 import type { ActionType, Audit, HiddenCost, Item, Recommendation } from '../engine/types';
 import { calendarEvents, howToFor, moneyPlan, toIcs } from '../engine/howto';
@@ -75,6 +76,8 @@ export function CutList() {
           );
         })}
 
+        <Discoveries audit={audit} />
+
         <AdviceList advice={audit.advice} cur={cur} />
 
         {audit.hiddenCosts.length > 0 && (
@@ -126,7 +129,7 @@ function CalendarButton({ audit, cur }: { audit: Audit; cur: string }) {
     <section style={{ border: '1.5px dashed var(--line)', borderRadius: 'var(--radius)', padding: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
       <span style={{ fontSize: 17, fontWeight: 700 }}>Let the plan run itself</span>
       <span style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.5 }}>
-        {events.length} reminders for the next year: every cancel deadline{audit.rotationPlan && audit.recommendations.some((r) => r.action === 'rotate') ? ', every streaming switch' : ''} and one check-up in a year. Works with Apple, Google and Outlook calendars.
+        {events.length} {events.length === 1 ? 'reminder' : 'reminders'} for the next year: every cancel deadline{audit.rotationPlan && audit.recommendations.some((r) => r.action === 'rotate') ? ', every streaming switch' : ''} and one check-up in a year. Works with Apple, Google and Outlook calendars.
       </span>
       <button type="button" className="btn btn--secondary" onClick={download}>Add reminders to my calendar</button>
     </section>

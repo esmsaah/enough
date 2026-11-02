@@ -8,6 +8,8 @@ const SUBLABEL: Record<Advice['kind'], string> = {
   compareOffers: 'Compare offers',
   cheaperPlan: 'Cheaper plan',
   habit: 'Habit',
+  sharePlan: 'Share one plan',
+  spending: 'From your statement',
 };
 
 export function AdviceList({ advice, cur }: { advice: Advice[]; cur: string }) {
@@ -29,7 +31,7 @@ export function AdviceList({ advice, cur }: { advice: Advice[]; cur: string }) {
             {a.yearly !== undefined && <span className="m" style={{ fontSize: 15 }}>{formatMoney(a.yearly, cur)} a year</span>}
           </div>
           <span style={{ fontSize: 14, lineHeight: 1.5, color: 'var(--muted)' }}>{a.note}</span>
-          <span style={{ fontSize: 14, lineHeight: 1.5 }}>{howToForAdvice(a)}</span>
+          {howToForAdvice(a) && <span style={{ fontSize: 14, lineHeight: 1.5 }}>{howToForAdvice(a)}</span>}
         </div>
       ))}
     </section>

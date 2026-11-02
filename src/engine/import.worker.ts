@@ -94,6 +94,7 @@ function combineMeta(metas: ImportMeta[], transactions: DetectionResult['transac
     redactedCategories: [...new Set(metas.flatMap((meta) => meta.redactedCategories))],
     columnQuestions: metas.flatMap((meta) => meta.columnQuestions),
     columnCount: Math.max(0, ...metas.map((meta) => meta.columnCount)),
+    ...(metas.some((meta) => meta.columnFees?.length) ? { columnFees: metas.flatMap((meta) => meta.columnFees ?? []) } : {}),
   };
 }
 

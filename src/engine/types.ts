@@ -95,6 +95,8 @@ export type Item = {
   uses?: AiUse[]; // AI overlap: what the person uses this assistant for
   renewalMonth?: number; // 1–12, for a yearly plan: the month it renews (reminder)
   trialEndsOn?: string; // ISO date a free/intro trial turns into a paid charge (reminder)
+  watchAtOnce?: number; // how many people use it at the same time (screen-tier plans)
+  householdOwn?: boolean; // someone else at home pays for their own account of the same service
   planName?: string; // which plan the person has (from researched plans), e.g. "Standard"
   userPriced?: boolean; // the person typed the amount themselves (gym, habits)
   catalogPrice?: number; // typical monthly price from the catalog, in this item's currency (price-above-catalog warning)
@@ -167,7 +169,7 @@ export type Reminder = {
 
 /** Advice worth acting on that is never counted as money found (value doc levers 7–11). */
 export type Advice = {
-  kind: 'compareOffers' | 'cheaperPlan' | 'habit';
+  kind: 'compareOffers' | 'cheaperPlan' | 'habit' | 'sharePlan' | 'spending';
   itemId: string;
   name: string;
   note: string; // one plain sentence

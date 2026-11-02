@@ -80,3 +80,36 @@ describe('acceptance: nothing vanishes', () => {
     expect(a.advice[0]).toMatchObject({ kind: 'cheaperPlan', yearlyDiff: 60 });
   });
 });
+
+describe('acceptance: answers the person could not work out alone', () => {
+  it('Netflix Premium watched by one person → the plan that fits', () => {
+    const a = runAudit([item({ name: 'Netflix', merchantKey: 'netflix', planName: 'Premium', price: 9.99, usage: 'always', watchAtOnce: 1 })], {
+      cheaperPlan: () => ({ name: 'Basic', monthly: 4.99, currency: 'EUR' }),
+    });
+    expect(a.advice[0]).toMatchObject({ kind: 'cheaperPlan', yearlyDiff: 60 });
+    expect(a.advice[0]!.note).toMatch(/Only you watch/);
+  });
+  it('two Spotify accounts at home → Duo', () => {
+    const a = runAudit([item({ name: 'Spotify', merchantKey: 'spotify', price: 5.99, usage: 'always', householdOwn: true })], {
+      sharePlan: () => ({ name: 'Premium Duo', monthly: 8.49, currency: 'EUR', people: 2 }),
+    });
+    expect(a.advice[0]).toMatchObject({ kind: 'sharePlan', yearlyDiff: 41.88 });
+  });
+  it('Microsoft 365 already includes cloud storage', () => {
+    const a = runAudit([
+      item({ name: 'Microsoft 365', merchantKey: 'microsoft 365', price: 7, usage: 'always' }),
+      item({ id: 'db', name: 'Dropbox', merchantKey: 'dropbox', overlapGroup: 'cloud', price: 11.99, usage: 'always' }),
+    ]);
+    const r = a.recommendations.find((x) => x.itemId === 'db')!;
+    expect(r.action).toBe('removeOverlap');
+    expect(r.reason).toMatch(/OneDrive/);
+  });
+  it('statement spending becomes a yearly figure, and is not part of recurring costs', () => {
+    const a = runAudit([item({ name: 'Glovo', category: 'habit', displayCategory: 'Shopping & Delivery', price: 40, source: 'statement' })], {
+      spendingMonths: 6, spendingByCategory: { Delivery: 240, Groceries: 0, Shopping: 0, 'Cafes & eating out': 0, Transport: 0, Travel: 0 },
+    });
+    expect(a.advice.find((x) => x.kind === 'spending')!.yearly).toBe(480);
+    expect(a.grandYearlyTotal).toBe(0);
+    expect(a.advice.some((x) => x.kind === 'habit')).toBe(false);
+  });
+});
