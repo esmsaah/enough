@@ -410,3 +410,13 @@ p { margin: 8px 0; }
 @media (min-width: 901px) {
   .flow-head__bar, .flow-head__label { visibility: hidden; }
 }
+
+/* Save as PDF: print only the list. */
+@media print {
+  #test-banner, .desktop-header, .desktop-receipt, .flow-head, .flow-foot, button, .btn, .ghost { display: none !important; }
+  body, .app, .board { background: #fff !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .no-print { display: none !important; }
+  .app--with-receipt { display: block !important; }
+  a { color: inherit; }
+}

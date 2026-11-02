@@ -11,6 +11,7 @@ import { Discoveries } from '../components/Discoveries';
 import { isExactAmount } from '../engine/score';
 import type { ActionType, Audit, HiddenCost, Item, Recommendation } from '../engine/types';
 import { calendarEvents, howToFor, moneyPlan, toIcs } from '../engine/howto';
+import { EMAIL_ENABLED } from '../app/features';
 
 const GROUPS: Array<{ label: string; actions: ActionType[] }> = [
   { label: 'Cancel', actions: ['cancel'] },
@@ -106,7 +107,11 @@ export function CutList() {
         <CalendarButton audit={audit} cur={cur} />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
-          <button type="button" className="btn full" onClick={() => dispatch({ type: 'goto', step: 'emailShare' })}>Email me this list</button>
+          {EMAIL_ENABLED
+            ? <button type="button" className="btn full" onClick={() => dispatch({ type: 'goto', step: 'emailShare' })}>Email me this list</button>
+            : <button type="button" className="btn full" onClick={() => window.print()}>Save as PDF</button>}
+          {!EMAIL_ENABLED && <span className="no-print" style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center' }}>Choose "Save as PDF" in the print window. Your list stays on this device too.</span>}
+          {!EMAIL_ENABLED && <button type="button" className="ghost" onClick={() => dispatch({ type: 'goto', step: 'emailShare' })}>Make my share card</button>}
           <button type="button" className="ghost" style={{ color: 'var(--muted)' }}
             onClick={async () => { await clearEverything(); resetStatements(); dispatch({ type: 'reset' }); }}>
             Delete everything
@@ -126,7 +131,7 @@ function CalendarButton({ audit, cur }: { audit: Audit; cur: string }) {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
   return (
-    <section style={{ border: '1.5px dashed var(--line)', borderRadius: 'var(--radius)', padding: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
+    <section className="no-print" style={{ border: '1.5px dashed var(--line)', borderRadius: 'var(--radius)', padding: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
       <span style={{ fontSize: 17, fontWeight: 700 }}>Let the plan run itself</span>
       <span style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.5 }}>
         {events.length} {events.length === 1 ? 'reminder' : 'reminders'} for the next year: every cancel deadline{audit.rotationPlan && audit.recommendations.some((r) => r.action === 'rotate') ? ', every streaming switch' : ''} and one check-up in a year. Works with Apple, Google and Outlook calendars.

@@ -1,4 +1,5 @@
 import { resetStatements } from '../app/statementImport';
+import { EMAIL_ENABLED } from '../app/features';
 // Screen 10 — email report, renewal reminders and share card (§8, §10).
 import { useMemo, useState, type FormEvent } from 'react';
 import { useStore } from '../app/store';
@@ -75,9 +76,11 @@ export function EmailShare() {
       <ProgressBar step={4} total={4} />
       <p className="muted mono">YOUR NEXT STEPS</p>
       <h1>Keep it close.</h1>
-      <p className="muted email-share-intro">We’ll send a short letter with your cut list, and nudge you before the things you flagged renew.</p>
+      <p className="muted email-share-intro">{EMAIL_ENABLED
+        ? 'We’ll send a short letter with your cut list, and nudge you before the things you flagged renew.'
+        : 'Share what you found. No amounts from your statement leave this device unless you choose to share the card.'}</p>
 
-      <form className="email-share-form" onSubmit={submit}>
+      {EMAIL_ENABLED && <form className="email-share-form" onSubmit={submit}>
         <label className="email-share-label" htmlFor="report-email">Email address</label>
         <input
           id="report-email"
@@ -115,7 +118,7 @@ export function EmailShare() {
         ) : (
           <Button full type="submit" disabled={!canSubmit}>{sending ? 'Sending…' : 'Send my choices'}</Button>
         )}
-      </form>
+      </form>}
 
       <ShareCard currency={audit.currency} yearlyTotal={audit.yearlyTotal} saving={shareAmount} doneSaving={hasDoneItems} />
 
