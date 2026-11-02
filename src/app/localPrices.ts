@@ -52,6 +52,8 @@ export function cheaperPlanFor(merchantKey: string | undefined, planName: string
   if (!merchantKey) return undefined;
   const plans = personalPlans(merchantKey, country).filter((p) => !needPeople || (p.people ?? 1) >= needPeople);
   if (plans.length < 2) return undefined;
+  // Storage tiers (50 GB, 2 TB…): a smaller plan only helps if the files fit, which we can't know.
+  if (plans.every((p) => /^\d+(gb|tb)$/.test(p.type))) return undefined;
   const current = plans.find((p) => p.name === planName);
   const allowAds = current ? /ads/i.test(current.name) : false;
   const inCur = (p: Plan) => (p.currency === currency ? p.monthly : convert(p.monthly, p.currency, currency) ?? p.monthly);

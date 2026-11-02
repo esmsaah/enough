@@ -11,7 +11,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'research', 'plans')
 OUT = os.path.join(ROOT, 'src', 'app', 'plans.data.json')
 # Which plan the tap list uses when the person hasn't said which one they have.
-DEFAULT_ORDER = ['standard', 'individual', 'premium', 'basic', 'mobile']
+DEFAULT_ORDER = ['standard', 'individual', 'premium', 'basic', 'mobile', '200gb']
+# Research names → the merchant keys the app uses for the same service.
+KEY_ALIASES = {'icloud': ['icloud', 'icloud+'], 'hbomax': ['max', 'hbo max']}
 
 def num(v):
     if v is None: return None
@@ -62,6 +64,13 @@ for svc, countries in data.items():
             best = next((i for i in choices if e['plans'][i]['type'] == t), None)
             if best is not None: break
         e['default'] = best if best is not None else (choices[0] if choices else 0)
+
+for k, aliases in KEY_ALIASES.items():
+    if k in data:
+        for a in aliases:
+            data[a] = data[k]
+        if k not in aliases:
+            del data[k]
 
 with open(OUT, 'w') as f:
     json.dump(data, f, ensure_ascii=False, separators=(',', ':'), sort_keys=True)
