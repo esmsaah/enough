@@ -13,7 +13,7 @@ OUT = os.path.join(ROOT, 'src', 'app', 'plans.data.json')
 # Which plan the tap list uses when the person hasn't said which one they have.
 DEFAULT_ORDER = ['standard', 'individual', 'premium', 'basic', 'mobile', '200gb']
 # Research names → the merchant keys the app uses for the same service.
-KEY_ALIASES = {'icloud': ['icloud', 'icloud+'], 'hbomax': ['max', 'hbo max']}
+KEY_ALIASES = {'icloud+': ['icloud', 'icloud+'], 'hbo max': ['max', 'hbo max']}
 
 def num(v):
     if v is None: return None
@@ -28,7 +28,8 @@ def num(v):
     return round(n, 2) if n > 0 else None
 
 def key(service):
-    return re.sub(r'[^a-z0-9]', '', service.lower())
+    # The app's merchant keys: lowercase, spaces and '+' kept ("youtube premium", "disney+").
+    return re.sub(r'\s+', ' ', service.lower().strip())
 
 data = {}
 for path in sorted(glob.glob(os.path.join(SRC, '*.xlsx'))):
