@@ -6,6 +6,8 @@ import { useStore } from '../app/store';
 import { FlowHeader, StatementIcon } from '../components/board';
 import { isExactAmount } from '../engine/score';
 import { Discoveries } from '../components/Discoveries';
+import { useState } from 'react';
+import { startCheckout } from '../app/payment';
 import type { ActionType } from '../engine/types';
 
 const ACTION_LABEL: Record<ActionType, string> = {
@@ -23,6 +25,13 @@ const ACTION_LABEL: Record<ActionType, string> = {
 export function Result() {
   const { state, audit, dispatch } = useStore();
   const cur = audit.currency;
+  const [payError, setPayError] = useState('');
+  const [opening, setOpening] = useState(false);
+  const pay = async () => {
+    setPayError(''); setOpening(true);
+    const r = await startCheckout(() => dispatch({ type: 'unlock' }));
+    if (!r.ok) { setPayError(r.message); setOpening(false); }
+  };
   const actionable = audit.recommendations
     .filter((r) => r.verdict !== 'keep')
     .sort((a, b) => b.potentialYearlySaving - a.potentialYearlySaving);
@@ -97,7 +106,17 @@ export function Result() {
             <span style={{ fontWeight: 700 }}>Once</span>
             <span style={{ fontSize: 28, fontWeight: 800, fontStretch: '118%' }}>{formatMoney(AUDIT_PRICE_EUR, 'EUR')}</span>
           </div>
-          <button type="button" className="btn full" onClick={() => dispatch({ type: 'unlock' })}>Show my full cut list</button>
+          {state.unlocked
+            ? <button type="button" className="btn full" onClick={() => dispatch({ type: 'goto', step: 'cutlist' })}>Show my full cut list</button>
+            : <button type="button" className="btn full" onClick={pay} disabled={opening || state.paymentPending}>
+                {state.paymentPending ? 'Confirming your payment…' : opening ? 'Opening secure checkout…' : 'Show my full cut list'}
+              </button>}
+          {(payError || state.paymentFailed) && (
+            <span role="alert" style={{ fontSize: 13, color: 'var(--coral-pen)', textAlign: 'center' }}>
+              {payError || "We couldn't confirm a payment. If you were charged, write to us and we'll unlock it or refund you."}
+            </span>
+          )}
+          <span style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center' }}>Secure checkout by Dodo Payments. <a href="/refund.html">Refund within 14 days</a> if it didn't help.</span>
           <span style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center' }}>Pays for itself if you cut one thing. No subscription, obviously.</span>
         </div>
 

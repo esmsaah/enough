@@ -12,6 +12,22 @@ const ACCOUNT_PAGES: Record<string, string> = {
   'disney+': 'https://www.disneyplus.com/account/subscription',
   'youtube premium': 'https://www.youtube.com/paid_memberships',
   dropbox: 'https://www.dropbox.com/account/plan',
+  // Checked November 2026.
+  chatgpt: 'https://help.openai.com/en/articles/7232927-how-do-i-cancel-my-chatgpt-plus-subscription',
+  adobe: 'https://account.adobe.com/plans',
+  'adobe creative cloud': 'https://account.adobe.com/plans',
+  'google one': 'https://one.google.com/settings',
+  nordvpn: 'https://my.nordaccount.com/',
+  expressvpn: 'https://www.expressvpn.com/subscriptions',
+  microsoft: 'https://account.microsoft.com/services',
+  'microsoft 365': 'https://account.microsoft.com/services',
+  // Apple services are all cancelled in the Apple account.
+  apple: 'https://support.apple.com/en-us/118428',
+  icloud: 'https://support.apple.com/en-us/118428',
+  'icloud+': 'https://support.apple.com/en-us/118428',
+  'apple music': 'https://support.apple.com/en-us/118428',
+  'apple tv+': 'https://support.apple.com/en-us/118428',
+  'apple arcade': 'https://support.apple.com/en-us/118428',
 };
 
 export type HowTo = { steps: string[]; link?: string; deadline?: string };

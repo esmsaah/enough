@@ -8,6 +8,7 @@ import { analyseItems, restoreMerchantProfiles } from './merchantResearch';
 import { cheaperPlanFor, sharePlanFor } from './localPrices';
 import { guessCountry } from './country';
 import { monthlyEquivalent } from '../engine/score';
+import { clearReturnParams, confirmPayment, returnedPaymentId } from './payment';
 
 type Ctx = { state: State; dispatch: (a: Action) => void; audit: Audit };
 const StoreContext = createContext<Ctx | null>(null);
@@ -18,8 +19,18 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   // Resume where the person left off (§8 flow rule).
   useEffect(() => {
     let live = true;
-    loadState().then((s) => {
+    loadState().then(async (s) => {
       if (live && s && s.items) dispatch({ type: 'hydrate', state: s });
+      // Back from checkout: unlock only after our server confirms the payment.
+      const paymentId = returnedPaymentId();
+      if (!paymentId) return;
+      clearReturnParams();
+      dispatch({ type: 'paymentPending', pending: true });
+      const paid = await confirmPayment(paymentId);
+      if (!live) return;
+      dispatch({ type: 'paymentPending', pending: false });
+      if (paid) dispatch({ type: 'unlock' });
+      else dispatch({ type: 'paymentFailed' });
     });
     return () => {
       live = false;

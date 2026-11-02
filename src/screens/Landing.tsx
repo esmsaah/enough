@@ -201,9 +201,10 @@ export function Landing() {
             <p className="b2-footer__by">Made by one person who also had too many subscriptions.</p>
           </div>
           <nav className="b2-footer__links">
-            <a href="#top">About</a>
-            <a href="#trust">Privacy</a>
-            <a href="#top">Terms</a>
+            <a href="#trust">How it's safe</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="/refund.html">Refunds</a>
           </nav>
         </div>
       </footer>

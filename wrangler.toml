@@ -1,7 +1,19 @@
 name = "enough"
 compatibility_date = "2026-10-08"
 
-# Static site: serve the built SPA from dist/. No Worker script (no `main`).
+# A tiny Worker for /api/* (payment check, shop-name recognition); everything
+# else is the built SPA from dist/.
+main = "worker/index.ts"
+# Keep variables set in the dashboard (DODO_PRODUCT_ID) when deploying.
+keep_vars = true
+
 [assets]
 directory = "./dist"
+binding = "ASSETS"
 not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+[vars]
+DODO_MODE = "test"
+# DODO_PRODUCT_ID is set in the Cloudflare dashboard (Settings → Variables).
+# DODO_API_KEY is a secret, set in the Cloudflare dashboard, never in this file.

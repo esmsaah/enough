@@ -27,6 +27,10 @@ export type State = {
   step: Step;
   items: Item[];
   unlocked: boolean;
+  /** Back from checkout, waiting for the server to confirm the payment. */
+  paymentPending?: boolean;
+  /** The last checkout came back without a confirmed payment. */
+  paymentFailed?: boolean;
   currency: string;
   statement?: DetectionResult;
   reportEmail: string;
@@ -99,6 +103,8 @@ export type Action =
   | { type: 'setRotationReminders'; enabled: boolean }
   | { type: 'setEmailConsent'; key: 'sendReport' | 'enableReminders' | 'newsConsent'; value: boolean }
   | { type: 'unlock' }
+  | { type: 'paymentPending'; pending: boolean }
+  | { type: 'paymentFailed' }
   | { type: 'reset' }
   | { type: 'setAiRecognition'; enabled: boolean }
   | { type: 'setCountry'; country: string }
@@ -291,7 +297,11 @@ export function reducer(state: State, action: Action): State {
       return { ...state, [action.key]: action.value };
 
     case 'unlock':
-      return { ...state, unlocked: true, step: 'cutlist' };
+      return { ...state, unlocked: true, paymentFailed: false, step: 'cutlist' };
+    case 'paymentPending':
+      return { ...state, paymentPending: action.pending, ...(action.pending ? { step: 'result' as const } : {}) };
+    case 'paymentFailed':
+      return { ...state, paymentFailed: true, step: 'result' };
     case 'setCountry':
       return { ...state, country: action.country };
 
@@ -313,7 +323,7 @@ export function reducer(state: State, action: Action): State {
     case 'reset':
       return { ...initialState };
     case 'hydrate':
-      return { ...initialState, ...action.state };
+      return { ...initialState, ...action.state, paymentPending: false };
 
     default:
       return state;
