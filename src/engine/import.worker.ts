@@ -12,7 +12,7 @@ let statementFiles: Array<{ rows?: string[][]; pdf?: PdfPage[] }> | undefined;
 
 const scope = self as DedicatedWorkerGlobalScope;
 
-type StatementFile = { name: string; bytes: ArrayBuffer };
+type StatementFile = { name: string; bytes?: ArrayBuffer; pages?: PdfPage[] };
 scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files: StatementFile[] } | { id: number; type: 'dateFormat'; format: DateFormat } | { id: number; type: 'reset' }>) => {
   const { id } = event.data;
   if (event.data.type === 'reset') {
@@ -21,7 +21,10 @@ scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files:
   }
   try {
     if (event.data.type === 'files') {
-      const addedFiles = await Promise.all(event.data.files.map(async ({ name, bytes }) => {
+      const addedFiles = await Promise.all(event.data.files.map(async ({ name, bytes: maybeBytes, pages: ocrPages }) => {
+      // Photos and scanned PDFs were read on the device (OCR); their words arrive positioned like a text PDF.
+      if (ocrPages) return { pdf: ocrPages };
+      const bytes = maybeBytes!;
       const extension = name.split('.').pop()?.toLowerCase();
       if (extension === 'csv' || extension === 'txt') return { rows: parseCsvBytes(new Uint8Array(bytes)) };
       if (extension === 'xls' || extension === 'xlsx') {
@@ -47,7 +50,7 @@ scope.onmessage = async (event: MessageEvent<{ id: number; type: 'files'; files:
     const batches = statementFiles.map((file) => {
       if (file.pdf) {
         const parsed = transactionsFromPdfPages(file.pdf);
-        if (!file.pdf.some((page) => page.some((cell) => cell.str.trim()))) throw new Error('This PDF has no selectable text. Try a CSV or Excel export instead.');
+        if (!file.pdf.some((page) => page.some((cell) => cell.str.trim()))) throw new Error('We couldn’t read any text in this file. Try a sharper photo, or a CSV or Excel export from your bank.');
         return {
           transactions: parsed.transactions,
           meta: {

@@ -3,15 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Enough — audit your recurring costs once. Privacy-first, on-device.",
+  "description": "Enough \u2014 audit your recurring costs once. Privacy-first, on-device.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/copy-ocr-assets.mjs && tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -b --noEmit",
-    "audit": "vite-node scripts/audit.ts --"
+    "audit": "vite-node scripts/audit.ts --",
+    "predev": "node scripts/copy-ocr-assets.mjs"
   },
   "dependencies": {
     "idb-keyval": "^6.3.0",
@@ -19,7 +20,8 @@
     "pdfjs-dist": "^4.10.38",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
+    "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
     "@types/papaparse": "^5.5.2",
@@ -28,6 +30,9 @@
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.6.3",
     "vite": "^5.4.11",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "@tesseract.js-data/eng": "^1.0.0",
+    "@tesseract.js-data/hrv": "^1.0.0",
+    "@tesseract.js-data/srp": "^1.0.0"
   }
 }

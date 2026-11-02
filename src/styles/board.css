@@ -133,3 +133,7 @@
 .sheet__handle { display: block; width: 40px; height: 4px; border-radius: 2px; background: var(--dash); margin: 10px auto 0; }
 .sheet__actions { display: flex; flex-direction: column; gap: 6px; align-items: center; padding: 4px 18px 20px; background: var(--paper); }
 @media (min-width: 901px) { .sheet { align-items: center; justify-content: center; } .sheet__panel { max-width: 360px; } }
+
+/* Tap targets ≥ 44 px (brief §14): the field's input fills its 48 px box. */
+.board .field input { min-height: 44px; flex: 1; }
+.pick-bar__count { min-height: 44px; }

@@ -16,7 +16,7 @@ Status key: **DONE** works end to end and was tested · **PARTIAL** · **PLACEHO
 | §1.5 | One action per item, savings never double counted | `engine/score.ts` | DONE | `score.test.ts`, `acceptance.test.ts` (lines add up to total) |
 | §1.6 | Mobile 390 px, in-app browsers | CSS, `Landing.tsx` banner | DONE (banner added) | all browser runs at 390×844 |
 | §6 | CSV, Excel, text PDF, several files merged | `engine/*` | DONE | fixtures + 6 real statements (earlier run) |
-| §6 | Photo / scanned PDF OCR, phone subscription screenshot | — | NOT BUILT | hidden from upload screen, in `LATER.md` |
+| §6 | Photo / scanned PDF OCR (Latin + Cyrillic), phone subscription screenshot | `app/ocr.ts`, `engine/subscriptionList.ts`, `AddStatement.tsx` | DONE (2026-11-02) | photo and scanned PDF: 10/10 rows read; iPhone screenshot: 3/3 subscriptions; no outside requests; `subscriptionList.test.ts` |
 | §6 | Currency conversion marked approx. | `engine/rates.ts` | DONE | unit tests |
 | §6 | Redaction + "What we keep" | `engine/redact.ts`, `WhatWeKeep.tsx` | DONE | fixture tests, browser |
 | §6 | Detection rules 1–8 | `engine/detect.ts` | DONE | `recurring-cases.test.ts`, fixtures |
@@ -31,7 +31,7 @@ Status key: **DONE** works end to end and was tested · **PARTIAL** · **PLACEHO
 | §7 | Savings target tool | `engine/target.ts`, `CutList.tsx` | DONE (was missing) | `target.test.ts`, browser |
 | §7 | One plain reason per item | `score.ts` | DONE (false "use more" fixed earlier) | tests |
 | §8 | Landing two paths | `Landing.tsx` | CHANGED (B2 design, decision 69) | — |
-| §8 | Screen 3 "Finish on my computer" | — | BLOCKED (email) | placeholder removed from UI |
+| §8 | Screen 3 "Finish on my computer" | `app/continueLink.ts`, `AddStatement.tsx`, `store.tsx` | DONE (2026-11-02, no server: link sent from the person's email app) | browser: link opened in a fresh browser brings items and answers; `continueLink.test.ts` |
 | §8 | Good shape screen + share card | `GoodShape.tsx` | DONE | browser |
 | §8 | Full list: before/after, target tool, Cut / Look again / Keep, Cancel now, Done | `CutList.tsx` | DONE (Keep section and Done for every change added) | browser |
 | §8 | "Remind me before it renews" | `CutList.tsx` calendar file | CHANGED: calendar file instead of email until email exists | browser: .ics with cancel, notice, pause/restart, renewal, trial, check-up |
@@ -67,9 +67,9 @@ Status key: **DONE** works end to end and was tested · **PARTIAL** · **PLACEHO
 
 1. Payment live test: Dodo keys in Cloudflare (founder).
 2. Email report, reminders, "Finish on my computer": domain + Resend (founder), then build.
-3. Photo/scanned-PDF OCR and phone-subscription screenshots: not built (larger work, `LATER.md`).
+3. OCR for Arabic, CJK, Thai and Devanagari scripts is not bundled yet (Latin and Cyrillic are).
 4. Brief §7 "more than 6 items on one screen": not built; needs a decision (see open questions).
-5. Three controls under 44 px: the country "Change" link, the "0 picked" toggle and the search field height on Pick.
+5. Fixed 2026-11-02: country "Change", the "picked" toggle and the search field are now 44 px.
 6. Local prices: 9 services; other services fall back to typical prices.
 
 ## 5. Open questions for the founder

@@ -170,7 +170,7 @@ export function QuickStart() {
         <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 4 }}>
           <label className="r" style={{ fontSize: 14, color: 'var(--muted)' }}>
             <span>Showing services in {countryFlag(country)} {countryName(country)}</span>
-            <span style={{ position: 'relative', color: 'var(--indigo)' }}>
+            <span style={{ position: 'relative', color: 'var(--indigo)', minHeight: 44, minWidth: 64, display: 'inline-flex', alignItems: 'center', justifyContent: 'flex-end' }}>
               Change
               <select value={country} onChange={(e) => dispatch({ type: 'setCountry', country: e.target.value })} aria-label="Change country"
                 style={{ position: 'absolute', inset: 0, width: '100%', opacity: 0, cursor: 'pointer' }}>

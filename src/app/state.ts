@@ -71,6 +71,8 @@ export type Action =
   | { type: 'statementDateFormat'; result: DetectionResult }
   | { type: 'acceptStatement' }
   | { type: 'redetectStatement' }
+  | { type: 'importContinue'; items: Array<Omit<Item, 'id'>>; country?: string }
+  | { type: 'addPhoneSubscriptions'; items: Array<Omit<Item, 'id'>> }
   | { type: 'confirmPossible'; merchantKey: string; frequency: 'monthly' | 'yearly' | 'oneTime' }
   | { type: 'toggleQuickPick'; pick: QuickPick }
   | { type: 'addPricedPick'; pick: QuickPick; price: number } // tapped item, price entered by the person (in display currency)
@@ -132,6 +134,19 @@ export function reducer(state: State, action: Action): State {
 
     case 'statementDateFormat':
       return { ...state, statement: action.result, currency: action.result.meta.displayCurrency, step: 'keep' };
+
+    case 'importContinue': {
+      // Items from a "Finish on my computer" link, merged without duplicates.
+      const have = new Set(state.items.map((i) => (i.merchantKey ?? i.name).toLowerCase()));
+      const added = action.items.filter((i) => !have.has((i.merchantKey ?? i.name).toLowerCase())).map((i) => ({ ...i, id: newId() }) as Item);
+      return { ...state, ...(action.country ? { country: action.country } : {}), items: [...state.items, ...added], step: 'quickstart' };
+    }
+
+    case 'addPhoneSubscriptions': {
+      const have = new Set(state.items.map((i) => (i.merchantKey ?? i.name).toLowerCase()));
+      const added = action.items.filter((i) => !have.has((i.merchantKey ?? i.name).toLowerCase())).map((i) => ({ ...i, id: newId() }) as Item);
+      return { ...state, items: [...state.items, ...added], step: 'usage' };
+    }
 
     case 'redetectStatement': {
       // Re-run detection after shop names were recognised (new merchant profiles).

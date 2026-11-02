@@ -5,3 +5,4 @@ dist/
 private-fixtures/
 *.zip
 .ut-dist.tgz
+public/ocr/

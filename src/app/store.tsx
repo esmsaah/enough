@@ -9,6 +9,7 @@ import { cheaperPlanFor, sharePlanFor } from './localPrices';
 import { guessCountry } from './country';
 import { monthlyEquivalent } from '../engine/score';
 import { clearReturnParams, confirmPayment, returnedPaymentId } from './payment';
+import { readContinueHash } from './continueLink';
 
 type Ctx = { state: State; dispatch: (a: Action) => void; audit: Audit };
 const StoreContext = createContext<Ctx | null>(null);
@@ -21,6 +22,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     let live = true;
     loadState().then(async (s) => {
       if (live && s && s.items) dispatch({ type: 'hydrate', state: s });
+      // Opened from a "Finish on my computer" link: bring the tapped items in.
+      const carried = readContinueHash(window.location.hash);
+      if (carried) {
+        window.history.replaceState(null, '', window.location.pathname);
+        if (carried.items.length) dispatch({ type: 'importContinue', items: carried.items, ...(carried.country ? { country: carried.country } : {}) });
+      }
       // Back from checkout: unlock only after our server confirms the payment.
       const paymentId = returnedPaymentId();
       if (!paymentId) return;
