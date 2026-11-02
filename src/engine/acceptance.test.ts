@@ -12,11 +12,13 @@ function item(p: Partial<Item>): Item {
 const sumRecs = (a: ReturnType<typeof runAudit>) => Math.round(a.recommendations.reduce((s, r) => s + r.potentialYearlySaving, 0) * 100) / 100;
 
 describe('acceptance: honest money found', () => {
-  it('rotation shows one line per paused service and the lines add up to the total', () => {
-    const vids = ['Netflix', 'Disney+', 'HBO Max', 'Apple TV+'].map((name) => item({ name, overlapGroup: 'video', usage: 'sometimes', wouldMiss: true }));
+  it('rotation (brief rule 4): keep one, pause each other 4 months, lines add up to the total', () => {
+    const vids = ['Netflix', 'Disney+', 'HBO Max', 'Apple TV+'].map((name, n) => item({ name, overlapGroup: 'video', usage: 'sometimes', wouldMiss: true, price: 8 + n }));
     const a = runAudit(vids, { createdAt: '2026-11-01' });
     const rotate = a.recommendations.filter((r) => r.action === 'rotate');
-    expect(rotate.length).toBe(4);
+    expect(rotate.length).toBe(3); // the cheapest (Netflix, 8) stays on
+    expect(rotate.map((r) => r.potentialYearlySaving).sort()).toEqual([36, 40, 44]); // monthly × 4
+    expect(rotate.every((r) => r.pauseMonths?.length === 4)).toBe(true);
     expect(a.potentialYearlySaving).toBeGreaterThan(0);
     expect(sumRecs(a)).toBe(a.potentialYearlySaving);
   });
@@ -28,7 +30,7 @@ describe('acceptance: honest money found', () => {
       item({ name: 'HBO Max', overlapGroup: 'video', usage: 'sometimes', wouldMiss: true }),
     ], { createdAt: '2026-11-01' });
     expect(a.recommendations.find((r) => r.itemId === 'nf')!.action).toBe('keep');
-    expect(a.recommendations.filter((r) => r.action === 'rotate').length).toBe(2);
+    expect(a.recommendations.filter((r) => r.action === 'rotate').length).toBe(1);
   });
 
   it('unanswered items never produce money', () => {

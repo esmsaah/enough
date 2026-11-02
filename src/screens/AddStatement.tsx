@@ -1,7 +1,6 @@
 import { useRef, useState, type ChangeEvent, type DragEvent } from 'react';
 import { useStore } from '../app/store';
 import { importStatement } from '../app/statementImport';
-import { researchMerchants } from '../app/merchantResearch';
 import { Button, ProgressBar } from '../components/ui';
 
 export function AddStatement() {
@@ -18,10 +17,7 @@ export function AddStatement() {
     setError('');
     try {
       const result = await importStatement(files);
-      if (state.aiRecognition) {
-        setStatus('Recognising shop names…');
-        await researchMerchants(result.transactions, result.meta.displayCurrency);
-      }
+      // Shop-name recognition runs only after the person has seen "What we keep" (brief §11.8).
       dispatch({ type: 'statementParsed', result });
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'This statement could not be read.');
@@ -73,16 +69,8 @@ export function AddStatement() {
           {error && <p role="alert" className="error-message">{error}</p>}
         </section>
 
-        <section className="card">
-          <h2 style={{ marginTop: 0 }}>Screenshot of your phone's subscription list</h2>
-          <p className="muted">iPhone: Settings › your name › Subscriptions. Android: Google Play › Payments and subscriptions › Subscriptions.</p>
-          <p className="muted" style={{ fontSize: 13 }}>On-device screenshot reading is coming next.</p>
-        </section>
-
-        <section className="card">
-          <h2 style={{ marginTop: 0 }}>Finish on my computer</h2>
-          <p className="muted">This option will send a continuation link by email. It is not available yet.</p>
-        </section>
+        {/* Screenshot reading and "Finish on my computer" are not built yet (see LATER.md),
+            so they are not shown as options. */}
       </div>
       <div className="footer">
         <Button variant="secondary" full onClick={() => dispatch({ type: 'goto', step: 'landing' })}>Back</Button>

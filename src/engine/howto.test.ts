@@ -31,9 +31,10 @@ describe('the full list is a plan, not a verdict', () => {
     const vids = ['Netflix', 'Disney+', 'HBO Max'].map((name, n) => item({ id: `v${n}`, name, overlapGroup: 'video', usage: 'sometimes', wouldMiss: true }));
     const a = runAudit(vids, { createdAt: '2026-11-02' });
     const how = howToFor(a.recommendations.find((r) => r.action === 'rotate')!, a.items[0]!, a, money);
-    expect(how.steps[0]).toMatch(/Keep .* on in /);
+    expect(how.steps[0]).toMatch(/Cancel .* before .* and restart it/);
     const events = calendarEvents(a, money);
-    expect(events.filter((e) => e.title.startsWith('Streaming switch')).length).toBeGreaterThanOrEqual(3);
+    expect(events.filter((e) => e.title.startsWith('Pause ')).length).toBe(2);
+    expect(events.filter((e) => e.title.startsWith('Restart ')).length).toBe(2);
     expect(events.at(-1)!.title).toMatch(/check your subscriptions again/);
     const ics = toIcs(events);
     expect(ics).toContain('BEGIN:VCALENDAR');
@@ -79,5 +80,17 @@ describe('calendar for tapped items', () => {
     const a = runAudit([item({ name: 'Disney+', source: 'quickpick', usage: 'almostNever' })], { createdAt: '2026-11-02' });
     const ev = calendarEvents(a, money);
     expect(ev.find((e) => e.title === 'Cancel Disney+')?.date).toBe('2026-11-03');
+  });
+});
+
+describe('reminders for yearly bills and trials', () => {
+  it('a yearly insurance with a renewal month and a trial both reach the calendar', () => {
+    const a = runAudit([
+      item({ name: 'Insurance', category: 'bill', displayCategory: 'Bills & Utilities', frequency: 'yearly', price: 120, renewalMonth: 3, source: 'manual', estimate: true }),
+      item({ name: 'Netflix', usage: 'always', trialEndsOn: '2026-11-20' }),
+    ], { createdAt: '2026-11-02' });
+    const titles = calendarEvents(a, money).map((e) => e.title);
+    expect(titles).toContain('Insurance renews soon');
+    expect(titles).toContain('Netflix: trial turns paid soon');
   });
 });

@@ -12,6 +12,9 @@ import { isExactAmount } from '../engine/score';
 import type { ActionType, Audit, HiddenCost, Item, Recommendation } from '../engine/types';
 import { calendarEvents, howToFor, moneyPlan, toIcs } from '../engine/howto';
 import { EMAIL_ENABLED } from '../app/features';
+import { pickForTarget } from '../engine/target';
+import { useState } from 'react';
+import { yearlyCost } from '../engine/score';
 
 const GROUPS: Array<{ label: string; actions: ActionType[] }> = [
   { label: 'Cancel', actions: ['cancel'] },
@@ -57,6 +60,8 @@ export function CutList() {
       </section>
 
       <div className="flow-body flow-col" style={{ padding: '28px 20px 32px', display: 'flex', flexDirection: 'column', gap: 32 }}>
+        <TargetTool />
+
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', fontSize: 12, color: 'var(--muted)', alignItems: 'baseline' }}>
           <span className="tag ex">EXACT</span> from your statement <span className="tag es">ESTIMATE</span> from your answers
         </div>
@@ -76,6 +81,29 @@ export function CutList() {
             </section>
           );
         })}
+
+        {(() => {
+          const kept = audit.recommendations.filter((r) => r.verdict === 'keep');
+          if (!kept.length) return null;
+          return (
+            <section style={{ display: 'flex', flexDirection: 'column' }}>
+              <span className="lab">Keep</span>
+              <div className="r" style={{ marginTop: 8, paddingBottom: 10, borderBottom: '1.5px solid var(--ink)' }}>
+                <span style={{ fontSize: 22, fontWeight: 800, fontStretch: '112%' }}>{kept.length} {kept.length === 1 ? 'item' : 'items'}</span>
+                <span className="m" style={{ fontSize: 15 }}>{formatMoney(kept.reduce((s, r) => s + r.yearlyCost, 0), cur)} a year</span>
+              </div>
+              {kept.map((r) => {
+                const it = itemById.get(r.itemId);
+                return (
+                  <div key={r.itemId} style={{ display: 'flex', flexDirection: 'column', gap: 2, padding: '12px 0', borderTop: '1px solid var(--line)' }}>
+                    <div className="r"><span style={{ fontSize: 16, fontWeight: 600 }}>{it?.name ?? 'Item'}</span><span className="m" style={{ fontSize: 15 }}>{formatMoney(it ? yearlyCost(it) : r.yearlyCost, cur)}</span></div>
+                    <span style={{ fontSize: 14, color: 'var(--muted)' }}>{state.analystNotes[r.itemId]?.reason ?? r.reason}</span>
+                  </div>
+                );
+              })}
+            </section>
+          );
+        })()}
 
         <Discoveries audit={audit} />
 
@@ -122,6 +150,28 @@ export function CutList() {
   );
 }
 
+/** Brief §7: "To save around €X a month, start with A and B." */
+function TargetTool() {
+  const { audit } = useStore();
+  const cur = audit.currency;
+  const [target, setTarget] = useState('');
+  const n = Number(target.replace(',', '.'));
+  const pick = n > 0 ? pickForTarget(audit.recommendations, n) : undefined;
+  const names = pick?.ids.map((id) => audit.items.find((i) => i.id === id)?.name ?? '').filter(Boolean) ?? [];
+  if (!audit.recommendations.some((r) => r.potentialYearlySaving > 0)) return null;
+  const list = names.length <= 1 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+  return (
+    <section style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--radius-card)', padding: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <label htmlFor="target" style={{ fontWeight: 700 }}>How much do you want to save a month?</label>
+      <div className="field" style={{ maxWidth: 200 }}>
+        <span className="m" style={{ color: 'var(--muted)' }}>{cur}</span>
+        <input id="target" className="m" inputMode="decimal" placeholder="20" value={target} onChange={(e) => setTarget(e.target.value)} />
+      </div>
+      {pick && <span style={{ fontSize: 15, lineHeight: 1.5 }}>To save around {formatMoney(pick.monthly, cur)} a month, start with <strong>{list}</strong>.</span>}
+    </section>
+  );
+}
+
 function CalendarButton({ audit, cur }: { audit: Audit; cur: string }) {
   const events = calendarEvents(audit, (n) => formatMoney(n, cur));
   const download = () => {
@@ -134,7 +184,7 @@ function CalendarButton({ audit, cur }: { audit: Audit; cur: string }) {
     <section className="no-print" style={{ border: '1.5px dashed var(--line)', borderRadius: 'var(--radius)', padding: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
       <span style={{ fontSize: 17, fontWeight: 700 }}>Let the plan run itself</span>
       <span style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.5 }}>
-        {events.length} {events.length === 1 ? 'reminder' : 'reminders'} for the next year: every cancel deadline{audit.rotationPlan && audit.recommendations.some((r) => r.action === 'rotate') ? ', every streaming switch' : ''} and one check-up in a year. Works with Apple, Google and Outlook calendars.
+        {events.length} {events.length === 1 ? 'reminder' : 'reminders'} for the next year: every cancel deadline{audit.recommendations.some((r) => r.action === 'rotate') ? ', every streaming pause and restart' : ''} and one check-up in a year. Works with Apple, Google and Outlook calendars.
       </span>
       <button type="button" className="btn btn--secondary" onClick={download}>Add reminders to my calendar</button>
     </section>
@@ -164,7 +214,7 @@ function Row({ rec, item, reason, cur, audit }: { rec: Recommendation; item?: It
       )}
       {how?.link && <a href={how.link} target="_blank" rel="noreferrer" style={{ fontSize: 14, fontWeight: 600 }}>Open the {item?.name} account page</a>}
       {how?.deadline && <span style={{ fontSize: 13, color: 'var(--ink)' }}><strong>When:</strong> {how.deadline}</span>}
-      {item && (item.nextCharge || item.done) && (
+      {item && (
         <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--muted)', marginTop: 4, cursor: 'pointer' }}>
           <input type="checkbox" checked={!!item.done} onChange={() => dispatch({ type: 'toggleDone', id: item.id })} /> Done
         </label>

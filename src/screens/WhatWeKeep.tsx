@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { resolveStatementDates } from '../app/statementImport';
 import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
+import { researchMerchants } from '../app/merchantResearch';
 import { Button, Chip, ProgressBar } from '../components/ui';
 import type { DateFormat } from '../engine/parse';
 
@@ -79,7 +80,16 @@ export function WhatWeKeep() {
       <div className="footer">
         <div className="row">
           <Button variant="secondary" onClick={() => dispatch({ type: 'goto', step: 'addstatement' })}>Back</Button>
-          <Button full disabled={result.meta.dateAmbiguous} onClick={() => dispatch({ type: 'acceptStatement' })}>Continue</Button>
+          <Button full disabled={result.meta.dateAmbiguous || resolving} onClick={async () => {
+            // Only cleaned shop names leave the device, and only now, after the person has seen what we keep.
+            if (state.aiRecognition) {
+              setResolving(true);
+              const learned = await researchMerchants(result.transactions, result.meta.displayCurrency).catch(() => 0);
+              if (learned > 0) dispatch({ type: 'redetectStatement' });
+              setResolving(false);
+            }
+            dispatch({ type: 'acceptStatement' });
+          }}>{resolving ? 'Recognising shop names…' : 'Continue'}</Button>
         </div>
       </div>
     </>

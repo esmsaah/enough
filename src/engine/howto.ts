@@ -83,21 +83,20 @@ export function howToFor(rec: Recommendation, item: Item, audit: Audit, money: (
       const save = item.overlapGroup === 'cloud' || item.displayCategory === 'Cloud & Storage'
         ? 'Move your files to the service you keep first. Check the storage there is big enough.'
         : item.overlapGroup === 'music' || item.merchantKey === 'spotify'
-          ? 'Save your playlists first. Free transfer tools can copy them to the app you keep.'
+          ? 'Save your playlists first. Playlist transfer tools can copy them to the app you keep.'
           : 'Save anything you would lose first.';
       return withLink({ steps: [save, ...cancelSteps(item)], deadline: deadlineFor(item, money, audit.createdAt) });
     }
     case 'rotate': {
-      const plan = audit.rotationPlan;
-      const mine = plan?.months.filter((m) => m.activeServiceId === item.id).map((m) => m.month.replace(/ \d{4}$/, '')) ?? [];
+      const months = (rec.pauseMonths ?? []).map((ym) => new Intl.DateTimeFormat('en', { month: 'long', timeZone: 'UTC' }).format(new Date(`${ym}-01T00:00:00Z`)));
       return withLink({
         steps: [
-          mine.length ? `Keep ${item.name} on in ${mine.join(', ')}. Pause it the other months.` : `Pause ${item.name} for now and restart it when the others are paused.`,
+          months.length ? `Cancel ${item.name} before ${months[0]} and restart it in the month after ${months[months.length - 1]}.` : `Pause ${item.name} for four months.`,
           item.merchantKey === 'netflix'
             ? 'Netflix keeps your profiles and viewing history for 24 months after you cancel, so restarting takes a minute.'
-            : 'Your account stays when you cancel a monthly plan, so restarting later takes a minute. A new free trial is usually not offered.',
+            : 'Your account stays when you cancel a monthly plan, so restarting later takes a minute. A new trial is usually not offered.',
           'Paying through the App Store or Google Play? Cancel and restart it on the phone.',
-          'The calendar file below reminds you two days before each switch.',
+          'The calendar file below reminds you when to pause and when to restart.',
         ],
       });
     }
@@ -202,15 +201,16 @@ export function calendarEvents(audit: Audit, money: (n: number) => string): Cale
     const notice = noticeDate(item.contractEnds);
     if (notice >= audit.createdAt) out.push({ date: minusDays(notice, 7), title: `Give notice: ${item.name}`, note: `Your contract ends ${item.contractEnds}. Send written notice before ${humanDate(notice)} so it doesn't renew.` });
   }
-  const plan = audit.rotationPlan;
-  if (plan && audit.recommendations.some((r) => r.action === 'rotate')) {
-    plan.months.forEach((m, n) => {
-      const prev = n > 0 ? plan.months[n - 1]!.activeServiceName : undefined;
-      if (!m.activeServiceName || m.activeServiceName === prev) return;
-      out.push({ date: m.reminderDate, title: `Streaming switch: ${m.activeServiceName}`, note: `${prev ? `Cancel ${prev}. ` : ''}Start ${m.activeServiceName} for ${m.month}.` });
-    });
+  for (const r of audit.recommendations) {
+    if (r.action !== 'rotate' || !r.pauseMonths?.length) continue;
+    const item = byId.get(r.itemId);
+    if (!item) continue;
+    const first = `${r.pauseMonths[0]}-01`;
+    const after = plusMonths(`${r.pauseMonths[r.pauseMonths.length - 1]}-01`, 1);
+    out.push({ date: minusDays(first, 2), title: `Pause ${item.name}`, note: `Cancel ${item.name} now. Its four-month pause starts ${humanDate(first)}.` });
+    out.push({ date: after, title: `Restart ${item.name} if you want it`, note: `The pause is over. Restart ${item.name} only if there's something you want to watch.` });
   }
-  for (const r of audit.reminders) out.push({ date: r.date, title: r.label, note: r.note });
+  for (const r of audit.reminders) out.push({ date: r.date, title: r.kind === 'trial' ? `${r.label}: trial turns paid soon` : `${r.label} renews soon`, note: r.note });
   out.push({ date: plusMonths(audit.createdAt, 12), title: 'Enough: check your subscriptions again', note: 'A year has passed. Prices change and new subscriptions creep in.' });
   return out.sort((a, b) => a.date.localeCompare(b.date));
 }

@@ -9,7 +9,6 @@ import { tapListForCountry } from '../app/tapList';
 import { guessCountry } from '../app/country';
 import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { importStatement } from '../app/statementImport';
-import { researchMerchants } from '../app/merchantResearch';
 import '../styles/landing-fonts.css';
 import '../styles/landing.css';
 
@@ -44,7 +43,6 @@ export function Landing() {
     setUploading(true);
     try {
       const result = await importStatement(files);
-      if (state.aiRecognition) await researchMerchants(result.transactions, result.meta.displayCurrency);
       dispatch({ type: 'statementParsed', result });
     } catch (error) {
       setUploadError(error instanceof Error ? error.message : 'This statement could not be read.');
@@ -55,6 +53,12 @@ export function Landing() {
 
   return (
     <div className="screen landing-screen b2">
+      {/* Brief §8: inside TikTok/Instagram/Facebook browsers storage can vanish. */}
+      {typeof navigator !== 'undefined' && /Instagram|FBAN|FBAV|TikTok|musical_ly|BytedanceWebview/i.test(navigator.userAgent) && (
+        <div role="note" style={{ background: 'var(--paper)', color: 'var(--ink)', padding: '10px 16px', fontSize: 14, textAlign: 'center' }}>
+          Open in your browser so your audit is saved. Tap ⋯ and choose “Open in browser”.
+        </div>
+      )}
       {/* 1 — Header */}
       <header className="b2-header">
         <a className="b2-logo" href="#top" aria-label="Enough home">

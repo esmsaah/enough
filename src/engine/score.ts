@@ -205,11 +205,12 @@ function addGenericOverlap(
   for (const m of members) {
     if (m.id === kept.id) continue;
     overlapLosers.add(m.id);
-    overlapKeptName.set(m.id,
-      chosen ? `You said you'd keep ${kept.name}. They do the same job.`
+    // iPhone backups only go to iCloud: dropping it is right only if that isn't needed.
+    const icloudNote = /icloud/i.test(`${m.merchantKey ?? ''} ${m.name}`) ? ` If your iPhone backs up to iCloud, keep iCloud+ and drop ${kept.name} instead.` : '';
+    overlapKeptName.set(m.id, (chosen ? `You said you'd keep ${kept.name}. They do the same job.`
         : !m.usage || !kept.usage ? `${m.name} and ${kept.name} do the same job. Keeping the cheaper one covers you.`
         : usageRank(m) === usageRank(kept) ? `You use ${m.name} and ${kept.name} about the same, and they do the same job. Keeping the cheaper one covers you.`
-          : `Overlaps with ${kept.name}, which you use more.`);
+          : `Overlaps with ${kept.name}, which you use more.`) + icloudNote);
   }
 }
 
@@ -444,23 +445,28 @@ export function runAudit(
   });
   const pinned = opts.pinnedVideoItemIds?.length ? opts.pinnedVideoItemIds : keptVideo.filter((i) => i.usage === 'always').map((i) => i.id);
   const rotationPlan = buildStreamingRotationPlan(keptVideo, currency, pinned, opts.createdAt);
-  const rotating = rotationPlan ? rotationPlan.services.filter((s) => !s.pinned) : [];
-  const recommendations = rotationPlan && rotating.length >= 2 && rotationPlan.yearlySaving > 0
-    ? scored.map((r) => {
-      const svc = rotating.find((s) => s.id === r.itemId);
-      if (!svc) return r;
-      const item = ctx.byId.get(r.itemId)!;
-      const monthsOn = rotationPlan.months.filter((m) => m.activeServiceId === svc.id).length;
-      const saving = round2(yearlyCost(item) - monthsOn * svc.monthlyEquivalent);
-      return {
-        ...r,
-        verdict: 'lookAgain' as Verdict,
-        action: 'rotate' as ActionType,
-        potentialYearlySaving: Math.max(0, saving),
-        reason: `Watch one at a time. Keep it ${monthsOn} ${monthsOn === 1 ? 'month' : 'months'} a year and pause it the rest, the others take turns.`,
-      };
-    })
-    : scored;
+  // Brief §7 rule 4: 2+ video services used "Sometimes" → keep the most used (ties: the
+  // cheaper one), pause each of the others 4 months a year. Saving = monthly price × 4.
+  // The pauses are staggered so there is always something to watch.
+  const sometimes = keptVideo.filter((i) => i.usage === 'sometimes' && !(opts.pinnedVideoItemIds ?? []).includes(i.id));
+  const keptOn = sometimes.length >= 2 ? pickKept(sometimes) : undefined;
+  const toRotate = keptOn ? sometimes.filter((i) => i.id !== keptOn.id).sort((a, b) => yearlyCost(b) - yearlyCost(a)) : [];
+  const start = opts.createdAt ?? new Date().toISOString().slice(0, 10);
+  const recommendations = scored.map((r) => {
+    const k = toRotate.findIndex((i) => i.id === r.itemId);
+    if (k === -1) return r;
+    const item = toRotate[k]!;
+    const pauseMonths = Array.from({ length: 4 }, (_, n) => addMonths(start, 1 + ((k * 4 + n) % 12)).slice(0, 7));
+    const label = (ym: string) => new Intl.DateTimeFormat('en', { month: 'long', timeZone: 'UTC' }).format(new Date(`${ym}-01T00:00:00Z`));
+    return {
+      ...r,
+      verdict: 'lookAgain' as Verdict,
+      action: 'rotate' as ActionType,
+      potentialYearlySaving: round2(monthlyEquivalent(item) * 4),
+      pauseMonths,
+      reason: `You watch it sometimes, like ${keptOn!.name}. Pause it 4 months a year (${label(pauseMonths[0]!)} to ${label(pauseMonths[3]!)}) while ${keptOn!.name} stays on.`,
+    };
+  });
   const potentialYearlySaving = round2(recommendations.reduce((sum, rec) => sum + rec.potentialYearlySaving, 0));
   const spendCategories: SpendingCategory[] = ['Groceries', 'Shopping', 'Cafes & eating out', 'Transport', 'Travel', 'Delivery'];
   const spendingByCategory = Object.fromEntries(spendCategories.map((category) => {
@@ -490,7 +496,8 @@ export function runAudit(
     smallSubThreshold: convert(5, 'EUR', currency) ?? 5,
   });
   const hiddenCostYearlyTotal = round2(hiddenCosts.reduce((s, h) => s + (h.yearly ?? 0), 0));
-  const reminders = buildReminders(subscriptions, opts.profile, createdAt);
+  // Yearly bills (insurance) renew too, so they get reminders as well.
+  const reminders = buildReminders([...subscriptions, ...bills], opts.profile, createdAt);
   const advice = buildAdvice(subscriptions, bills, habits, recommendations, currency, { ...opts, spendingByCategory });
   // Statement "habits" are everyday spending (groceries, cafes, rides), not recurring
   // costs: they appear as spending advice, never in the year's recurring total.

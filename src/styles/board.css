@@ -36,7 +36,7 @@
 .board .btn.warm:hover { background: var(--coral-hover); color: var(--ink); }
 .board .btn.full { width: 100%; }
 .board .btn:disabled { opacity: .45; cursor: not-allowed; }
-.board .ghost { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; font-size: 15px; padding: 10px 0; background: none; border: 0; cursor: pointer; }
+.board .ghost { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; font-size: 15px; padding: 10px 0; min-height: 44px; background: none; border: 0; cursor: pointer; }
 .board .ondark { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Chips */
@@ -72,7 +72,7 @@
 /* Source tag (exact | estimate) */
 .board .tag { display: inline-block; font-family: var(--font-mono); font-size: 9px; letter-spacing: 1px; padding: 1px 4px; border: 1px solid currentColor; border-radius: 2px; line-height: 1.3; vertical-align: middle; }
 .board .tag.ex { color: var(--indigo); }
-.board .tag.es { color: #8a877c; }
+.board .tag.es { color: #6b685e; } /* WCAG AA on paper */
 
 /* Rows & fields */
 .board .r { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }

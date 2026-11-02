@@ -70,6 +70,7 @@ export type Action =
   | { type: 'statementParsed'; result: DetectionResult }
   | { type: 'statementDateFormat'; result: DetectionResult }
   | { type: 'acceptStatement' }
+  | { type: 'redetectStatement' }
   | { type: 'confirmPossible'; merchantKey: string; frequency: 'monthly' | 'yearly' | 'oneTime' }
   | { type: 'toggleQuickPick'; pick: QuickPick }
   | { type: 'addPricedPick'; pick: QuickPick; price: number } // tapped item, price entered by the person (in display currency)
@@ -131,6 +132,12 @@ export function reducer(state: State, action: Action): State {
 
     case 'statementDateFormat':
       return { ...state, statement: action.result, currency: action.result.meta.displayCurrency, step: 'keep' };
+
+    case 'redetectStatement': {
+      // Re-run detection after shop names were recognised (new merchant profiles).
+      if (!state.statement) return state;
+      return { ...state, statement: { ...detect(state.statement.transactions, state.statement.meta), ...(state.statement.fees ? { fees: state.statement.fees } : {}) } };
+    }
 
     case 'acceptStatement': {
       // Known services charged at least twice (or charged twice by mistake) are

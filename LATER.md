@@ -9,3 +9,8 @@ Per the brief: do not add features outside it. Ideas land here instead.
 - Monthly re-research of subscription profiles older than 30 days (needs a separate Cloudflare Worker with a Cron trigger; Pages Functions have no cron). Store price history, feed price-increase alerts.
 - Opt-in sharing of user corrections (merchant name + category only) back to the D1 cache.
 - Rate limit /api/* per IP via Cloudflare rate limiting rule.
+
+## Brief items not built yet (2026-11-02)
+- Photo / scanned-PDF OCR and phone subscription-list screenshots (brief §6, M3). Hidden from the upload screen until built.
+- "Finish on my computer" (brief §8 screen 3), needs email.
+- Email report, reminder emails, unsubscribe and the daily job (brief §10), need a domain and Resend. Calendar file covers reminders meanwhile.

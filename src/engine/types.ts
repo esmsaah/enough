@@ -132,6 +132,7 @@ export type Recommendation = {
   currency?: string;
   potentialYearlySaving: number; // 0 for keep
   approx?: boolean; // saving relies on a converted (approximate) figure
+  pauseMonths?: string[]; // rotate: the four months (YYYY-MM) to pause this service
 };
 
 /**

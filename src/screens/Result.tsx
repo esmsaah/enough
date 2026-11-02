@@ -13,7 +13,7 @@ import type { ActionType } from '../engine/types';
 const ACTION_LABEL: Record<ActionType, string> = {
   keep: 'Keep',
   cancel: 'Cancel',
-  rotate: 'Rotate month to month',
+  rotate: 'Pause 4 months a year',
   switchYearly: 'Switch to yearly',
   payPerVisit: 'Pay per visit',
   removeOverlap: 'Drop the overlap',
@@ -26,6 +26,7 @@ export function Result() {
   const { state, audit, dispatch } = useStore();
   const cur = audit.currency;
   const [payError, setPayError] = useState('');
+  const [consent, setConsent] = useState(false);
   const [opening, setOpening] = useState(false);
   const pay = async () => {
     setPayError(''); setOpening(true);
@@ -68,7 +69,7 @@ export function Result() {
       </section>
 
       <div className="flow-body flow-col" style={{ padding: '28px 20px 32px', display: 'flex', flexDirection: 'column', gap: 32 }}>
-        <Discoveries audit={audit} />
+        <Discoveries audit={audit} locked />
 
         {/* Money found — first change shown, the rest blurred behind the paywall. */}
         <section style={{ display: 'flex', flexDirection: 'column' }}>
@@ -108,9 +109,15 @@ export function Result() {
           </div>
           {state.unlocked
             ? <button type="button" className="btn full" onClick={() => dispatch({ type: 'goto', step: 'cutlist' })}>Show my full cut list</button>
-            : <button type="button" className="btn full" onClick={pay} disabled={opening || state.paymentPending}>
+            : <>
+              <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 13, lineHeight: 1.45, color: 'var(--ink)', cursor: 'pointer' }}>
+                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} style={{ marginTop: 3, width: 18, height: 18, flexShrink: 0 }} />
+                <span>I want immediate access to my audit and understand I lose the 14-day withdrawal right.</span>
+              </label>
+              <button type="button" className="btn full" onClick={pay} disabled={!consent || opening || state.paymentPending}>
                 {state.paymentPending ? 'Confirming your payment…' : opening ? 'Opening secure checkout…' : 'Show my full cut list'}
-              </button>}
+              </button>
+            </>}
           {(payError || state.paymentFailed) && (
             <span role="alert" style={{ fontSize: 13, color: 'var(--coral-pen)', textAlign: 'center' }}>
               {payError || "We couldn't confirm a payment. If you were charged, write to us and we'll unlock it or refund you."}
@@ -129,7 +136,7 @@ export function Result() {
               <span style={{ fontSize: 13, color: 'var(--muted)' }}>Not counted in money found</span>
             </div>
             <div style={{ padding: '12px 0', borderTop: '1px solid var(--line)', fontSize: 14, color: 'var(--muted)', display: 'flex', gap: 8, alignItems: 'center' }}>
-              <LockIcon />{audit.advice.map((a) => a.name).slice(0, 3).join(', ')}{audit.advice.length > 3 ? ' and more' : ''}, in your full audit
+              <LockIcon />Cheaper plans, bills and habits, in your full audit
             </div>
           </section>
         )}

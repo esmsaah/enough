@@ -38,7 +38,7 @@
 .b2-sub { color: var(--muted-on-navy); font-size: 17px; line-height: 1.5; max-width: 30em; margin: 16px 0 0; }
 .b2-hero__tap-label { margin: 22px 0 8px; font-size: 10px; }
 .b2-quick-picks { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-.b2-quick-picks button { min-height: 34px; border: 1px solid rgba(255,255,255,.68); border-radius: 999px; background: transparent; color: #fff; padding: 0 12px; font: 600 13px var(--font-display); cursor: pointer; }
+.b2-quick-picks button { min-height: 44px; border: 1px solid rgba(255,255,255,.68); border-radius: 999px; background: transparent; color: #fff; padding: 0 12px; font: 600 13px var(--font-display); cursor: pointer; }
 .b2-quick-picks button { transition: background .15s ease, color .15s ease, border-color .15s ease; }
 .b2-quick-picks button:not(.b2-quick-picks__more):hover,
 .b2-quick-picks button:not(.b2-quick-picks__more):focus { background: #cfede6; color: #101014; border-color: #cfede6; }

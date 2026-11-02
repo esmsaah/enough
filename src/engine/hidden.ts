@@ -52,14 +52,18 @@ export function computeHiddenCosts(input: HiddenCostInput): HiddenCost[] {
     const rate = profile.foreignCurrency === 'often' ? 0.03 : 0.015;
     out.push({ ...base, kind: 'fx', label: 'Foreign-currency fees', yearly: round2(input.foreignSpendYearly * rate), estimate: true, note: `Spending in other currencies ${profile.foreignCurrency} costs roughly ${(rate * 100).toFixed(1)}% in card fees.` });
   }
+  else if (profile?.foreignCurrency && profile.foreignCurrency !== 'never') {
+    // Tapped, no statement: we can't size it, but the person said it happens.
+    out.push({ ...base, kind: 'fx', label: 'Foreign-currency fees', estimate: true, note: 'Card payments in other currencies usually cost 1 to 3% extra. A card without currency fees, or paying in the local currency when asked, avoids it.' });
+  }
 
   // --- Monthly bank/account fee ---
   if (typeof input.statementBankFeeYearly === 'number' && input.statementBankFeeYearly > 0) {
     out.push({ ...base, kind: 'bankFee', label: 'Bank account fees', yearly: round2(input.statementBankFeeYearly), estimate: false, note: 'Your statement shows this much in account fees over the year.' });
   } else if (profile?.bankFeeMonthly === 'unknown') {
-    out.push({ ...base, kind: 'bankFee', label: 'Bank account fee', estimate: true, note: 'Check whether your bank charges a monthly account fee — a free account may cover you.' });
+    out.push({ ...base, kind: 'bankFee', label: 'Bank account fee', estimate: true, note: 'Check whether your bank charges a monthly account fee. An account without one may cover you.' });
   } else if (typeof profile?.bankFeeMonthly === 'number' && profile.bankFeeMonthly > 0) {
-    out.push({ ...base, kind: 'bankFee', label: 'Bank account fee', yearly: round2(profile.bankFeeMonthly * 12), estimate: true, note: 'A monthly account fee — many banks offer a free account.' });
+    out.push({ ...base, kind: 'bankFee', label: 'Bank account fee', yearly: round2(profile.bankFeeMonthly * 12), estimate: true, note: 'A monthly account fee. Many banks offer accounts without one.' });
   }
 
   // --- Delivery / taxi habits ---
