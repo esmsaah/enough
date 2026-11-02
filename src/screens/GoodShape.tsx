@@ -75,7 +75,7 @@ export function GoodShape() {
             style={{ border: '1.5px dashed var(--chip-border)', borderRadius: 'var(--radius)', padding: 16, display: 'flex', alignItems: 'center', gap: 14, background: 'none', textAlign: 'left', cursor: 'pointer', color: 'var(--ink)' }}>
             <StatementIcon />
             <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--indigo)' }}>Upload one statement to turn estimates into exact numbers.</span>
+              <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--indigo)' }}>Add one statement. It finds what tapping can't: double charges, price rises, forgotten renewals and fees.</span>
               <span style={{ fontSize: 13, color: 'var(--muted)' }}>Optional. Read on your device.</span>
             </span>
           </button>

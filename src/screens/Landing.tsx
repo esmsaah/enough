@@ -15,6 +15,16 @@ import '../styles/landing.css';
 
 const PRICE = formatMoney(AUDIT_PRICE_EUR, 'EUR'); // €5.99
 
+/** Real kinds of findings (from the statements we tested), shown on the landing. */
+const FINDS: Array<{ amount: string; title: string; text: string }> = [
+  { amount: '€16.81 back', title: 'Charged twice', text: 'Adobe took the same payment two days apart. We write the refund request for you.' },
+  { amount: '+€3.75 a year', title: 'A quiet price rise', text: 'Spotify went from €5.99 to €6.30. Nobody asked you.' },
+  { amount: '€60 a year', title: 'A plan bigger than you', text: 'Netflix Premium for one person. Basic covers you.' },
+  { amount: '€54 a year', title: 'Two accounts, one home', text: 'Two Spotify accounts cost more than one Duo plan.' },
+  { amount: 'Before 26 April', title: 'A contract that renews itself', text: 'Your gym ends in May. Miss the notice date and it runs another year.' },
+  { amount: '€1,921 a year', title: 'The real size of it', text: 'Cafés, from one statement. Not a sermon, just the number.' },
+];
+
 export function Landing() {
   const { state, dispatch } = useStore();
   const [dragOver, setDragOver] = useState(false);
@@ -73,7 +83,7 @@ export function Landing() {
             <p className="b2-eyebrow">Your subscriptions, audited once.</p>
             <h1 className="b2-h1">Tap what<span className="b2-desktop-break"><br /></span><span className="b2-mobile-break"><br /></span> you pay for.</h1>
             <p className="b2-sub">
-              Netflix, gym, phone, that app you forgot about. See what it all costs you a year, and what to cut.
+              Netflix, gym, phone, that app you forgot about. We find the double charges, the quiet price rises and the plans that don't fit you, then tell you what to cut and by when.
             </p>
 
             <p className="b2-eyebrow b2-hero__tap-label">Tap one to start</p>
@@ -89,11 +99,30 @@ export function Landing() {
               <button type="button" className="b2-btn b2-btn--lime" onClick={start}>Start tapping</button>
               <span className="b2-price-inline">{PRICE} once.</span>
             </div>
+            <button type="button" className="b2-link b2-hero__upload" onClick={upload}>Or add a bank statement. It finds more.</button>
           </div>
 
           <div className="b2-hero__aside">
             <ReceiptCard />
           </div>
+        </div>
+      </section>
+
+      {/* 2b — What we find: the things people don't work out alone. */}
+      <section className="b2-section b2-section--ground" id="finds">
+        <div className="b2-section__inner">
+          <p className="b2-eyebrow b2-eyebrow--ink">What Enough finds</p>
+          <h2 className="b2-h2">The money you'd never spot yourself.</h2>
+          <div className="b2-finds">
+            {FINDS.map((f) => (
+              <div className="b2-find" key={f.title}>
+                <span className="b2-find__amount">{f.amount}</span>
+                <h3 className="b2-find__title">{f.title}</h3>
+                <p className="b2-find__text">{f.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="b2-col__text b2-col__text--small">Examples from real statements we tested with. Your numbers will be yours.</p>
         </div>
       </section>
 
@@ -171,8 +200,8 @@ export function Landing() {
               <div className="b2-tile b2-tile--price">
                 <span className="b2-gym"><s>€480</s><b className="b2-mark">€288</b></span>
               </div>
-              <h3 className="b2-step__title">See what to cut.</h3>
-              <p className="b2-step__text">Cut, keep or pay per use, with the yearly money next to each.</p>
+              <h3 className="b2-step__title">Get a plan, not a verdict.</h3>
+              <p className="b2-step__text">What to cancel and by when, cheaper plans that fit, and reminders in your calendar for a year.</p>
             </li>
           </ol>
         </div>

@@ -94,6 +94,7 @@ export function computeHiddenCosts(input: HiddenCostInput): HiddenCost[] {
   // --- Paying more than the typical catalog price ---
   for (const item of subscriptions) {
     if (typeof item.catalogPrice !== 'number' || item.catalogPrice <= 0) continue;
+    if (item.planName) continue; // the person chose their plan; the plan tip covers cheaper options
     const m = monthly(item);
     if (m > item.catalogPrice * PRICE_OVER_CATALOG) {
       out.push({ currency, kind: 'priceAboveCatalog', label: item.name, yearly: round2((m - item.catalogPrice) * 12), estimate: item.estimate, itemId: item.id, note: `You pay more than the typical ${formatCur(item.catalogPrice, currency)}/mo — check you're on the right plan.` });
