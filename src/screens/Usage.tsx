@@ -6,8 +6,11 @@ import { formatMoney } from '../app/money';
 import { itemsNeedingUsage } from '../app/state';
 import { useStore } from '../app/store';
 import { FlowHeader, Seg, Stepper } from '../components/board';
-import { yearlyCost } from '../engine/score';
+import { isUtility, yearlyCost } from '../engine/score';
 import type { Item } from '../engine/types';
+import { personalPlans } from '../app/localPrices';
+import { guessCountry } from '../app/country';
+import { convert } from '../engine/rates';
 
 export function Usage() {
   const { state, dispatch, audit } = useStore();
@@ -21,11 +24,23 @@ export function Usage() {
   const i = items[Math.min(idx, items.length - 1)]!;
   const atLast = idx >= items.length - 1;
   const left = items.length - idx - 1;
+  const plans = i.category === 'digital' && i.merchantKey ? personalPlans(i.merchantKey, state.country ?? guessCountry()) : [];
+  // A statement amount usually matches one plan exactly: preselect it.
+  const inItemCur = (p: { monthly: number; currency: string }) => (p.currency === i.currency ? p.monthly : convert(p.monthly, p.currency, i.currency) ?? p.monthly);
+  const planShown = i.planName ?? plans.find((p) => Math.abs(inItemCur(p) - i.price) <= Math.max(0.06, i.price * 0.02))?.name;
+  // Found so far counts only items the person has already answered.
+  const answered = new Set(state.items.filter(isAnswered).map((x) => x.id));
+  const foundSoFar = audit.recommendations.filter((r) => answered.has(r.itemId)).reduce((sum, r) => sum + r.potentialYearlySaving, 0);
 
-  const back = () => (idx === 0 ? dispatch({ type: 'goto', step: 'quickstart' }) : setIdx(idx - 1));
+  const back = () => (idx === 0 ? dispatch({ type: 'goto', step: state.statement ? 'found' : 'quickstart' }) : setIdx(idx - 1));
   const advance = () => (atLast ? dispatch({ type: 'goto', step: 'anythingElse' }) : setIdx(idx + 1));
   // Next confirms this item's price (it joins the receipt with its amount); Skip moves on, leaving it "to check".
-  const next = () => { dispatch({ type: 'setPriceConfirmed', id: i.id, confirmed: true }); advance(); };
+  const next = () => {
+    dispatch({ type: 'setPriceConfirmed', id: i.id, confirmed: true });
+    // The stepper shows 0: pressing Next confirms "0 visits".
+    if (i.category === 'membership' && typeof i.visitsPerMonth !== 'number') dispatch({ type: 'setVisits', id: i.id, visits: 0 });
+    advance();
+  };
   const skip = () => advance();
 
   return (
@@ -44,7 +59,19 @@ export function Usage() {
 
           <div style={{ marginTop: 14 }}>
             <div className="q">
-              <div className="t">Is this what you pay? <span>Usual price in {i.displayCategory === 'Bills & Utilities' ? 'your area' : 'your country'}</span></div>
+              <div className="t">Is this what you pay? <span>{i.source === 'statement' && !i.estimate ? 'From your statement' : i.userPriced ? 'What you told us' : plans.length ? 'Price of this plan in your country' : `Usual price in ${i.displayCategory === 'Bills & Utilities' ? 'your area' : 'your country'}`}</span></div>
+              {plans.length >= 2 && (
+                <div style={{ marginBottom: 10 }}>
+                  <Seg value={planShown}
+                    options={plans.slice(0, 5).map((p) => ({ value: p.name, label: p.name.replace(/^Premium /, '') }))}
+                    onChange={(name) => {
+                      const p = plans.find((x) => x.name === name);
+                      if (!p) return;
+                      const price = p.currency === i.currency ? p.monthly : convert(p.monthly, p.currency, i.currency) ?? p.monthly;
+                      dispatch({ type: 'setPlan', id: i.id, planName: p.name, price: Math.round(price * 100) / 100 });
+                    }} />
+                </div>
+              )}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
                 <Stepper value={i.price} step={1} format={(v) => formatMoney(v, i.currency)}
                   onChange={(v) => dispatch({ type: 'setPrice', id: i.id, price: v })} />
@@ -80,6 +107,19 @@ export function Usage() {
                   <Stepper value={i.visitsPerMonth ?? 0} onChange={(v) => dispatch({ type: 'setVisits', id: i.id, visits: v })} />
                 </div>
                 <div className="q">
+                  <div className="t">Can you cancel any time? <span>Many gyms bind you for 12 or 24 months</span></div>
+                  <Seg value={i.contract}
+                    options={[{ value: 'none', label: 'Yes, monthly' }, { value: 'contract', label: 'Contract' }, { value: 'unsure', label: 'Not sure' }]}
+                    onChange={(c) => dispatch({ type: 'setContract', id: i.id, contract: c })} />
+                  {i.contract === 'contract' && (
+                    <select aria-label="Contract ends" value={i.contractEnds ?? ''} style={{ marginTop: 8 }}
+                      onChange={(e) => dispatch({ type: 'setContract', id: i.id, contract: 'contract', contractEnds: e.target.value })}>
+                      <option value="">It ends in…</option>
+                      {nextMonths(25).map((m) => <option key={m.value} value={m.value}>{m.label}</option>)}
+                    </select>
+                  )}
+                </div>
+                <div className="q">
                   <div className="t">Price of one visit <span>optional</span></div>
                   <div className="field" style={{ maxWidth: 160 }}>
                     <span className="m" style={{ color: 'var(--muted)' }}>{i.currency}</span>
@@ -90,7 +130,7 @@ export function Usage() {
               </>
             )}
 
-            {i.category === 'bill' && (
+            {i.category === 'bill' && !isUtility(i) && (
               <div className="q">
                 <div className="t">When did you last compare offers?</div>
                 <Seg value={i.compareState}
@@ -106,7 +146,7 @@ export function Usage() {
           <TornEdge dir="down" />
           <div className="m r" style={{ background: 'var(--paper)', padding: '10px 16px', fontSize: 13 }}>
             <span style={{ letterSpacing: '1.2px' }}>FOUND SO FAR</span>
-            <span><span style={{ background: 'var(--lime)', padding: '0 6px', borderRadius: 3 }}>{formatMoney(audit.potentialYearlySaving, audit.currency)}</span> a year</span>
+            <span><span style={{ background: 'var(--lime)', padding: '0 6px', borderRadius: 3 }}>{formatMoney(foundSoFar, audit.currency)}</span> a year</span>
           </div>
           <TornEdge dir="up" />
         </div>
@@ -135,13 +175,21 @@ function TornEdge({ dir }: { dir: 'up' | 'down' }) {
   );
 }
 
+function nextMonths(n: number): Array<{ value: string; label: string }> {
+  const now = new Date();
+  return Array.from({ length: n }, (_, k) => {
+    const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + k, 1));
+    return { value: d.toISOString().slice(0, 7), label: new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(d) };
+  });
+}
+
 function isAnswered(i: Item): boolean {
   if (i.category === 'digital') {
     if (!i.usage) return false;
     if (i.usage === 'sometimes' && typeof i.wouldMiss !== 'boolean') return false;
     return true;
   }
-  if (i.category === 'membership') return typeof i.visitsPerMonth === 'number';
-  if (i.category === 'bill') return !!i.compareState;
+  if (i.category === 'membership') return true; // 0 visits is an answer too
+  if (i.category === 'bill') return isUtility(i) || !!i.compareState;
   return true;
 }

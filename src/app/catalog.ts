@@ -14,6 +14,7 @@ export type QuickPick = {
   overlapGroup?: OverlapGroup;
   cancelUrl?: string;
   yearlyPrice?: number; // known cheaper annual price, EUR (rule 8)
+  planName?: string; // researched plan this price belongs to, e.g. "Standard"
   currency?: string; // currency of price, default EUR
   group?: string; // tap-list group
   priceUnknown?: boolean; // catalog has no typical price: person enters it

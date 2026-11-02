@@ -5,6 +5,7 @@ import { useState, type DragEvent } from 'react';
 import { useStore } from '../app/store';
 import { QUICK_PICKS } from '../app/catalog';
 import { withLocalPrice } from '../app/localPrices';
+import { tapListForCountry } from '../app/tapList';
 import { guessCountry } from '../app/country';
 import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
 import { importStatement } from '../app/statementImport';
@@ -25,7 +26,9 @@ export function Landing() {
   // A landing chip preselects that service on the Pick list, then opens it.
   const startWith = (key: string) => {
     const pick = QUICK_PICKS.find((p) => p.merchantKey === key);
-    if (pick && !state.items.some((i) => i.merchantKey === key)) {
+    // Gym and phone prices vary too much to guess: the Pick screen asks for the amount.
+    const asks = tapListForCountry(state.country ?? guessCountry()).some((p) => p.merchantKey === key && p.askPrice);
+    if (pick && !asks && !state.items.some((i) => i.merchantKey === key)) {
       dispatch({ type: 'toggleQuickPick', pick: withLocalPrice(pick, state.country ?? guessCountry()) });
     }
     start();

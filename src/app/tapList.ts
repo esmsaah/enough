@@ -42,6 +42,7 @@ export const GLOBAL_CORE: QuickPick[] = [
   { merchantKey: 'ride hailing', name: 'Taxi / ride-hailing (Uber, Bolt…)', group: 'Everyday & personal', displayCategory: 'Transport', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 40 a month' },
   { merchantKey: 'coffee eating out', name: 'Coffee / eating out', group: 'Everyday & personal', displayCategory: 'Other', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'week', example: 'e.g. 15 a week' },
   { merchantKey: 'cleaner', name: 'Cleaner / house help', group: 'Everyday & personal', displayCategory: 'Other', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 50 a month' },
+  { merchantKey: 'parking', name: 'Parking', group: 'Everyday & personal', displayCategory: 'Transport', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 30 a month' },
   { merchantKey: 'nanny', name: 'Nanny / childcare', group: 'Everyday & personal', displayCategory: 'Kids & Family', category: 'habit', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, defaultCadence: 'month', example: 'e.g. 200 a month' },
   // NOTE: regional fintech (Revolut, Wise, N26, Payoneer) is deliberately NOT in
   // the global core — availability is country-specific (e.g. Revolut/N26 are not

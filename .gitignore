@@ -4,3 +4,4 @@ dist/
 .DS_Store
 private-fixtures/
 *.zip
+.ut-dist.tgz

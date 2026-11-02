@@ -6,6 +6,8 @@ import { searchCatalog, type QuickPick } from '../app/catalog';
 import { tapListForCountry } from '../app/tapList';
 import { COUNTRIES, countryFlag, countryName, guessCountry } from '../app/country';
 import { formatMoney } from '../app/money';
+import { typicalGymEur } from '../app/localPrices';
+import { convert } from '../engine/rates';
 import { useStore } from '../app/store';
 import { Button } from '../components/ui';
 import { BoardChip, FlowHeader, SearchIcon, StatementIcon } from '../components/board';
@@ -76,6 +78,14 @@ export function QuickStart() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [custom, setCustom] = useState({ name: '', price: '', period: 'monthly' as 'monthly' | 'yearly', dc: 'Entertainment' as DisplayCategory });
   const [askFor, setAskFor] = useState<QuickPick | null>(null);
+  const gymHint = (key: string) => {
+    if (key !== 'gym') return undefined;
+    const c = state.country ?? guessCountry();
+    const eur = typicalGymEur(c);
+    if (eur === undefined) return undefined;
+    const local = convert(eur, 'EUR', state.currency) ?? eur;
+    return `A gym in ${countryName(c)} is about ${formatMoney(local, state.currency, { round: true })} a month on average.`;
+  };
   const [askAmount, setAskAmount] = useState('');
   const [askCadence, setAskCadence] = useState<NonNullable<QuickPick['defaultCadence']>>('month');
   const pickedByKey = new Map(state.items.filter((i) => i.source === 'quickpick').map((i) => [i.merchantKey, i]));
@@ -179,12 +189,15 @@ export function QuickStart() {
           const perMonth = CADENCES.find((c) => c.key === askCadence)?.perMonth ?? 1;
           const yearly = amount * perMonth * 12;
           return (
-            <div className="card">
+            <div role="dialog" aria-modal="true" aria-label={`How much do you pay for ${askFor.name}?`}
+              onClick={(e) => { if (e.target === e.currentTarget) setAskFor(null); }}
+              style={{ position: 'fixed', inset: 0, zIndex: 50, background: 'rgba(16,16,20,0.35)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+            <div className="card" style={{ width: 'min(100%, 420px)', background: 'var(--paper)', boxShadow: '0 12px 40px rgba(0,0,0,0.18)' }}>
               <label style={{ fontWeight: 700 }}>How much do you pay for {askFor.name}?</label>
               <p className="muted" style={{ fontSize: 13, margin: '2px 0 10px' }}>
-                No need to know the yearly total — just how it feels. {askFor.example ? `(${askFor.example})` : ''}
+                {gymHint(askFor.merchantKey) ?? 'No need to know the yearly total, just how it feels.'} {askFor.example ? `(${askFor.example})` : ''}
               </p>
-              <div className="row" style={{ gap: 8, alignItems: 'center' }}>
+              <div className="row" style={{ gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
                 <span className="muted">{state.currency}</span>
                 <input className="amount-input mono" inputMode="decimal" autoFocus value={askAmount} placeholder="0"
                   onChange={(e) => setAskAmount(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') addAsked(); }} />
@@ -197,6 +210,7 @@ export function QuickStart() {
                 <Button variant="secondary" onClick={() => setAskFor(null)}>Cancel</Button>
                 <Button full disabled={!amount} onClick={addAsked}>Add {askFor.name}</Button>
               </div>
+            </div>
             </div>
           );
         })()}

@@ -5,6 +5,9 @@ import type { Audit } from '../engine/types';
 import { initialState, reducer, type Action, type State } from './state';
 import { loadState, saveState } from './storage';
 import { analyseItems, restoreMerchantProfiles } from './merchantResearch';
+import { cheaperPlanFor } from './localPrices';
+import { guessCountry } from './country';
+import { monthlyEquivalent } from '../engine/score';
 
 type Ctx = { state: State; dispatch: (a: Action) => void; audit: Audit };
 const StoreContext = createContext<Ctx | null>(null);
@@ -51,6 +54,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     spendingCurrency: state.statement?.meta.displayCurrency,
     pinnedVideoItemIds: state.rotationPinnedIds,
     profile: state.profile,
+    cheaperPlan: (item) => cheaperPlanFor(item.merchantKey, item.planName, monthlyEquivalent(item), state.currency, state.country ?? guessCountry()),
     ...(state.statement?.fees ? {
       ...(state.statement.fees.fxYearly !== undefined ? { statementFxFeeYearly: state.statement.fees.fxYearly } : {}),
       ...(state.statement.fees.bankYearly !== undefined ? { statementBankFeeYearly: state.statement.fees.bankYearly } : {}),

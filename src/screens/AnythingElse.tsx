@@ -34,6 +34,8 @@ export function AnythingElse() {
         <p className="sub" style={{ marginTop: 12 }}>A few quick ones. Skip any of them.</p>
 
         <div style={{ marginTop: 16 }}>
+          {/* With a statement, fees and delivery are read from it, so we don't ask. */}
+          {!state.statement && (<>
           {/* Foreign currency */}
           <div className="q">
             <div className="t">Pay in another currency? <span>Card fees add up</span></div>
@@ -52,7 +54,7 @@ export function AnythingElse() {
 
           {/* Delivery / taxi */}
           <div className="q">
-            <div className="t">Delivery or taxi?</div>
+            <div className="t">Food delivery?</div>
             <Seg value={p.delivery?.frequency}
               options={[{ value: 'never', label: 'Rarely' }, { value: 'sometimes', label: 'Sometimes' }, { value: 'weekly', label: 'Weekly' }]}
               onChange={(v) => dispatch({ type: 'setProfile', profile: { delivery: { frequency: v, ...(p.delivery?.typicalAmount ? { typicalAmount: p.delivery.typicalAmount } : {}) } } })} />
@@ -67,6 +69,8 @@ export function AnythingElse() {
             )}
           </div>
 
+          </>)}
+
           {/* Recent trial */}
           <div className="q">
             <div className="t">Free trial lately?</div>
@@ -77,9 +81,10 @@ export function AnythingElse() {
 
           {/* Cash */}
           <div className="q">
-            <div className="t">Paid in cash?</div>
+            <div className="t">Anything else paid in cash?</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {CASH_CHIPS.map((c) => {
+              {/* Hairdresser, nails, cleaning, nanny and coffee are already on the Pick screen. */}
+              {CASH_CHIPS.filter((c) => c.name === 'Beauty / skincare').map((c) => {
                 const added = cashItems.find((ci) => ci.label === c.name);
                 return (
                   <BoardChip key={c.name} label={c.name} selected={!!added}

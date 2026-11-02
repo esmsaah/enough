@@ -20,6 +20,8 @@ export type ImportMeta = {
   redactedCategories: string[];
   columnQuestions: ColumnQuestion[];
   columnCount: number;
+  /** Fees printed in their own column (Wise "Source fee amount"), per outgoing row. */
+  columnFees?: Array<{ amount: number; currency: string }>;
 };
 
 export type DetectedItem = {
@@ -87,7 +89,7 @@ const INTERVALS: Array<{ freq: Frequency; days: number; tol: number }> = [
 // Rows → redacted transactions
 // ---------------------------------------------------------------------------
 
-type RawRow = { date: string; description: string; out: number | null; currency: string; billingModelHint?: BillingModel; bankCategoryHint?: BankCategoryHint };
+type RawRow = { date: string; description: string; out: number | null; currency: string; fee?: number; feeCurrency?: string; billingModelHint?: BillingModel; bankCategoryHint?: BankCategoryHint };
 
 function findHeaderRow(rows: string[][]): number {
   const known = rows.findIndex(looksLikeHeaderRow);
@@ -168,6 +170,9 @@ export function transactionsFromRows(
   const directionCol = inferred.direction;
   const statusCol = inferred.status;
   const categoryCol = header.findIndex((cell) => /\b(category|kategorija|kategorie|categorie|categoria|kategoria|kategori)\b/.test(foldHeader(cell)));
+  // A separate fee column (Wise: "Source fee amount" + "Source fee currency").
+  const feeCol = header.findIndex((cell) => { const f = foldHeader(cell); return /\b(fee amount|fees?|total fees?|naknada|gebuhr|gebuhren)\b/.test(f) && !/currency|valuta|wahrung/.test(f); });
+  const feeCurCol = header.findIndex((cell) => /\bfee currency\b/.test(foldHeader(cell)));
 
   // First pass: collect raw rows and the date strings for format detection.
   const raws: RawRow[] = [];
@@ -190,7 +195,10 @@ export function transactionsFromRows(
     for (const category of redactedDescriptionCategories(rawDesc)) redactedCategories.add(category);
     const bankCategoryHint = categoryCol === -1 ? undefined : classifyBankCategory(r[categoryCol] ?? '');
     const billingModelHint = inferBillingModelHint(rawDesc)?.model ?? inferBillingModelHint(fullDescription)?.model;
-    raws.push({ date: rawDate, description: redactDescription(rawDesc), out, currency: cur, ...(billingModelHint ? { billingModelHint } : {}), ...(bankCategoryHint ? { bankCategoryHint } : {}) });
+    const feeValue = feeCol !== -1 ? parseAmount(r[feeCol] ?? '') : null;
+    const fee = feeValue !== null && Math.abs(feeValue) > 0 && out !== null ? Math.abs(feeValue) : undefined;
+    const feeCurrency = feeCurCol !== -1 ? (r[feeCurCol] ?? '').trim().toUpperCase() || cur : cur;
+    raws.push({ date: rawDate, description: redactDescription(rawDesc), out, currency: cur, ...(fee !== undefined ? { fee, feeCurrency } : {}), ...(billingModelHint ? { billingModelHint } : {}), ...(bankCategoryHint ? { bankCategoryHint } : {}) });
     dateStrings.push(rawDate);
   }
 
@@ -199,10 +207,12 @@ export function transactionsFromRows(
     : detectDateFormat(dateStrings);
 
   const transactions: Transaction[] = [];
+  const columnFees: Array<{ amount: number; currency: string }> = [];
   for (const r of raws) {
     if (r.out === null) continue; // only money going out is kept
     const iso = parseDate(r.date, dateFormat);
     if (!iso) continue;
+    if (r.fee !== undefined) columnFees.push({ amount: r.fee, currency: r.feeCurrency ?? r.currency });
     transactions.push({ date: iso, merchantRaw: r.description, amount: r.out, currency: r.currency, ...(r.billingModelHint ? { billingModelHint: r.billingModelHint } : {}), ...(r.bankCategoryHint ? { bankCategoryHint: r.bankCategoryHint } : {}) });
   }
 
@@ -219,6 +229,7 @@ export function transactionsFromRows(
       redactedCategories: [...redactedCategories],
       columnQuestions: [],
       columnCount,
+      ...(columnFees.length ? { columnFees } : {}),
     },
   };
 }
@@ -493,6 +504,8 @@ export function computeStatementFees(transactions: Transaction[], meta: ImportMe
     if (FX_FEE.test(desc)) fx += amount;
     else if (BANK_FEE.test(desc)) bank += amount;
   }
+  // Fees printed in their own column are conversion/transfer fees (Wise and similar).
+  for (const f of meta.columnFees ?? []) fx += convert(f.amount, f.currency, meta.displayCurrency) ?? f.amount;
   // Annualize: a statement shorter than a year is scaled up; a longer one down.
   const factor = meta.monthsSpan >= 1 ? 12 / meta.monthsSpan : 1;
   const out: StatementFees = {};

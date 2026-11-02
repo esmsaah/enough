@@ -156,7 +156,7 @@ export function FoundItems() {
         </div>
       </div>
       <div className="footer">
-        <Button full onClick={() => dispatch({ type: 'goto', step: 'anythingElse' })}>Continue</Button>
+        <Button full onClick={() => dispatch({ type: 'goto', step: 'usage' })}>Continue</Button>
       </div>
     </>
   );

@@ -405,3 +405,8 @@ p { margin: 8px 0; }
 .qp-chips { margin-top: 18px; gap: 10px; }
 .qp-something { min-height: 44px; padding: 8px 16px; border: 1.5px dashed var(--dash); border-radius: 999px; background: transparent; color: var(--muted); font-weight: 600; font-size: 15px; cursor: pointer; }
 .qp-something:hover { border-color: var(--ink); color: var(--ink); }
+
+/* Desktop: the top stage bar is the progress; the per-screen bar would repeat it. */
+@media (min-width: 901px) {
+  .flow-head__bar, .flow-head__label { visibility: hidden; }
+}

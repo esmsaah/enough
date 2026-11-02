@@ -6,6 +6,8 @@ import type { AiUse, BillingModel, Frequency, Item, Profile, Usage } from '../en
 import { detect, type DetectionResult, type ImportMeta } from '../engine/detect';
 import type { QuickPick } from './catalog';
 import { convert } from '../engine/rates';
+import { guessCountry } from './country';
+import { typicalGymEur } from './localPrices';
 
 export type Step =
   | 'landing'
@@ -70,6 +72,7 @@ export type Action =
   | { type: 'addManual'; item: Omit<Item, 'id'> }
   | { type: 'removeItem'; id: string }
   | { type: 'setPrice'; id: string; price: number }
+  | { type: 'setPlan'; id: string; planName: string; price: number }
   | { type: 'setFrequency'; id: string; frequency: Frequency }
   | { type: 'setPriceConfirmed'; id: string; confirmed: boolean }
   | { type: 'setDisplayCategory'; id: string; displayCategory: Item['displayCategory'] }
@@ -78,6 +81,7 @@ export type Action =
   | { type: 'setWouldMiss'; id: string; wouldMiss: boolean }
   | { type: 'setVisits'; id: string; visits: number }
   | { type: 'setSingleVisit'; id: string; price: number }
+  | { type: 'setContract'; id: string; contract: 'none' | 'contract' | 'unsure'; contractEnds?: string }
   | { type: 'setCompareState'; id: string; compareState: Item['compareState'] }
   | { type: 'setPreferredInOverlap'; id: string; preferred: string } // item id to keep, or 'same'
   | { type: 'setStorageUsed'; id: string; storageUsedGb: number }
@@ -175,6 +179,7 @@ export function reducer(state: State, action: Action): State {
         overlapGroup: action.pick.overlapGroup,
         cancelUrl: action.pick.cancelUrl,
         yearlyPrice: action.pick.yearlyPrice,
+        ...(action.pick.planName ? { planName: action.pick.planName } : {}),
         billingModel: action.pick.billingModel, // 'usage' keeps utilities as fixed costs
       } as Item;
       return { ...state, items: [...state.items, item] };
@@ -194,7 +199,11 @@ export function reducer(state: State, action: Action): State {
         source: 'quickpick',
         estimate: true,
         currency: state.currency,
-        ...(p.price > 0 && !p.priceUnknown ? { catalogPrice: convert(p.price, p.currency ?? 'EUR', state.currency) ?? p.price } : {}),
+        userPriced: true,
+        priceConfirmed: true,
+        // Only a researched typical price is ever compared (gyms, research/gyms.csv).
+        // The tap-list placeholder prices for asked items are not real data.
+        ...(gymTypical(p.merchantKey, state) !== undefined ? { catalogPrice: gymTypical(p.merchantKey, state) } : {}),
         overlapGroup: p.overlapGroup,
         cancelUrl: p.cancelUrl,
         yearlyPrice: p.yearlyPrice,
@@ -212,6 +221,8 @@ export function reducer(state: State, action: Action): State {
     case 'setPrice':
       // Changing the price on the Check card counts as confirming it.
       return { ...state, items: patch(state.items, action.id, { price: action.price, priceConfirmed: true }) };
+    case 'setPlan':
+      return { ...state, items: patch(state.items, action.id, { planName: action.planName, price: action.price, priceConfirmed: true }) };
     case 'setFrequency':
       return { ...state, items: patch(state.items, action.id, { frequency: action.frequency, priceConfirmed: true }) };
     case 'setPriceConfirmed':
@@ -226,6 +237,8 @@ export function reducer(state: State, action: Action): State {
       return { ...state, items: patch(state.items, action.id, { wouldMiss: action.wouldMiss }) };
     case 'setVisits':
       return { ...state, items: patch(state.items, action.id, { visitsPerMonth: action.visits }) };
+    case 'setContract':
+      return { ...state, items: patch(state.items, action.id, { contract: action.contract, ...(action.contractEnds ? { contractEnds: action.contractEnds } : {}) }) };
     case 'setSingleVisit':
       return { ...state, items: patch(state.items, action.id, { singleVisitPrice: action.price }) };
     case 'setCompareState':
@@ -370,4 +383,11 @@ function detectedItemToInput(found: DetectionResult['possibleRecurring'][number]
 /** Items that need a usage/visits/compare question (screen 7). */
 export function itemsNeedingUsage(items: Item[]): Item[] {
   return items.filter((i) => i.category === 'digital' || i.category === 'membership' || i.category === 'bill');
+}
+
+/** Typical gym fee in the person's country and currency, when researched. */
+function gymTypical(merchantKey: string, state: State): number | undefined {
+  if (merchantKey !== 'gym') return undefined;
+  const eur = typicalGymEur(state.country ?? guessCountry());
+  return eur === undefined ? undefined : Math.round((convert(eur, 'EUR', state.currency) ?? eur) * 100) / 100;
 }

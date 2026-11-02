@@ -2,7 +2,7 @@ import { clearEverything } from '../app/storage';
 import { useStore } from '../app/store';
 
 // Three steps only — the statement is a way IN to Pick, not its own step.
-const STAGES = ['Pick', 'Usage', 'Result'] as const;
+const STAGES = ['Pick', 'Check', 'Result'] as const;
 
 export function DesktopHeader() {
   const { state, dispatch } = useStore();

@@ -25,8 +25,9 @@ export function Result() {
   const actionable = audit.recommendations
     .filter((r) => r.verdict !== 'keep')
     .sort((a, b) => b.potentialYearlySaving - a.potentialYearlySaving);
-  const net = Math.max(0, audit.yearlyTotal - audit.potentialYearlySaving);
-  const monthly = audit.yearlyTotal / 12;
+  const net = Math.max(0, audit.grandYearlyTotal - audit.potentialYearlySaving);
+  const monthly = audit.grandYearlyTotal / 12;
+  const count = audit.items.length + audit.bills.length + audit.habits.length;
   const lead = actionable[0];
   const leadItem = lead ? audit.items.find((i) => i.id === lead.itemId) : undefined;
   const moreChanges = Math.max(0, actionable.length - 1);
@@ -41,14 +42,14 @@ export function Result() {
         <span className="lab" style={{ color: 'var(--muted-on-navy)' }}>Your year in recurring costs</span>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, flexWrap: 'wrap' }}>
           <span style={{ fontSize: 56, lineHeight: 0.9, fontWeight: 800, fontStretch: '118%', letterSpacing: '-3px', position: 'relative', display: 'inline-block' }}>
-            {formatMoney(audit.yearlyTotal, cur)}
+            {formatMoney(audit.grandYearlyTotal, cur)}
             <svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" style={{ position: 'absolute', left: -4, top: 'calc(50% - 5px)', width: 'calc(100% + 8px)', height: 10, overflow: 'visible' }}>
               <path d="M1 6 C 18 3, 35 7, 55 4 S 88 3, 99 5" stroke="var(--coral-pen)" strokeWidth="2.4" fill="none" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
             </svg>
           </span>
           <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--muted-on-navy)' }}>→ {formatMoney(net, cur)}</span>
         </div>
-        <span style={{ fontSize: 14, color: 'var(--muted-on-navy)' }}>{audit.items.length} things · {formatMoney(monthly, cur, { round: true })} a month · from {source}</span>
+        <span style={{ fontSize: 14, color: 'var(--muted-on-navy)' }}>{count} {count === 1 ? 'thing' : 'things'} · {formatMoney(monthly, cur, { round: true })} a month · from {source}</span>
         {audit.potentialYearlySaving > 0 && (
           <span style={{ fontSize: 20, fontWeight: 700, marginTop: 8 }}>
             You could keep <span style={{ background: 'var(--lime)', color: 'var(--navy)', padding: '0 8px', borderRadius: 3 }}>{formatMoney(audit.potentialYearlySaving, cur)}</span> a year.
@@ -97,12 +98,26 @@ export function Result() {
           <span style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center' }}>Pays for itself if you cut one thing. No subscription, obviously.</span>
         </div>
 
+        {/* Advice teaser — shown, never counted. */}
+        {audit.advice.length > 0 && (
+          <section style={{ display: 'flex', flexDirection: 'column' }}>
+            <span className="lab">Worth a look</span>
+            <div className="r" style={{ marginTop: 8, paddingBottom: 10, borderBottom: '1.5px solid var(--ink)' }}>
+              <span style={{ fontSize: 22, fontWeight: 800, fontStretch: '112%' }}>{audit.advice.length} {audit.advice.length === 1 ? 'tip' : 'tips'}</span>
+              <span style={{ fontSize: 13, color: 'var(--muted)' }}>Not counted in money found</span>
+            </div>
+            <div style={{ padding: '12px 0', borderTop: '1px solid var(--line)', fontSize: 14, color: 'var(--muted)', display: 'flex', gap: 8, alignItems: 'center' }}>
+              <LockIcon />{audit.advice.map((a) => a.name).slice(0, 3).join(', ')}{audit.advice.length > 3 ? ' and more' : ''}, in your full audit
+            </div>
+          </section>
+        )}
+
         {/* Hidden costs teaser. */}
         {audit.hiddenCosts.length > 0 && (
           <section style={{ display: 'flex', flexDirection: 'column' }}>
             <span className="lab">Hidden costs</span>
             <div className="r" style={{ marginTop: 8, paddingBottom: 10, borderBottom: '1.5px solid var(--ink)' }}>
-              <span style={{ fontSize: 22, fontWeight: 800, fontStretch: '112%' }}>{audit.hiddenCosts.length} {audit.hiddenCosts.length === 1 ? 'cost' : 'costs'} that aren't subscriptions</span>
+              <span style={{ fontSize: 22, fontWeight: 800, fontStretch: '112%' }}>{audit.hiddenCosts.length} hidden {audit.hiddenCosts.length === 1 ? 'cost' : 'costs'}</span>
               {audit.hiddenCostYearlyTotal > 0 && <span className="m" style={{ fontSize: 15 }}>{formatMoney(audit.hiddenCostYearlyTotal, cur)}</span>}
             </div>
             <SkeletonRow /><SkeletonRow />

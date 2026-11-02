@@ -4,12 +4,14 @@
 import { formatMoney } from '../app/money';
 import { useStore } from '../app/store';
 import { FlowHeader, StatementIcon } from '../components/board';
+import { AdviceList } from '../components/AdviceList';
 import { isExactAmount, yearlyCost } from '../engine/score';
 
 export function GoodShape() {
   const { state, audit, dispatch } = useStore();
   const cur = audit.currency;
-  const kept = [...audit.items].sort((a, b) => yearlyCost(b) - yearlyCost(a));
+  const kept = [...audit.items, ...audit.bills, ...audit.habits].filter((i) => yearlyCost(i) > 0).sort((a, b) => yearlyCost(b) - yearlyCost(a));
+  const hasTips = audit.advice.length > 0;
 
   return (
     <div className="board">
@@ -17,9 +19,9 @@ export function GoodShape() {
 
       <section style={{ flexShrink: 0, background: 'var(--navy)', color: 'var(--white)', padding: '28px 20px 32px', display: 'flex', flexDirection: 'column', gap: 12 }}>
         <span className="lab" style={{ color: 'var(--muted-on-navy)' }}>Your year in recurring costs</span>
-        <span style={{ fontSize: 56, lineHeight: 0.9, fontWeight: 800, fontStretch: '118%', letterSpacing: '-2px' }}>{formatMoney(audit.yearlyTotal, cur)}</span>
-        <span style={{ fontSize: 22, fontWeight: 700, marginTop: 6 }}>You're in good shape.</span>
-        <span style={{ fontSize: 15, color: 'var(--muted-on-navy)' }}>Everything is earning its place, so there's nothing to buy.</span>
+        <span style={{ fontSize: 56, lineHeight: 0.9, fontWeight: 800, fontStretch: '118%', letterSpacing: '-2px' }}>{formatMoney(audit.grandYearlyTotal, cur)}</span>
+        <span style={{ fontSize: 22, fontWeight: 700, marginTop: 6 }}>{hasTips ? 'Nothing to cancel.' : "You're in good shape."}</span>
+        <span style={{ fontSize: 15, color: 'var(--muted-on-navy)' }}>{hasTips ? `There's nothing to buy. ${audit.advice.length === 1 ? 'One thing is' : `${audit.advice.length} things are`} still worth a look.` : "Everything is earning its place, so there's nothing to buy."}</span>
       </section>
 
       <div className="flow-body flow-col" style={{ padding: '28px 20px 32px', display: 'flex', flexDirection: 'column', gap: 28 }}>
@@ -31,7 +33,7 @@ export function GoodShape() {
           <span className="lab">Kept</span>
           <div className="r" style={{ marginTop: 8, paddingBottom: 10, borderBottom: '1.5px solid var(--ink)' }}>
             <span style={{ fontSize: 22, fontWeight: 800, fontStretch: '112%' }}>{kept.length} {kept.length === 1 ? 'thing' : 'things'}</span>
-            <span className="m" style={{ fontSize: 15 }}>{formatMoney(audit.yearlyTotal, cur)}</span>
+            <span className="m" style={{ fontSize: 15 }}>{formatMoney(audit.grandYearlyTotal, cur)}</span>
           </div>
           {kept.map((i) => {
             const exact = isExactAmount(i);
@@ -46,6 +48,8 @@ export function GoodShape() {
             );
           })}
         </section>
+
+        <AdviceList advice={audit.advice} cur={cur} />
 
         <div className="r" style={{ borderTop: '1.5px solid var(--ink)', paddingTop: 12 }}>
           <span style={{ fontWeight: 700 }}>To pay</span>

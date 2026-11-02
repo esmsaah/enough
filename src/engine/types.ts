@@ -82,6 +82,8 @@ export type Item = {
   wouldMiss?: boolean; // digital, only when usage === 'sometimes'
   visitsPerMonth?: number; // memberships only
   singleVisitPrice?: number; // memberships only, optional
+  contract?: 'none' | 'contract' | 'unsure'; // memberships: can they cancel any time?
+  contractEnds?: string; // memberships under contract: 'YYYY-MM' the minimum term ends
   compareState?: 'thisYear' | 'overAYear' | 'never'; // bills: last offer comparison (rule 7)
   yearlyPrice?: number; // known cheaper yearly price from the merchant map (rule 8), in EUR
   redactNameOutbound?: boolean; // private transfers: hide the person's name from the server
@@ -93,6 +95,8 @@ export type Item = {
   uses?: AiUse[]; // AI overlap: what the person uses this assistant for
   renewalMonth?: number; // 1–12, for a yearly plan: the month it renews (reminder)
   trialEndsOn?: string; // ISO date a free/intro trial turns into a paid charge (reminder)
+  planName?: string; // which plan the person has (from researched plans), e.g. "Standard"
+  userPriced?: boolean; // the person typed the amount themselves (gym, habits)
   catalogPrice?: number; // typical monthly price from the catalog, in this item's currency (price-above-catalog warning)
   duplicateOf?: string; // set for a second charge of the same service
   flaggedForReminder?: boolean;
@@ -161,6 +165,18 @@ export type Reminder = {
   itemId?: string;
 };
 
+/** Advice worth acting on that is never counted as money found (value doc levers 7–11). */
+export type Advice = {
+  kind: 'compareOffers' | 'cheaperPlan' | 'habit';
+  itemId: string;
+  name: string;
+  note: string; // one plain sentence
+  yearly?: number; // what it costs a year, display currency
+  yearlyDiff?: number; // how much less the alternative costs a year, if known
+  currency: string;
+  estimate: boolean;
+};
+
 export type Audit = {
   /** Digital subscriptions and memberships; the only items scored for verdicts. */
   items: Item[];
@@ -177,6 +193,9 @@ export type Audit = {
   estimateYearlyTotal: number;
   habitYearlyTotal: number;
   potentialYearlySaving: number;
+  /** Subscriptions + bills + habits, everything the person told us about. */
+  grandYearlyTotal: number;
+  advice: Advice[];
   hiddenCosts: HiddenCost[];
   hiddenCostYearlyTotal: number; // sum of known hidden costs; advice, never money found
   reminders: Reminder[];

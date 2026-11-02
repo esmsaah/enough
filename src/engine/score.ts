@@ -13,6 +13,7 @@ import { convert } from './rates';
 import { buildReminders } from './reminders';
 import type {
   ActionType,
+  Advice,
   Audit,
   Item,
   OverlapGroup,
@@ -80,7 +81,7 @@ type CloudConsolidation = { winnerId: string; saving: number; planName: string; 
 type Context = {
   /** id of the item kept in each duplicate group; every other member is an extra */
   duplicateExtras: Set<string>;
-  /** for a member being cut for overlap: the name of the item kept in its group */
+  /** for a member being cut for overlap: the sentence explaining why */
   overlapKeptName: Map<string, string>;
   overlapLosers: Set<string>;
   /** cloud items that collapse into one cheaper plan (§7 cloud overlap) */
@@ -117,7 +118,26 @@ function buildContext(items: Item[]): Context {
   }
 
   // --- Music overlap: keep the preferred (or most used), cut the other. ---
-  addGenericOverlap(items, 'music', duplicateExtras, overlapLosers, overlapKeptName);
+  // YouTube Premium includes YouTube Music, so it overlaps with any music service.
+  const ytp = items.find((i) => isYouTubePremium(i) && !duplicateExtras.has(i.id));
+  const musicOnly = items.filter((i) => i.overlapGroup === 'music' && !isYouTubePremium(i) && !duplicateExtras.has(i.id));
+  const pref = [ytp, ...musicOnly].map((m) => m?.preferredInOverlap).find((p) => p !== undefined);
+  if (ytp && musicOnly.length && pref === undefined) {
+    const topMusic = pickKept(musicOnly);
+    if (usageRank(ytp) >= usageRank(topMusic)) {
+      // Keep YouTube Premium (it also removes ads on videos); the music app is the extra.
+      for (const m of musicOnly) {
+        overlapLosers.add(m.id);
+        overlapKeptName.set(m.id, `YouTube Premium already includes YouTube Music, so ${m.name} is a second music app.`);
+      }
+    } else {
+      overlapLosers.add(ytp.id);
+      overlapKeptName.set(ytp.id, `You use ${topMusic.name} more for music. YouTube Premium mostly adds YouTube Music and no ads.`);
+      addGenericOverlap(musicOnly, 'music', duplicateExtras, overlapLosers, overlapKeptName);
+    }
+  } else {
+    addGenericOverlap(items.map((i) => (isYouTubePremium(i) ? { ...i, overlapGroup: 'music' as const } : i)), 'music', duplicateExtras, overlapLosers, overlapKeptName);
+  }
 
   // --- Cloud overlap: consolidate into one cheaper plan when we know storage;
   //     otherwise fall back to the same keep-most-used-cut-other rule. ---
@@ -168,12 +188,27 @@ function addGenericOverlap(
   // Honour the person's overlap answer: a specific item id to keep, or 'same'.
   const pref = members.map((m) => m.preferredInOverlap).find((p) => p !== undefined);
   if (pref === 'same') return; // "I'd miss both the same" → look again, cut nothing here
-  const kept = (pref && members.find((m) => m.id === pref)) || pickKept(members);
+  const chosen = pref ? members.find((m) => m.id === pref) : undefined;
+  const kept = chosen || pickKept(members);
   for (const m of members) {
     if (m.id === kept.id) continue;
     overlapLosers.add(m.id);
-    overlapKeptName.set(m.id, kept.name);
+    overlapKeptName.set(m.id,
+      chosen ? `You said you'd keep ${kept.name}. They do the same job.`
+        : !m.usage || !kept.usage ? `${m.name} and ${kept.name} do the same job. Keeping the cheaper one covers you.`
+        : usageRank(m) === usageRank(kept) ? `You use ${m.name} and ${kept.name} about the same, and they do the same job. Keeping the cheaper one covers you.`
+          : `Overlaps with ${kept.name}, which you use more.`);
   }
+}
+
+/** Power, water, heating and similar: fixed costs with (usually) one provider. */
+export function isUtility(item: Pick<Item, 'billingModel' | 'name' | 'merchantKey'>): boolean {
+  if (item.billingModel === 'usage') return true;
+  return /elektr|struj|vodovod|vodokanal|\bvoda\b|plin|\bgas\b|toplan|grijanj|infostan|komunal|electric|water|power|energy|heating|utility|strom|stadtwerke/i.test(`${item.name} ${item.merchantKey ?? ''}`);
+}
+
+function isYouTubePremium(item: Item): boolean {
+  return item.merchantKey === 'youtube premium' || /youtube\s*premium/i.test(item.name);
 }
 
 /** Most used wins; ties go to the cheaper one (by yearly cost). */
@@ -266,8 +301,7 @@ export function scoreItem(item: Item, ctx: Context): Recommendation {
 
   // Rule 3c — music / cloud-fallback overlap. Keep the preferred/most used, drop the rest.
   if (ctx.overlapLosers.has(item.id)) {
-    const keptName = ctx.overlapKeptName.get(item.id) ?? 'another service';
-    return rec('removeOverlap', yc, `Overlaps with ${keptName}, which you use more.`);
+    return rec('removeOverlap', yc, ctx.overlapKeptName.get(item.id) ?? 'It does the same job as another service you pay for.');
   }
 
   // Rules 5 & 6 — memberships priced against per-visit cost.
@@ -346,6 +380,10 @@ export function runAudit(
     statementFxFeeYearly?: number;
     /** Exact yearly bank fee read from the statement, in the spending currency. */
     statementBankFeeYearly?: number;
+    /** A cheaper local provider for a bill, monthly price in `currency`. */
+    billAlternative?: (item: Item) => { name: string; monthly: number; currency: string } | undefined;
+    /** The cheapest plan of the same service, monthly price in `currency`. */
+    cheaperPlan?: (item: Item) => { name: string; monthly: number; currency: string } | undefined;
   } = {},
 ): Audit {
   const currency = opts.displayCurrency ?? mostCommonCurrency(items) ?? 'EUR';
@@ -372,19 +410,42 @@ export function runAudit(
   const bills = convertedItems.filter((item) => item.category === 'bill');
   const habits = convertedItems.filter((item) => !subscriptions.includes(item) && !bills.includes(item));
   const ctx = buildContext(subscriptions);
-  const recommendations = subscriptions.map((i) => scoreItem(i, ctx));
+  const today = opts.createdAt ?? new Date().toISOString().slice(0, 10);
+  const scored = subscriptions.map((i) => adjustForContract(scoreItem(i, ctx), i, today));
 
   const yearlyTotal = round2(subscriptions.reduce((s, i) => s + yearlyCost(i), 0));
   const exactYearlyTotal = round2(subscriptions.filter(isExactAmount).reduce((s, i) => s + yearlyCost(i), 0));
   const estimateYearlyTotal = round2(yearlyTotal - exactYearlyTotal);
   const billYearlyTotal = round2(bills.reduce((s, i) => s + yearlyCost(i), 0));
   const habitYearlyTotal = round2(habits.reduce((s, i) => s + yearlyCost(i), 0));
-  const cutVideoIds = new Set(recommendations.filter((rec) => rec.verdict === 'cut').map((rec) => rec.itemId));
-  const rotationPlan = buildStreamingRotationPlan(subscriptions.filter((item) => !cutVideoIds.has(item.id)), currency, opts.pinnedVideoItemIds ?? [], opts.createdAt);
-  const videoIds = new Set(subscriptions.filter((item) => item.overlapGroup === 'video').map((item) => item.id));
-  const videoSavings = recommendations.filter((rec) => videoIds.has(rec.itemId)).reduce((sum, rec) => sum + rec.potentialYearlySaving, 0);
-  const otherSavings = recommendations.filter((rec) => !videoIds.has(rec.itemId)).reduce((sum, rec) => sum + rec.potentialYearlySaving, 0);
-  const potentialYearlySaving = round2(otherSavings + Math.max(videoSavings, rotationPlan?.yearlySaving ?? 0));
+  // Streaming rotation (value doc lever 3): only answered video services that are
+  // still kept. What you watch every week stays on; the "sometimes" ones take turns.
+  // Only monthly plans can be paused and restarted; a yearly plan is paid to its end.
+  const keptVideo = subscriptions.filter((item) => {
+    if (item.overlapGroup !== 'video' || item.frequency !== 'monthly' || (item.usage !== 'always' && item.usage !== 'sometimes')) return false;
+    const r = scored.find((x) => x.itemId === item.id);
+    return r?.action === 'keep';
+  });
+  const pinned = opts.pinnedVideoItemIds?.length ? opts.pinnedVideoItemIds : keptVideo.filter((i) => i.usage === 'always').map((i) => i.id);
+  const rotationPlan = buildStreamingRotationPlan(keptVideo, currency, pinned, opts.createdAt);
+  const rotating = rotationPlan ? rotationPlan.services.filter((s) => !s.pinned) : [];
+  const recommendations = rotationPlan && rotating.length >= 2 && rotationPlan.yearlySaving > 0
+    ? scored.map((r) => {
+      const svc = rotating.find((s) => s.id === r.itemId);
+      if (!svc) return r;
+      const item = ctx.byId.get(r.itemId)!;
+      const monthsOn = rotationPlan.months.filter((m) => m.activeServiceId === svc.id).length;
+      const saving = round2(yearlyCost(item) - monthsOn * svc.monthlyEquivalent);
+      return {
+        ...r,
+        verdict: 'lookAgain' as Verdict,
+        action: 'rotate' as ActionType,
+        potentialYearlySaving: Math.max(0, saving),
+        reason: `Watch one at a time. Keep it ${monthsOn} ${monthsOn === 1 ? 'month' : 'months'} a year and pause it the rest, the others take turns.`,
+      };
+    })
+    : scored;
+  const potentialYearlySaving = round2(recommendations.reduce((sum, rec) => sum + rec.potentialYearlySaving, 0));
   const spendCategories: SpendingCategory[] = ['Groceries', 'Shopping', 'Cafes & eating out', 'Transport', 'Travel', 'Delivery'];
   const spendingByCategory = Object.fromEntries(spendCategories.map((category) => {
     const raw = opts.spendingByCategory?.[category] ?? 0;
@@ -394,7 +455,7 @@ export function runAudit(
     return [category, round2(converted)];
   })) as Record<SpendingCategory, number>;
 
-  const hasActionable = recommendations.some((r) => r.verdict !== 'keep') || (rotationPlan?.yearlySaving ?? 0) > videoSavings;
+  const hasActionable = recommendations.some((r) => r.verdict !== 'keep' && r.potentialYearlySaving > 0);
   const paywall = hasActionable && potentialYearlySaving >= paywallThreshold(currency);
 
   // Hidden costs and reminders: shown to inform, never added to money found.
@@ -414,6 +475,8 @@ export function runAudit(
   });
   const hiddenCostYearlyTotal = round2(hiddenCosts.reduce((s, h) => s + (h.yearly ?? 0), 0));
   const reminders = buildReminders(subscriptions, opts.profile, createdAt);
+  const advice = buildAdvice(subscriptions, bills, habits, recommendations, currency, opts);
+  const grandYearlyTotal = round2(yearlyTotal + billYearlyTotal + habitYearlyTotal);
 
   return {
     items: subscriptions,
@@ -428,6 +491,8 @@ export function runAudit(
     estimateYearlyTotal,
     habitYearlyTotal,
     potentialYearlySaving,
+    grandYearlyTotal,
+    advice,
     hiddenCosts,
     hiddenCostYearlyTotal,
     reminders,
@@ -437,6 +502,88 @@ export function runAudit(
     unlocked: opts.unlocked ?? false,
     createdAt,
   };
+}
+
+/**
+ * Gym and club contracts often bind for 12–24 months (Germany, Sweden, Finland):
+ * leaving early still means paying to the end. Only the months after the
+ * contract ends, within the next year, count as money found.
+ */
+export function monthsFreeAfterContract(contractEnds: string, today: string): number {
+  const [y, m] = contractEnds.split('-').map(Number);
+  const [ty, tm] = today.slice(0, 10).split('-').map(Number);
+  const monthsUntilEnd = (y! - ty!) * 12 + (m! - tm!);
+  return Math.max(0, Math.min(12, 12 - Math.max(0, monthsUntilEnd)));
+}
+
+function adjustForContract(rec: Recommendation, item: Item, today: string): Recommendation {
+  if (item.category !== 'membership' || (rec.action !== 'cancel' && rec.action !== 'payPerVisit')) return rec;
+  if (item.contract === 'unsure') {
+    return { ...rec, verdict: 'lookAgain', potentialYearlySaving: 0,
+      reason: `${rec.reason} Check your contract first. Many gyms bind you for 12 or 24 months, and leaving early still means paying.` };
+  }
+  if (item.contract === 'contract' && item.contractEnds) {
+    const free = monthsFreeAfterContract(item.contractEnds, today);
+    const end = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${item.contractEnds}-01T00:00:00Z`));
+    return { ...rec, verdict: free > 0 ? rec.verdict : 'lookAgain', potentialYearlySaving: round2(rec.potentialYearlySaving * (free / 12)),
+      reason: free > 0
+        ? `${rec.reason} Your contract runs until ${end}, so this counts only the ${free} ${free === 1 ? 'month' : 'months'} after it.`
+        : `${rec.reason} Your contract runs until ${end}. Give notice in time so it doesn't renew.` };
+  }
+  return rec;
+}
+
+/** Advice the person can act on, never counted as money found (value doc levers 7, 9, 11). */
+function buildAdvice(
+  subscriptions: Item[],
+  bills: Item[],
+  habits: Item[],
+  recommendations: Recommendation[],
+  currency: string,
+  opts: {
+    billAlternative?: (item: Item) => { name: string; monthly: number; currency: string } | undefined;
+    cheaperPlan?: (item: Item) => { name: string; monthly: number; currency: string } | undefined;
+  },
+): Advice[] {
+  const out: Advice[] = [];
+  const toCur = (n: number, from: string) => (from.toUpperCase() === currency.toUpperCase() ? n : convert(n, from, currency) ?? n);
+
+  // Lever 7 — a cheaper plan of the same service, for something kept but used only sometimes.
+  for (const item of subscriptions) {
+    const rec = recommendations.find((r) => r.itemId === item.id);
+    if (!rec || rec.action !== 'keep' || item.usage !== 'sometimes' || !opts.cheaperPlan) continue;
+    const alt = opts.cheaperPlan(item);
+    if (!alt) continue;
+    const altMonthly = toCur(alt.monthly, alt.currency);
+    const diff = round2((monthlyEquivalent(item) - altMonthly) * 12);
+    if (diff <= 0) continue;
+    out.push({ kind: 'cheaperPlan', itemId: item.id, name: item.name, currency, estimate: true, yearly: yearlyCost(item), yearlyDiff: diff,
+      note: `You use it sometimes. ${alt.name} is ${fmt(altMonthly, currency)} a month and would keep about ${fmt(diff, currency)} a year.` });
+  }
+
+  // Lever 9 — bills nobody has compared in a while.
+  for (const bill of bills) {
+    if (isUtility(bill)) continue; // power, water, heating: usually one provider, nothing to switch
+    if (bill.compareState !== 'overAYear' && bill.compareState !== 'never') continue;
+    const alt = opts.billAlternative?.(bill);
+    const altMonthly = alt ? toCur(alt.monthly, alt.currency) : undefined;
+    const diff = altMonthly !== undefined ? round2((monthlyEquivalent(bill) - altMonthly) * 12) : 0;
+    const when = bill.compareState === 'never' ? "You've never compared offers" : "You haven't compared offers in over a year";
+    out.push({ kind: 'compareOffers', itemId: bill.id, name: bill.name, currency, estimate: true, yearly: yearlyCost(bill),
+      ...(diff > 0 ? { yearlyDiff: diff } : {}),
+      note: diff > 0 && alt
+        ? `${when}. ${alt.name} starts at ${fmt(altMonthly!, currency)} a month here, about ${fmt(diff, currency)} a year less. Ask your provider to match it.`
+        : `${when}. Prices drop for new customers, so ask your provider for their current offer.` });
+  }
+
+  // Lever 11 — habits, shown as a yearly total so the size is visible. No euros claimed.
+  for (const h of habits) {
+    const yearly = yearlyCost(h);
+    if (yearly <= 0) continue;
+    out.push({ kind: 'habit', itemId: h.id, name: h.name, currency, estimate: true, yearly,
+      note: `About ${fmt(monthlyEquivalent(h), currency)} a month adds up to ${fmt(yearly, currency)} a year. Not a subscription, but worth knowing.` });
+  }
+  return out;
 }
 
 export function buildStreamingRotationPlan(
