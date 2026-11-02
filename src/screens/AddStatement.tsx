@@ -44,8 +44,9 @@ export function AddStatement() {
     setShotError(''); setFound(null); setShotBusy('Reading the screenshot on this device…');
     try {
       const { ocr } = await import('../app/ocr');
-      const pages = await ocr(files, (d, t) => setShotBusy(`Reading screenshot ${d} of ${t} on this device…`));
-      const subs = parseSubscriptionList(pages.flatMap((p) => p.lines), new Date().toISOString().slice(0, 10));
+      const country = state.country ?? guessCountry();
+      const pages = await ocr(files, (d, t) => setShotBusy(`Reading screenshot ${d} of ${t} on this device…`), country);
+      const subs = parseSubscriptionList(pages.flatMap((p) => p.lines), new Date().toISOString().slice(0, 10), country);
       if (!subs.length) setShotError("We couldn't find subscriptions in that picture. Make sure the list with prices is visible, or tap them instead.");
       setFound(subs.map((s) => ({ ...s, keep: true })));
     } catch {

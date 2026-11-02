@@ -15,8 +15,10 @@ const core = pkgDir('tesseract.js-core');
 for (const f of ['tesseract-core-relaxedsimd-lstm.wasm.js', 'tesseract-core-relaxedsimd-lstm.wasm', 'tesseract-core-simd-lstm.wasm.js', 'tesseract-core-simd-lstm.wasm', 'tesseract-core-lstm.wasm.js', 'tesseract-core-lstm.wasm']) {
   copyFileSync(join(core, f), join(out, f));
 }
-// Latin (English + Croatian for č ć š ž đ) and Cyrillic (Serbian), fast integer models.
-for (const lang of ['eng', 'hrv', 'srp']) {
+// Language packs (fast integer models). Keep in step with OCR_PACKS in src/app/ocrLangs.ts.
+const PACKS = ['eng', 'hrv', 'srp', 'ara', 'heb', 'chi_sim', 'chi_tra', 'jpn', 'kor', 'tha', 'hin', 'ell', 'rus', 'ukr', 'bul', 'tur', 'deu',
+  'fra', 'spa', 'por', 'ita', 'nld', 'pol', 'vie', 'ind', 'msa', 'ces', 'hun', 'ron', 'slv', 'mkd', 'sqi', 'swe', 'nor', 'dan', 'fin', 'fas', 'urd', 'ben', 'tam'];
+for (const lang of PACKS) {
   const src = join(pkgDir(`@tesseract.js-data/${lang}`), '4.0.0_best_int', `${lang}.traineddata.gz`);
   if (!existsSync(src)) throw new Error(`missing ${src}`);
   copyFileSync(src, join(out, `${lang}.traineddata.gz`));

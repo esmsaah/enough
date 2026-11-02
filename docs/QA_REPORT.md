@@ -16,7 +16,7 @@ Status key: **DONE** works end to end and was tested · **PARTIAL** · **PLACEHO
 | §1.5 | One action per item, savings never double counted | `engine/score.ts` | DONE | `score.test.ts`, `acceptance.test.ts` (lines add up to total) |
 | §1.6 | Mobile 390 px, in-app browsers | CSS, `Landing.tsx` banner | DONE (banner added) | all browser runs at 390×844 |
 | §6 | CSV, Excel, text PDF, several files merged | `engine/*` | DONE | fixtures + 6 real statements (earlier run) |
-| §6 | Photo / scanned PDF OCR (Latin + Cyrillic), phone subscription screenshot | `app/ocr.ts`, `engine/subscriptionList.ts`, `AddStatement.tsx` | DONE (2026-11-02) | photo and scanned PDF: 10/10 rows read; iPhone screenshot: 3/3 subscriptions; no outside requests; `subscriptionList.test.ts` |
+| §6 | Photo / scanned PDF OCR (40 language packs, picked by country and browser language), phone subscription screenshot (renewal words, months, currencies and date styles in 40+ languages) | `app/ocr.ts`, `engine/subscriptionList.ts`, `AddStatement.tsx` | DONE (2026-11-02) | photo and scanned PDF: 10/10 rows read; iPhone screenshot: 3/3 subscriptions; no outside requests; `subscriptionList.test.ts` |
 | §6 | Currency conversion marked approx. | `engine/rates.ts` | DONE | unit tests |
 | §6 | Redaction + "What we keep" | `engine/redact.ts`, `WhatWeKeep.tsx` | DONE | fixture tests, browser |
 | §6 | Detection rules 1–8 | `engine/detect.ts` | DONE | `recurring-cases.test.ts`, fixtures |
@@ -67,7 +67,7 @@ Status key: **DONE** works end to end and was tested · **PARTIAL** · **PLACEHO
 
 1. Payment live test: Dodo keys in Cloudflare (founder).
 2. Email report, reminders, "Finish on my computer": domain + Resend (founder), then build.
-3. OCR for Arabic, CJK, Thai and Devanagari scripts is not bundled yet (Latin and Cyrillic are).
+3. OCR languages outside the 40 packs fall back to English letters and numbers.
 4. Brief §7 "more than 6 items on one screen": not built; needs a decision (see open questions).
 5. Fixed 2026-11-02: country "Change", the "picked" toggle and the search field are now 44 px.
 6. Local prices: 9 services; other services fall back to typical prices.

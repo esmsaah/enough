@@ -11,6 +11,6 @@ Per the brief: do not add features outside it. Ideas land here instead.
 - Rate limit /api/* per IP via Cloudflare rate limiting rule.
 
 ## Brief items not built yet (2026-11-02)
-- Photo / scanned-PDF OCR and phone screenshots: built 2026-11-02 (Latin + Cyrillic). Arabic, CJK, Thai and Devanagari packs on demand are still to do.
+- Photo / scanned-PDF OCR and phone screenshots: built 2026-11-02, 40 language packs (Latin, Cyrillic, Greek, Arabic, Hebrew, Persian, Urdu, Chinese, Japanese, Korean, Thai, Devanagari, Bengali, Tamil), chosen by country and browser language.
 - "Finish on my computer": built without a server (link in the #fragment, sent from the person's own email app).
 - Email report, reminder emails, unsubscribe and the daily job (brief §10), need a domain and Resend. Calendar file covers reminders meanwhile.

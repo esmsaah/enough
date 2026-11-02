@@ -5,6 +5,8 @@
 // so scanned statements go through the exact same rules as text PDFs.
 
 import type { PdfPage } from '../engine/pdf';
+import { ocrLanguages } from './ocrLangs';
+import { guessCountry } from './country';
 
 export type OcrPage = { items: PdfPage; lines: string[] };
 
@@ -19,10 +21,11 @@ async function sourceSize(src: HTMLCanvasElement | Blob): Promise<{ w: number; h
   return size;
 }
 
-/** Recognise text on each image/canvas. Latin (English, Croatian letters) and Cyrillic. */
-export async function ocr(sources: Array<HTMLCanvasElement | Blob>, onProgress?: (done: number, total: number) => void): Promise<OcrPage[]> {
+/** Recognise text on each image/canvas in English plus the person's local languages. */
+export async function ocr(sources: Array<HTMLCanvasElement | Blob>, onProgress?: (done: number, total: number) => void, country?: string): Promise<OcrPage[]> {
   const { createWorker } = await import('tesseract.js');
-  const worker = await withTimeout(createWorker(['eng', 'hrv', 'srp'], 1, {
+  const langs = ocrLanguages(country ?? guessCountry(), typeof navigator !== 'undefined' ? navigator.languages ?? [navigator.language] : []);
+  const worker = await withTimeout(createWorker(langs, 1, {
     workerPath: '/ocr/worker.min.js',
     corePath: '/ocr',
     langPath: '/ocr',

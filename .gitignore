@@ -6,3 +6,5 @@ private-fixtures/
 *.zip
 .ut-dist.tgz
 public/ocr/
+.ut-packs.tgz
+.ut-jp.png
