@@ -7,15 +7,15 @@ import { QUICK_PICKS } from '../app/catalog';
 import { withLocalPrice } from '../app/localPrices';
 import { tapListForCountry } from '../app/tapList';
 import { guessCountry } from '../app/country';
-import { formatMoney, AUDIT_PRICE_EUR } from '../app/money';
+import { formatMoney, auditPrice } from '../app/money';
 import { importStatement } from '../app/statementImport';
 import '../styles/landing-fonts.css';
 import '../styles/landing.css';
 
-const PRICE = formatMoney(AUDIT_PRICE_EUR, 'EUR'); // €5.99
 
 export function Landing() {
   const { state, dispatch } = useStore();
+  const PRICE = formatMoney(auditPrice(state.country ?? guessCountry()), 'EUR');
   const [dragOver, setDragOver] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const [uploading, setUploading] = useState(false);

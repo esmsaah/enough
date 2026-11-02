@@ -1,7 +1,8 @@
 // Screen — Result (step 4). The locked preview before paying: the year's total
 // struck down to what's left, the money found (first change shown, the rest
 // blurred), the €5.99 full-audit unlock, and a taste of the hidden costs.
-import { AUDIT_PRICE_EUR, formatMoney } from '../app/money';
+import { auditPrice, formatMoney } from '../app/money';
+import { guessCountry } from '../app/country';
 import { useStore } from '../app/store';
 import { FlowHeader, StatementIcon } from '../components/board';
 import { isExactAmount } from '../engine/score';
@@ -105,7 +106,7 @@ export function Result() {
           <span style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.5 }}>Steps for every item, a plan for the money and renewal reminders for a year.</span>
           <div className="r" style={{ borderTop: '1.5px solid var(--ink)', paddingTop: 12 }}>
             <span style={{ fontWeight: 700 }}>Once</span>
-            <span style={{ fontSize: 28, fontWeight: 800, fontStretch: '118%' }}>{formatMoney(AUDIT_PRICE_EUR, 'EUR')}</span>
+            <span style={{ fontSize: 28, fontWeight: 800, fontStretch: '118%' }}>{formatMoney(auditPrice(state.country ?? guessCountry()), 'EUR')}</span>
           </div>
           {state.unlocked
             ? <button type="button" className="btn full" onClick={() => dispatch({ type: 'goto', step: 'cutlist' })}>Show my full cut list</button>
