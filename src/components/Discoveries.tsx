@@ -32,9 +32,10 @@ export function discoveries(audit: Audit): Line[] {
 export function Discoveries({ audit }: { audit: Audit }) {
   const lines = discoveries(audit);
   if (lines.length === 0) return null;
+  const fromStatement = audit.items.some((i) => i.source === 'statement');
   return (
     <section style={{ display: 'flex', flexDirection: 'column' }}>
-      <span className="lab">Found in your statement</span>
+      <span className="lab">{fromStatement ? 'Found in your statement' : 'Worth knowing'}</span>
       <div className="r" style={{ marginTop: 8, paddingBottom: 10, borderBottom: '1.5px solid var(--ink)' }}>
         <span style={{ fontSize: 22, fontWeight: 800, fontStretch: '112%' }}>{lines.length} {lines.length === 1 ? 'thing' : 'things'} you might not know</span>
       </div>

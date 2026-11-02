@@ -184,9 +184,16 @@ export function calendarEvents(audit: Audit, money: (n: number) => string): Cale
   const byId = new Map(audit.items.map((i) => [i.id, i]));
   for (const r of audit.recommendations) {
     const item = byId.get(r.itemId);
-    const next = item ? upcomingCharge(item, audit.createdAt) : undefined;
-    if (!item || r.potentialYearlySaving <= 0 || !next) continue;
-    if (r.action === 'cancel' || r.action === 'removeOverlap' || r.action === 'payPerVisit') {
+    if (!item || r.potentialYearlySaving <= 0) continue;
+    const next = upcomingCharge(item, audit.createdAt);
+    const actNow = r.action === 'cancel' || r.action === 'removeOverlap' || r.action === 'payPerVisit';
+    // No charge date known (tapped, not from a statement): remind tomorrow, so it gets done.
+    if (!next && actNow && !(item.category === 'membership' && (item.contract === 'contract' || item.contract === 'unsure'))) {
+      out.push({ date: plusDays(audit.createdAt, 1), title: `Cancel ${item.name}`, note: `${r.reason} Saves about ${money(r.potentialYearlySaving)} a year.` });
+      continue;
+    }
+    if (!next) continue;
+    if (actNow) {
       out.push({ date: minusDays(next, 2), title: `Cancel ${item.name}`, note: `${item.name} charges ${money(item.price)} on ${humanDate(next)}. Cancel before then.` });
     }
   }
@@ -219,6 +226,10 @@ export function toIcs(events: CalendarEvent[]): string {
   });
   lines.push('END:VCALENDAR');
   return lines.join('\r\n');
+}
+
+function plusDays(iso: string, d: number): string {
+  return new Date(Date.parse(`${iso.slice(0, 10)}T00:00:00Z`) + d * 86_400_000).toISOString().slice(0, 10);
 }
 
 function minusDays(iso: string, d: number): string {

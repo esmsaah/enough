@@ -73,3 +73,11 @@ describe('contracts and pauses', () => {
     expect(howToFor(a.recommendations[0]!, a.items[0]!, a, money).steps[0]).toMatch(/Pause/);
   });
 });
+
+describe('calendar for tapped items', () => {
+  it('a tapped cancel without a charge date still gets a reminder', () => {
+    const a = runAudit([item({ name: 'Disney+', source: 'quickpick', usage: 'almostNever' })], { createdAt: '2026-11-02' });
+    const ev = calendarEvents(a, money);
+    expect(ev.find((e) => e.title === 'Cancel Disney+')?.date).toBe('2026-11-03');
+  });
+});
