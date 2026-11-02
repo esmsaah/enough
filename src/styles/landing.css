@@ -185,14 +185,3 @@
   .b2-price-band { padding: 72px 0; }
   .b2-price-huge { font-size: clamp(72px, 8vw, 104px); }
 }
-
-/* ---- 2b What Enough finds ---- */
-.b2-hero__upload { color: var(--muted-on-navy); margin-top: 14px; font-size: 15px; font-weight: 600; text-underline-offset: 4px; }
-.b2-hero__upload:hover { color: #fff; }
-.b2-finds { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 24px; }
-.b2-find { background: var(--paper); border: 1.5px solid var(--line); border-radius: 8px; padding: 18px; display: flex; flex-direction: column; gap: 6px; }
-.b2-find__amount { font-family: var(--font-mono); font-size: 14px; align-self: flex-start; background: var(--lime); color: var(--navy); padding: 2px 8px; border-radius: 3px; }
-.b2-find__title { font-size: 19px; line-height: 1.2; }
-.b2-find__text { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
-@media (min-width: 640px) { .b2-finds { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 901px) { .b2-finds { grid-template-columns: 1fr 1fr 1fr; } }

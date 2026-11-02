@@ -101,13 +101,7 @@ export function Result() {
         <div style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--radius-card)', padding: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <span className="lab" style={{ color: 'var(--ink)' }}>Your full audit</span>
           <span style={{ fontSize: 22, fontWeight: 800, fontStretch: '112%' }}>See exactly what to cut, and how.</span>
-          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 15, color: 'var(--muted)', lineHeight: 1.6 }}>
-            <li>{actionable.length} {actionable.length === 1 ? 'change' : 'changes'} with the exact steps, the link and the last day to do {actionable.length === 1 ? 'it' : 'each'}</li>
-            {audit.recommendations.some((r) => r.action === 'rotate') && <li>Your streaming rotation, month by month</li>}
-            {audit.advice.length > 0 && <li>{audit.advice.length} {audit.advice.length === 1 ? 'tip' : 'tips'} on cheaper plans, bills and habits, with amounts</li>}
-            <li>A calendar file that reminds you of every deadline for a year</li>
-            <li>A PDF of your plan to keep</li>
-          </ul>
+          <span style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.5 }}>Steps for every item, a plan for the money and renewal reminders for a year.</span>
           <div className="r" style={{ borderTop: '1.5px solid var(--ink)', paddingTop: 12 }}>
             <span style={{ fontWeight: 700 }}>Once</span>
             <span style={{ fontSize: 28, fontWeight: 800, fontStretch: '118%' }}>{formatMoney(AUDIT_PRICE_EUR, 'EUR')}</span>
@@ -161,7 +155,7 @@ export function Result() {
             style={{ border: '1.5px dashed var(--line)', borderRadius: 'var(--radius)', padding: 16, display: 'flex', alignItems: 'center', gap: 14, background: 'none', textAlign: 'left', cursor: 'pointer', color: 'var(--ink)' }}>
             <StatementIcon />
             <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--indigo)' }}>Add one statement. It finds what tapping can't: double charges, price rises, forgotten renewals and fees.</span>
+              <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--indigo)' }}>Upload one statement to turn estimates into exact numbers.</span>
               <span style={{ fontSize: 13, color: 'var(--muted)' }}>Optional. Read on your device.</span>
             </span>
           </button>
