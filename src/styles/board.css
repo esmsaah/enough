@@ -137,3 +137,60 @@
 /* Tap targets ≥ 44 px (brief §14): the field's input fills its 48 px box. */
 .board .field input { min-height: 44px; flex: 1; }
 .pick-bar__count { min-height: 44px; }
+
+/* Check step — one thing in focus (Usage.tsx). */
+.board .chk { padding: 8px 20px 0; }
+.board .chk-card { display: flex; flex-direction: column; }
+.board .chk-name { font-size: 40px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; margin: 10px 0 0; }
+.board .chk-name--q { font-size: 32px; }
+.board .chk-price { margin: 8px 0 0; font-size: 15px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.board .chk-link { min-height: 32px; padding: 0; font-size: 14px; }
+.board .chk-qs { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
+.board .chk-title { font-size: 21px; font-weight: 700; margin: 0 0 12px; line-height: 1.25; }
+.board .chk-list { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.board .chk-list button { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 10px 16px; background: none; border: 0; border-top: 1px solid var(--line); text-align: left; color: var(--ink); font: inherit; font-size: 17px; cursor: pointer; transition: background-color .15s ease; }
+.board .chk-list button:first-child { border-top: 0; }
+.board .chk-list button:hover:not(:disabled) { background: color-mix(in srgb, var(--indigo) 5%, var(--paper)); }
+.board .chk-list button:active:not(:disabled) { background: color-mix(in srgb, var(--indigo) 10%, var(--paper)); }
+.board .chk-list button.on { font-weight: 600; }
+.board .chk-list button:disabled { cursor: default; }
+.board .chk-list__label { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.board .chk-list__label small { font-size: 13px; font-weight: 400; color: var(--muted); }
+.board .chk-list__tick { color: var(--indigo); width: 20px; height: 20px; flex: 0 0 auto; }
+.board .chk-list button.on .chk-list__tick svg { animation: chk-pop .22s ease-out; }
+.board .chk-list__go { color: var(--muted); font-size: 22px; line-height: 1; }
+.board .chk-done { display: grid; grid-template-columns: minmax(0,1fr) auto; grid-template-areas: "q c" "a c"; gap: 2px 12px; align-items: center; min-height: 56px; padding: 10px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; text-align: left; color: var(--ink); font: inherit; cursor: pointer; }
+.board .chk-done span { grid-area: q; font-size: 13px; color: var(--muted); }
+.board .chk-done b { grid-area: a; font-size: 16px; }
+.board .chk-done em { grid-area: c; font-style: normal; font-size: 14px; color: var(--indigo); }
+.board .chk-inline { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.board .chk-ok { min-height: 48px; padding: 0 22px; width: auto; }
+.board .chk-select { margin-top: 10px; min-height: 52px; padding: 0 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--ink); font: inherit; font-size: 17px; }
+.board .chk-skip { align-self: center; margin-top: 18px; color: var(--muted); }
+.board .chk-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 26px 0 12px; }
+.board .chk-tiles.many { grid-template-columns: 1fr; }
+.board .chk-tiles button { position: relative; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; justify-content: flex-end; min-height: 128px; padding: 16px; background: var(--paper); border: 1.5px solid var(--line); border-radius: 16px; color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: border-color .15s ease, transform .15s ease; }
+.board .chk-tiles button:active { transform: scale(.98); }
+.board .chk-tiles button b { font-size: 19px; }
+.board .chk-tiles button span { font-size: 14px; color: var(--muted); }
+.board .chk-tiles button.on { border-color: var(--indigo); box-shadow: 0 0 0 1.5px var(--indigo) inset; }
+.board .chk-tiles__tick { position: absolute; top: 12px; right: 12px; color: var(--indigo); }
+.board .chk-review { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+.board .chk-foot { display: flex; flex-direction: column; gap: 8px; align-items: stretch; border-top: 0; }
+.board .chk-progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.board .chk-progress div { height: 100%; background: var(--indigo); border-radius: 2px; transition: width .35s ease; }
+.board .chk-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted); }
+.board .chk-money { font-family: var(--font-mono); color: var(--ink); padding: 0 6px; border-radius: 3px; background: var(--lime); transition: box-shadow .3s ease; }
+.board .chk-money.up { box-shadow: 0 0 0 4px color-mix(in srgb, var(--lime) 70%, transparent); }
+.board .chk-note { text-align: center; font-size: 13px; color: var(--muted); }
+.board .chk-in-fwd { animation: chk-in-fwd .32s cubic-bezier(.2,.8,.2,1); }
+.board .chk-in-back { animation: chk-in-back .32s cubic-bezier(.2,.8,.2,1); }
+.board .chk-reveal { animation: chk-reveal .28s ease-out; }
+@keyframes chk-in-fwd { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes chk-in-back { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+@keyframes chk-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes chk-pop { from { transform: scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .board .chk-in-fwd, .board .chk-in-back, .board .chk-reveal, .board .chk-list button.on .chk-list__tick svg { animation: none; }
+}
+@media (min-width: 900px) { .board .chk-name { font-size: 48px; } }
