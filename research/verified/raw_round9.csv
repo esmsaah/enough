@@ -1,0 +1,36 @@
+service,country,plan,monthly,yearly,currency,ads,streams,accounts,same_address,source,tier
+hbo max,AR,Basic with ads,4.49,36.99,USD,yes,2,1,yes,https://apps.apple.com/ar/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,AR,Standard,5.99,48.99,USD,no,2,1,yes,https://apps.apple.com/ar/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,AR,Premium,6.99,58.99,USD,no,4,1,yes,https://apps.apple.com/ar/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CL,Basic with ads,7190,,CLP,yes,2,1,yes,https://apps.apple.com/cl/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CL,Standard,9590,85990,CLP,no,2,1,yes,https://apps.apple.com/cl/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CL,Premium,11990,,CLP,no,4,1,yes,https://apps.apple.com/cl/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CO,Basic with ads,22900,224900,COP,yes,2,1,yes,https://apps.apple.com/co/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CO,Standard,29900,284900,COP,no,2,1,yes,https://apps.apple.com/co/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CO,Premium,40900,369900,COP,no,4,1,yes,https://apps.apple.com/co/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,PE,Basic with ads,26.90,214.90,PEN,yes,2,1,yes,https://apps.apple.com/pe/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,PE,Standard,40.90,319.90,PEN,no,2,1,yes,https://apps.apple.com/pe/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,PE,Premium,52.90,429.90,PEN,no,4,1,yes,https://apps.apple.com/pe/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,PA,Basic with ads,6.99,39.90,USD,yes,2,1,yes,https://apps.apple.com/pa/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,PA,Standard,8.29,49.90,USD,no,2,1,yes,https://apps.apple.com/pa/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,PA,Premium,9.99,59.90,USD,no,4,1,yes,https://apps.apple.com/pa/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,HK,Standard,78,780,HKD,no,2,1,yes,https://apps.apple.com/hk/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,HK,Premium,98,980,HKD,no,4,1,yes,https://apps.apple.com/hk/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,TW,Standard,220,2190,TWD,no,2,1,yes,https://apps.apple.com/tw/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,TW,Premium,299,2990,TWD,no,4,1,yes,https://apps.apple.com/tw/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,SG,Standard,14.48,129.98,SGD,no,2,1,yes,https://apps.apple.com/sg/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,SG,Premium,18.98,169.98,SGD,no,4,1,yes,https://apps.apple.com/sg/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,TH,Standard,199,1390,THB,no,2,1,yes,https://apps.apple.com/th/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,TH,Premium,299,2090,THB,no,4,1,yes,https://apps.apple.com/th/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,MY,Standard,24.90,199.90,MYR,no,2,1,yes,https://apps.apple.com/my/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,MY,Premium,39.90,319.90,MYR,no,4,1,yes,https://apps.apple.com/my/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,PH,Standard,269,1890,PHP,no,2,1,yes,https://apps.apple.com/ph/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,PH,Premium,399,2790,PHP,no,4,1,yes,https://apps.apple.com/ph/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,ID,Standard,79000,549000,IDR,no,2,1,yes,https://apps.apple.com/id/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,ID,Premium,119000,829000,IDR,no,4,1,yes,https://apps.apple.com/id/app/hbo-max/id1666653815,A app store (iPhone price)
+microsoft 365,AE,Personal,9.99,99.99,USD,no,,1,no,https://www.microsoft.com/en-ae/microsoft-365/buy/compare-all-microsoft-365-products,A official
+microsoft 365,AE,Family,13.99,139.99,USD,no,,6,no,https://www.microsoft.com/en-ae/microsoft-365/buy/compare-all-microsoft-365-products,A official
+microsoft 365,UA,Personal,269,2699,UAH,no,,1,no,https://www.microsoft.com/uk-ua/microsoft-365/buy/compare-all-microsoft-365-products,A official
+microsoft 365,UA,Family,339,3399,UAH,no,,6,no,https://www.microsoft.com/uk-ua/microsoft-365/buy/compare-all-microsoft-365-products,A official
+microsoft 365,HK,Personal,78,780,HKD,no,,1,no,https://www.microsoft.com/en-hk/microsoft-365/buy/compare-all-microsoft-365-products,A official
+microsoft 365,HK,Family,102,1020,HKD,no,,6,no,https://www.microsoft.com/en-hk/microsoft-365/buy/compare-all-microsoft-365-products,A official

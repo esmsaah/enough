@@ -59,6 +59,22 @@
         }
       ],
       "verified": true
+    },
+    "FR": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Prime",
+          "type": "monthly",
+          "monthly": 6.99,
+          "currency": "EUR",
+          "yearly": 69.9,
+          "people": 1,
+          "source": "https://en.selectra.info/broadband-phone-france/guides/tv/amazon-prime"
+        }
+      ],
+      "verified": true
     }
   },
   "apple music": {
@@ -2326,41 +2342,44 @@
       ]
     },
     "US": {
-      "checked": "2026-10-25",
-      "default": 0,
+      "checked": "2026-11-03",
+      "default": 1,
       "plans": [
         {
-          "currency": "USD",
-          "monthly": 11.99,
-          "name": "Premium",
-          "people": 1,
-          "type": "individual",
-          "yearly": 107.99
-        },
-        {
-          "currency": "USD",
-          "monthly": 5.99,
           "name": "Student",
+          "type": "student",
+          "monthly": 5.99,
+          "currency": "USD",
           "people": 1,
-          "type": "student"
+          "source": "https://www.deezer.com/us/offers"
         },
         {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 11.99,
           "currency": "USD",
-          "monthly": 15.99,
+          "yearly": 107.99,
+          "people": 1,
+          "source": "https://www.deezer.com/us/offers"
+        },
+        {
           "name": "Duo",
-          "people": 2,
           "type": "duo",
-          "yearly": 174.99
+          "monthly": 15.99,
+          "currency": "USD",
+          "people": 2,
+          "source": "https://www.deezer.com/us/offers"
         },
         {
-          "currency": "USD",
-          "monthly": 19.99,
           "name": "Family",
-          "people": 6,
           "type": "family",
-          "yearly": 218.99
+          "monthly": 19.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://www.deezer.com/us/offers"
         }
-      ]
+      ],
+      "verified": true
     },
     "VN": {
       "checked": "2026-10-25",
@@ -4741,6 +4760,354 @@
           "yearly": 219.99,
           "people": 1,
           "source": "https://apps.apple.com/au/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "AR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 4.49,
+          "currency": "USD",
+          "yearly": 36.99,
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/ar/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 5.99,
+          "currency": "USD",
+          "yearly": 48.99,
+          "people": 2,
+          "source": "https://apps.apple.com/ar/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 6.99,
+          "currency": "USD",
+          "yearly": 58.99,
+          "people": 4,
+          "source": "https://apps.apple.com/ar/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "CL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 7190.0,
+          "currency": "CLP",
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/cl/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 9590.0,
+          "currency": "CLP",
+          "yearly": 85990.0,
+          "people": 2,
+          "source": "https://apps.apple.com/cl/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 11990.0,
+          "currency": "CLP",
+          "people": 4,
+          "source": "https://apps.apple.com/cl/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "CO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 22900.0,
+          "currency": "COP",
+          "yearly": 224900.0,
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/co/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 29900.0,
+          "currency": "COP",
+          "yearly": 284900.0,
+          "people": 2,
+          "source": "https://apps.apple.com/co/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 40900.0,
+          "currency": "COP",
+          "yearly": 369900.0,
+          "people": 4,
+          "source": "https://apps.apple.com/co/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "PE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 26.9,
+          "currency": "PEN",
+          "yearly": 214.9,
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/pe/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 40.9,
+          "currency": "PEN",
+          "yearly": 319.9,
+          "people": 2,
+          "source": "https://apps.apple.com/pe/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 52.9,
+          "currency": "PEN",
+          "yearly": 429.9,
+          "people": 4,
+          "source": "https://apps.apple.com/pe/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "PA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 6.99,
+          "currency": "USD",
+          "yearly": 39.9,
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/pa/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 8.29,
+          "currency": "USD",
+          "yearly": 49.9,
+          "people": 2,
+          "source": "https://apps.apple.com/pa/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 9.99,
+          "currency": "USD",
+          "yearly": 59.9,
+          "people": 4,
+          "source": "https://apps.apple.com/pa/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "HK": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 78.0,
+          "currency": "HKD",
+          "yearly": 780.0,
+          "people": 2,
+          "source": "https://apps.apple.com/hk/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 98.0,
+          "currency": "HKD",
+          "yearly": 980.0,
+          "people": 4,
+          "source": "https://apps.apple.com/hk/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "TW": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 220.0,
+          "currency": "TWD",
+          "yearly": 2190.0,
+          "people": 2,
+          "source": "https://apps.apple.com/tw/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 299.0,
+          "currency": "TWD",
+          "yearly": 2990.0,
+          "people": 4,
+          "source": "https://apps.apple.com/tw/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "SG": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 14.48,
+          "currency": "SGD",
+          "yearly": 129.98,
+          "people": 2,
+          "source": "https://apps.apple.com/sg/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 18.98,
+          "currency": "SGD",
+          "yearly": 169.98,
+          "people": 4,
+          "source": "https://apps.apple.com/sg/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "TH": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 199.0,
+          "currency": "THB",
+          "yearly": 1390.0,
+          "people": 2,
+          "source": "https://apps.apple.com/th/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 299.0,
+          "currency": "THB",
+          "yearly": 2090.0,
+          "people": 4,
+          "source": "https://apps.apple.com/th/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "MY": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 24.9,
+          "currency": "MYR",
+          "yearly": 199.9,
+          "people": 2,
+          "source": "https://apps.apple.com/my/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 39.9,
+          "currency": "MYR",
+          "yearly": 319.9,
+          "people": 4,
+          "source": "https://apps.apple.com/my/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "PH": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 269.0,
+          "currency": "PHP",
+          "yearly": 1890.0,
+          "people": 2,
+          "source": "https://apps.apple.com/ph/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 399.0,
+          "currency": "PHP",
+          "yearly": 2790.0,
+          "people": 4,
+          "source": "https://apps.apple.com/ph/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "ID": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 79000.0,
+          "currency": "IDR",
+          "yearly": 549000.0,
+          "people": 2,
+          "source": "https://apps.apple.com/id/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 119000.0,
+          "currency": "IDR",
+          "yearly": 829000.0,
+          "people": 4,
+          "source": "https://apps.apple.com/id/app/hbo-max/id1666653815"
         }
       ],
       "verified": true
@@ -10630,6 +10997,354 @@
           "yearly": 219.99,
           "people": 1,
           "source": "https://apps.apple.com/au/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "AR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 4.49,
+          "currency": "USD",
+          "yearly": 36.99,
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/ar/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 5.99,
+          "currency": "USD",
+          "yearly": 48.99,
+          "people": 2,
+          "source": "https://apps.apple.com/ar/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 6.99,
+          "currency": "USD",
+          "yearly": 58.99,
+          "people": 4,
+          "source": "https://apps.apple.com/ar/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "CL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 7190.0,
+          "currency": "CLP",
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/cl/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 9590.0,
+          "currency": "CLP",
+          "yearly": 85990.0,
+          "people": 2,
+          "source": "https://apps.apple.com/cl/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 11990.0,
+          "currency": "CLP",
+          "people": 4,
+          "source": "https://apps.apple.com/cl/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "CO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 22900.0,
+          "currency": "COP",
+          "yearly": 224900.0,
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/co/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 29900.0,
+          "currency": "COP",
+          "yearly": 284900.0,
+          "people": 2,
+          "source": "https://apps.apple.com/co/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 40900.0,
+          "currency": "COP",
+          "yearly": 369900.0,
+          "people": 4,
+          "source": "https://apps.apple.com/co/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "PE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 26.9,
+          "currency": "PEN",
+          "yearly": 214.9,
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/pe/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 40.9,
+          "currency": "PEN",
+          "yearly": 319.9,
+          "people": 2,
+          "source": "https://apps.apple.com/pe/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 52.9,
+          "currency": "PEN",
+          "yearly": 429.9,
+          "people": 4,
+          "source": "https://apps.apple.com/pe/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "PA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic with ads",
+          "type": "basic_with_ads",
+          "monthly": 6.99,
+          "currency": "USD",
+          "yearly": 39.9,
+          "people": 2,
+          "ads": true,
+          "source": "https://apps.apple.com/pa/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 8.29,
+          "currency": "USD",
+          "yearly": 49.9,
+          "people": 2,
+          "source": "https://apps.apple.com/pa/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 9.99,
+          "currency": "USD",
+          "yearly": 59.9,
+          "people": 4,
+          "source": "https://apps.apple.com/pa/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "HK": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 78.0,
+          "currency": "HKD",
+          "yearly": 780.0,
+          "people": 2,
+          "source": "https://apps.apple.com/hk/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 98.0,
+          "currency": "HKD",
+          "yearly": 980.0,
+          "people": 4,
+          "source": "https://apps.apple.com/hk/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "TW": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 220.0,
+          "currency": "TWD",
+          "yearly": 2190.0,
+          "people": 2,
+          "source": "https://apps.apple.com/tw/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 299.0,
+          "currency": "TWD",
+          "yearly": 2990.0,
+          "people": 4,
+          "source": "https://apps.apple.com/tw/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "SG": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 14.48,
+          "currency": "SGD",
+          "yearly": 129.98,
+          "people": 2,
+          "source": "https://apps.apple.com/sg/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 18.98,
+          "currency": "SGD",
+          "yearly": 169.98,
+          "people": 4,
+          "source": "https://apps.apple.com/sg/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "TH": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 199.0,
+          "currency": "THB",
+          "yearly": 1390.0,
+          "people": 2,
+          "source": "https://apps.apple.com/th/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 299.0,
+          "currency": "THB",
+          "yearly": 2090.0,
+          "people": 4,
+          "source": "https://apps.apple.com/th/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "MY": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 24.9,
+          "currency": "MYR",
+          "yearly": 199.9,
+          "people": 2,
+          "source": "https://apps.apple.com/my/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 39.9,
+          "currency": "MYR",
+          "yearly": 319.9,
+          "people": 4,
+          "source": "https://apps.apple.com/my/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "PH": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 269.0,
+          "currency": "PHP",
+          "yearly": 1890.0,
+          "people": 2,
+          "source": "https://apps.apple.com/ph/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 399.0,
+          "currency": "PHP",
+          "yearly": 2790.0,
+          "people": 4,
+          "source": "https://apps.apple.com/ph/app/hbo-max/id1666653815"
+        }
+      ],
+      "verified": true
+    },
+    "ID": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Standard",
+          "type": "standard",
+          "monthly": 79000.0,
+          "currency": "IDR",
+          "yearly": 549000.0,
+          "people": 2,
+          "source": "https://apps.apple.com/id/app/hbo-max/id1666653815"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 119000.0,
+          "currency": "IDR",
+          "yearly": 829000.0,
+          "people": 4,
+          "source": "https://apps.apple.com/id/app/hbo-max/id1666653815"
         }
       ],
       "verified": true
@@ -16525,6 +17240,67 @@
         }
       ],
       "verified": true
+    },
+    "US": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 8.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://9to5google.com/2026/04/10/youtube-premium-us-price-hike/"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 15.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://9to5google.com/2026/04/10/youtube-premium-us-price-hike/"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 26.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://9to5google.com/2026/04/10/youtube-premium-us-price-hike/"
+        }
+      ],
+      "verified": true
+    },
+    "ES": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 15.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://www.notebookcheck.net/YouTube-Premium-is-getting-a-price-hike-of-up-to-17-across-Europe.1375180.0.html"
+        }
+      ],
+      "verified": true
+    },
+    "NL": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 15.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://finance.yahoo.com/media-advertising/articles/youtube-premium-prices-going-again-135549383.html"
+        }
+      ],
+      "verified": true
     }
   },
   "apple one": {
@@ -19222,7 +19998,7 @@
           "currency": "HKD",
           "yearly": 780.0,
           "people": 1,
-          "source": "https://www.microsoft.com/zh-hk/microsoft-365/buy/compare-all-microsoft-365-products"
+          "source": "https://www.microsoft.com/en-hk/microsoft-365/buy/compare-all-microsoft-365-products"
         },
         {
           "name": "Family",
@@ -19231,7 +20007,7 @@
           "currency": "HKD",
           "yearly": 1020.0,
           "people": 6,
-          "source": "https://www.microsoft.com/zh-hk/microsoft-365/buy/compare-all-microsoft-365-products"
+          "source": "https://www.microsoft.com/en-hk/microsoft-365/buy/compare-all-microsoft-365-products"
         }
       ],
       "verified": true
@@ -19632,6 +20408,56 @@
           "yearly": 1999.0,
           "people": 6,
           "source": "https://www.microsoft.com/en-za/microsoft-365/buy/compare-all-microsoft-365-products"
+        }
+      ],
+      "verified": true
+    },
+    "AE": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Personal",
+          "type": "personal",
+          "monthly": 9.99,
+          "currency": "USD",
+          "yearly": 99.99,
+          "people": 1,
+          "source": "https://www.microsoft.com/en-ae/microsoft-365/buy/compare-all-microsoft-365-products"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 13.99,
+          "currency": "USD",
+          "yearly": 139.99,
+          "people": 6,
+          "source": "https://www.microsoft.com/en-ae/microsoft-365/buy/compare-all-microsoft-365-products"
+        }
+      ],
+      "verified": true
+    },
+    "UA": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Personal",
+          "type": "personal",
+          "monthly": 269.0,
+          "currency": "UAH",
+          "yearly": 2699.0,
+          "people": 1,
+          "source": "https://www.microsoft.com/uk-ua/microsoft-365/buy/compare-all-microsoft-365-products"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 339.0,
+          "currency": "UAH",
+          "yearly": 3399.0,
+          "people": 6,
+          "source": "https://www.microsoft.com/uk-ua/microsoft-365/buy/compare-all-microsoft-365-products"
         }
       ],
       "verified": true
@@ -20783,6 +21609,1449 @@
         }
       ],
       "verified": true
+    },
+    "AR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ar/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/ar/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/ar/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "BG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/bg/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/bg/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 10.49,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/bg/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "BH": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/bh/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/bh/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/bh/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "CL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1790.0,
+          "currency": "CLP",
+          "yearly": 17900.0,
+          "people": 6,
+          "source": "https://apps.apple.com/cl/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2690.0,
+          "currency": "CLP",
+          "yearly": 26900.0,
+          "people": 6,
+          "source": "https://apps.apple.com/cl/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 8990.0,
+          "currency": "CLP",
+          "people": 6,
+          "source": "https://apps.apple.com/cl/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "CO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 8900.0,
+          "currency": "COP",
+          "yearly": 89000.0,
+          "people": 6,
+          "source": "https://apps.apple.com/co/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 12900.0,
+          "currency": "COP",
+          "people": 6,
+          "source": "https://apps.apple.com/co/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 44900.0,
+          "currency": "COP",
+          "people": 6,
+          "source": "https://apps.apple.com/co/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "CY": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/cy/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/cy/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/cy/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "CZ": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 59.0,
+          "currency": "CZK",
+          "yearly": 599.0,
+          "people": 6,
+          "source": "https://apps.apple.com/cz/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 79.0,
+          "currency": "CZK",
+          "yearly": 799.0,
+          "people": 6,
+          "source": "https://apps.apple.com/cz/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 299.0,
+          "currency": "CZK",
+          "people": 6,
+          "source": "https://apps.apple.com/cz/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "DK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 17.0,
+          "currency": "DKK",
+          "yearly": 169.0,
+          "people": 6,
+          "source": "https://apps.apple.com/dk/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 25.0,
+          "currency": "DKK",
+          "people": 6,
+          "source": "https://apps.apple.com/dk/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 79.0,
+          "currency": "DKK",
+          "people": 6,
+          "source": "https://apps.apple.com/dk/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "DZ": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/dz/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/dz/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/dz/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "EE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ee/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ee/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/ee/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "EG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 94.99,
+          "currency": "EGP",
+          "yearly": 949.99,
+          "people": 6,
+          "source": "https://apps.apple.com/eg/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 144.99,
+          "currency": "EGP",
+          "people": 6,
+          "source": "https://apps.apple.com/eg/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 449.99,
+          "currency": "EGP",
+          "people": 6,
+          "source": "https://apps.apple.com/eg/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "FI": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/fi/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/fi/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/fi/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "GH": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/gh/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/gh/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/gh/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "GR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/gr/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/gr/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/gr/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "HK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 15.0,
+          "currency": "HKD",
+          "yearly": 158.0,
+          "people": 6,
+          "source": "https://apps.apple.com/hk/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 23.0,
+          "currency": "HKD",
+          "yearly": 228.0,
+          "people": 6,
+          "source": "https://apps.apple.com/hk/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 78.0,
+          "currency": "HKD",
+          "people": 6,
+          "source": "https://apps.apple.com/hk/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "HU": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 699.0,
+          "currency": "HUF",
+          "yearly": 6490.0,
+          "people": 6,
+          "source": "https://apps.apple.com/hu/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 1090.0,
+          "currency": "HUF",
+          "people": 6,
+          "source": "https://apps.apple.com/hu/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 3590.0,
+          "currency": "HUF",
+          "people": 6,
+          "source": "https://apps.apple.com/hu/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "ID": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 32000.0,
+          "currency": "IDR",
+          "yearly": 320000.0,
+          "people": 6,
+          "source": "https://apps.apple.com/id/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 48000.0,
+          "currency": "IDR",
+          "people": 6,
+          "source": "https://apps.apple.com/id/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 158000.0,
+          "currency": "IDR",
+          "people": 6,
+          "source": "https://apps.apple.com/id/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "IL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 7.9,
+          "currency": "ILS",
+          "yearly": 79.9,
+          "people": 6,
+          "source": "https://apps.apple.com/il/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 11.9,
+          "currency": "ILS",
+          "yearly": 119.9,
+          "people": 6,
+          "source": "https://apps.apple.com/il/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 39.9,
+          "currency": "ILS",
+          "people": 6,
+          "source": "https://apps.apple.com/il/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "IS": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 2.49,
+          "currency": "USD",
+          "yearly": 24.9,
+          "people": 6,
+          "source": "https://apps.apple.com/is/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 3.09,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/is/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.95,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/is/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "JO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/jo/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/jo/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/jo/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "KE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ke/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ke/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/ke/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "KW": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/kw/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/kw/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/kw/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "LB": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/lb/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/lb/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/lb/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "LT": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/lt/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/lt/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/lt/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "LU": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/lu/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/lu/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/lu/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "LV": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/lv/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/lv/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/lv/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "MA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ma/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/ma/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/ma/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "MD": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/md/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/md/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/md/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "MT": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/mt/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/mt/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "MY": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 8.9,
+          "currency": "MYR",
+          "yearly": 84.9,
+          "people": 6,
+          "source": "https://apps.apple.com/my/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 11.9,
+          "currency": "MYR",
+          "people": 6,
+          "source": "https://apps.apple.com/my/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "NG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 2950.0,
+          "currency": "NGN",
+          "yearly": 29500.0,
+          "people": 6,
+          "source": "https://apps.apple.com/ng/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 4400.0,
+          "currency": "NGN",
+          "yearly": 44000.0,
+          "people": 6,
+          "source": "https://apps.apple.com/ng/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "NO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 24.0,
+          "currency": "NOK",
+          "yearly": 239.0,
+          "people": 6,
+          "source": "https://apps.apple.com/no/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 34.0,
+          "currency": "NOK",
+          "people": 6,
+          "source": "https://apps.apple.com/no/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "NZ": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 3.49,
+          "currency": "NZD",
+          "yearly": 34.99,
+          "people": 6,
+          "source": "https://apps.apple.com/nz/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 4.99,
+          "currency": "NZD",
+          "people": 6,
+          "source": "https://apps.apple.com/nz/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "OM": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/om/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/om/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "PA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/pa/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/pa/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "PE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 7.5,
+          "currency": "PEN",
+          "yearly": 74.99,
+          "people": 6,
+          "source": "https://apps.apple.com/pe/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 10.99,
+          "currency": "PEN",
+          "people": 6,
+          "source": "https://apps.apple.com/pe/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "PH": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 119.0,
+          "currency": "PHP",
+          "yearly": 1190.0,
+          "people": 6,
+          "source": "https://apps.apple.com/ph/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 179.0,
+          "currency": "PHP",
+          "people": 6,
+          "source": "https://apps.apple.com/ph/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "PK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 550.0,
+          "currency": "PKR",
+          "yearly": 5500.0,
+          "people": 6,
+          "source": "https://apps.apple.com/pk/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 850.0,
+          "currency": "PKR",
+          "people": 6,
+          "source": "https://apps.apple.com/pk/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "QA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 6.99,
+          "currency": "QAR",
+          "yearly": 69.99,
+          "people": 6,
+          "source": "https://apps.apple.com/qa/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 10.99,
+          "currency": "QAR",
+          "people": 6,
+          "source": "https://apps.apple.com/qa/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 36.99,
+          "currency": "QAR",
+          "people": 6,
+          "source": "https://apps.apple.com/qa/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "RO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 9.99,
+          "currency": "RON",
+          "yearly": 99.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ro/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 13.99,
+          "currency": "RON",
+          "people": 6,
+          "source": "https://apps.apple.com/ro/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 49.99,
+          "currency": "RON",
+          "people": 6,
+          "source": "https://apps.apple.com/ro/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "SG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 2.98,
+          "currency": "SGD",
+          "yearly": 27.98,
+          "people": 6,
+          "source": "https://apps.apple.com/sg/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 3.98,
+          "currency": "SGD",
+          "yearly": 39.98,
+          "people": 6,
+          "source": "https://apps.apple.com/sg/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 13.98,
+          "currency": "SGD",
+          "people": 6,
+          "source": "https://apps.apple.com/sg/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "SK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "EUR",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/sk/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/sk/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/sk/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "TH": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 69.0,
+          "currency": "THB",
+          "yearly": 699.0,
+          "people": 6,
+          "source": "https://apps.apple.com/th/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 99.0,
+          "currency": "THB",
+          "yearly": 989.0,
+          "people": 6,
+          "source": "https://apps.apple.com/th/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 349.0,
+          "currency": "THB",
+          "people": 6,
+          "source": "https://apps.apple.com/th/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "TW": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 70.0,
+          "currency": "TWD",
+          "yearly": 650.0,
+          "people": 6,
+          "source": "https://apps.apple.com/tw/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 90.0,
+          "currency": "TWD",
+          "yearly": 900.0,
+          "people": 6,
+          "source": "https://apps.apple.com/tw/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 330.0,
+          "currency": "TWD",
+          "people": 6,
+          "source": "https://apps.apple.com/tw/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "UA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ua/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "yearly": 29.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ua/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/ua/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "UG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 1.99,
+          "currency": "USD",
+          "yearly": 19.99,
+          "people": 6,
+          "source": "https://apps.apple.com/ug/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 2.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/ug/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 6,
+          "source": "https://apps.apple.com/ug/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
+    },
+    "VN": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "100 GB",
+          "type": "100gb",
+          "monthly": 45000.0,
+          "currency": "VND",
+          "yearly": 459000.0,
+          "people": 6,
+          "source": "https://apps.apple.com/vn/app/google-one/id1451784328"
+        },
+        {
+          "name": "200 GB",
+          "type": "200gb",
+          "monthly": 69000.0,
+          "currency": "VND",
+          "people": 6,
+          "source": "https://apps.apple.com/vn/app/google-one/id1451784328"
+        },
+        {
+          "name": "2 TB (Google AI Plus)",
+          "type": "2tb",
+          "monthly": 229000.0,
+          "currency": "VND",
+          "people": 6,
+          "source": "https://apps.apple.com/vn/app/google-one/id1451784328"
+        }
+      ],
+      "verified": true
     }
   },
   "chatgpt": {
@@ -21070,6 +23339,1590 @@
           "yearly": 200.0,
           "people": 1,
           "source": "https://apps.apple.com/gb/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "AE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 29.99,
+          "currency": "AED",
+          "people": 1,
+          "source": "https://apps.apple.com/ae/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 79.99,
+          "currency": "AED",
+          "yearly": 799.99,
+          "people": 1,
+          "source": "https://apps.apple.com/ae/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "AR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 5.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/ar/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ar/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "AU": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 13.0,
+          "currency": "AUD",
+          "people": 1,
+          "source": "https://apps.apple.com/au/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 29.99,
+          "currency": "AUD",
+          "yearly": 300.0,
+          "people": 1,
+          "source": "https://apps.apple.com/au/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "BE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/be/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/be/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "BG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 6.49,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/bg/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "EUR",
+          "yearly": 199.99,
+          "people": 1,
+          "source": "https://apps.apple.com/bg/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "BH": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/bh/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/bh/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "BR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 39.9,
+          "currency": "BRL",
+          "people": 1,
+          "source": "https://apps.apple.com/br/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 99.9,
+          "currency": "BRL",
+          "yearly": 999.9,
+          "people": 1,
+          "source": "https://apps.apple.com/br/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "CA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 12.99,
+          "currency": "CAD",
+          "people": 1,
+          "source": "https://apps.apple.com/ca/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 24.99,
+          "currency": "CAD",
+          "yearly": 249.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ca/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "CL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7990.0,
+          "currency": "CLP",
+          "people": 1,
+          "source": "https://apps.apple.com/cl/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19990.0,
+          "currency": "CLP",
+          "yearly": 229990.0,
+          "people": 1,
+          "source": "https://apps.apple.com/cl/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "CO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 24900.0,
+          "currency": "COP",
+          "people": 1,
+          "source": "https://apps.apple.com/co/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 99900.0,
+          "currency": "COP",
+          "yearly": 999900.0,
+          "people": 1,
+          "source": "https://apps.apple.com/co/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "CY": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/cy/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/cy/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "CZ": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 200.0,
+          "currency": "CZK",
+          "people": 1,
+          "source": "https://apps.apple.com/cz/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 499.0,
+          "currency": "CZK",
+          "yearly": 4990.0,
+          "people": 1,
+          "source": "https://apps.apple.com/cz/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "DK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 64.0,
+          "currency": "DKK",
+          "people": 1,
+          "source": "https://apps.apple.com/dk/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 179.0,
+          "currency": "DKK",
+          "yearly": 1799.0,
+          "people": 1,
+          "source": "https://apps.apple.com/dk/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "DZ": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 4.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/dz/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/dz/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "EE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/ee/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ee/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "EG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 249.99,
+          "currency": "EGP",
+          "people": 1,
+          "source": "https://apps.apple.com/eg/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 999.99,
+          "currency": "EGP",
+          "yearly": 9999.99,
+          "people": 1,
+          "source": "https://apps.apple.com/eg/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "ES": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/es/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/es/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "FI": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/fi/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/fi/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "FR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/fr/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/fr/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "GH": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 5.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/gh/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "USD",
+          "yearly": 250.0,
+          "people": 1,
+          "source": "https://apps.apple.com/gh/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "GR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/gr/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/gr/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "HU": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 2990.0,
+          "currency": "HUF",
+          "people": 1,
+          "source": "https://apps.apple.com/hu/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 8990.0,
+          "currency": "HUF",
+          "yearly": 89990.0,
+          "people": 1,
+          "source": "https://apps.apple.com/hu/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "ID": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 75000.0,
+          "currency": "IDR",
+          "people": 1,
+          "source": "https://apps.apple.com/id/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 349000.0,
+          "currency": "IDR",
+          "yearly": 3499000.0,
+          "people": 1,
+          "source": "https://apps.apple.com/id/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "IE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/ie/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ie/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "IL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 25.0,
+          "currency": "ILS",
+          "people": 1,
+          "source": "https://apps.apple.com/il/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 69.9,
+          "currency": "ILS",
+          "yearly": 699.9,
+          "people": 1,
+          "source": "https://apps.apple.com/il/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "IN": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 399.0,
+          "currency": "INR",
+          "people": 1,
+          "source": "https://apps.apple.com/in/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 1999.0,
+          "currency": "INR",
+          "yearly": 19900.0,
+          "people": 1,
+          "source": "https://apps.apple.com/in/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "IS": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/is/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "USD",
+          "yearly": 250.0,
+          "people": 1,
+          "source": "https://apps.apple.com/is/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "IT": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/it/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/it/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "JO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 4.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/jo/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/jo/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "KE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 5.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/ke/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "USD",
+          "yearly": 250.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ke/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "KR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 13000.0,
+          "currency": "KRW",
+          "people": 1,
+          "source": "https://apps.apple.com/kr/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 29000.0,
+          "currency": "KRW",
+          "yearly": 299000.0,
+          "people": 1,
+          "source": "https://apps.apple.com/kr/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "KW": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/kw/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/kw/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "LB": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 5.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/lb/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/lb/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "LT": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/lt/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/lt/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "LU": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/lu/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/lu/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "LV": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/lv/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/lv/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "MA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 5.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/ma/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ma/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "MD": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 6.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/md/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "USD",
+          "yearly": 250.0,
+          "people": 1,
+          "source": "https://apps.apple.com/md/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "MT": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/mt/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/mt/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "MX": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 129.0,
+          "currency": "MXN",
+          "people": 1,
+          "source": "https://apps.apple.com/mx/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 399.0,
+          "currency": "MXN",
+          "yearly": 3999.0,
+          "people": 1,
+          "source": "https://apps.apple.com/mx/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "MY": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 23.99,
+          "currency": "MYR",
+          "people": 1,
+          "source": "https://apps.apple.com/my/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 99.9,
+          "currency": "MYR",
+          "yearly": 999.9,
+          "people": 1,
+          "source": "https://apps.apple.com/my/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "NG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 6900.0,
+          "currency": "NGN",
+          "people": 1,
+          "source": "https://apps.apple.com/ng/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 31500.0,
+          "currency": "NGN",
+          "yearly": 299900.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ng/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "NL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/nl/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/nl/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "NO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 99.0,
+          "currency": "NOK",
+          "people": 1,
+          "source": "https://apps.apple.com/no/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 249.0,
+          "currency": "NOK",
+          "yearly": 2490.0,
+          "people": 1,
+          "source": "https://apps.apple.com/no/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "NZ": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 13.99,
+          "currency": "NZD",
+          "people": 1,
+          "source": "https://apps.apple.com/nz/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 39.99,
+          "currency": "NZD",
+          "yearly": 400.0,
+          "people": 1,
+          "source": "https://apps.apple.com/nz/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "OM": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/om/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/om/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "PA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/pa/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 19.99,
+          "currency": "USD",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/pa/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "PE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 19.9,
+          "currency": "PEN",
+          "people": 1,
+          "source": "https://apps.apple.com/pe/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 79.9,
+          "currency": "PEN",
+          "yearly": 899.9,
+          "people": 1,
+          "source": "https://apps.apple.com/pe/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "PH": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 300.0,
+          "currency": "PHP",
+          "people": 1,
+          "source": "https://apps.apple.com/ph/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 999.0,
+          "currency": "PHP",
+          "yearly": 9990.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ph/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "PK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 1400.0,
+          "currency": "PKR",
+          "people": 1,
+          "source": "https://apps.apple.com/pk/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 4900.0,
+          "currency": "PKR",
+          "yearly": 49900.0,
+          "people": 1,
+          "source": "https://apps.apple.com/pk/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "PL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 34.99,
+          "currency": "PLN",
+          "people": 1,
+          "source": "https://apps.apple.com/pl/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 99.99,
+          "currency": "PLN",
+          "yearly": 999.99,
+          "people": 1,
+          "source": "https://apps.apple.com/pl/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "PT": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/pt/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/pt/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "QA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 29.99,
+          "currency": "QAR",
+          "people": 1,
+          "source": "https://apps.apple.com/qa/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 69.99,
+          "currency": "QAR",
+          "yearly": 699.99,
+          "people": 1,
+          "source": "https://apps.apple.com/qa/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "RO": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 29.99,
+          "currency": "RON",
+          "people": 1,
+          "source": "https://apps.apple.com/ro/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 99.99,
+          "currency": "RON",
+          "yearly": 999.99,
+          "people": 1,
+          "source": "https://apps.apple.com/ro/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "SA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 35.0,
+          "currency": "SAR",
+          "people": 1,
+          "source": "https://apps.apple.com/sa/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 89.99,
+          "currency": "SAR",
+          "yearly": 899.99,
+          "people": 1,
+          "source": "https://apps.apple.com/sa/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "SE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 85.0,
+          "currency": "SEK",
+          "people": 1,
+          "source": "https://apps.apple.com/se/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 249.0,
+          "currency": "SEK",
+          "yearly": 2495.0,
+          "people": 1,
+          "source": "https://apps.apple.com/se/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "SG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 10.98,
+          "currency": "SGD",
+          "people": 1,
+          "source": "https://apps.apple.com/sg/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 29.98,
+          "currency": "SGD",
+          "yearly": 299.98,
+          "people": 1,
+          "source": "https://apps.apple.com/sg/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "SK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/sk/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/sk/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "TH": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 259.0,
+          "currency": "THB",
+          "people": 1,
+          "source": "https://apps.apple.com/th/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 699.0,
+          "currency": "THB",
+          "yearly": 6990.0,
+          "people": 1,
+          "source": "https://apps.apple.com/th/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "TR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 249.99,
+          "currency": "TRY",
+          "people": 1,
+          "source": "https://apps.apple.com/tr/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 999.99,
+          "currency": "TRY",
+          "yearly": 9999.99,
+          "people": 1,
+          "source": "https://apps.apple.com/tr/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "TW": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 270.0,
+          "currency": "TWD",
+          "people": 1,
+          "source": "https://apps.apple.com/tw/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 690.0,
+          "currency": "TWD",
+          "yearly": 6990.0,
+          "people": 1,
+          "source": "https://apps.apple.com/tw/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "UA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 6.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/ua/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "USD",
+          "yearly": 250.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ua/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "UG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 5.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/ug/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "USD",
+          "yearly": 250.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ug/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "VN": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 132000.0,
+          "currency": "VND",
+          "people": 1,
+          "source": "https://apps.apple.com/vn/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 499000.0,
+          "currency": "VND",
+          "yearly": 4999000.0,
+          "people": 1,
+          "source": "https://apps.apple.com/vn/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "XK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 7.0,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/xk/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 22.99,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/xk/app/chatgpt/id6448311069"
+        }
+      ],
+      "verified": true
+    },
+    "ZA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Go",
+          "type": "go",
+          "monthly": 149.99,
+          "currency": "ZAR",
+          "people": 1,
+          "source": "https://apps.apple.com/za/app/chatgpt/id6448311069"
+        },
+        {
+          "name": "Plus",
+          "type": "plus",
+          "monthly": 399.99,
+          "currency": "ZAR",
+          "yearly": 3999.99,
+          "people": 1,
+          "source": "https://apps.apple.com/za/app/chatgpt/id6448311069"
         }
       ],
       "verified": true

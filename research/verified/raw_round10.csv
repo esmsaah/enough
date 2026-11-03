@@ -1,0 +1,11 @@
+service,country,plan,monthly,yearly,currency,ads,streams,accounts,same_address,source,tier
+youtube premium,US,Individual,15.99,,USD,no,,1,no,https://9to5google.com/2026/04/10/youtube-premium-us-price-hike/ ; https://www.tomsguide.com/entertainment/streaming/google-just-announced-a-price-hike-for-youtube-premium-heres-what-youll-pay-now,"B news, 2 sources"
+youtube premium,US,Family,26.99,,USD,no,,6,yes,https://9to5google.com/2026/04/10/youtube-premium-us-price-hike/ ; https://www.tomsguide.com/entertainment/streaming/google-just-announced-a-price-hike-for-youtube-premium-heres-what-youll-pay-now,"B news, 2 sources"
+youtube premium,US,Lite,8.99,,USD,no,,1,no,https://9to5google.com/2026/04/10/youtube-premium-us-price-hike/ ; https://www.tomsguide.com/entertainment/streaming/google-just-announced-a-price-hike-for-youtube-premium-heres-what-youll-pay-now,"B news, 2 sources"
+youtube premium,ES,Individual,15.99,,EUR,no,,1,no,https://www.notebookcheck.net/YouTube-Premium-is-getting-a-price-hike-of-up-to-17-across-Europe.1375180.0.html ; https://finance.yahoo.com/media-advertising/articles/youtube-premium-prices-going-again-135549383.html,"B news, 2 sources"
+youtube premium,NL,Individual,15.99,,EUR,no,,1,no,https://finance.yahoo.com/media-advertising/articles/youtube-premium-prices-going-again-135549383.html ; https://routenote.com/radar/youtube-premium-price-increase-2026-prices-rise-across-europe-and-singapore/,"B news, 2 sources"
+amazon prime,FR,Prime,6.99,69.90,EUR,no,,1,no,https://en.selectra.info/broadband-phone-france/guides/tv/amazon-prime ; https://www.tv-direct.fr/offre/prime-video/,"B news, 2 sources"
+deezer,US,Premium,11.99,107.99,USD,no,,1,no,https://www.deezer.com/us/offers,A official
+deezer,US,Duo,15.99,,USD,no,,2,no,https://www.deezer.com/us/offers,A official
+deezer,US,Family,19.99,,USD,no,,6,yes,https://www.deezer.com/us/offers,A official
+deezer,US,Student,5.99,,USD,no,,1,no,https://www.deezer.com/us/offers,A official
