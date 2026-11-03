@@ -45,6 +45,22 @@ export const RATES_PER_EUR: Record<string, number> = {
   RUB: 100.0,
   RON: 4.97,
   // Regional currencies Enough serves directly:
+  // Added 2026-11-02 (open.er-api.com; ISK from ECB 30 Oct 2026).
+  ALL: 90.99, // Albanian lek
+  ARS: 1715.75, // Argentine peso
+  BDT: 138.41, // Bangladeshi taka
+  ISK: 136.0, // Icelandic króna
+  MKD: 61.5, // Macedonian denar
+  PKR: 308.81, // Pakistani rupee
+  VND: 28779, // Vietnamese dong
+  EGP: 62.27, // Egyptian pound
+  KES: 145.31, // Kenyan shilling
+  MAD: 10.99, // Moroccan dirham
+  NGN: 1505.58, // Nigerian naira
+  PEN: 3.87, // Peruvian sol
+  QAR: 4.06, // Qatari riyal
+  GHS: 13.0, // Ghanaian cedi
+  UGX: 4752, // Ugandan shilling
   BAM: 1.95583, // Bosnia — pegged to EUR
   RSD: 117.2, // Serbian dinar
   BGN: 1.95583, // Bulgaria — pegged to EUR

@@ -19,7 +19,9 @@ def num(v):
     if v is None: return None
     s = str(v).strip().replace(' ', '').replace(' ', '')
     if not s or 'NOT' in s.upper(): return None
-    if ',' in s and '.' not in s: s = s.replace(',', '.')
+    # "9.000" / "54,000" / "1.199.000" are thousands, not decimals.
+    if re.fullmatch(r'\d{1,3}([.,]\d{3})+', s): s = re.sub(r'[.,]', '', s)
+    elif ',' in s and '.' not in s: s = s.replace(',', '.')
     s = s.replace(',', '')
     try:
         n = float(re.sub(r'[^0-9.]', '', s))

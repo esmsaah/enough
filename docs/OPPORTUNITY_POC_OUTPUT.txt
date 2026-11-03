@@ -1,0 +1,85 @@
+===== S1 =====
+Recurring: €179.82 a month. Free to change now €54.92. FitX €39.90 locked until 2027-03-31. Fixed bills €85.00.
+Without giving anything up: €379.08 in the next 12 months
+  • iCloud+: switch 2 TB to 200 GB: €84.00 (high), act before 2026-11-07
+  • Netflix: switch Premium to Standard: €72.00 (high), act before 2026-11-14
+  • Spotify: 2 accounts at one address → Premium Duo: €95.88 (medium), act before 2026-11-19
+  • FitX: pay per visit: €127.20 (medium), act before 2027-03-31
+If you also drop what you said you can live without: €498.48 in the next 12 months
+  • Audible: cancel: €119.40 (medium), act before 2026-12-02
+  • iCloud+: switch 2 TB to 200 GB: €84.00 (high), act before 2026-11-07
+  • Netflix: switch Premium to Standard: €72.00 (high), act before 2026-11-14
+  • Spotify: 2 accounts at one address → Premium Duo: €95.88 (medium), act before 2026-11-19
+  • FitX: pay per visit: €127.20 (medium), act before 2027-03-31
+
+Netflix: switch Premium to Standard
+  - You pay €21.99 a month (from your statement).
+  - Up to 1 person watches at once, Standard allows 2.
+  - Standard is €15.99 a month in DE.
+  - You give up 2 screens you don't use, 4K.
+  source: https://help.netflix.com/en/node/24926/de (checked 2026-11-03)
+
+Spotify: 2 accounts at one address → Premium Duo
+  - 2 people at the same address each pay for Spotify, €25.98 a month together.
+  - Premium Duo covers 2 accounts for €17.99.
+  - Everyone on it must live at the same address (provider rule).
+  source: https://www.spotify.com/de/premium/ (checked 2026-11-03)
+
+iCloud+: switch 2 TB to 200 GB
+  - You pay €9.99 a month (from your statement).
+  - You use 140 GB, 200 GB holds 200 GB (we keep 10% room to grow).
+  - 200 GB is €2.99 a month in DE.
+  - You give up storage you don't use.
+  source: https://support.apple.com/en-us/108047 (checked 2026-11-03)
+
+Audible: cancel
+  - You said you can live without it.
+  source: your price
+
+FitX: pay per visit
+  - 3 visits a month on a €39.90 plan is €13.30 a visit.
+  - You said one visit costs €8.00, so €24.00 a month for the same visits.
+  - Your contract runs until 2027-03-31, so the saving starts on 2027-04-01. Check the notice period in your contract, it can be a month or more.
+  source: your own prices
+
+No opportunity:
+  Vattenfall: Fixed bill, nothing to switch.
+
+===== S2 =====
+Recurring: €35.96 a month. Free to change now €35.96. Fixed bills €0.00.
+Without giving anything up: €0.00 in the next 12 months (no verified saving)
+If you also wait for some shows: €287.68 in the next 12 months
+  • Rotate Netflix, Disney+, WOW: one at a time, 4 months each: €287.68 (medium)
+
+Rotate Netflix, Disney+, WOW: one at a time, 4 months each
+  - You keep all of them and use each only sometimes.
+  - Today: €431.52 over 12 months. Rotating: €143.84.
+  - Disney+: no verified list price, assumes the same price when you return.
+  - WOW: no verified list price, assumes the same price when you return.
+  - You wait for a show until its service is on. Nothing is lost, you keep your account and profile.
+  · Netflix: paid 2026-11-03 → 2027-03-09. cancel before 2027-03-09.
+  · Disney+: paid 2027-03-10 → 2027-07-09. cancel before 2026-12-02 (paid until then), subscribe again on 2027-03-10, cancel before 2027-07-09.
+  · WOW: paid 2027-07-10 → 2027-11-09. cancel before 2026-12-02 (paid until then), subscribe again on 2027-07-10.
+  source: https://help.netflix.com/en/node/24926/de (checked 2026-11-03)
+
+===== S3 =====
+Recurring: €20.97 a month. Free to change now €20.97. Fixed bills €0.00.
+Without giving anything up: €0.00 in the next 12 months (no verified saving)
+
+No opportunity:
+  Netflix: Already on the cheapest plan that covers what you told us.
+  Spotify: Already on the cheapest plan that covers what you told us.
+  iCloud+: Already on the cheapest plan that covers what you told us.
+
+===== S4 =====
+Recurring: €31.98 a month. Free to change now €31.98. Fixed bills €0.00.
+Without giving anything up: €0.00 in the next 12 months (no verified saving)
+
+One answer would settle:
+  ? Do no more than 2 people watch Netflix at once, without needing 4K? If yes: switch Premium to Standard, €72.00 more in 12 months (not counted)
+  ? How much of your iCloud+ storage do you use? (Settings shows it) We can check if a smaller plan fits
+
+No opportunity:
+  Netflix: Depends on one answer, see the question below.
+  iCloud+: Depends on one answer, see the question below.
+

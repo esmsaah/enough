@@ -4331,11 +4331,12 @@
     "group": "Entertainment",
     "displayCategory": "Entertainment",
     "category": "digital",
-    "price": 12,
+    "price": 109,
     "currency": "NOK",
     "frequency": "monthly",
     "region": "NO",
-    "pop": 3
+    "pop": 3,
+    "planName": "Film & Serier med reklame"
   },
   {
     "merchantKey": "globe at home",

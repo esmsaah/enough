@@ -22,7 +22,10 @@ function normCountry(country: string): string {
 
 /** All researched plans for a service in a country, or undefined if not researched. */
 export function plansFor(merchantKey: string, country: string): CountryPlans | undefined {
-  return DATA[merchantKey]?.[normCountry(country)];
+  const e = DATA[merchantKey]?.[normCountry(country)] as (CountryPlans & { verified?: boolean }) | undefined;
+  // Only verified prices are used (official page, App Store, or two sources).
+  // iCloud+ comes from Apple's own price table, so all of it counts.
+  return e && (e.verified || /^icloud/.test(merchantKey)) ? e : undefined;
 }
 
 /** The typical plan price for a service in a country. */

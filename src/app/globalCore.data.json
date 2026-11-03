@@ -383,7 +383,9 @@
     "category": "digital",
     "price": 12,
     "currency": "USD",
-    "frequency": "monthly"
+    "frequency": "monthly",
+    "priceUnknown": true,
+    "askPrice": true
   },
   {
     "merchantKey": "x premium",
@@ -771,7 +773,9 @@
     "category": "digital",
     "price": 12,
     "currency": "USD",
-    "frequency": "monthly"
+    "frequency": "monthly",
+    "priceUnknown": true,
+    "askPrice": true
   },
   {
     "merchantKey": "tidal",
@@ -814,7 +818,9 @@
     "category": "digital",
     "price": 12,
     "currency": "USD",
-    "frequency": "monthly"
+    "frequency": "monthly",
+    "priceUnknown": true,
+    "askPrice": true
   },
   {
     "merchantKey": "whoop",

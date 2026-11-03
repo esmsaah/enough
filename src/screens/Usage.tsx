@@ -265,7 +265,7 @@ function ItemCard({ item: i, group, country, passed, onPass, onComplete }: {
             <span className="m" style={{ color: 'var(--muted)' }}>{i.currency}</span>
             <input className="m" inputMode="decimal" value={single} placeholder="—" aria-label="Price of one visit" onChange={(e) => setSingle(e.target.value)} />
           </div>
-          <button type="button" className="btn chk-ok" onClick={() => answer(() => { dispatch({ type: 'setSingleVisit', id: i.id, price: Number(single.replace(',', '.')) || 0 }); onPass(k); })}>
+          <button type="button" className="btn chk-ok" onClick={() => answer(() => { const v = Number(single.replace(',', '.')); if (v > 0) dispatch({ type: 'setSingleVisit', id: i.id, price: v }); onPass(k); })}>
             {single.trim() ? 'Continue' : 'Skip'}
           </button>
         </div>

@@ -1,0 +1,35 @@
+service,country,plan,monthly,yearly,currency,ads,streams,accounts,same_address,source,tier
+hbo max,BA,Standard,7.99,79.90,EUR,no,,1,no,https://apps.apple.com/ba/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,BA,Premium,9.99,99.90,EUR,no,,1,no,https://apps.apple.com/ba/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,ME,Standard,7.99,79.90,EUR,no,,1,no,https://apps.apple.com/me/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,ME,Premium,9.99,99.90,EUR,no,,1,no,https://apps.apple.com/me/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,MK,Standard,8.99,89.90,USD,no,,1,no,https://apps.apple.com/mk/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,MK,Premium,10.99,109.00,USD,no,,1,no,https://apps.apple.com/mk/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,AL,Standard,9.19,91.90,USD,no,,1,no,https://apps.apple.com/al/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,AL,Premium,11.49,113.99,USD,no,,1,no,https://apps.apple.com/al/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CH,Basic with ads,9.90,,CHF,no,,1,no,https://apps.apple.com/ch/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CH,Standard,16.90,,CHF,no,,1,no,https://apps.apple.com/ch/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,CH,Premium,23.90,,CHF,no,,1,no,https://apps.apple.com/ch/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,NO,Basic with ads,89,,NOK,no,,1,no,https://apps.apple.com/no/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,NO,Standard,149,1490,NOK,no,,1,no,https://apps.apple.com/no/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,NO,Premium,189,,NOK,no,,1,no,https://apps.apple.com/no/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,US,Basic with ads,10.99,109.99,USD,no,,1,no,https://apps.apple.com/us/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,US,Standard,18.49,184.99,USD,no,,1,no,https://apps.apple.com/us/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,US,Premium,22.99,229.99,USD,no,,1,no,https://apps.apple.com/us/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,BR,Basic with ads,29.90,274.90,BRL,no,,1,no,https://apps.apple.com/br/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,BR,Standard,44.90,419.90,BRL,no,,1,no,https://apps.apple.com/br/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,MX,Basic with ads,149,1429,MXN,no,,1,no,https://apps.apple.com/mx/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,MX,Standard,239,2149,MXN,no,,1,no,https://apps.apple.com/mx/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,AU,Basic with ads,11.99,119.99,AUD,no,,1,no,https://apps.apple.com/au/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,AU,Standard,15.99,159.99,AUD,no,,1,no,https://apps.apple.com/au/app/hbo-max/id1666653815,A app store (iPhone price)
+hbo max,AU,Premium,21.99,219.99,AUD,no,,1,no,https://apps.apple.com/au/app/hbo-max/id1666653815,A app store (iPhone price)
+disney+,XK,Premium,13.99,139.99,EUR,no,,1,no,https://apps.apple.com/xk/app/disney/id1446075923,A app store (iPhone price)
+disney+,XK,Standard,9.99,,EUR,no,,1,no,https://apps.apple.com/xk/app/disney/id1446075923,A app store (iPhone price)
+spotify,PT,Premium Individual,8.99,,EUR,no,,1,no,https://www.spotify.com/pt-en/premium/,A official
+spotify,PT,Premium Student,4.99,,EUR,no,,1,no,https://www.spotify.com/pt-en/premium/,A official
+spotify,PT,Premium Duo,11.99,,EUR,no,,1,no,https://www.spotify.com/pt-en/premium/,A official
+spotify,PT,Premium Family,16.99,,EUR,no,,6,no,https://www.spotify.com/pt-en/premium/,A official
+spotify,MD,Premium Individual,5.49,,USD,no,,1,no,https://www.spotify.com/md-en/premium/,A official
+spotify,MD,Premium Student,2.99,,USD,no,,1,no,https://www.spotify.com/md-en/premium/,A official
+spotify,MD,Premium Duo,7.49,,USD,no,,1,no,https://www.spotify.com/md-en/premium/,A official
+spotify,MD,Premium Family,9.49,,USD,no,,6,no,https://www.spotify.com/md-en/premium/,A official

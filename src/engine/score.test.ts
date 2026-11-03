@@ -398,3 +398,13 @@ describe('hidden costs and reminders flow through the audit (§7)', () => {
     expect(audit.reminders.some((r) => r.kind === 'renewal' && r.itemId === 'd')).toBe(true);
   });
 });
+
+describe('gym without a single-visit price', () => {
+  it('never claims "€0.00 each"', async () => {
+    const { runAudit } = await import('./score');
+    const a = runAudit([{ id: 'g', name: 'Gym', category: 'membership', displayCategory: 'Fitness & Health', price: 45, frequency: 'monthly', source: 'quickpick', estimate: true, currency: 'EUR', visitsPerMonth: 2, singleVisitPrice: 0 } as never], { currency: 'EUR' } as never);
+    const r = a.recommendations.find((x) => x.itemId === 'g')!;
+    expect(r.reason).not.toMatch(/0\.00/);
+    expect(r.potentialYearlySaving).toBe(0);
+  });
+});

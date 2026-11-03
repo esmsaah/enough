@@ -1,0 +1,24 @@
+{
+  "market": "DE",
+  "currency": "EUR",
+  "verified": "2026-11-03",
+  "plans": [
+    { "service": "netflix", "plan": "Standard with ads", "monthly": 6.99, "billing": ["monthly"], "features": { "ads": true, "streams": 2, "quality": 1080 }, "accounts": 1, "sameAddress": true, "source": "https://help.netflix.com/en/node/24926/de" },
+    { "service": "netflix", "plan": "Standard", "monthly": 15.99, "billing": ["monthly"], "features": { "ads": false, "streams": 2, "quality": 1080 }, "accounts": 1, "sameAddress": true, "source": "https://help.netflix.com/en/node/24926/de" },
+    { "service": "netflix", "plan": "Premium", "monthly": 21.99, "billing": ["monthly"], "features": { "ads": false, "streams": 4, "quality": 2160 }, "accounts": 1, "sameAddress": true, "source": "https://help.netflix.com/en/node/24926/de" },
+    { "service": "spotify", "plan": "Premium Individual", "monthly": 12.99, "billing": ["monthly"], "features": { "ads": false }, "accounts": 1, "sameAddress": false, "source": "https://www.spotify.com/de/premium/" },
+    { "service": "spotify", "plan": "Premium Student", "monthly": 6.99, "billing": ["monthly"], "features": { "ads": false }, "accounts": 1, "sameAddress": false, "requires": "student", "source": "https://www.spotify.com/de/premium/" },
+    { "service": "spotify", "plan": "Premium Duo", "monthly": 17.99, "billing": ["monthly"], "features": { "ads": false }, "accounts": 2, "sameAddress": true, "source": "https://www.spotify.com/de/premium/" },
+    { "service": "spotify", "plan": "Premium Family", "monthly": 21.99, "billing": ["monthly"], "features": { "ads": false }, "accounts": 6, "sameAddress": true, "source": "https://www.spotify.com/de/premium/" },
+    { "service": "icloud", "plan": "50 GB", "monthly": 0.99, "billing": ["monthly"], "features": { "storageGb": 50 }, "accounts": 6, "sameAddress": false, "requires": "family", "source": "https://support.apple.com/en-us/108047" },
+    { "service": "icloud", "plan": "200 GB", "monthly": 2.99, "billing": ["monthly"], "features": { "storageGb": 200 }, "accounts": 6, "sameAddress": false, "requires": "family", "source": "https://support.apple.com/en-us/108047" },
+    { "service": "icloud", "plan": "2 TB", "monthly": 9.99, "billing": ["monthly"], "features": { "storageGb": 2000 }, "accounts": 6, "sameAddress": false, "requires": "family", "source": "https://support.apple.com/en-us/108047" },
+    { "service": "icloud", "plan": "6 TB", "monthly": 29.99, "billing": ["monthly"], "features": { "storageGb": 6000 }, "accounts": 6, "sameAddress": false, "requires": "family", "source": "https://support.apple.com/en-us/108047" },
+    { "service": "icloud", "plan": "12 TB", "monthly": 59.99, "billing": ["monthly"], "features": { "storageGb": 12000 }, "accounts": 6, "sameAddress": false, "requires": "family", "source": "https://support.apple.com/en-us/108047" }
+  ],
+  "notes": [
+    "Netflix: no annual plans in Germany. Basic is discontinued. Extra member 4.99 (ads) / 5.99 (no ads) on Standard and Premium, for someone outside the household.",
+    "Spotify: Duo and Family members must live at the same address as the plan manager. No yearly Premium plan on the German page.",
+    "iCloud+: every tier can be shared with up to five other family members through Family Sharing. Apple lists one Euro price row; using it for Germany is an inference."
+  ]
+}

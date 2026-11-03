@@ -1,0 +1,1265 @@
+service,country,plan,monthly,yearly,currency,ads,streams,quality,accounts,same_address,source,checked,note,tier
+netflix,BA,Basic,4.99,,EUR,no,1,720,1,yes,https://help.netflix.com/en/node/24926/ba,2026-11-03,,A official
+netflix,BA,Standard,7.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/ba,2026-11-03,,A official
+netflix,BA,Premium,9.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/ba,2026-11-03,,A official
+netflix,RS,Basic,5.99,,EUR,no,1,720,1,yes,https://help.netflix.com/en/node/24926/rs,2026-11-03,,A official
+netflix,RS,Standard,8.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/rs,2026-11-03,,A official
+netflix,RS,Premium,10.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/rs,2026-11-03,,A official
+netflix,HR,Basic,5.99,,EUR,no,1,720,1,yes,https://help.netflix.com/en/node/24926/hr,2026-11-03,,A official
+netflix,HR,Standard,9.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/hr,2026-11-03,,A official
+netflix,HR,Premium,12.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/hr,2026-11-03,,A official
+netflix,ME,Basic,4.99,,EUR,no,1,720,1,yes,https://help.netflix.com/en/node/24926/me,2026-11-03,,A official
+netflix,ME,Standard,7.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/me,2026-11-03,,A official
+netflix,ME,Premium,9.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/me,2026-11-03,,A official
+netflix,MK,Basic,4.99,,EUR,no,1,720,1,yes,https://help.netflix.com/en/node/24926/mk,2026-11-03,,A official
+netflix,MK,Standard,7.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/mk,2026-11-03,,A official
+netflix,MK,Premium,9.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/mk,2026-11-03,,A official
+netflix,SI,Basic,5.99,,EUR,no,1,720,1,yes,https://help.netflix.com/en/node/24926/si,2026-11-03,,A official
+netflix,SI,Standard,8.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/si,2026-11-03,,A official
+netflix,SI,Premium,10.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/si,2026-11-03,,A official
+netflix,AL,Basic,4.99,,EUR,no,1,720,1,yes,https://help.netflix.com/en/node/24926/al,2026-11-03,,A official
+netflix,AL,Standard,7.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/al,2026-11-03,,A official
+netflix,AL,Premium,9.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/al,2026-11-03,,A official
+netflix,AT,Basic,10.99,,EUR,no,1,720,1,yes,https://help.netflix.com/en/node/24926/at,2026-11-03,,A official
+netflix,AT,Standard,15.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/at,2026-11-03,,A official
+netflix,AT,Premium,21.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/at,2026-11-03,,A official
+netflix,DE,Standard with ads,6.99,,EUR,yes,2,1080,1,yes,https://help.netflix.com/en/node/24926/de,2026-11-03,Basic discontinued,A official
+netflix,DE,Standard,15.99,,EUR,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/de,2026-11-03,,A official
+netflix,DE,Premium,21.99,,EUR,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/de,2026-11-03,,A official
+netflix,CH,Basic,14.9,,CHF,no,1,720,1,yes,https://help.netflix.com/en/node/24926/ch,2026-11-03,,A official
+netflix,CH,Standard,22.9,,CHF,no,2,1080,1,yes,https://help.netflix.com/en/node/24926/ch,2026-11-03,,A official
+netflix,CH,Premium,29.9,,CHF,no,4,2160,1,yes,https://help.netflix.com/en/node/24926/ch,2026-11-03,,A official
+spotify,BA,Premium Individual,5.99,,EUR,no,,,1,no,https://www.spotify.com/ba/premium/,2026-11-03,,A official
+spotify,BA,Premium Student,3.29,,EUR,no,,,1,no,https://www.spotify.com/ba/premium/,2026-11-03,student verification,A official
+spotify,BA,Premium Duo,8.49,,EUR,no,,,2,yes,https://www.spotify.com/ba/premium/,2026-11-03,,A official
+spotify,BA,Premium Family,10.49,,EUR,no,,,6,yes,https://www.spotify.com/ba/premium/,2026-11-03,,A official
+spotify,RS,Premium Individual,5.99,,EUR,no,,,1,no,https://www.spotify.com/rs/premium/,2026-11-03,,A official
+spotify,RS,Premium Student,3.29,,EUR,no,,,1,no,https://www.spotify.com/rs/premium/,2026-11-03,student verification,A official
+spotify,RS,Premium Duo,8.49,,EUR,no,,,2,yes,https://www.spotify.com/rs/premium/,2026-11-03,,A official
+spotify,RS,Premium Family,10.49,,EUR,no,,,6,yes,https://www.spotify.com/rs/premium/,2026-11-03,,A official
+spotify,ME,Premium Individual,5.99,,EUR,no,,,1,no,https://www.spotify.com/me/premium/,2026-11-03,,A official
+spotify,ME,Premium Student,3.29,,EUR,no,,,1,no,https://www.spotify.com/me/premium/,2026-11-03,student verification,A official
+spotify,ME,Premium Duo,8.49,,EUR,no,,,2,yes,https://www.spotify.com/me/premium/,2026-11-03,,A official
+spotify,ME,Premium Family,10.49,,EUR,no,,,6,yes,https://www.spotify.com/me/premium/,2026-11-03,,A official
+spotify,MK,Premium Individual,5.99,,EUR,no,,,1,no,https://www.spotify.com/mk/premium/,2026-11-03,,A official
+spotify,MK,Premium Student,3.29,,EUR,no,,,1,no,https://www.spotify.com/mk/premium/,2026-11-03,student verification,A official
+spotify,MK,Premium Duo,8.49,,EUR,no,,,2,yes,https://www.spotify.com/mk/premium/,2026-11-03,,A official
+spotify,MK,Premium Family,10.49,,EUR,no,,,6,yes,https://www.spotify.com/mk/premium/,2026-11-03,,A official
+spotify,AL,Premium Individual,5.99,,EUR,no,,,1,no,https://www.spotify.com/al/premium/,2026-11-03,,A official
+spotify,AL,Premium Student,3.29,,EUR,no,,,1,no,https://www.spotify.com/al/premium/,2026-11-03,student verification,A official
+spotify,AL,Premium Duo,8.49,,EUR,no,,,2,yes,https://www.spotify.com/al/premium/,2026-11-03,,A official
+spotify,AL,Premium Family,10.49,,EUR,no,,,6,yes,https://www.spotify.com/al/premium/,2026-11-03,,A official
+spotify,XK,Premium Individual,5.99,,EUR,no,,,1,no,https://www.spotify.com/xk/premium/,2026-11-03,,A official
+spotify,XK,Premium Student,3.29,,EUR,no,,,1,no,https://www.spotify.com/xk/premium/,2026-11-03,student verification,A official
+spotify,XK,Premium Duo,8.49,,EUR,no,,,2,yes,https://www.spotify.com/xk/premium/,2026-11-03,,A official
+spotify,XK,Premium Family,10.49,,EUR,no,,,6,yes,https://www.spotify.com/xk/premium/,2026-11-03,,A official
+spotify,HR,Premium Individual,6.99,,EUR,no,,,1,no,https://www.spotify.com/hr/premium/,2026-11-03,,A official
+spotify,HR,Premium Student,3.99,,EUR,no,,,1,no,https://www.spotify.com/hr/premium/,2026-11-03,student verification,A official
+spotify,HR,Premium Duo,9.99,,EUR,no,,,2,yes,https://www.spotify.com/hr/premium/,2026-11-03,,A official
+spotify,HR,Premium Family,12.49,,EUR,no,,,6,yes,https://www.spotify.com/hr/premium/,2026-11-03,,A official
+spotify,SI,Premium Individual,6.99,,EUR,no,,,1,no,https://www.spotify.com/si/premium/,2026-11-03,,A official
+spotify,SI,Premium Student,3.99,,EUR,no,,,1,no,https://www.spotify.com/si/premium/,2026-11-03,student verification,A official
+spotify,SI,Premium Duo,9.99,,EUR,no,,,2,yes,https://www.spotify.com/si/premium/,2026-11-03,,A official
+spotify,SI,Premium Family,12.49,,EUR,no,,,6,yes,https://www.spotify.com/si/premium/,2026-11-03,,A official
+spotify,DE,Premium Individual,12.99,,EUR,no,,,1,no,https://www.spotify.com/de/premium/,2026-11-03,,A official
+spotify,DE,Premium Student,6.99,,EUR,no,,,1,no,https://www.spotify.com/de/premium/,2026-11-03,student verification,A official
+spotify,DE,Premium Duo,17.99,,EUR,no,,,2,yes,https://www.spotify.com/de/premium/,2026-11-03,,A official
+spotify,DE,Premium Family,21.99,,EUR,no,,,6,yes,https://www.spotify.com/de/premium/,2026-11-03,,A official
+spotify,AT,Premium Individual,12.99,,EUR,no,,,1,no,https://www.spotify.com/at/premium/,2026-11-03,,A official
+spotify,AT,Premium Student,6.99,,EUR,no,,,1,no,https://www.spotify.com/at/premium/,2026-11-03,student verification,A official
+spotify,AT,Premium Duo,16.99,,EUR,no,,,2,yes,https://www.spotify.com/at/premium/,2026-11-03,,A official
+spotify,AT,Premium Family,20.99,,EUR,no,,,6,yes,https://www.spotify.com/at/premium/,2026-11-03,,A official
+spotify,CH,Premium Individual,15.95,,CHF,no,,,1,no,https://www.spotify.com/ch/premium/,2026-11-03,,A official
+spotify,CH,Premium Student,8.95,,CHF,no,,,1,no,https://www.spotify.com/ch/premium/,2026-11-03,,A official
+spotify,CH,Premium Duo,21.95,,CHF,no,,,2,yes,https://www.spotify.com/ch/premium/,2026-11-03,,A official
+spotify,CH,Premium Family,26.95,,CHF,no,,,6,yes,https://www.spotify.com/ch/premium/,2026-11-03,,A official
+disney+,HR,Standard,9.99,99.9,EUR,no,2,,1,yes,https://www.disneyplus.com/hr-hr,2026-11-03,regular price after intro offer,A official
+disney+,HR,Premium,13.99,139.9,EUR,no,4,,1,yes,https://www.disneyplus.com/hr-hr,2026-11-03,regular price after intro offer,A official
+disney+,DE,Standard with ads,6.99,,EUR,yes,2,,1,yes,https://www.disneyplus.com/de-de,2026-11-03,regular price after intro offer,A official
+disney+,DE,Standard,10.99,109.9,EUR,no,2,,1,yes,https://www.disneyplus.com/de-de,2026-11-03,regular price after intro offer,A official
+disney+,DE,Premium,15.99,159.9,EUR,no,4,,1,yes,https://www.disneyplus.com/de-de,2026-11-03,regular price after intro offer,A official
+disney+,AT,Standard,10.99,109.9,EUR,no,2,,1,yes,https://www.disneyplus.com/de-at,2026-11-03,regular price after intro offer,A official
+disney+,AT,Premium,15.99,159.9,EUR,no,4,,1,yes,https://www.disneyplus.com/de-at,2026-11-03,regular price after intro offer,A official
+disney+,CH,Standard with ads,9.9,,CHF,yes,2,,1,yes,https://www.disneyplus.com/de-ch,2026-11-03,regular price after intro offer,A official
+disney+,CH,Standard,16.9,169.0,CHF,no,2,,1,yes,https://www.disneyplus.com/de-ch,2026-11-03,regular price after intro offer,A official
+disney+,CH,Premium,23.4,234.0,CHF,no,4,,1,yes,https://www.disneyplus.com/de-ch,2026-11-03,regular price after intro offer,A official
+hbo max,SI,Standard,7.99,79.9,EUR,no,2,,1,yes,https://www.hbomax.com/si/sl,2026-11-03,confirmed by App Store,A official
+hbo max,SI,Premium,9.99,99.9,EUR,no,4,,1,yes,https://www.hbomax.com/si/sl,2026-11-03,confirmed by App Store,A official
+hbo max,RS,Standard,7.99,79.9,EUR,no,2,,1,yes,https://www.hbomax.com/rs/sr,2026-11-03,"page shows dates that passed, recheck; confirmed by App Store",A official
+hbo max,RS,Premium,9.99,99.9,EUR,no,4,,1,yes,https://www.hbomax.com/rs/sr,2026-11-03,"page shows dates that passed, recheck; confirmed by App Store",A official
+hbo max,HR,Standard,9.99,99.9,EUR,no,2,,1,yes,https://www.hbomax.com/hr/hr,2026-11-03,confirmed by App Store,A official
+hbo max,HR,Premium,11.99,119.0,EUR,no,4,,1,yes,https://www.hbomax.com/hr/hr,2026-11-03,confirmed by App Store,A official
+hbo max,DE,Basic with ads,5.99,,EUR,yes,2,,1,yes,https://www.hbomax.com/de/de,2026-11-03,confirmed by App Store,A official
+hbo max,DE,Standard,11.99,,EUR,no,2,,1,yes,https://www.hbomax.com/de/de,2026-11-03,confirmed by App Store,A official
+hbo max,DE,Premium,16.99,,EUR,no,4,,1,yes,https://www.hbomax.com/de/de,2026-11-03,confirmed by App Store,A official
+hbo max,AT,Basic with ads,5.99,,EUR,yes,2,,1,yes,https://www.hbomax.com/at/de,2026-11-03,confirmed by App Store,A official
+hbo max,AT,Standard,11.99,,EUR,no,2,,1,yes,https://www.hbomax.com/at/de,2026-11-03,confirmed by App Store,A official
+hbo max,AT,Premium,16.99,,EUR,no,4,,1,yes,https://www.hbomax.com/at/de,2026-11-03,confirmed by App Store,A official
+apple one,DE,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/de/apple-one/,2026-11-03,"includes Music, TV, Arcade, iCloud+ 50 GB",A official
+apple one,DE,Family,25.95,,EUR,no,,,6,no,https://www.apple.com/de/apple-one/,2026-11-03,"Family Sharing, iCloud+ 200 GB",A official
+apple music,DE,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/de/apple-one/,2026-11-03,,A official
+apple music,DE,Family,19.99,,EUR,no,,,6,no,https://www.apple.com/de/apple-one/,2026-11-03,,A official
+apple tv+,DE,Monthly,9.99,,EUR,no,,,6,no,https://www.apple.com/de/apple-one/,2026-11-03,,A official
+apple arcade,DE,Monthly,6.99,,EUR,no,,,6,no,https://www.apple.com/de/apple-one/,2026-11-03,,A official
+apple one,AT,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/at/apple-one/,2026-11-03,"includes Music, TV, Arcade, iCloud+ 50 GB",A official
+apple one,AT,Family,25.95,,EUR,no,,,6,no,https://www.apple.com/at/apple-one/,2026-11-03,"Family Sharing, iCloud+ 200 GB",A official
+apple music,AT,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/at/apple-one/,2026-11-03,,A official
+apple music,AT,Family,19.99,,EUR,no,,,6,no,https://www.apple.com/at/apple-one/,2026-11-03,,A official
+apple tv+,AT,Monthly,9.99,,EUR,no,,,6,no,https://www.apple.com/at/apple-one/,2026-11-03,,A official
+apple arcade,AT,Monthly,6.99,,EUR,no,,,6,no,https://www.apple.com/at/apple-one/,2026-11-03,,A official
+apple one,CH,Individual,23.9,,CHF,no,,,1,no,https://www.apple.com/chde/apple-one/,2026-11-03,"includes Music, TV, Arcade, iCloud+ 50 GB",A official
+apple one,CH,Family,33.9,,CHF,no,,,6,no,https://www.apple.com/chde/apple-one/,2026-11-03,"Family Sharing, iCloud+ 200 GB",A official
+apple music,CH,Individual,14.9,,CHF,no,,,1,no,https://www.apple.com/chde/apple-one/,2026-11-03,,A official
+apple music,CH,Family,24.9,,CHF,no,,,6,no,https://www.apple.com/chde/apple-one/,2026-11-03,,A official
+apple tv+,CH,Monthly,10.9,,CHF,no,,,6,no,https://www.apple.com/chde/apple-one/,2026-11-03,,A official
+apple arcade,CH,Monthly,7.9,,CHF,no,,,6,no,https://www.apple.com/chde/apple-one/,2026-11-03,,A official
+apple music,DE,Student,6.99,,EUR,no,,,1,no,https://www.apple.com/de/apple-music/,2026-11-03,student verification,A official
+icloud+,CH,50 GB,1,,CHF,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,CH,200 GB,3,,CHF,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,CH,2 TB,10,,CHF,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,CH,6 TB,30,,CHF,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,CH,12 TB,60,,CHF,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,HR,50 GB,0.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,HR,200 GB,2.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,HR,2 TB,9.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,HR,6 TB,29.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,HR,12 TB,59.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,DE,50 GB,0.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/de",A official
+icloud+,DE,200 GB,2.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/de",A official
+icloud+,DE,2 TB,9.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/de",A official
+icloud+,DE,6 TB,29.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/de",A official
+icloud+,DE,12 TB,59.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/de",A official
+icloud+,AT,50 GB,0.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/at",A official
+icloud+,AT,200 GB,2.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/at",A official
+icloud+,AT,2 TB,9.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/at",A official
+icloud+,AT,6 TB,29.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/at",A official
+icloud+,AT,12 TB,59.99,,EUR,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,"Euro row, matches apple.com/at",A official
+icloud+,RS,50 GB,0.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,RS,200 GB,2.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,RS,2 TB,9.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,RS,6 TB,29.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,RS,12 TB,59.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,BA,50 GB,0.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,BA,200 GB,2.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,BA,2 TB,9.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,BA,6 TB,29.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,BA,12 TB,59.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,ME,50 GB,0.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,ME,200 GB,2.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,ME,2 TB,9.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,ME,6 TB,29.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,ME,12 TB,59.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,MK,50 GB,0.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,MK,200 GB,2.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,MK,2 TB,9.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,MK,6 TB,29.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,MK,12 TB,59.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,XK,50 GB,0.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,XK,200 GB,2.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,XK,2 TB,9.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,XK,6 TB,29.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,XK,12 TB,59.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,may be slightly higher with VAT,A official
+icloud+,AL,50 GB,1.19,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,AL,200 GB,3.59,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,AL,2 TB,11.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,AL,6 TB,34.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+icloud+,AL,12 TB,69.99,,USD,no,,,6,no,https://support.apple.com/en-us/108047,2026-11-03,,A official
+microsoft 365,DE,Personal,10,99,EUR,no,,,1,no,https://www.microsoft.com/de-de/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive,A official
+microsoft 365,DE,Family,13,129,EUR,no,,,6,no,https://www.microsoft.com/de-de/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive per person,A official
+microsoft 365,AT,Personal,10,99,EUR,no,,,1,no,https://www.microsoft.com/de-at/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive,A official
+microsoft 365,AT,Family,13,129,EUR,no,,,6,no,https://www.microsoft.com/de-at/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive per person,A official
+microsoft 365,CH,Personal,9.95,99.95,CHF,no,,,1,no,https://www.microsoft.com/de-ch/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive,A official
+microsoft 365,CH,Family,13.95,139.95,CHF,no,,,6,no,https://www.microsoft.com/de-ch/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive per person,A official
+microsoft 365,HR,Personal,10,99,EUR,no,,,1,no,https://www.microsoft.com/hr-hr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive,A official
+microsoft 365,HR,Family,13,129,EUR,no,,,6,no,https://www.microsoft.com/hr-hr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive per person,A official
+microsoft 365,SI,Personal,10,99,EUR,no,,,1,no,https://www.microsoft.com/sl-si/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive,A official
+microsoft 365,SI,Family,13,129,EUR,no,,,6,no,https://www.microsoft.com/sl-si/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,1 TB OneDrive per person,A official
+audible,DE,Standard,6.99,,EUR,no,,,1,no,https://www.audible.de,2026-11-03,,A official
+audible,DE,Premium,9.95,,EUR,no,,,1,no,https://www.audible.de,2026-11-03,1 credit a month,A official
+dazn,DE,Mobile Pass,9.99,,EUR,no,,,1,no,https://www.dazn.com/de-DE/,2026-11-03,,A official
+chatgpt,*,Plus,20,,USD,no,,,1,no,https://openai.com/chatgpt/pricing,2026-11-03,plus tax where applicable,A official
+claude,*,Pro,20,200,USD,no,,,1,no,https://claude.com/pricing,2026-11-03,excludes tax,A official
+notion,*,Plus,10,,USD,no,,,1,no,https://www.notion.com/pricing,2026-11-03,,A official
+grammarly,*,Pro,12,,USD,no,,,1,no,https://www.grammarly.com/plans,2026-11-03,,A official
+nordvpn,*,Complete monthly,19.99,,USD,no,,,1,no,https://nordvpn.com/pricing/,2026-11-03,"longer plans much cheaper, promo prices",A official
+strava,*,Individual yearly,6.67,79.99,USD,no,,,1,no,https://www.strava.com/subscribe,2026-11-03,"yearly only shown, excludes tax",A official
+linkedin premium,EU,Career,29.98,179.88,EUR,no,,,1,no,https://premium.linkedin.com/careers/career,2026-11-03,may exclude VAT,A official
+adobe creative cloud,DE,"Pro (annual, billed monthly)",77.99,,EUR,no,,,1,no,https://www.adobe.com/de/creativecloud/plans.html,2026-11-03,incl. VAT; 12-month commitment,A official
+youtube premium,DE,Individual,14.99,,EUR,no,,,1,no,https://www.computerbase.de/news/audio-video-foto/neukunden-youtube-premium-kostet-jetzt-mehr-in-deutschland.97865/ ; https://www.googlewatchblog.de/2026/06/youtube-premium-alle-abos-werden-teurer-google-erhoeht-jetzt-auch-in-deutschland-die-preise-alle-infos/ ; https://www.connect.de/news/youtube-premium-preis-erhoehung-deutschland-06-2026-3212681.html,2026-11-03,"price rise June 2026, 3 sources agree","B news, 3 sources"
+youtube premium,DE,Lite,7.99,,EUR,no,,,1,no,https://www.computerbase.de/news/audio-video-foto/neukunden-youtube-premium-kostet-jetzt-mehr-in-deutschland.97865/ ; https://www.googlewatchblog.de/2026/06/youtube-premium-alle-abos-werden-teurer-google-erhoeht-jetzt-auch-in-deutschland-die-preise-alle-infos/ ; https://www.connect.de/news/youtube-premium-preis-erhoehung-deutschland-06-2026-3212681.html,2026-11-03,"price rise June 2026, 3 sources agree","B news, 3 sources"
+youtube premium,DE,Family,27.99,,EUR,no,,,6,yes,https://www.computerbase.de/news/audio-video-foto/neukunden-youtube-premium-kostet-jetzt-mehr-in-deutschland.97865/ ; https://www.googlewatchblog.de/2026/06/youtube-premium-alle-abos-werden-teurer-google-erhoeht-jetzt-auch-in-deutschland-die-preise-alle-infos/ ; https://www.connect.de/news/youtube-premium-preis-erhoehung-deutschland-06-2026-3212681.html,2026-11-03,"price rise June 2026, 3 sources agree","B news, 3 sources"
+youtube premium,DE,Student,8.99,,EUR,no,,,1,no,https://www.computerbase.de/news/audio-video-foto/neukunden-youtube-premium-kostet-jetzt-mehr-in-deutschland.97865/ ; https://www.googlewatchblog.de/2026/06/youtube-premium-alle-abos-werden-teurer-google-erhoeht-jetzt-auch-in-deutschland-die-preise-alle-infos/ ; https://www.connect.de/news/youtube-premium-preis-erhoehung-deutschland-06-2026-3212681.html,2026-11-03,"price rise June 2026, 3 sources agree","B news, 3 sources"
+youtube premium,HR,Individual,9.55,,EUR,no,,,1,no,https://www.bug.hr/internet/poskupljuje-obiteljski-youtube-premium-u-hrvatskoj-51095 ; https://www.jabuka.tv/youtube-premium-u-hrvatskoj-stizu-nove-cijene/,2026-11-03,"2025 articles, recheck","B news, 2 sources, 2025"
+youtube premium,HR,Family,18.99,,EUR,no,,,6,yes,https://www.bug.hr/internet/poskupljuje-obiteljski-youtube-premium-u-hrvatskoj-51095 ; https://www.jabuka.tv/youtube-premium-u-hrvatskoj-stizu-nove-cijene/,2026-11-03,"from Aug 2025, recheck","B news, 2 sources, 2025"
+youtube premium,AT,Individual,14.99,,EUR,no,,,1,no,https://www.derstandard.at/story/3000000327079/youtube-premium-wird-erheblich-teurer,2026-11-03,"2026, matches DE rise",C single source
+youtube premium,AT,Family,27.99,,EUR,no,,,6,yes,https://www.derstandard.at/story/3000000327079/youtube-premium-wird-erheblich-teurer,2026-11-03,"2026, matches DE rise",C single source
+youtube premium,AT,Student,8.99,,EUR,no,,,1,no,https://www.derstandard.at/story/3000000327079/youtube-premium-wird-erheblich-teurer,2026-11-03,"2026, matches DE rise",C single source
+youtube premium,CH,Individual,17.9,,CHF,no,,,1,no,https://pctipp.ch/themen/news/youtube-premium-massiv-teurer ; https://ppc.land/youtube-premium-prices-surge-up-to-56-increase-in-multiple-countries/,2026-11-03,"2024, recheck","B news, 2 sources, 2024"
+youtube premium,CH,Family,33.9,,CHF,no,,,6,yes,https://pctipp.ch/themen/news/youtube-premium-massiv-teurer ; https://ppc.land/youtube-premium-prices-surge-up-to-56-increase-in-multiple-countries/,2026-11-03,"2024, recheck","B news, 2 sources, 2024"
+google one,DE,100 GB,1.99,,EUR,no,,,6,no,https://blog.internxt.com/de/google-one-preise-alle-tarife-stufen-und-eine-private-alternative/ ; https://www.giga.de/artikel/was-ist-google-one-preise-unterschiede-zu-google-drive/,2026-11-03,,"B news, 2 sources"
+google one,DE,2 TB,9.99,,EUR,no,,,6,no,https://blog.internxt.com/de/google-one-preise-alle-tarife-stufen-und-eine-private-alternative/ ; https://www.giga.de/artikel/was-ist-google-one-preise-unterschiede-zu-google-drive/,2026-11-03,now called Google AI Plus 2 TB,"B news, 2 sources"
+google one,DE,Google AI Pro 5 TB,21.99,219.99,EUR,no,,,6,no,https://blog.internxt.com/de/google-one-preise-alle-tarife-stufen-und-eine-private-alternative/,2026-11-03,,C single source
+amazon prime,DE,Prime,8.99,89.9,EUR,no,,,1,no,https://www.homeandsmart.de/amazon-prime-kosten ; https://www.dslweb.de/amazon-prime-preiserhoehung.php,2026-11-03,Prime Video with ads,"B news, 2 sources"
+amazon prime,DE,Prime Video ad-free add-on,2.99,,EUR,no,,,1,no,https://www.homeandsmart.de/amazon-prime-kosten ; https://www.dslweb.de/amazon-prime-preiserhoehung.php,2026-11-03,add-on,"B news, 2 sources"
+amazon prime,DE,Prime 18-24 / Student,4.49,44.9,EUR,no,,,1,no,https://www.homeandsmart.de/amazon-prime-kosten ; https://www.dslweb.de/amazon-prime-preiserhoehung.php,2026-11-03,,"B news, 2 sources"
+disney+,BA,Standard,9.99,,EUR,no,,,1,yes,https://apps.apple.com/ba/app/disney/id1446075923,2026-11-03,2 streams,A app store (iPhone price)
+disney+,BA,Premium,13.99,139.99,EUR,no,,,1,yes,https://apps.apple.com/ba/app/disney/id1446075923,2026-11-03,4 streams,A app store (iPhone price)
+disney+,RS,Standard,9.99,,EUR,no,,,1,yes,https://apps.apple.com/rs/app/disney/id1446075923,2026-11-03,2 streams,A app store (iPhone price)
+disney+,RS,Premium,13.99,139.99,EUR,no,,,1,yes,https://apps.apple.com/rs/app/disney/id1446075923,2026-11-03,4 streams,A app store (iPhone price)
+disney+,ME,Standard,9.99,,EUR,no,,,1,yes,https://apps.apple.com/me/app/disney/id1446075923,2026-11-03,2 streams,A app store (iPhone price)
+disney+,ME,Premium,13.99,139.99,EUR,no,,,1,yes,https://apps.apple.com/me/app/disney/id1446075923,2026-11-03,4 streams,A app store (iPhone price)
+disney+,SI,Standard,9.99,,EUR,no,,,1,yes,https://apps.apple.com/si/app/disney/id1446075923,2026-11-03,2 streams,A app store (iPhone price)
+disney+,SI,Premium,13.99,139.99,EUR,no,,,1,yes,https://apps.apple.com/si/app/disney/id1446075923,2026-11-03,4 streams,A app store (iPhone price)
+disney+,MK,Standard,9.99,,USD,no,,,1,yes,https://apps.apple.com/mk/app/disney/id1446075923,2026-11-03,2 streams,A app store (iPhone price)
+disney+,MK,Premium,13.99,139.99,USD,no,,,1,yes,https://apps.apple.com/mk/app/disney/id1446075923,2026-11-03,4 streams,A app store (iPhone price)
+disney+,AL,Standard,11.9,,USD,no,,,1,yes,https://apps.apple.com/al/app/disney/id1446075923,2026-11-03,2 streams,A app store (iPhone price)
+disney+,AL,Premium,16.49,161.99,USD,no,,,1,yes,https://apps.apple.com/al/app/disney/id1446075923,2026-11-03,4 streams,A app store (iPhone price)
+google one,BA,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/ba/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,BA,200 GB,3.49,,EUR,no,,,6,no,https://apps.apple.com/ba/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,BA,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/ba/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,RS,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/rs/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,RS,200 GB,3.49,,EUR,no,,,6,no,https://apps.apple.com/rs/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,RS,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/rs/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,ME,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/me/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,ME,200 GB,3.49,,EUR,no,,,6,no,https://apps.apple.com/me/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,ME,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/me/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,SI,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/si/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,SI,200 GB,2.99,29.99,EUR,no,,,6,no,https://apps.apple.com/si/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,SI,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/si/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,HR,100 GB,2.9,18.9,EUR,no,,,6,no,https://apps.apple.com/hr/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,HR,200 GB,3.39,,EUR,no,,,6,no,https://apps.apple.com/hr/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,HR,2 TB (Google AI Plus),10.9,,EUR,no,,,6,no,https://apps.apple.com/hr/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,DE,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/de/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,DE,200 GB,2.99,29.99,EUR,no,,,6,no,https://apps.apple.com/de/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,DE,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/de/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,CH,100 GB,2.0,20.0,CHF,no,,,6,no,https://apps.apple.com/ch/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,CH,200 GB,3.0,30.0,CHF,no,,,6,no,https://apps.apple.com/ch/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,CH,2 TB (Google AI Plus),10.0,,CHF,no,,,6,no,https://apps.apple.com/ch/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,MK,100 GB,1.99,19.99,USD,no,,,6,no,https://apps.apple.com/mk/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,MK,200 GB,2.99,29.99,USD,no,,,6,no,https://apps.apple.com/mk/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,MK,2 TB (Google AI Plus),9.99,,USD,no,,,6,no,https://apps.apple.com/mk/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,AL,100 GB,2.39,23.99,USD,no,,,6,no,https://apps.apple.com/al/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,AL,200 GB,2.99,29.99,USD,no,,,6,no,https://apps.apple.com/al/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+google one,AL,2 TB (Google AI Plus),10.49,,USD,no,,,6,no,https://apps.apple.com/al/app/google-one/id1451784328,2026-11-03,iPhone price,A app store (iPhone price)
+amazon prime,AT,Prime Video ad-free add-on,2.99,,EUR,no,,,1,no,https://apps.apple.com/at/app/amazon-prime-video/id545519333,2026-11-03,,A app store (iPhone price)
+netflix,AE,Basic,35,,AED,no,1,,1,yes,https://help.netflix.com/en/node/24926/ae,2026-11-03,,A official
+netflix,AE,Standard,49,,AED,no,2,,1,yes,https://help.netflix.com/en/node/24926/ae,2026-11-03,,A official
+netflix,AE,Premium,71,,AED,no,4,,1,yes,https://help.netflix.com/en/node/24926/ae,2026-11-03,,A official
+netflix,AR,Basic,8999,,ARS,no,1,,1,yes,https://help.netflix.com/en/node/24926/ar,2026-11-03,,A official
+netflix,AR,Standard,14999,,ARS,no,2,,1,yes,https://help.netflix.com/en/node/24926/ar,2026-11-03,,A official
+netflix,AR,Premium,19999,,ARS,no,4,,1,yes,https://help.netflix.com/en/node/24926/ar,2026-11-03,,A official
+netflix,AU,Standard with ads,9.99,,AUD,yes,2,,1,yes,https://help.netflix.com/en/node/24926/au,2026-11-03,,A official
+netflix,AU,Standard,20.99,,AUD,no,2,,1,yes,https://help.netflix.com/en/node/24926/au,2026-11-03,,A official
+netflix,AU,Premium,28.99,,AUD,no,4,,1,yes,https://help.netflix.com/en/node/24926/au,2026-11-03,,A official
+netflix,BD,Mobile,2.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/bd,2026-11-03,,A official
+netflix,BD,Basic,3.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/bd,2026-11-03,,A official
+netflix,BD,Standard,7.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/bd,2026-11-03,,A official
+netflix,BD,Premium,9.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/bd,2026-11-03,,A official
+netflix,BE,Basic,10.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/be,2026-11-03,,A official
+netflix,BE,Standard,16.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/be,2026-11-03,,A official
+netflix,BE,Premium,21.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/be,2026-11-03,,A official
+netflix,BG,Basic,5.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/bg,2026-11-03,,A official
+netflix,BG,Standard,8.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/bg,2026-11-03,,A official
+netflix,BG,Premium,10.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/bg,2026-11-03,,A official
+netflix,BH,Basic,7.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/bh,2026-11-03,,A official
+netflix,BH,Standard,10.49,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/bh,2026-11-03,,A official
+netflix,BH,Premium,15.79,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/bh,2026-11-03,,A official
+netflix,BR,Standard with ads,25.90,,BRL,yes,2,,1,yes,https://help.netflix.com/en/node/24926/br,2026-11-03,,A official
+netflix,BR,Standard,51.90,,BRL,no,2,,1,yes,https://help.netflix.com/en/node/24926/br,2026-11-03,,A official
+netflix,BR,Premium,71.90,,BRL,no,4,,1,yes,https://help.netflix.com/en/node/24926/br,2026-11-03,,A official
+netflix,CA,Standard with ads,7.99,,CAD,yes,2,,1,yes,https://help.netflix.com/en/node/24926/ca,2026-11-03,,A official
+netflix,CA,Standard,18.99,,CAD,no,2,,1,yes,https://help.netflix.com/en/node/24926/ca,2026-11-03,,A official
+netflix,CA,Premium,23.99,,CAD,no,4,,1,yes,https://help.netflix.com/en/node/24926/ca,2026-11-03,,A official
+netflix,CL,Basic,7190,,CLP,no,1,,1,yes,https://help.netflix.com/en/node/24926/cl,2026-11-03,,A official
+netflix,CL,Standard,9990,,CLP,no,2,,1,yes,https://help.netflix.com/en/node/24926/cl,2026-11-03,,A official
+netflix,CL,Premium,12990,,CLP,no,4,,1,yes,https://help.netflix.com/en/node/24926/cl,2026-11-03,,A official
+netflix,CO,Basic,18900,,COP,no,1,,1,yes,https://help.netflix.com/en/node/24926/co,2026-11-03,,A official
+netflix,CO,Standard,32900,,COP,no,2,,1,yes,https://help.netflix.com/en/node/24926/co,2026-11-03,,A official
+netflix,CO,Premium,50900,,COP,no,4,,1,yes,https://help.netflix.com/en/node/24926/co,2026-11-03,,A official
+netflix,CY,Basic,8.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/cy,2026-11-03,,A official
+netflix,CY,Standard,12.49,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/cy,2026-11-03,,A official
+netflix,CY,Premium,15.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/cy,2026-11-03,,A official
+netflix,CZ,Basic,259,,CZK,no,1,,1,yes,https://help.netflix.com/en/node/24926/cz,2026-11-03,,A official
+netflix,CZ,Standard,339,,CZK,no,2,,1,yes,https://help.netflix.com/en/node/24926/cz,2026-11-03,,A official
+netflix,CZ,Premium,419,,CZK,no,4,,1,yes,https://help.netflix.com/en/node/24926/cz,2026-11-03,,A official
+netflix,DK,Basic,109,,DKK,no,1,,1,yes,https://help.netflix.com/en/node/24926/dk,2026-11-03,,A official
+netflix,DK,Standard,149,,DKK,no,2,,1,yes,https://help.netflix.com/en/node/24926/dk,2026-11-03,,A official
+netflix,DK,Premium,189,,DKK,no,4,,1,yes,https://help.netflix.com/en/node/24926/dk,2026-11-03,,A official
+netflix,DZ,Basic,3.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/dz,2026-11-03,,A official
+netflix,DZ,Standard,7.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/dz,2026-11-03,,A official
+netflix,DZ,Premium,9.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/dz,2026-11-03,,A official
+netflix,EE,Basic,7.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/ee,2026-11-03,,A official
+netflix,EE,Standard,9.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/ee,2026-11-03,,A official
+netflix,EE,Premium,11.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/ee,2026-11-03,,A official
+netflix,EG,Basic,110,,EGP,no,1,,1,yes,https://help.netflix.com/en/node/24926/eg,2026-11-03,,A official
+netflix,EG,Standard,190,,EGP,no,2,,1,yes,https://help.netflix.com/en/node/24926/eg,2026-11-03,,A official
+netflix,EG,Premium,270,,EGP,no,4,,1,yes,https://help.netflix.com/en/node/24926/eg,2026-11-03,,A official
+netflix,ES,Standard with ads,8.99,,EUR,yes,2,,1,yes,https://help.netflix.com/en/node/24926/es,2026-11-03,,A official
+netflix,ES,Standard,14.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/es,2026-11-03,,A official
+netflix,ES,Premium,21.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/es,2026-11-03,,A official
+netflix,FI,Basic,10.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/fi,2026-11-03,,A official
+netflix,FI,Standard,15.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/fi,2026-11-03,,A official
+netflix,FI,Premium,19.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/fi,2026-11-03,,A official
+netflix,FR,Standard with ads,7.99,,EUR,yes,2,,1,yes,https://help.netflix.com/en/node/24926/fr,2026-11-03,,A official
+netflix,FR,Standard,14.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/fr,2026-11-03,,A official
+netflix,FR,Premium,21.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/fr,2026-11-03,,A official
+netflix,GH,Mobile,2.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/gh,2026-11-03,,A official
+netflix,GH,Basic,3.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/gh,2026-11-03,,A official
+netflix,GH,Standard,7.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/gh,2026-11-03,,A official
+netflix,GH,Premium,9.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/gh,2026-11-03,,A official
+netflix,GR,Basic,8.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/gr,2026-11-03,,A official
+netflix,GR,Standard,12.49,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/gr,2026-11-03,,A official
+netflix,GR,Premium,15.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/gr,2026-11-03,,A official
+netflix,HK,Basic,78,,HKD,no,1,,1,yes,https://help.netflix.com/en/node/24926/hk,2026-11-03,,A official
+netflix,HK,Standard,98,,HKD,no,2,,1,yes,https://help.netflix.com/en/node/24926/hk,2026-11-03,,A official
+netflix,HK,Premium,118,,HKD,no,4,,1,yes,https://help.netflix.com/en/node/24926/hk,2026-11-03,,A official
+netflix,HU,Basic,3190,,HUF,no,1,,1,yes,https://help.netflix.com/en/node/24926/hu,2026-11-03,,A official
+netflix,HU,Standard,4490,,HUF,no,2,,1,yes,https://help.netflix.com/en/node/24926/hu,2026-11-03,,A official
+netflix,HU,Premium,5690,,HUF,no,4,,1,yes,https://help.netflix.com/en/node/24926/hu,2026-11-03,,A official
+netflix,ID,Mobile,54000,,IDR,no,1,,1,yes,https://help.netflix.com/en/node/24926/id,2026-11-03,,A official
+netflix,ID,Basic,65000,,IDR,no,1,,1,yes,https://help.netflix.com/en/node/24926/id,2026-11-03,,A official
+netflix,ID,Standard,120000,,IDR,no,2,,1,yes,https://help.netflix.com/en/node/24926/id,2026-11-03,,A official
+netflix,ID,Premium,186000,,IDR,no,4,,1,yes,https://help.netflix.com/en/node/24926/id,2026-11-03,,A official
+netflix,IE,Basic,11.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/ie,2026-11-03,,A official
+netflix,IE,Standard,18.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/ie,2026-11-03,,A official
+netflix,IE,Premium,25.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/ie,2026-11-03,,A official
+netflix,IL,Basic,32.90,,ILS,no,1,,1,yes,https://help.netflix.com/en/node/24926/il,2026-11-03,,A official
+netflix,IL,Standard,54.90,,ILS,no,2,,1,yes,https://help.netflix.com/en/node/24926/il,2026-11-03,,A official
+netflix,IL,Premium,69.90,,ILS,no,4,,1,yes,https://help.netflix.com/en/node/24926/il,2026-11-03,,A official
+netflix,IN,Mobile,149,,INR,no,1,,1,yes,https://help.netflix.com/en/node/24926/in,2026-11-03,,A official
+netflix,IN,Basic,199,,INR,no,1,,1,yes,https://help.netflix.com/en/node/24926/in,2026-11-03,,A official
+netflix,IN,Standard,499,,INR,no,2,,1,yes,https://help.netflix.com/en/node/24926/in,2026-11-03,,A official
+netflix,IN,Premium,649,,INR,no,4,,1,yes,https://help.netflix.com/en/node/24926/in,2026-11-03,,A official
+netflix,IS,Basic,11.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/is,2026-11-03,,A official
+netflix,IS,Standard,16.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/is,2026-11-03,,A official
+netflix,IS,Premium,23.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/is,2026-11-03,,A official
+netflix,IT,Standard with ads,6.99,,EUR,yes,2,,1,yes,https://help.netflix.com/en/node/24926/it,2026-11-03,,A official
+netflix,IT,Standard,13.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/it,2026-11-03,,A official
+netflix,IT,Premium,19.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/it,2026-11-03,,A official
+netflix,JO,Basic,3.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/jo,2026-11-03,,A official
+netflix,JO,Standard,7.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/jo,2026-11-03,,A official
+netflix,JO,Premium,9.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/jo,2026-11-03,,A official
+netflix,JP,Standard with ads,890,,JPY,yes,2,,1,yes,https://help.netflix.com/en/node/24926/jp,2026-11-03,,A official
+netflix,JP,Standard,1590,,JPY,no,2,,1,yes,https://help.netflix.com/en/node/24926/jp,2026-11-03,,A official
+netflix,JP,Premium,2290,,JPY,no,4,,1,yes,https://help.netflix.com/en/node/24926/jp,2026-11-03,,A official
+netflix,KE,Mobile,200,,KES,no,1,,1,yes,https://help.netflix.com/en/node/24926/ke,2026-11-03,,A official
+netflix,KE,Basic,300,,KES,no,1,,1,yes,https://help.netflix.com/en/node/24926/ke,2026-11-03,,A official
+netflix,KE,Standard,700,,KES,no,2,,1,yes,https://help.netflix.com/en/node/24926/ke,2026-11-03,,A official
+netflix,KE,Premium,1100,,KES,no,4,,1,yes,https://help.netflix.com/en/node/24926/ke,2026-11-03,,A official
+netflix,KR,Standard with ads,7000,,KRW,yes,2,,1,yes,https://help.netflix.com/en/node/24926/kr,2026-11-03,,A official
+netflix,KR,Standard,13500,,KRW,no,2,,1,yes,https://help.netflix.com/en/node/24926/kr,2026-11-03,,A official
+netflix,KR,Premium,17000,,KRW,no,4,,1,yes,https://help.netflix.com/en/node/24926/kr,2026-11-03,,A official
+netflix,KW,Basic,8.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/kw,2026-11-03,,A official
+netflix,KW,Standard,11.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/kw,2026-11-03,,A official
+netflix,KW,Premium,17.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/kw,2026-11-03,,A official
+netflix,KZ,Basic,7.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/kz,2026-11-03,,A official
+netflix,KZ,Standard,9.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/kz,2026-11-03,,A official
+netflix,KZ,Premium,11.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/kz,2026-11-03,,A official
+netflix,LB,Basic,3.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/lb,2026-11-03,,A official
+netflix,LB,Standard,7.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/lb,2026-11-03,,A official
+netflix,LB,Premium,9.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/lb,2026-11-03,,A official
+netflix,LT,Basic,8.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/lt,2026-11-03,,A official
+netflix,LT,Standard,10.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/lt,2026-11-03,,A official
+netflix,LT,Premium,13.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/lt,2026-11-03,,A official
+netflix,LU,Basic,10.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/lu,2026-11-03,,A official
+netflix,LU,Standard,16.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/lu,2026-11-03,,A official
+netflix,LU,Premium,21.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/lu,2026-11-03,,A official
+netflix,LV,Basic,7.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/lv,2026-11-03,,A official
+netflix,LV,Standard,9.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/lv,2026-11-03,,A official
+netflix,LV,Premium,11.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/lv,2026-11-03,,A official
+netflix,MA,Basic,45,,MAD,no,1,,1,yes,https://help.netflix.com/en/node/24926/ma,2026-11-03,,A official
+netflix,MA,Standard,80,,MAD,no,2,,1,yes,https://help.netflix.com/en/node/24926/ma,2026-11-03,,A official
+netflix,MA,Premium,115,,MAD,no,4,,1,yes,https://help.netflix.com/en/node/24926/ma,2026-11-03,,A official
+netflix,MD,Basic,7.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/md,2026-11-03,,A official
+netflix,MD,Standard,9.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/md,2026-11-03,,A official
+netflix,MD,Premium,11.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/md,2026-11-03,,A official
+netflix,MT,Basic,8.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/mt,2026-11-03,,A official
+netflix,MT,Standard,13.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/mt,2026-11-03,,A official
+netflix,MT,Premium,19.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/mt,2026-11-03,,A official
+netflix,MX,Standard with ads,139,,MXN,yes,2,,1,yes,https://help.netflix.com/en/node/24926/mx,2026-11-03,,A official
+netflix,MX,Standard,269,,MXN,no,2,,1,yes,https://help.netflix.com/en/node/24926/mx,2026-11-03,,A official
+netflix,MX,Premium,369,,MXN,no,4,,1,yes,https://help.netflix.com/en/node/24926/mx,2026-11-03,,A official
+netflix,MY,Mobile,19.90,,MYR,no,1,,1,yes,https://help.netflix.com/en/node/24926/my,2026-11-03,,A official
+netflix,MY,Basic,33.90,,MYR,no,1,,1,yes,https://help.netflix.com/en/node/24926/my,2026-11-03,,A official
+netflix,MY,Standard,55.90,,MYR,no,2,,1,yes,https://help.netflix.com/en/node/24926/my,2026-11-03,,A official
+netflix,MY,Premium,69.90,,MYR,no,4,,1,yes,https://help.netflix.com/en/node/24926/my,2026-11-03,,A official
+netflix,NG,Basic,4000,,NGN,no,1,,1,yes,https://help.netflix.com/en/node/24926/ng,2026-11-03,,A official
+netflix,NG,Standard,6500,,NGN,no,2,,1,yes,https://help.netflix.com/en/node/24926/ng,2026-11-03,,A official
+netflix,NG,Premium,8500,,NGN,no,4,,1,yes,https://help.netflix.com/en/node/24926/ng,2026-11-03,,A official
+netflix,NL,Basic,9.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/nl,2026-11-03,,A official
+netflix,NL,Standard,15.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/nl,2026-11-03,,A official
+netflix,NL,Premium,20.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/nl,2026-11-03,,A official
+netflix,NO,Basic,119,,NOK,no,1,,1,yes,https://help.netflix.com/en/node/24926/no,2026-11-03,,A official
+netflix,NO,Standard,149,,NOK,no,2,,1,yes,https://help.netflix.com/en/node/24926/no,2026-11-03,,A official
+netflix,NO,Premium,219,,NOK,no,4,,1,yes,https://help.netflix.com/en/node/24926/no,2026-11-03,,A official
+netflix,NZ,Basic,17.99,,NZD,no,1,,1,yes,https://help.netflix.com/en/node/24926/nz,2026-11-03,,A official
+netflix,NZ,Standard,25.99,,NZD,no,2,,1,yes,https://help.netflix.com/en/node/24926/nz,2026-11-03,,A official
+netflix,NZ,Premium,33.99,,NZD,no,4,,1,yes,https://help.netflix.com/en/node/24926/nz,2026-11-03,,A official
+netflix,OM,Basic,8.39,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/om,2026-11-03,,A official
+netflix,OM,Standard,10.49,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/om,2026-11-03,,A official
+netflix,OM,Premium,15.79,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/om,2026-11-03,,A official
+netflix,PA,Basic,5.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/pa,2026-11-03,,A official
+netflix,PA,Standard,9.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/pa,2026-11-03,,A official
+netflix,PA,Premium,13.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/pa,2026-11-03,,A official
+netflix,PE,Basic,28.90,,PEN,no,1,,1,yes,https://help.netflix.com/en/node/24926/pe,2026-11-03,,A official
+netflix,PE,Standard,44.90,,PEN,no,2,,1,yes,https://help.netflix.com/en/node/24926/pe,2026-11-03,,A official
+netflix,PE,Premium,58.90,,PEN,no,4,,1,yes,https://help.netflix.com/en/node/24926/pe,2026-11-03,,A official
+netflix,PH,Mobile,169,,PHP,no,1,,1,yes,https://help.netflix.com/en/node/24926/ph,2026-11-03,,A official
+netflix,PH,Basic,279,,PHP,no,1,,1,yes,https://help.netflix.com/en/node/24926/ph,2026-11-03,,A official
+netflix,PH,Standard,449,,PHP,no,2,,1,yes,https://help.netflix.com/en/node/24926/ph,2026-11-03,,A official
+netflix,PH,Premium,619,,PHP,no,4,,1,yes,https://help.netflix.com/en/node/24926/ph,2026-11-03,,A official
+netflix,PK,Mobile,250,,PKR,no,1,,1,yes,https://help.netflix.com/en/node/24926/pk,2026-11-03,,A official
+netflix,PK,Basic,450,,PKR,no,1,,1,yes,https://help.netflix.com/en/node/24926/pk,2026-11-03,,A official
+netflix,PK,Standard,800,,PKR,no,2,,1,yes,https://help.netflix.com/en/node/24926/pk,2026-11-03,,A official
+netflix,PK,Premium,1100,,PKR,no,4,,1,yes,https://help.netflix.com/en/node/24926/pk,2026-11-03,,A official
+netflix,PL,Basic,37,,PLN,no,1,,1,yes,https://help.netflix.com/en/node/24926/pl,2026-11-03,,A official
+netflix,PL,Standard,55,,PLN,no,2,,1,yes,https://help.netflix.com/en/node/24926/pl,2026-11-03,,A official
+netflix,PL,Premium,75,,PLN,no,4,,1,yes,https://help.netflix.com/en/node/24926/pl,2026-11-03,,A official
+netflix,PT,Basic,8.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/pt,2026-11-03,,A official
+netflix,PT,Standard,12.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/pt,2026-11-03,,A official
+netflix,PT,Premium,17.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/pt,2026-11-03,,A official
+netflix,QA,Basic,8.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/qa,2026-11-03,,A official
+netflix,QA,Standard,11.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/qa,2026-11-03,,A official
+netflix,QA,Premium,17.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/qa,2026-11-03,,A official
+netflix,RO,Basic,5.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/ro,2026-11-03,,A official
+netflix,RO,Standard,10.99,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/ro,2026-11-03,,A official
+netflix,RO,Premium,13.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/ro,2026-11-03,,A official
+netflix,SA,Basic,35,,SAR,no,1,,1,yes,https://help.netflix.com/en/node/24926/sa,2026-11-03,,A official
+netflix,SA,Standard,49,,SAR,no,2,,1,yes,https://help.netflix.com/en/node/24926/sa,2026-11-03,,A official
+netflix,SA,Premium,71,,SAR,no,4,,1,yes,https://help.netflix.com/en/node/24926/sa,2026-11-03,,A official
+netflix,SE,Basic,129,,SEK,no,1,,1,yes,https://help.netflix.com/en/node/24926/se,2026-11-03,,A official
+netflix,SE,Standard,169,,SEK,no,2,,1,yes,https://help.netflix.com/en/node/24926/se,2026-11-03,,A official
+netflix,SE,Premium,219,,SEK,no,4,,1,yes,https://help.netflix.com/en/node/24926/se,2026-11-03,,A official
+netflix,SG,Basic,15.98,,SGD,no,1,,1,yes,https://help.netflix.com/en/node/24926/sg,2026-11-03,,A official
+netflix,SG,Standard,22.98,,SGD,no,2,,1,yes,https://help.netflix.com/en/node/24926/sg,2026-11-03,,A official
+netflix,SG,Premium,29.98,,SGD,no,4,,1,yes,https://help.netflix.com/en/node/24926/sg,2026-11-03,,A official
+netflix,SK,Basic,9.49,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/sk,2026-11-03,,A official
+netflix,SK,Standard,11.49,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/sk,2026-11-03,,A official
+netflix,SK,Premium,13.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/sk,2026-11-03,,A official
+netflix,TH,Mobile,99,,THB,no,1,,1,yes,https://help.netflix.com/en/node/24926/th,2026-11-03,,A official
+netflix,TH,Basic,169,,THB,no,1,,1,yes,https://help.netflix.com/en/node/24926/th,2026-11-03,,A official
+netflix,TH,Standard,349,,THB,no,2,,1,yes,https://help.netflix.com/en/node/24926/th,2026-11-03,,A official
+netflix,TH,Premium,419,,THB,no,4,,1,yes,https://help.netflix.com/en/node/24926/th,2026-11-03,,A official
+netflix,TR,Basic,259.99,,TRY,no,1,,1,yes,https://help.netflix.com/en/node/24926/tr,2026-11-03,,A official
+netflix,TR,Standard,389.99,,TRY,no,2,,1,yes,https://help.netflix.com/en/node/24926/tr,2026-11-03,,A official
+netflix,TR,Premium,499.99,,TRY,no,4,,1,yes,https://help.netflix.com/en/node/24926/tr,2026-11-03,,A official
+netflix,TW,Basic,290,,TWD,no,1,,1,yes,https://help.netflix.com/en/node/24926/tw,2026-11-03,,A official
+netflix,TW,Standard,380,,TWD,no,2,,1,yes,https://help.netflix.com/en/node/24926/tw,2026-11-03,,A official
+netflix,TW,Premium,460,,TWD,no,4,,1,yes,https://help.netflix.com/en/node/24926/tw,2026-11-03,,A official
+netflix,UA,Basic,4.99,,EUR,no,1,,1,yes,https://help.netflix.com/en/node/24926/ua,2026-11-03,,A official
+netflix,UA,Standard,7.49,,EUR,no,2,,1,yes,https://help.netflix.com/en/node/24926/ua,2026-11-03,,A official
+netflix,UA,Premium,9.99,,EUR,no,4,,1,yes,https://help.netflix.com/en/node/24926/ua,2026-11-03,,A official
+netflix,UG,Mobile,2.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/ug,2026-11-03,,A official
+netflix,UG,Basic,3.99,,USD,no,1,,1,yes,https://help.netflix.com/en/node/24926/ug,2026-11-03,,A official
+netflix,UG,Standard,7.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/ug,2026-11-03,,A official
+netflix,UG,Premium,9.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/ug,2026-11-03,,A official
+netflix,UK,Standard with ads,7.99,,GBP,yes,2,,1,yes,https://help.netflix.com/en/node/24926/gb,2026-11-03,,A official
+netflix,UK,Standard,13.99,,GBP,no,2,,1,yes,https://help.netflix.com/en/node/24926/gb,2026-11-03,,A official
+netflix,UK,Premium,20.99,,GBP,no,4,,1,yes,https://help.netflix.com/en/node/24926/gb,2026-11-03,,A official
+netflix,US,Standard with ads,8.99,,USD,yes,2,,1,yes,https://help.netflix.com/en/node/24926/us,2026-11-03,,A official
+netflix,US,Standard,19.99,,USD,no,2,,1,yes,https://help.netflix.com/en/node/24926/us,2026-11-03,,A official
+netflix,US,Premium,26.99,,USD,no,4,,1,yes,https://help.netflix.com/en/node/24926/us,2026-11-03,,A official
+netflix,VN,Mobile,74000,,VND,no,1,,1,yes,https://help.netflix.com/en/node/24926/vn,2026-11-03,,A official
+netflix,VN,Basic,114000,,VND,no,1,,1,yes,https://help.netflix.com/en/node/24926/vn,2026-11-03,,A official
+netflix,VN,Standard,231000,,VND,no,2,,1,yes,https://help.netflix.com/en/node/24926/vn,2026-11-03,,A official
+netflix,VN,Premium,273000,,VND,no,4,,1,yes,https://help.netflix.com/en/node/24926/vn,2026-11-03,,A official
+netflix,ZA,Mobile,59,,ZAR,no,1,,1,yes,https://help.netflix.com/en/node/24926/za,2026-11-03,,A official
+netflix,ZA,Basic,99,,ZAR,no,1,,1,yes,https://help.netflix.com/en/node/24926/za,2026-11-03,,A official
+netflix,ZA,Standard,179,,ZAR,no,2,,1,yes,https://help.netflix.com/en/node/24926/za,2026-11-03,,A official
+netflix,ZA,Premium,229,,ZAR,no,4,,1,yes,https://help.netflix.com/en/node/24926/za,2026-11-03,,A official
+spotify,AE,Individual,23.99,,AED,no,,,1,no,https://www.spotify.com/ae/premium/,2026-11-03,,A official
+spotify,AE,Platinum,59.99,,AED,no,,,3,no,https://www.spotify.com/ae/premium/,2026-11-03,,A official
+spotify,AE,Student,12.99,,AED,no,,,1,no,https://www.spotify.com/ae/premium/,2026-11-03,,A official
+spotify,AR,Individual,4499,,ARS,no,,,1,no,https://www.spotify.com/ar/premium/,2026-11-03,,A official
+spotify,AR,Student,2299,,ARS,no,,,1,no,https://www.spotify.com/ar/premium/,2026-11-03,,A official
+spotify,AR,Duo,5999,,ARS,no,,,2,yes,https://www.spotify.com/ar/premium/,2026-11-03,,A official
+spotify,AR,Family,7599,,ARS,no,,,6,yes,https://www.spotify.com/ar/premium/,2026-11-03,,A official
+spotify,AU,Individual,15.99,,AUD,no,,,1,no,https://www.spotify.com/au/premium/,2026-11-03,,A official
+spotify,AU,Student,7.99,,AUD,no,,,1,no,https://www.spotify.com/au/premium/,2026-11-03,,A official
+spotify,AU,Duo,22.99,,AUD,no,,,2,yes,https://www.spotify.com/au/premium/,2026-11-03,,A official
+spotify,AU,Family,27.99,,AUD,no,,,6,yes,https://www.spotify.com/au/premium/,2026-11-03,,A official
+spotify,BD,Individual,219,,BDT,no,,,1,no,https://www.spotify.com/bd/premium/,2026-11-03,,A official
+spotify,BD,Student,109,,BDT,no,,,1,no,https://www.spotify.com/bd/premium/,2026-11-03,,A official
+spotify,BD,Duo,299,,BDT,no,,,2,yes,https://www.spotify.com/bd/premium/,2026-11-03,,A official
+spotify,BD,Family,379,,BDT,no,,,6,yes,https://www.spotify.com/bd/premium/,2026-11-03,,A official
+spotify,BE,Individual,13.99,,EUR,no,,,1,no,https://www.spotify.com/be/premium/,2026-11-03,,A official
+spotify,BE,Student,6.99,,EUR,no,,,1,no,https://www.spotify.com/be/premium/,2026-11-03,,A official
+spotify,BE,Duo,19.99,,EUR,no,,,2,yes,https://www.spotify.com/be/premium/,2026-11-03,,A official
+spotify,BE,Family,23.99,,EUR,no,,,6,yes,https://www.spotify.com/be/premium/,2026-11-03,,A official
+spotify,BG,Individual,5.62,,EUR,no,,,1,no,https://www.spotify.com/bg/premium/,2026-11-03,,A official
+spotify,BG,Student,2.81,,EUR,no,,,1,no,https://www.spotify.com/bg/premium/,2026-11-03,,A official
+spotify,BG,Duo,7.92,,EUR,no,,,2,yes,https://www.spotify.com/bg/premium/,2026-11-03,,A official
+spotify,BG,Family,9.97,,EUR,no,,,6,yes,https://www.spotify.com/bg/premium/,2026-11-03,,A official
+spotify,BH,Individual,5.49,,USD,no,,,1,no,https://www.spotify.com/bh/premium/,2026-11-03,,A official
+spotify,BH,Student,2.99,,USD,no,,,1,no,https://www.spotify.com/bh/premium/,2026-11-03,,A official
+spotify,BH,Duo,7.49,,USD,no,,,2,yes,https://www.spotify.com/bh/premium/,2026-11-03,,A official
+spotify,BH,Family,9.49,,USD,no,,,6,yes,https://www.spotify.com/bh/premium/,2026-11-03,,A official
+spotify,BR,Individual,23.90,,BRL,no,,,1,no,https://www.spotify.com/br/premium/,2026-11-03,,A official
+spotify,BR,Student,12.90,,BRL,no,,,1,no,https://www.spotify.com/br/premium/,2026-11-03,,A official
+spotify,BR,Duo,31.90,,BRL,no,,,2,yes,https://www.spotify.com/br/premium/,2026-11-03,,A official
+spotify,BR,Family,40.90,,BRL,no,,,6,yes,https://www.spotify.com/br/premium/,2026-11-03,,A official
+spotify,CA,Individual,13.99,,CAD,no,,,1,no,https://www.spotify.com/ca/premium/,2026-11-03,,A official
+spotify,CA,Student,6.39,,CAD,no,,,1,no,https://www.spotify.com/ca/premium/,2026-11-03,,A official
+spotify,CA,Duo,19.99,,CAD,no,,,2,yes,https://www.spotify.com/ca/premium/,2026-11-03,,A official
+spotify,CA,Family,23.99,,CAD,no,,,6,yes,https://www.spotify.com/ca/premium/,2026-11-03,,A official
+spotify,CL,Individual,4950,,CLP,no,,,1,no,https://www.spotify.com/cl/premium/,2026-11-03,,A official
+spotify,CL,Student,2700,,CLP,no,,,1,no,https://www.spotify.com/cl/premium/,2026-11-03,,A official
+spotify,CL,Duo,6750,,CLP,no,,,2,yes,https://www.spotify.com/cl/premium/,2026-11-03,,A official
+spotify,CL,Family,8250,,CLP,no,,,6,yes,https://www.spotify.com/cl/premium/,2026-11-03,,A official
+spotify,CY,Individual,8.99,,EUR,no,,,1,no,https://www.spotify.com/cy/premium/,2026-11-03,,A official
+spotify,CY,Student,4.99,,EUR,no,,,1,no,https://www.spotify.com/cy/premium/,2026-11-03,,A official
+spotify,CY,Duo,11.99,,EUR,no,,,2,yes,https://www.spotify.com/cy/premium/,2026-11-03,,A official
+spotify,CY,Family,14.99,,EUR,no,,,6,yes,https://www.spotify.com/cy/premium/,2026-11-03,,A official
+spotify,CZ,Individual,185,,CZK,no,,,1,no,https://www.spotify.com/cz/premium/,2026-11-03,,A official
+spotify,CZ,Student,97,,CZK,no,,,1,no,https://www.spotify.com/cz/premium/,2026-11-03,,A official
+spotify,CZ,Duo,249,,CZK,no,,,2,yes,https://www.spotify.com/cz/premium/,2026-11-03,,A official
+spotify,CZ,Family,299,,CZK,no,,,6,yes,https://www.spotify.com/cz/premium/,2026-11-03,,A official
+spotify,DK,Individual,129,,DKK,no,,,1,no,https://www.spotify.com/dk/premium/,2026-11-03,,A official
+spotify,DK,Student,65,,DKK,no,,,1,no,https://www.spotify.com/dk/premium/,2026-11-03,,A official
+spotify,DK,Duo,189,,DKK,no,,,2,yes,https://www.spotify.com/dk/premium/,2026-11-03,,A official
+spotify,DK,Family,229,,DKK,no,,,6,yes,https://www.spotify.com/dk/premium/,2026-11-03,,A official
+spotify,DZ,Individual,4.99,,USD,no,,,1,no,https://www.spotify.com/dz/premium/,2026-11-03,,A official
+spotify,DZ,Student,2.49,,USD,no,,,1,no,https://www.spotify.com/dz/premium/,2026-11-03,,A official
+spotify,DZ,Duo,6.49,,USD,no,,,2,yes,https://www.spotify.com/dz/premium/,2026-11-03,,A official
+spotify,DZ,Family,7.99,,USD,no,,,6,yes,https://www.spotify.com/dz/premium/,2026-11-03,,A official
+spotify,EE,Individual,11.99,,EUR,no,,,1,no,https://www.spotify.com/ee/premium/,2026-11-03,,A official
+spotify,EE,Student,6.49,,EUR,no,,,1,no,https://www.spotify.com/ee/premium/,2026-11-03,,A official
+spotify,EE,Duo,15.99,,EUR,no,,,2,yes,https://www.spotify.com/ee/premium/,2026-11-03,,A official
+spotify,EE,Family,19.99,,EUR,no,,,6,yes,https://www.spotify.com/ee/premium/,2026-11-03,,A official
+spotify,EG,Individual,79,,EGP,no,,,1,no,https://www.spotify.com/eg/premium/,2026-11-03,,A official
+spotify,EG,Student,39,,EGP,no,,,1,no,https://www.spotify.com/eg/premium/,2026-11-03,,A official
+spotify,EG,Duo,109,,EGP,no,,,2,yes,https://www.spotify.com/eg/premium/,2026-11-03,,A official
+spotify,EG,Family,139,,EGP,no,,,6,yes,https://www.spotify.com/eg/premium/,2026-11-03,,A official
+spotify,ES,Individual,11.99,,EUR,no,,,1,no,https://www.spotify.com/es/premium/,2026-11-03,,A official
+spotify,ES,Student,6.49,,EUR,no,,,1,no,https://www.spotify.com/es/premium/,2026-11-03,,A official
+spotify,ES,Duo,16.99,,EUR,no,,,2,yes,https://www.spotify.com/es/premium/,2026-11-03,,A official
+spotify,ES,Family,20.99,,EUR,no,,,6,yes,https://www.spotify.com/es/premium/,2026-11-03,,A official
+spotify,FI,Individual,12.99,,EUR,no,,,1,no,https://www.spotify.com/fi/premium/,2026-11-03,,A official
+spotify,FI,Student,7.49,,EUR,no,,,1,no,https://www.spotify.com/fi/premium/,2026-11-03,,A official
+spotify,FI,Duo,18.49,,EUR,no,,,2,yes,https://www.spotify.com/fi/premium/,2026-11-03,,A official
+spotify,FI,Family,21.99,,EUR,no,,,6,yes,https://www.spotify.com/fi/premium/,2026-11-03,,A official
+spotify,FR,Individual,12.14,,EUR,no,,,1,no,https://www.spotify.com/fr/premium/,2026-11-03,,A official
+spotify,FR,Student,7.07,,EUR,no,,,1,no,https://www.spotify.com/fr/premium/,2026-11-03,,A official
+spotify,FR,Duo,17.20,,EUR,no,,,2,yes,https://www.spotify.com/fr/premium/,2026-11-03,,A official
+spotify,FR,Family,21.24,,EUR,no,,,6,yes,https://www.spotify.com/fr/premium/,2026-11-03,,A official
+spotify,GH,Individual,24,,GHS,no,,,1,no,https://www.spotify.com/gh/premium/,2026-11-03,,A official
+spotify,GH,Student,12,,GHS,no,,,1,no,https://www.spotify.com/gh/premium/,2026-11-03,,A official
+spotify,GH,Duo,33,,GHS,no,,,2,yes,https://www.spotify.com/gh/premium/,2026-11-03,,A official
+spotify,GH,Family,43,,GHS,no,,,6,yes,https://www.spotify.com/gh/premium/,2026-11-03,,A official
+spotify,GR,Individual,8.99,,EUR,no,,,1,no,https://www.spotify.com/gr/premium/,2026-11-03,,A official
+spotify,GR,Student,4.99,,EUR,no,,,1,no,https://www.spotify.com/gr/premium/,2026-11-03,,A official
+spotify,GR,Duo,11.99,,EUR,no,,,2,yes,https://www.spotify.com/gr/premium/,2026-11-03,,A official
+spotify,GR,Family,14.99,,EUR,no,,,6,yes,https://www.spotify.com/gr/premium/,2026-11-03,,A official
+spotify,HK,Individual,78,,HKD,no,,,1,no,https://www.spotify.com/hk/premium/,2026-11-03,,A official
+spotify,HK,Student,48,,HKD,no,,,1,no,https://www.spotify.com/hk/premium/,2026-11-03,,A official
+spotify,HK,Duo,98,,HKD,no,,,2,yes,https://www.spotify.com/hk/premium/,2026-11-03,,A official
+spotify,HK,Family,128,,HKD,no,,,6,yes,https://www.spotify.com/hk/premium/,2026-11-03,,A official
+spotify,HU,Individual,2190,,HUF,no,,,1,no,https://www.spotify.com/hu/premium/,2026-11-03,,A official
+spotify,HU,Student,1190,,HUF,no,,,1,no,https://www.spotify.com/hu/premium/,2026-11-03,,A official
+spotify,HU,Duo,3090,,HUF,no,,,2,yes,https://www.spotify.com/hu/premium/,2026-11-03,,A official
+spotify,HU,Family (4),3690,,HUF,no,,,4,yes,https://www.spotify.com/hu/premium/,2026-11-03,,A official
+spotify,HU,Family,4090,,HUF,no,,,6,yes,https://www.spotify.com/hu/premium/,2026-11-03,,A official
+spotify,IE,Individual,12.99,,EUR,no,,,1,no,https://www.spotify.com/ie/premium/,2026-11-03,,A official
+spotify,IE,Student,6.99,,EUR,no,,,1,no,https://www.spotify.com/ie/premium/,2026-11-03,,A official
+spotify,IE,Duo,18.99,,EUR,no,,,2,yes,https://www.spotify.com/ie/premium/,2026-11-03,,A official
+spotify,IE,Family,22.99,,EUR,no,,,6,yes,https://www.spotify.com/ie/premium/,2026-11-03,,A official
+spotify,IL,Individual,23.90,,ILS,no,,,1,no,https://www.spotify.com/il/premium/,2026-11-03,,A official
+spotify,IL,Student,12.90,,ILS,no,,,1,no,https://www.spotify.com/il/premium/,2026-11-03,,A official
+spotify,IL,Duo,33.90,,ILS,no,,,2,yes,https://www.spotify.com/il/premium/,2026-11-03,,A official
+spotify,IL,Family,39.90,,ILS,no,,,4,yes,https://www.spotify.com/il/premium/,2026-11-03,,A official
+spotify,IN,Individual,119,,INR,no,,,1,no,https://www.spotify.com/in/premium/,2026-11-03,,A official
+spotify,IT,Individual,11.99,,EUR,no,,,1,no,https://www.spotify.com/it/premium/,2026-11-03,,A official
+spotify,IT,Student,6.49,,EUR,no,,,1,no,https://www.spotify.com/it/premium/,2026-11-03,,A official
+spotify,IT,Duo,16.99,,EUR,no,,,2,yes,https://www.spotify.com/it/premium/,2026-11-03,,A official
+spotify,IT,Family,20.99,,EUR,no,,,6,yes,https://www.spotify.com/it/premium/,2026-11-03,,A official
+spotify,JP,Standard,1080,,JPY,no,,,1,no,https://www.spotify.com/jp/premium/,2026-11-03,,A official
+spotify,JP,Student,580,,JPY,no,,,1,no,https://www.spotify.com/jp/premium/,2026-11-03,,A official
+spotify,JP,Duo,1480,,JPY,no,,,2,yes,https://www.spotify.com/jp/premium/,2026-11-03,,A official
+spotify,JP,Family,1880,,JPY,no,,,6,yes,https://www.spotify.com/jp/premium/,2026-11-03,,A official
+spotify,KE,Individual,419,,KES,no,,,1,no,https://www.spotify.com/ke/premium/,2026-11-03,,A official
+spotify,KE,Student,209,,KES,no,,,1,no,https://www.spotify.com/ke/premium/,2026-11-03,,A official
+spotify,KE,Duo,549,,KES,no,,,2,yes,https://www.spotify.com/ke/premium/,2026-11-03,,A official
+spotify,KE,Family,669,,KES,no,,,6,yes,https://www.spotify.com/ke/premium/,2026-11-03,,A official
+spotify,KR,Individual,11990,,KRW,no,,,1,no,https://www.spotify.com/kr/premium/,2026-11-03,,A official
+spotify,KR,Basic,8690,,KRW,no,,,1,no,https://www.spotify.com/kr/premium/,2026-11-03,,A official
+spotify,KR,Student,6600,,KRW,no,,,1,no,https://www.spotify.com/kr/premium/,2026-11-03,,A official
+spotify,KR,Duo,17985,,KRW,no,,,2,yes,https://www.spotify.com/kr/premium/,2026-11-03,,A official
+spotify,KW,Individual,5.49,,USD,no,,,1,no,https://www.spotify.com/kw/premium/,2026-11-03,,A official
+spotify,KW,Student,2.99,,USD,no,,,1,no,https://www.spotify.com/kw/premium/,2026-11-03,,A official
+spotify,KW,Duo,7.49,,USD,no,,,2,yes,https://www.spotify.com/kw/premium/,2026-11-03,,A official
+spotify,KW,Family,9.49,,USD,no,,,6,yes,https://www.spotify.com/kw/premium/,2026-11-03,,A official
+spotify,LB,Individual,5.49,,USD,no,,,1,no,https://www.spotify.com/lb/premium/,2026-11-03,,A official
+spotify,LB,Student,2.99,,USD,no,,,1,no,https://www.spotify.com/lb/premium/,2026-11-03,,A official
+spotify,LB,Duo,7.49,,USD,no,,,2,yes,https://www.spotify.com/lb/premium/,2026-11-03,,A official
+spotify,LB,Family,9.49,,USD,no,,,6,yes,https://www.spotify.com/lb/premium/,2026-11-03,,A official
+spotify,LT,Individual,8.99,,EUR,no,,,1,no,https://www.spotify.com/lt/premium/,2026-11-03,,A official
+spotify,LT,Student,4.99,,EUR,no,,,1,no,https://www.spotify.com/lt/premium/,2026-11-03,,A official
+spotify,LT,Duo,11.99,,EUR,no,,,2,yes,https://www.spotify.com/lt/premium/,2026-11-03,,A official
+spotify,LT,Family,14.99,,EUR,no,,,6,yes,https://www.spotify.com/lt/premium/,2026-11-03,,A official
+spotify,LU,Individual,13.99,,EUR,no,,,1,no,https://www.spotify.com/lu/premium/,2026-11-03,,A official
+spotify,LU,Student,6.99,,EUR,no,,,1,no,https://www.spotify.com/lu/premium/,2026-11-03,,A official
+spotify,LU,Duo,19.99,,EUR,no,,,2,yes,https://www.spotify.com/lu/premium/,2026-11-03,,A official
+spotify,LU,Family,23.99,,EUR,no,,,6,yes,https://www.spotify.com/lu/premium/,2026-11-03,,A official
+spotify,LV,Individual,11.99,,EUR,no,,,1,no,https://www.spotify.com/lv/premium/,2026-11-03,,A official
+spotify,LV,Student,6.49,,EUR,no,,,1,no,https://www.spotify.com/lv/premium/,2026-11-03,,A official
+spotify,LV,Duo,15.99,,EUR,no,,,2,yes,https://www.spotify.com/lv/premium/,2026-11-03,,A official
+spotify,LV,Family,19.99,,EUR,no,,,6,yes,https://www.spotify.com/lv/premium/,2026-11-03,,A official
+spotify,MA,Individual,45,,MAD,no,,,1,no,https://www.spotify.com/ma/premium/,2026-11-03,,A official
+spotify,MA,Student,23,,MAD,no,,,1,no,https://www.spotify.com/ma/premium/,2026-11-03,,A official
+spotify,MA,Duo,60,,MAD,no,,,2,yes,https://www.spotify.com/ma/premium/,2026-11-03,,A official
+spotify,MA,Family,75,,MAD,no,,,6,yes,https://www.spotify.com/ma/premium/,2026-11-03,,A official
+spotify,MT,Individual,8.99,,EUR,no,,,1,no,https://www.spotify.com/mt/premium/,2026-11-03,,A official
+spotify,MT,Student,4.99,,EUR,no,,,1,no,https://www.spotify.com/mt/premium/,2026-11-03,,A official
+spotify,MT,Duo,11.99,,EUR,no,,,2,yes,https://www.spotify.com/mt/premium/,2026-11-03,,A official
+spotify,MT,Family,14.99,,EUR,no,,,6,yes,https://www.spotify.com/mt/premium/,2026-11-03,,A official
+spotify,MX,Individual,139,,MXN,no,,,1,no,https://www.spotify.com/mx/premium/,2026-11-03,,A official
+spotify,MX,Student,74,,MXN,no,,,1,no,https://www.spotify.com/mx/premium/,2026-11-03,,A official
+spotify,MX,Duo,189,,MXN,no,,,2,yes,https://www.spotify.com/mx/premium/,2026-11-03,,A official
+spotify,MX,Family,239,,MXN,no,,,6,yes,https://www.spotify.com/mx/premium/,2026-11-03,,A official
+spotify,MY,Individual,17.50,,MYR,no,,,1,no,https://www.spotify.com/my/premium/,2026-11-03,,A official
+spotify,MY,Student,9.50,,MYR,no,,,1,no,https://www.spotify.com/my/premium/,2026-11-03,,A official
+spotify,MY,Duo,24.50,,MYR,no,,,2,yes,https://www.spotify.com/my/premium/,2026-11-03,,A official
+spotify,MY,Family,27.90,,MYR,no,,,4,yes,https://www.spotify.com/my/premium/,2026-11-03,,A official
+spotify,NG,Individual,1600,,NGN,no,,,1,no,https://www.spotify.com/ng/premium/,2026-11-03,,A official
+spotify,NG,Student,800,,NGN,no,,,1,no,https://www.spotify.com/ng/premium/,2026-11-03,,A official
+spotify,NG,Duo,2100,,NGN,no,,,2,yes,https://www.spotify.com/ng/premium/,2026-11-03,,A official
+spotify,NG,Family,2500,,NGN,no,,,6,yes,https://www.spotify.com/ng/premium/,2026-11-03,,A official
+spotify,NL,Individual,13.99,,EUR,no,,,1,no,https://www.spotify.com/nl/premium/,2026-11-03,,A official
+spotify,NL,Student,6.99,,EUR,no,,,1,no,https://www.spotify.com/nl/premium/,2026-11-03,,A official
+spotify,NL,Duo,19.99,,EUR,no,,,2,yes,https://www.spotify.com/nl/premium/,2026-11-03,,A official
+spotify,NL,Family,23.99,,EUR,no,,,6,yes,https://www.spotify.com/nl/premium/,2026-11-03,,A official
+spotify,NO,Individual,139,,NOK,no,,,1,no,https://www.spotify.com/no/premium/,2026-11-03,,A official
+spotify,NO,Student,75,,NOK,no,,,1,no,https://www.spotify.com/no/premium/,2026-11-03,,A official
+spotify,NO,Duo,189,,NOK,no,,,2,yes,https://www.spotify.com/no/premium/,2026-11-03,,A official
+spotify,NO,Family,219,,NOK,no,,,6,yes,https://www.spotify.com/no/premium/,2026-11-03,,A official
+spotify,NZ,Individual,20.99,,NZD,no,,,1,no,https://www.spotify.com/nz/premium/,2026-11-03,,A official
+spotify,NZ,Student,10.49,,NZD,no,,,1,no,https://www.spotify.com/nz/premium/,2026-11-03,,A official
+spotify,NZ,Duo,28.99,,NZD,no,,,2,yes,https://www.spotify.com/nz/premium/,2026-11-03,,A official
+spotify,NZ,Family,33.99,,NZD,no,,,6,yes,https://www.spotify.com/nz/premium/,2026-11-03,,A official
+spotify,OM,Individual,5.49,,USD,no,,,1,no,https://www.spotify.com/om/premium/,2026-11-03,,A official
+spotify,OM,Student,2.99,,USD,no,,,1,no,https://www.spotify.com/om/premium/,2026-11-03,,A official
+spotify,OM,Duo,7.49,,USD,no,,,2,yes,https://www.spotify.com/om/premium/,2026-11-03,,A official
+spotify,OM,Family,9.49,,USD,no,,,6,yes,https://www.spotify.com/om/premium/,2026-11-03,,A official
+spotify,PA,Individual,6.99,,USD,no,,,1,no,https://www.spotify.com/pa/premium/,2026-11-03,,A official
+spotify,PA,Student,3.99,,USD,no,,,1,no,https://www.spotify.com/pa/premium/,2026-11-03,,A official
+spotify,PA,Duo,9.99,,USD,no,,,2,yes,https://www.spotify.com/pa/premium/,2026-11-03,,A official
+spotify,PA,Family,12.99,,USD,no,,,6,yes,https://www.spotify.com/pa/premium/,2026-11-03,,A official
+spotify,PE,Individual,20.90,,PEN,no,,,1,no,https://www.spotify.com/pe/premium/,2026-11-03,,A official
+spotify,PE,Student,11.90,,PEN,no,,,1,no,https://www.spotify.com/pe/premium/,2026-11-03,,A official
+spotify,PE,Duo,26.90,,PEN,no,,,2,yes,https://www.spotify.com/pe/premium/,2026-11-03,,A official
+spotify,PE,Family,32.90,,PEN,no,,,4,yes,https://www.spotify.com/pe/premium/,2026-11-03,,A official
+spotify,PH,Individual,169,,PHP,no,,,1,no,https://www.spotify.com/ph/premium/,2026-11-03,,A official
+spotify,PH,Student,85,,PHP,no,,,1,no,https://www.spotify.com/ph/premium/,2026-11-03,,A official
+spotify,PH,Duo,229,,PHP,no,,,2,yes,https://www.spotify.com/ph/premium/,2026-11-03,,A official
+spotify,PH,Family,279,,PHP,no,,,6,yes,https://www.spotify.com/ph/premium/,2026-11-03,,A official
+spotify,PK,Individual,379,,PKR,no,,,1,no,https://www.spotify.com/pk/premium/,2026-11-03,,A official
+spotify,PK,Student,199,,PKR,no,,,1,no,https://www.spotify.com/pk/premium/,2026-11-03,,A official
+spotify,PK,Duo,519,,PKR,no,,,2,yes,https://www.spotify.com/pk/premium/,2026-11-03,,A official
+spotify,PK,Family,679,,PKR,no,,,6,yes,https://www.spotify.com/pk/premium/,2026-11-03,,A official
+spotify,PL,Individual,26.99,,PLN,no,,,1,no,https://www.spotify.com/pl/premium/,2026-11-03,,A official
+spotify,PL,Student,14.49,,PLN,no,,,1,no,https://www.spotify.com/pl/premium/,2026-11-03,,A official
+spotify,PL,Duo,36.99,,PLN,no,,,2,yes,https://www.spotify.com/pl/premium/,2026-11-03,,A official
+spotify,PL,Family,45.99,,PLN,no,,,6,yes,https://www.spotify.com/pl/premium/,2026-11-03,,A official
+spotify,QA,Individual,21.99,,QAR,no,,,1,no,https://www.spotify.com/qa/premium/,2026-11-03,,A official
+spotify,QA,Student,10.99,,QAR,no,,,1,no,https://www.spotify.com/qa/premium/,2026-11-03,,A official
+spotify,QA,Duo,29.99,,QAR,no,,,2,yes,https://www.spotify.com/qa/premium/,2026-11-03,,A official
+spotify,QA,Family,37.99,,QAR,no,,,6,yes,https://www.spotify.com/qa/premium/,2026-11-03,,A official
+spotify,RO,Individual,26,,RON,no,,,1,no,https://www.spotify.com/ro/premium/,2026-11-03,,A official
+spotify,RO,Student,14,,RON,no,,,1,no,https://www.spotify.com/ro/premium/,2026-11-03,,A official
+spotify,RO,Duo,35,,RON,no,,,2,yes,https://www.spotify.com/ro/premium/,2026-11-03,,A official
+spotify,RO,Family,42,,RON,no,,,4,yes,https://www.spotify.com/ro/premium/,2026-11-03,,A official
+spotify,SA,Standard,23.99,,SAR,no,,,1,no,https://www.spotify.com/sa/premium/,2026-11-03,,A official
+spotify,SA,Platinum,59.99,,SAR,no,,,3,no,https://www.spotify.com/sa/premium/,2026-11-03,,A official
+spotify,SA,Student,12.99,,SAR,no,,,1,no,https://www.spotify.com/sa/premium/,2026-11-03,,A official
+spotify,SE,Individual,149,,SEK,no,,,1,no,https://www.spotify.com/se/premium/,2026-11-03,,A official
+spotify,SE,Student,70,,SEK,no,,,1,no,https://www.spotify.com/se/premium/,2026-11-03,,A official
+spotify,SE,Duo,199,,SEK,no,,,2,yes,https://www.spotify.com/se/premium/,2026-11-03,,A official
+spotify,SE,Family,249,,SEK,no,,,6,yes,https://www.spotify.com/se/premium/,2026-11-03,,A official
+spotify,SK,Individual,6.99,,EUR,no,,,1,no,https://www.spotify.com/sk/premium/,2026-11-03,,A official
+spotify,SK,Student,3.99,,EUR,no,,,1,no,https://www.spotify.com/sk/premium/,2026-11-03,,A official
+spotify,SK,Duo,9.99,,EUR,no,,,2,yes,https://www.spotify.com/sk/premium/,2026-11-03,,A official
+spotify,SK,Family (4),11.99,,EUR,no,,,4,yes,https://www.spotify.com/sk/premium/,2026-11-03,,A official
+spotify,SK,Family,12.99,,EUR,no,,,6,yes,https://www.spotify.com/sk/premium/,2026-11-03,,A official
+spotify,TH,Individual,149,,THB,no,,,1,no,https://www.spotify.com/th/premium/,2026-11-03,,A official
+spotify,TH,Student,79,,THB,no,,,1,no,https://www.spotify.com/th/premium/,2026-11-03,,A official
+spotify,TH,Duo,209,,THB,no,,,2,yes,https://www.spotify.com/th/premium/,2026-11-03,,A official
+spotify,TH,Family,249,,THB,no,,,6,yes,https://www.spotify.com/th/premium/,2026-11-03,,A official
+spotify,TR,Individual,115,,TRY,no,,,1,no,https://www.spotify.com/tr/premium/,2026-11-03,,A official
+spotify,TR,Student,60,,TRY,no,,,1,no,https://www.spotify.com/tr/premium/,2026-11-03,,A official
+spotify,TR,Duo,159,,TRY,no,,,2,yes,https://www.spotify.com/tr/premium/,2026-11-03,,A official
+spotify,TR,Family,199,,TRY,no,,,6,yes,https://www.spotify.com/tr/premium/,2026-11-03,,A official
+spotify,TW,Individual,168,,TWD,no,,,1,no,https://www.spotify.com/tw/premium/,2026-11-03,,A official
+spotify,TW,Student,88,,TWD,no,,,1,no,https://www.spotify.com/tw/premium/,2026-11-03,,A official
+spotify,TW,Duo,228,,TWD,no,,,2,yes,https://www.spotify.com/tw/premium/,2026-11-03,,A official
+spotify,TW,Family,298,,TWD,no,,,6,yes,https://www.spotify.com/tw/premium/,2026-11-03,,A official
+spotify,UA,Individual,4.99,,USD,no,,,1,no,https://www.spotify.com/ua/premium/,2026-11-03,,A official
+spotify,UA,Student,2.49,,USD,no,,,1,no,https://www.spotify.com/ua/premium/,2026-11-03,,A official
+spotify,UA,Duo,6.49,,USD,no,,,2,yes,https://www.spotify.com/ua/premium/,2026-11-03,,A official
+spotify,UA,Family,7.99,,USD,no,,,6,yes,https://www.spotify.com/ua/premium/,2026-11-03,,A official
+spotify,UG,Individual,11000,,UGX,no,,,1,no,https://www.spotify.com/ug/premium/,2026-11-03,,A official
+spotify,UG,Student,5500,,UGX,no,,,1,no,https://www.spotify.com/ug/premium/,2026-11-03,,A official
+spotify,UG,Duo,15000,,UGX,no,,,2,yes,https://www.spotify.com/ug/premium/,2026-11-03,,A official
+spotify,UG,Family,19000,,UGX,no,,,6,yes,https://www.spotify.com/ug/premium/,2026-11-03,,A official
+spotify,UK,Individual,12.99,,GBP,no,,,1,no,https://www.spotify.com/uk/premium/,2026-11-03,,A official
+spotify,UK,Student,5.99,,GBP,no,,,1,no,https://www.spotify.com/uk/premium/,2026-11-03,,A official
+spotify,UK,Duo,17.99,,GBP,no,,,2,yes,https://www.spotify.com/uk/premium/,2026-11-03,,A official
+spotify,UK,Family,21.99,,GBP,no,,,6,yes,https://www.spotify.com/uk/premium/,2026-11-03,,A official
+spotify,US,Individual,12.99,,USD,no,,,1,no,https://www.spotify.com/us/premium/,2026-11-03,,A official
+spotify,US,Student,6.99,,USD,no,,,1,no,https://www.spotify.com/us/premium/,2026-11-03,,A official
+spotify,US,Duo,18.99,,USD,no,,,2,yes,https://www.spotify.com/us/premium/,2026-11-03,,A official
+spotify,US,Family,21.99,,USD,no,,,6,yes,https://www.spotify.com/us/premium/,2026-11-03,,A official
+spotify,VN,Individual,65000,,VND,no,,,1,no,https://www.spotify.com/vn/premium/,2026-11-03,,A official
+spotify,VN,Student,33000,,VND,no,,,1,no,https://www.spotify.com/vn/premium/,2026-11-03,,A official
+spotify,ZA,Standard,69.99,,ZAR,no,,,1,no,https://www.spotify.com/za/premium/,2026-11-03,,A official
+spotify,ZA,Platinum,179.99,,ZAR,no,,,3,no,https://www.spotify.com/za/premium/,2026-11-03,,A official
+spotify,ZA,Student,37.99,,ZAR,no,,,1,no,https://www.spotify.com/za/premium/,2026-11-03,,A official
+spotify,CO,Premium Individual,18500,,COP,no,,,1,no,https://www.spotify.com/co/premium/,2026-11-03,,A official
+spotify,CO,Premium Student,10100,,COP,no,,,1,no,https://www.spotify.com/co/premium/,2026-11-03,,A official
+spotify,CO,Premium Duo,24500,,COP,no,,,2,yes,https://www.spotify.com/co/premium/,2026-11-03,,A official
+spotify,CO,Premium Family,30500,,COP,no,,,6,yes,https://www.spotify.com/co/premium/,2026-11-03,,A official
+spotify,ID,Premium Standard,59900,,IDR,no,,,1,no,https://www.spotify.com/id/premium/,2026-11-03,,A official
+spotify,ID,Premium Platinum,119900,,IDR,no,,,3,yes,https://www.spotify.com/id/premium/,2026-11-03,,A official
+spotify,ID,Premium Student,29900,,IDR,no,,,1,no,https://www.spotify.com/id/premium/,2026-11-03,,A official
+spotify,IS,Premium Individual,12.99,,EUR,no,,,1,no,https://www.spotify.com/is/premium/,2026-11-03,,A official
+spotify,IS,Premium Student,7.49,,EUR,no,,,1,no,https://www.spotify.com/is/premium/,2026-11-03,,A official
+spotify,IS,Premium Duo,18.49,,EUR,no,,,2,yes,https://www.spotify.com/is/premium/,2026-11-03,,A official
+spotify,IS,Premium Family,21.99,,EUR,no,,,6,yes,https://www.spotify.com/is/premium/,2026-11-03,,A official
+spotify,JO,Premium Individual,5.49,,USD,no,,,1,no,https://www.spotify.com/jo/premium/,2026-11-03,,A official
+spotify,JO,Premium Student,2.99,,USD,no,,,1,no,https://www.spotify.com/jo/premium/,2026-11-03,,A official
+spotify,JO,Premium Duo,7.49,,USD,no,,,2,yes,https://www.spotify.com/jo/premium/,2026-11-03,,A official
+spotify,JO,Premium Family,9.49,,USD,no,,,6,yes,https://www.spotify.com/jo/premium/,2026-11-03,,A official
+spotify,KZ,Premium Individual,4.99,,USD,no,,,1,no,https://www.spotify.com/kz/premium/,2026-11-03,,A official
+spotify,KZ,Premium Student,2.49,,USD,no,,,1,no,https://www.spotify.com/kz/premium/,2026-11-03,,A official
+spotify,KZ,Premium Duo,6.49,,USD,no,,,2,yes,https://www.spotify.com/kz/premium/,2026-11-03,,A official
+spotify,KZ,Premium Family,7.99,,USD,no,,,6,yes,https://www.spotify.com/kz/premium/,2026-11-03,,A official
+spotify,SG,Premium Individual,11.98,,SGD,no,,,1,no,https://www.spotify.com/sg/premium/,2026-11-03,,A official
+spotify,SG,Premium Student,6.48,,SGD,no,,,1,no,https://www.spotify.com/sg/premium/,2026-11-03,,A official
+spotify,SG,Premium Duo,16.98,,SGD,no,,,2,yes,https://www.spotify.com/sg/premium/,2026-11-03,,A official
+spotify,SG,Premium Family,20.98,,SGD,no,,,6,yes,https://www.spotify.com/sg/premium/,2026-11-03,,A official
+disney+,BE,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/be/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,BE,Standard,10.99,,EUR,no,2,,1,yes,https://apps.apple.com/be/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,BG,Premium,13.99,139.99,EUR,no,4,,1,yes,https://apps.apple.com/bg/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,BG,Standard,9.99,99.99,EUR,no,2,,1,yes,https://apps.apple.com/bg/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CZ,Premium,359,3590,CZK,no,4,,1,yes,https://apps.apple.com/cz/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CZ,Standard,219,,CZK,no,2,,1,yes,https://apps.apple.com/cz/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,DK,Premium,169,1690,DKK,no,4,,1,yes,https://apps.apple.com/dk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,DK,Standard,119,,DKK,no,2,,1,yes,https://apps.apple.com/dk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,DK,Standard with ads,79,,DKK,yes,2,,1,yes,https://apps.apple.com/dk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,EE,Premium,13.99,139.99,EUR,no,4,,1,yes,https://apps.apple.com/ee/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,EE,Standard,9.99,,EUR,no,2,,1,yes,https://apps.apple.com/ee/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,ES,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/es/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,ES,Standard with ads,6.99,,EUR,yes,2,,1,yes,https://apps.apple.com/es/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,ES,Standard,10.99,,EUR,no,2,,1,yes,https://apps.apple.com/es/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,FI,Premium,16.99,169.99,EUR,no,4,,1,yes,https://apps.apple.com/fi/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,FI,Standard,11.99,,EUR,no,2,,1,yes,https://apps.apple.com/fi/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,FI,Standard with ads,7.99,,EUR,yes,2,,1,yes,https://apps.apple.com/fi/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,FR,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/fr/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,FR,Standard,10.99,,EUR,no,2,,1,yes,https://apps.apple.com/fr/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,FR,Standard with ads,6.99,,EUR,yes,2,,1,yes,https://apps.apple.com/fr/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,GR,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/gr/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,GR,Standard,10.99,,EUR,no,2,,1,yes,https://apps.apple.com/gr/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,HU,Premium,3090,30900,HUF,no,4,,1,yes,https://apps.apple.com/hu/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,IE,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/ie/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,IE,Standard,11.99,,EUR,no,2,,1,yes,https://apps.apple.com/ie/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,IT,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/it/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,IT,Standard,10.99,,EUR,no,2,,1,yes,https://apps.apple.com/it/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,IT,Standard with ads,6.99,,EUR,yes,2,,1,yes,https://apps.apple.com/it/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,LT,Premium,13.99,139.99,EUR,no,4,,1,yes,https://apps.apple.com/lt/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,LT,Standard,9.99,,EUR,no,2,,1,yes,https://apps.apple.com/lt/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,LU,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/lu/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,LU,Standard,10.99,,EUR,no,2,,1,yes,https://apps.apple.com/lu/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,LV,Premium,13.99,139.99,EUR,no,4,,1,yes,https://apps.apple.com/lv/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,LV,Standard,9.99,,EUR,no,2,,1,yes,https://apps.apple.com/lv/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,AU,Premium,24.99,249.99,AUD,no,4,,1,yes,https://apps.apple.com/au/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,AU,Standard,17.99,,AUD,no,2,,1,yes,https://apps.apple.com/au/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CA,Premium,16.99,169.99,CAD,no,4,,1,yes,https://apps.apple.com/ca/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CA,Standard,15.99,,CAD,no,2,,1,yes,https://apps.apple.com/ca/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CA,Standard with ads,8.99,,CAD,yes,2,,1,yes,https://apps.apple.com/ca/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,US,Premium,21.49,214.99,USD,no,4,,1,yes,https://apps.apple.com/us/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,US,Basic (with ads),12.49,,USD,yes,2,,1,yes,https://apps.apple.com/us/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,UK,Premium,15.99,159.99,GBP,no,4,,1,yes,https://apps.apple.com/gb/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,UK,Standard,11.99,,GBP,no,2,,1,yes,https://apps.apple.com/gb/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,UK,Standard with ads,6.99,,GBP,yes,2,,1,yes,https://apps.apple.com/gb/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,NZ,Premium,25.99,259.99,NZD,no,4,,1,yes,https://apps.apple.com/nz/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,NZ,Standard,18.99,,NZD,no,2,,1,yes,https://apps.apple.com/nz/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,JP,Premium,1670,16800,JPY,no,4,,1,yes,https://apps.apple.com/jp/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,JP,Standard,1250,12500,JPY,no,2,,1,yes,https://apps.apple.com/jp/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,KR,Premium,13900,139000,KRW,no,4,,1,yes,https://apps.apple.com/kr/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,KR,Standard,9900,99000,KRW,no,2,,1,yes,https://apps.apple.com/kr/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,SG,Premium,22.98,189.98,SGD,no,4,,1,yes,https://apps.apple.com/sg/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,SG,Standard,18.98,159.98,SGD,no,2,,1,yes,https://apps.apple.com/sg/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,HK,Premium,108,1080,HKD,no,4,,1,yes,https://apps.apple.com/hk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,HK,Standard,88,880,HKD,no,2,,1,yes,https://apps.apple.com/hk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,TW,Premium,335,3280,TWD,no,4,,1,yes,https://apps.apple.com/tw/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,TW,Standard,285,2790,TWD,no,2,,1,yes,https://apps.apple.com/tw/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,TH,Premium,219,2100,THB,no,4,,1,yes,https://apps.apple.com/th/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PH,Premium,369,3690,PHP,no,4,,1,yes,https://apps.apple.com/ph/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PH,Standard,289,2290,PHP,no,2,,1,yes,https://apps.apple.com/ph/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,ID,Premium,99000,989000,IDR,no,4,,1,yes,https://apps.apple.com/id/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,ID,Standard,65000,,IDR,no,2,,1,yes,https://apps.apple.com/id/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,BR,Premium,69.90,589.00,BRL,no,4,,1,yes,https://apps.apple.com/br/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,BR,Standard,49.90,,BRL,no,2,,1,yes,https://apps.apple.com/br/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+hbo max,ES,Basic with ads,6.99,69.90,EUR,yes,2,,1,yes,https://www.hbomax.com/es/es,2026-11-03,,A official
+hbo max,ES,Standard,10.99,109.00,EUR,no,2,,1,yes,https://www.hbomax.com/es/es,2026-11-03,,A official
+hbo max,ES,Premium,15.99,159.00,EUR,no,4,,1,yes,https://www.hbomax.com/es/es,2026-11-03,,A official
+hbo max,PT,Basic with ads,5.99,59.90,EUR,yes,2,,1,yes,https://www.hbomax.com/pt/pt,2026-11-03,,A official
+hbo max,PT,Standard,9.99,99.90,EUR,no,2,,1,yes,https://www.hbomax.com/pt/pt,2026-11-03,,A official
+hbo max,PT,Premium,13.99,139.00,EUR,no,4,,1,yes,https://www.hbomax.com/pt/pt,2026-11-03,,A official
+hbo max,NL,Basic with ads,5.99,59.90,EUR,yes,2,,1,yes,https://www.hbomax.com/nl/nl,2026-11-03,,A official
+hbo max,NL,Standard,11.99,119.00,EUR,no,2,,1,yes,https://www.hbomax.com/nl/nl,2026-11-03,,A official
+hbo max,NL,Premium,16.99,169.00,EUR,no,4,,1,yes,https://www.hbomax.com/nl/nl,2026-11-03,,A official
+hbo max,BE,Basic with ads,6.99,69.90,EUR,yes,2,,1,yes,https://www.hbomax.com/be/nl,2026-11-03,,A official
+hbo max,BE,Standard,10.99,109.00,EUR,no,2,,1,yes,https://www.hbomax.com/be/nl,2026-11-03,,A official
+hbo max,BE,Premium,15.99,159.00,EUR,no,4,,1,yes,https://www.hbomax.com/be/nl,2026-11-03,,A official
+hbo max,DK,Basic with ads,79,,DKK,yes,2,,1,yes,https://www.hbomax.com/dk/da,2026-11-03,,A official
+hbo max,DK,Standard,129,,DKK,no,2,,1,yes,https://www.hbomax.com/dk/da,2026-11-03,,A official
+hbo max,DK,Premium,169,,DKK,no,4,,1,yes,https://www.hbomax.com/dk/da,2026-11-03,,A official
+hbo max,SE,Basic with ads,89,890,SEK,yes,2,,1,yes,https://www.hbomax.com/se/sv,2026-11-03,,A official
+hbo max,SE,Standard,149,1490,SEK,no,2,,1,yes,https://www.hbomax.com/se/sv,2026-11-03,,A official
+hbo max,SE,Premium,189,1890,SEK,no,4,,1,yes,https://www.hbomax.com/se/sv,2026-11-03,,A official
+hbo max,FI,Basic with ads,6.99,69.90,EUR,yes,2,,1,yes,https://www.hbomax.com/fi/fi,2026-11-03,,A official
+hbo max,FI,Standard,11.99,119.00,EUR,no,2,,1,yes,https://www.hbomax.com/fi/fi,2026-11-03,,A official
+hbo max,FI,Premium,16.99,169.00,EUR,no,4,,1,yes,https://www.hbomax.com/fi/fi,2026-11-03,,A official
+hbo max,PL,Basic with ads,29.99,,PLN,yes,2,,1,yes,https://www.hbomax.com/pl/pl,2026-11-03,,A official
+hbo max,PL,Standard,39.99,399.00,PLN,no,2,,1,yes,https://www.hbomax.com/pl/pl,2026-11-03,,A official
+hbo max,PL,Premium,49.99,499.00,PLN,no,4,,1,yes,https://www.hbomax.com/pl/pl,2026-11-03,,A official
+hbo max,CZ,Standard,259,2590,CZK,no,2,,1,yes,https://www.hbomax.com/cz/cs,2026-11-03,,A official
+hbo max,CZ,Premium,349,3490,CZK,no,4,,1,yes,https://www.hbomax.com/cz/cs,2026-11-03,,A official
+hbo max,HU,Standard,3490,34900,HUF,no,2,,1,yes,https://www.hbomax.com/hu/hu,2026-11-03,,A official
+hbo max,HU,Premium,4590,45900,HUF,no,4,,1,yes,https://www.hbomax.com/hu/hu,2026-11-03,,A official
+hbo max,RO,Basic with ads,4.99,49.90,EUR,yes,2,,1,yes,https://www.hbomax.com/ro/ro,2026-11-03,,A official
+hbo max,RO,Standard,8.99,89.90,EUR,no,2,,1,yes,https://www.hbomax.com/ro/ro,2026-11-03,,A official
+hbo max,RO,Premium,11.99,119.00,EUR,no,4,,1,yes,https://www.hbomax.com/ro/ro,2026-11-03,,A official
+hbo max,BG,Standard,7.99,79.90,EUR,no,2,,1,yes,https://www.hbomax.com/bg/bg,2026-11-03,,A official
+hbo max,BG,Premium,9.99,99.90,EUR,no,4,,1,yes,https://www.hbomax.com/bg/bg,2026-11-03,,A official
+hbo max,SK,Standard,9.99,99.90,EUR,no,2,,1,yes,https://www.hbomax.com/sk/sk,2026-11-03,,A official
+hbo max,SK,Premium,11.99,119.00,EUR,no,4,,1,yes,https://www.hbomax.com/sk/sk,2026-11-03,,A official
+hbo max,FR,Basic with ads,6.99,69.90,EUR,yes,2,,1,yes,https://www.hbomax.com/fr/fr,2026-11-03,,A official
+hbo max,FR,Standard,10.99,109.00,EUR,no,2,,1,yes,https://www.hbomax.com/fr/fr,2026-11-03,,A official
+hbo max,FR,Premium,15.99,159.00,EUR,no,4,,1,yes,https://www.hbomax.com/fr/fr,2026-11-03,,A official
+hbo max,IT,Basic with ads,6.99,,EUR,yes,2,,1,yes,https://www.hbomax.com/it/it,2026-11-03,,A official
+hbo max,IT,Standard,11.99,,EUR,no,2,,1,yes,https://www.hbomax.com/it/it,2026-11-03,,A official
+hbo max,IT,Premium,16.99,,EUR,no,4,,1,yes,https://www.hbomax.com/it/it,2026-11-03,,A official
+disney+,MT,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/mt/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,MT,Standard,10.99,109.99,EUR,no,2,,1,yes,https://apps.apple.com/mt/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,NL,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/nl/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,NL,Standard,10.99,,EUR,no,2,,1,yes,https://apps.apple.com/nl/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,NO,Premium,179,1790,NOK,no,4,,1,yes,https://apps.apple.com/no/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,NO,Standard,129,,NOK,no,2,,1,yes,https://apps.apple.com/no/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,NO,Standard with ads,89,,NOK,yes,2,,1,yes,https://apps.apple.com/no/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PL,Premium,59.99,599.99,PLN,no,4,,1,yes,https://apps.apple.com/pl/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PL,Standard,34.99,349.90,PLN,no,2,,1,yes,https://apps.apple.com/pl/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PT,Premium,15.99,159.99,EUR,no,4,,1,yes,https://apps.apple.com/pt/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PT,Standard,10.99,,EUR,no,2,,1,yes,https://apps.apple.com/pt/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PT,Standard with ads,6.99,,EUR,yes,2,,1,yes,https://apps.apple.com/pt/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,RO,Premium,59.99,599.99,RON,no,4,,1,yes,https://apps.apple.com/ro/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,RO,Standard,34.99,349.90,RON,no,2,,1,yes,https://apps.apple.com/ro/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,SE,Premium,179,1790,SEK,no,4,,1,yes,https://apps.apple.com/se/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,SE,Standard,129,,SEK,no,2,,1,yes,https://apps.apple.com/se/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,SE,Standard with ads,89,,SEK,yes,2,,1,yes,https://apps.apple.com/se/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,SK,Premium,13.99,139.99,EUR,no,4,,1,yes,https://apps.apple.com/sk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,SK,Standard,9.99,,EUR,no,2,,1,yes,https://apps.apple.com/sk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,MX,Premium,339,2849,MXN,no,4,,1,yes,https://apps.apple.com/mx/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,MX,Standard,259,,MXN,no,2,,1,yes,https://apps.apple.com/mx/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,AR,Premium,15.99,139.00,USD,no,4,,1,yes,https://apps.apple.com/ar/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,AR,Standard,8.99,,USD,no,2,,1,yes,https://apps.apple.com/ar/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CL,Premium,15990,133990,CLP,no,4,,1,yes,https://apps.apple.com/cl/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CL,Standard,10990,,CLP,no,2,,1,yes,https://apps.apple.com/cl/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CO,Premium,54900,459900,COP,no,4,,1,yes,https://apps.apple.com/co/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,CO,Standard,36900,,COP,no,2,,1,yes,https://apps.apple.com/co/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PE,Premium,57.90,579.00,PEN,no,4,,1,yes,https://apps.apple.com/pe/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,PE,Standard,49.90,,PEN,no,2,,1,yes,https://apps.apple.com/pe/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,TR,Premium,449.90,4499.00,TRY,no,4,,1,yes,https://apps.apple.com/tr/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+google one,AT,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/at/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,AT,200 GB,2.99,,EUR,no,,,6,no,https://apps.apple.com/at/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,AT,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/at/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,FR,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/fr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,FR,200 GB,2.99,,EUR,no,,,6,no,https://apps.apple.com/fr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,FR,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/fr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IT,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/it/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IT,200 GB,2.99,,EUR,no,,,6,no,https://apps.apple.com/it/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IT,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/it/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,ES,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/es/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,ES,200 GB,2.99,,EUR,no,,,6,no,https://apps.apple.com/es/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,ES,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/es/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,NL,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/nl/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,NL,200 GB,3.49,,EUR,no,,,6,no,https://apps.apple.com/nl/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,NL,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/nl/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,BE,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/be/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,BE,200 GB,2.99,29.99,EUR,no,,,6,no,https://apps.apple.com/be/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,BE,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/be/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,PL,100 GB,8.99,89.99,PLN,no,,,6,no,https://apps.apple.com/pl/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,PL,200 GB,13.99,,PLN,no,,,6,no,https://apps.apple.com/pl/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,PL,2 TB (Google AI Plus),47.99,,PLN,no,,,6,no,https://apps.apple.com/pl/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,SE,100 GB,19,205,SEK,no,,,6,no,https://apps.apple.com/se/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,SE,200 GB,29,,SEK,no,,,6,no,https://apps.apple.com/se/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,SE,2 TB (Google AI Plus),99,,SEK,no,,,6,no,https://apps.apple.com/se/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,PT,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/pt/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,PT,200 GB,2.99,29.99,EUR,no,,,6,no,https://apps.apple.com/pt/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,PT,2 TB (Google AI Plus),9.99,,EUR,no,,,6,no,https://apps.apple.com/pt/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IE,100 GB,1.99,19.99,EUR,no,,,6,no,https://apps.apple.com/ie/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IE,200 GB,2.99,,EUR,no,,,6,no,https://apps.apple.com/ie/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IE,2 TB (Google AI Plus),10.99,,EUR,no,,,6,no,https://apps.apple.com/ie/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,UK,100 GB,1.79,15.99,GBP,no,,,6,no,https://apps.apple.com/gb/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,UK,200 GB,2.99,,GBP,no,,,6,no,https://apps.apple.com/gb/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,UK,2 TB (Google AI Plus),7.99,,GBP,no,,,6,no,https://apps.apple.com/gb/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,US,100 GB,1.99,19.99,USD,no,,,6,no,https://apps.apple.com/us/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,US,200 GB,2.99,29.99,USD,no,,,6,no,https://apps.apple.com/us/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,US,2 TB (Google AI Plus),9.99,,USD,no,,,6,no,https://apps.apple.com/us/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,CA,100 GB,2.79,27.99,CAD,no,,,6,no,https://apps.apple.com/ca/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,CA,200 GB,3.99,39.99,CAD,no,,,6,no,https://apps.apple.com/ca/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,CA,2 TB (Google AI Plus),13.99,,CAD,no,,,6,no,https://apps.apple.com/ca/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,AU,100 GB,2.99,29.99,AUD,no,,,6,no,https://apps.apple.com/au/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,AU,200 GB,4.49,44.99,AUD,no,,,6,no,https://apps.apple.com/au/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,AU,2 TB (Google AI Plus),14.99,,AUD,no,,,6,no,https://apps.apple.com/au/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,JP,100 GB,290,2900,JPY,no,,,6,no,https://apps.apple.com/jp/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,JP,200 GB,440,4400,JPY,no,,,6,no,https://apps.apple.com/jp/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,JP,2 TB (Google AI Plus),1450,,JPY,no,,,6,no,https://apps.apple.com/jp/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,KR,100 GB,2500,24000,KRW,no,,,6,no,https://apps.apple.com/kr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,KR,200 GB,3900,39000,KRW,no,,,6,no,https://apps.apple.com/kr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,KR,2 TB (Google AI Plus),12000,,KRW,no,,,6,no,https://apps.apple.com/kr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IN,100 GB,149,1499,INR,no,,,6,no,https://apps.apple.com/in/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IN,200 GB,219,2199,INR,no,,,6,no,https://apps.apple.com/in/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,IN,2 TB (Google AI Plus),749,,INR,no,,,6,no,https://apps.apple.com/in/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,BR,100 GB,9.99,99.99,BRL,no,,,6,no,https://apps.apple.com/br/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,BR,200 GB,14.99,,BRL,no,,,6,no,https://apps.apple.com/br/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,BR,2 TB (Google AI Plus),49.99,,BRL,no,,,6,no,https://apps.apple.com/br/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,MX,100 GB,39,390,MXN,no,,,6,no,https://apps.apple.com/mx/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,MX,200 GB,59,,MXN,no,,,6,no,https://apps.apple.com/mx/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,MX,2 TB (Google AI Plus),199,,MXN,no,,,6,no,https://apps.apple.com/mx/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,TR,100 GB,84.99,839.99,TRY,no,,,6,no,https://apps.apple.com/tr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,TR,200 GB,129.99,,TRY,no,,,6,no,https://apps.apple.com/tr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,TR,2 TB (Google AI Plus),359.99,3649.99,TRY,no,,,6,no,https://apps.apple.com/tr/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,AE,100 GB,7.49,74.99,AED,no,,,6,no,https://apps.apple.com/ae/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,AE,200 GB,10.99,109.99,AED,no,,,6,no,https://apps.apple.com/ae/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,AE,2 TB (Google AI Plus),36.99,,AED,no,,,6,no,https://apps.apple.com/ae/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,SA,100 GB,6.99,69.99,SAR,no,,,6,no,https://apps.apple.com/sa/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,SA,200 GB,10.99,109.99,SAR,no,,,6,no,https://apps.apple.com/sa/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,SA,2 TB (Google AI Plus),34.99,,SAR,no,,,6,no,https://apps.apple.com/sa/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,ZA,100 GB,34.99,349.99,ZAR,no,,,6,no,https://apps.apple.com/za/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,ZA,200 GB,52.99,,ZAR,no,,,6,no,https://apps.apple.com/za/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+google one,ZA,2 TB (Google AI Plus),184.99,,ZAR,no,,,6,no,https://apps.apple.com/za/app/google-one/id1451784328,2026-11-03,,A app store (iPhone price)
+microsoft 365,US,Personal,9.99,99.99,USD,no,,,1,no,https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,US,Family,12.99,129.99,USD,no,,,6,no,https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,UK,Personal,8.49,84.99,GBP,no,,,1,no,https://www.microsoft.com/en-gb/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,UK,Family,10.49,104.99,GBP,no,,,6,no,https://www.microsoft.com/en-gb/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,CA,Personal,11.50,115.00,CAD,no,,,1,no,https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,CA,Family,14.50,145.00,CAD,no,,,6,no,https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,AU,Personal,16.00,159.00,AUD,no,,,1,no,https://www.microsoft.com/en-au/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,AU,Family,18.00,179.00,AUD,no,,,6,no,https://www.microsoft.com/en-au/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,NZ,Personal,17.00,179.00,NZD,no,,,1,no,https://www.microsoft.com/en-nz/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,NZ,Family,23.00,229.00,NZD,no,,,6,no,https://www.microsoft.com/en-nz/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,IE,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/en-ie/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,IE,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/en-ie/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,FR,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/fr-fr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,FR,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/fr-fr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,IT,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,IT,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,ES,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/es-es/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,ES,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/es-es/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,NL,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/nl-nl/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,NL,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/nl-nl/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,BE,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/fr-be/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,BE,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/fr-be/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,PT,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/pt-pt/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,PT,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/pt-pt/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,PL,Personal,42.99,429.99,PLN,no,,,1,no,https://www.microsoft.com/pl-pl/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,PL,Family,55.99,559.99,PLN,no,,,6,no,https://www.microsoft.com/pl-pl/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,CZ,Personal,269,2699,CZK,no,,,1,no,https://www.microsoft.com/cs-cz/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,CZ,Family,349,3499,CZK,no,,,6,no,https://www.microsoft.com/cs-cz/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,SK,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/sk-sk/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,SK,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/sk-sk/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,HU,Personal,3549,35499,HUF,no,,,1,no,https://www.microsoft.com/hu-hu/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,HU,Family,4649,46499,HUF,no,,,6,no,https://www.microsoft.com/hu-hu/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,RO,Personal,48.49,484.99,RON,no,,,1,no,https://www.microsoft.com/ro-ro/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,RO,Family,62.49,624.99,RON,no,,,6,no,https://www.microsoft.com/ro-ro/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,BG,Personal,9.99,99.99,EUR,no,,,1,no,https://www.microsoft.com/bg-bg/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,BG,Family,12.49,124.99,EUR,no,,,6,no,https://www.microsoft.com/bg-bg/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,GR,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/el-gr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,GR,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/el-gr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,DK,Personal,78.99,789.00,DKK,no,,,1,no,https://www.microsoft.com/da-dk/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,DK,Family,103.99,1039.00,DKK,no,,,6,no,https://www.microsoft.com/da-dk/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,SE,Personal,119.99,1199.99,SEK,no,,,1,no,https://www.microsoft.com/sv-se/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,SE,Family,155.99,1559.00,SEK,no,,,6,no,https://www.microsoft.com/sv-se/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,NO,Personal,121.00,1189.00,NOK,no,,,1,no,https://www.microsoft.com/nb-no/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,NO,Family,155.00,1559.00,NOK,no,,,6,no,https://www.microsoft.com/nb-no/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,FI,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/fi-fi/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,FI,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/fi-fi/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,EE,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/et-ee/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,EE,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/et-ee/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,LV,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/lv-lv/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,LV,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/lv-lv/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,LT,Personal,10.00,99.00,EUR,no,,,1,no,https://www.microsoft.com/lt-lt/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,LT,Family,13.00,129.00,EUR,no,,,6,no,https://www.microsoft.com/lt-lt/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,JP,Personal,2130,21300,JPY,no,,,1,no,https://www.microsoft.com/ja-jp/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,JP,Family,2740,27400,JPY,no,,,6,no,https://www.microsoft.com/ja-jp/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,KR,Personal,12500,125000,KRW,no,,,1,no,https://www.microsoft.com/ko-kr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,KR,Family,15500,155000,KRW,no,,,6,no,https://www.microsoft.com/ko-kr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,IN,Personal,689,6899,INR,no,,,1,no,https://www.microsoft.com/en-in/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,IN,Family,819,8199,INR,no,,,6,no,https://www.microsoft.com/en-in/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,SG,Personal,15.49,154.99,SGD,no,,,1,no,https://www.microsoft.com/en-sg/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,SG,Family,18.99,189.99,SGD,no,,,6,no,https://www.microsoft.com/en-sg/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,HK,Personal,78,780,HKD,no,,,1,no,https://www.microsoft.com/zh-hk/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,HK,Family,102,1020,HKD,no,,,6,no,https://www.microsoft.com/zh-hk/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,TW,Personal,309,3090,TWD,no,,,1,no,https://www.microsoft.com/zh-tw/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,TW,Family,419,4190,TWD,no,,,6,no,https://www.microsoft.com/zh-tw/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,TH,Personal,299,2999,THB,no,,,1,no,https://www.microsoft.com/th-th/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,TH,Family,369,3699,THB,no,,,6,no,https://www.microsoft.com/th-th/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,ID,Personal,135999,1359999,IDR,no,,,1,no,https://www.microsoft.com/id-id/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,ID,Family,169999,1699999,IDR,no,,,6,no,https://www.microsoft.com/id-id/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,MY,Personal,44,440,MYR,no,,,1,no,https://www.microsoft.com/en-my/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,MY,Family,54,540,MYR,no,,,6,no,https://www.microsoft.com/en-my/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,PH,Personal,489,4899,PHP,no,,,1,no,https://www.microsoft.com/en-ph/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,PH,Family,609,6099,PHP,no,,,6,no,https://www.microsoft.com/en-ph/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,VN,Personal,210000,2099000,VND,no,,,1,no,https://www.microsoft.com/vi-vn/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,VN,Family,260000,2599000,VND,no,,,6,no,https://www.microsoft.com/vi-vn/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,BR,Personal,51,509,BRL,no,,,1,no,https://www.microsoft.com/pt-br/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,BR,Family,60,599,BRL,no,,,6,no,https://www.microsoft.com/pt-br/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,MX,Personal,184.99,1849,MXN,no,,,1,no,https://www.microsoft.com/es-mx/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,MX,Family,224.99,2299,MXN,no,,,6,no,https://www.microsoft.com/es-mx/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,AR,Personal,3699,37199,ARS,no,,,1,no,https://www.microsoft.com/es-ar/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,AR,Family,4599,45999,ARS,no,,,6,no,https://www.microsoft.com/es-ar/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,CL,Personal,8490,84990,CLP,no,,,1,no,https://www.microsoft.com/es-cl/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,CL,Family,10490,104990,CLP,no,,,6,no,https://www.microsoft.com/es-cl/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,CO,Personal,36999,369999,COP,no,,,1,no,https://www.microsoft.com/es-co/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,CO,Family,45999,459999,COP,no,,,6,no,https://www.microsoft.com/es-co/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,PE,Personal,30.99,308.99,PEN,no,,,1,no,https://www.microsoft.com/es-pe/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,PE,Family,37.99,378.99,PEN,no,,,6,no,https://www.microsoft.com/es-pe/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,TR,Personal,329.99,3299.99,TRY,no,,,1,no,https://www.microsoft.com/tr-tr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,TR,Family,409.99,4099.99,TRY,no,,,6,no,https://www.microsoft.com/tr-tr/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,IL,Personal,43,429,ILS,no,,,1,no,https://www.microsoft.com/he-il/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,IL,Family,53,549,ILS,no,,,6,no,https://www.microsoft.com/he-il/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,SA,Personal,42.99,429.99,SAR,no,,,1,no,https://www.microsoft.com/ar-sa/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,SA,Family,55.99,559.99,SAR,no,,,6,no,https://www.microsoft.com/ar-sa/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,ZA,Personal,159,1599,ZAR,no,,,1,no,https://www.microsoft.com/en-za/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+microsoft 365,ZA,Family,199,1999,ZAR,no,,,6,no,https://www.microsoft.com/en-za/microsoft-365/buy/compare-all-microsoft-365-products,2026-11-03,,A official
+apple one,US,Individual,21.95,,USD,no,,,1,no,https://www.apple.com/apple-one/,2026-11-03,,A official
+apple one,US,Family,27.95,,USD,no,,,6,no,https://www.apple.com/apple-one/,2026-11-03,,A official
+apple music,US,Individual,11.99,,USD,no,,,1,no,https://www.apple.com/apple-one/,2026-11-03,,A official
+apple tv+,US,Monthly,14.99,,USD,no,,,1,no,https://www.apple.com/apple-one/,2026-11-03,,A official
+apple arcade,US,Monthly,6.99,,USD,no,,,1,no,https://www.apple.com/apple-one/,2026-11-03,,A official
+apple one,UK,Individual,18.95,,GBP,no,,,1,no,https://www.apple.com/uk/apple-one/,2026-11-03,,A official
+apple one,UK,Family,24.95,,GBP,no,,,6,no,https://www.apple.com/uk/apple-one/,2026-11-03,,A official
+apple music,UK,Individual,11.99,,GBP,no,,,1,no,https://www.apple.com/uk/apple-one/,2026-11-03,,A official
+apple tv+,UK,Monthly,9.99,,GBP,no,,,1,no,https://www.apple.com/uk/apple-one/,2026-11-03,,A official
+apple arcade,UK,Monthly,6.99,,GBP,no,,,1,no,https://www.apple.com/uk/apple-one/,2026-11-03,,A official
+apple one,CA,Individual,22.95,,CAD,no,,,1,no,https://www.apple.com/ca/apple-one/,2026-11-03,,A official
+apple one,CA,Family,30.95,,CAD,no,,,6,no,https://www.apple.com/ca/apple-one/,2026-11-03,,A official
+apple music,CA,Individual,11.99,,CAD,no,,,1,no,https://www.apple.com/ca/apple-one/,2026-11-03,,A official
+apple tv+,CA,Monthly,14.99,,CAD,no,,,1,no,https://www.apple.com/ca/apple-one/,2026-11-03,,A official
+apple arcade,CA,Monthly,8.99,,CAD,no,,,1,no,https://www.apple.com/ca/apple-one/,2026-11-03,,A official
+apple one,AU,Individual,24.95,,AUD,no,,,1,no,https://www.apple.com/au/apple-one/,2026-11-03,,A official
+apple one,AU,Family,34.95,,AUD,no,,,6,no,https://www.apple.com/au/apple-one/,2026-11-03,,A official
+apple music,AU,Individual,14.99,,AUD,no,,,1,no,https://www.apple.com/au/apple-one/,2026-11-03,,A official
+apple tv+,AU,Monthly,15.99,,AUD,no,,,1,no,https://www.apple.com/au/apple-one/,2026-11-03,,A official
+apple arcade,AU,Monthly,9.99,,AUD,no,,,1,no,https://www.apple.com/au/apple-one/,2026-11-03,,A official
+apple one,NZ,Individual,29.95,,NZD,no,,,1,no,https://www.apple.com/nz/apple-one/,2026-11-03,,A official
+apple one,NZ,Family,42.95,,NZD,no,,,6,no,https://www.apple.com/nz/apple-one/,2026-11-03,,A official
+apple music,NZ,Individual,18.49,,NZD,no,,,1,no,https://www.apple.com/nz/apple-one/,2026-11-03,,A official
+apple tv+,NZ,Monthly,17.99,,NZD,no,,,1,no,https://www.apple.com/nz/apple-one/,2026-11-03,,A official
+apple arcade,NZ,Monthly,12.99,,NZD,no,,,1,no,https://www.apple.com/nz/apple-one/,2026-11-03,,A official
+apple one,IE,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/ie/apple-one/,2026-11-03,,A official
+apple one,IE,Family,27.95,,EUR,no,,,6,no,https://www.apple.com/ie/apple-one/,2026-11-03,,A official
+apple music,IE,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/ie/apple-one/,2026-11-03,,A official
+apple tv+,IE,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/ie/apple-one/,2026-11-03,,A official
+apple arcade,IE,Monthly,6.99,,EUR,no,,,1,no,https://www.apple.com/ie/apple-one/,2026-11-03,,A official
+apple one,FR,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/fr/apple-one/,2026-11-03,,A official
+apple one,FR,Family,25.95,,EUR,no,,,6,no,https://www.apple.com/fr/apple-one/,2026-11-03,,A official
+apple music,FR,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/fr/apple-one/,2026-11-03,,A official
+apple tv+,FR,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/fr/apple-one/,2026-11-03,,A official
+apple arcade,FR,Monthly,6.99,,EUR,no,,,1,no,https://www.apple.com/fr/apple-one/,2026-11-03,,A official
+apple one,IT,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/it/apple-one/,2026-11-03,,A official
+apple one,IT,Family,25.95,,EUR,no,,,6,no,https://www.apple.com/it/apple-one/,2026-11-03,,A official
+apple music,IT,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/it/apple-one/,2026-11-03,,A official
+apple tv+,IT,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/it/apple-one/,2026-11-03,,A official
+apple arcade,IT,Monthly,6.99,,EUR,no,,,1,no,https://www.apple.com/it/apple-one/,2026-11-03,,A official
+apple one,ES,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/es/apple-one/,2026-11-03,,A official
+apple one,ES,Family,27.95,,EUR,no,,,6,no,https://www.apple.com/es/apple-one/,2026-11-03,,A official
+apple music,ES,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/es/apple-one/,2026-11-03,,A official
+apple tv+,ES,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/es/apple-one/,2026-11-03,,A official
+apple arcade,ES,Monthly,6.99,,EUR,no,,,1,no,https://www.apple.com/es/apple-one/,2026-11-03,,A official
+apple one,NL,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/nl/apple-one/,2026-11-03,,A official
+apple one,NL,Family,25.95,,EUR,no,,,6,no,https://www.apple.com/nl/apple-one/,2026-11-03,,A official
+apple music,NL,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/nl/apple-one/,2026-11-03,,A official
+apple tv+,NL,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/nl/apple-one/,2026-11-03,,A official
+apple arcade,NL,Monthly,6.99,,EUR,no,,,1,no,https://www.apple.com/nl/apple-one/,2026-11-03,,A official
+apple one,BE,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/befr/apple-one/,2026-11-03,,A official
+apple one,BE,Family,27.95,,EUR,no,,,6,no,https://www.apple.com/befr/apple-one/,2026-11-03,,A official
+apple music,BE,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/befr/apple-one/,2026-11-03,,A official
+apple tv+,BE,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/befr/apple-one/,2026-11-03,,A official
+apple arcade,BE,Monthly,6.99,,EUR,no,,,1,no,https://www.apple.com/befr/apple-one/,2026-11-03,,A official
+apple one,PT,Individual,16.95,,EUR,no,,,1,no,https://www.apple.com/pt/apple-one/,2026-11-03,,A official
+apple one,PT,Family,23.95,,EUR,no,,,6,no,https://www.apple.com/pt/apple-one/,2026-11-03,,A official
+apple music,PT,Individual,8.99,,EUR,no,,,1,no,https://www.apple.com/pt/apple-one/,2026-11-03,,A official
+apple tv+,PT,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/pt/apple-one/,2026-11-03,,A official
+apple arcade,PT,Monthly,6.99,,EUR,no,,,1,no,https://www.apple.com/pt/apple-one/,2026-11-03,,A official
+apple one,PL,Individual,42.99,,PLN,no,,,1,no,https://www.apple.com/pl/apple-one/,2026-11-03,,A official
+apple one,PL,Family,59.99,,PLN,no,,,6,no,https://www.apple.com/pl/apple-one/,2026-11-03,,A official
+apple tv+,PL,Monthly,34.99,,PLN,no,,,1,no,https://www.apple.com/pl/apple-one/,2026-11-03,,A official
+apple music,PL,Individual,26.99,,PLN,no,,,1,no,https://www.apple.com/pl/apple-one/,2026-11-03,,A official
+apple music,PL,Family,45.99,,PLN,no,,,6,no,https://www.apple.com/pl/apple-one/,2026-11-03,,A official
+apple arcade,PL,Monthly,34.99,,PLN,no,,,1,no,https://www.apple.com/pl/apple-one/,2026-11-03,,A official
+apple one,CZ,Individual,339,,CZK,no,,,1,no,https://www.apple.com/cz/apple-one/,2026-11-03,,A official
+apple one,CZ,Family,479,,CZK,no,,,6,no,https://www.apple.com/cz/apple-one/,2026-11-03,,A official
+apple tv+,CZ,Monthly,199,,CZK,no,,,1,no,https://www.apple.com/cz/apple-one/,2026-11-03,,A official
+apple music,CZ,Individual,185,,CZK,no,,,1,no,https://www.apple.com/cz/apple-one/,2026-11-03,,A official
+apple music,CZ,Family,299,,CZK,no,,,6,no,https://www.apple.com/cz/apple-one/,2026-11-03,,A official
+apple arcade,CZ,Monthly,199,,CZK,no,,,1,no,https://www.apple.com/cz/apple-one/,2026-11-03,,A official
+apple one,HU,Individual,4590,,HUF,no,,,1,no,https://www.apple.com/hu/apple-one/,2026-11-03,,A official
+apple one,HU,Family,6290,,HUF,no,,,6,no,https://www.apple.com/hu/apple-one/,2026-11-03,,A official
+apple tv+,HU,Monthly,2790,,HUF,no,,,1,no,https://www.apple.com/hu/apple-one/,2026-11-03,,A official
+apple music,HU,Individual,2190,,HUF,no,,,1,no,https://www.apple.com/hu/apple-one/,2026-11-03,,A official
+apple music,HU,Family,3690,,HUF,no,,,6,no,https://www.apple.com/hu/apple-one/,2026-11-03,,A official
+apple arcade,HU,Monthly,2790,,HUF,no,,,1,no,https://www.apple.com/hu/apple-one/,2026-11-03,,A official
+apple one,DK,Individual,179,,DKK,no,,,1,no,https://www.apple.com/dk/apple-one/,2026-11-03,,A official
+apple one,DK,Family,259,,DKK,no,,,6,no,https://www.apple.com/dk/apple-one/,2026-11-03,,A official
+apple tv+,DK,Monthly,79,,DKK,no,,,1,no,https://www.apple.com/dk/apple-one/,2026-11-03,,A official
+apple music,DK,Individual,119,,DKK,no,,,1,no,https://www.apple.com/dk/apple-one/,2026-11-03,,A official
+apple music,DK,Family,199,,DKK,no,,,6,no,https://www.apple.com/dk/apple-one/,2026-11-03,,A official
+apple arcade,DK,Monthly,59,,DKK,no,,,1,no,https://www.apple.com/dk/apple-one/,2026-11-03,,A official
+apple one,SE,Individual,215,,SEK,no,,,1,no,https://www.apple.com/se/apple-one/,2026-11-03,,A official
+apple one,SE,Family,295,,SEK,no,,,6,no,https://www.apple.com/se/apple-one/,2026-11-03,,A official
+apple tv+,SE,Monthly,119,,SEK,no,,,1,no,https://www.apple.com/se/apple-one/,2026-11-03,,A official
+apple music,SE,Individual,119,,SEK,no,,,1,no,https://www.apple.com/se/apple-one/,2026-11-03,,A official
+apple music,SE,Family,209,,SEK,no,,,6,no,https://www.apple.com/se/apple-one/,2026-11-03,,A official
+apple arcade,SE,Monthly,89,,SEK,no,,,1,no,https://www.apple.com/se/apple-one/,2026-11-03,,A official
+apple one,NO,Individual,219,,NOK,no,,,1,no,https://www.apple.com/no/apple-one/,2026-11-03,,A official
+apple one,NO,Family,289,,NOK,no,,,6,no,https://www.apple.com/no/apple-one/,2026-11-03,,A official
+apple tv+,NO,Monthly,119,,NOK,no,,,1,no,https://www.apple.com/no/apple-one/,2026-11-03,,A official
+apple music,NO,Individual,139,,NOK,no,,,1,no,https://www.apple.com/no/apple-one/,2026-11-03,,A official
+apple music,NO,Family,219,,NOK,no,,,6,no,https://www.apple.com/no/apple-one/,2026-11-03,,A official
+apple arcade,NO,Monthly,89,,NOK,no,,,1,no,https://www.apple.com/no/apple-one/,2026-11-03,,A official
+apple one,FI,Individual,20.95,,EUR,no,,,1,no,https://www.apple.com/fi/apple-one/,2026-11-03,,A official
+apple one,FI,Family,27.95,,EUR,no,,,6,no,https://www.apple.com/fi/apple-one/,2026-11-03,,A official
+apple tv+,FI,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/fi/apple-one/,2026-11-03,,A official
+apple music,FI,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/fi/apple-one/,2026-11-03,,A official
+apple music,FI,Family,19.99,,EUR,no,,,6,no,https://www.apple.com/fi/apple-one/,2026-11-03,,A official
+apple arcade,FI,Monthly,7.99,,EUR,no,,,1,no,https://www.apple.com/fi/apple-one/,2026-11-03,,A official
+apple one,JP,Individual,1350,,JPY,no,,,1,no,https://www.apple.com/jp/apple-one/,2026-11-03,,A official
+apple one,JP,Family,2500,,JPY,no,,,6,no,https://www.apple.com/jp/apple-one/,2026-11-03,,A official
+apple music,JP,Individual,1180,,JPY,no,,,1,no,https://www.apple.com/jp/apple-one/,2026-11-03,,A official
+apple tv+,JP,Monthly,1200,,JPY,no,,,1,no,https://www.apple.com/jp/apple-one/,2026-11-03,,A official
+apple arcade,JP,Monthly,900,,JPY,no,,,1,no,https://www.apple.com/jp/apple-one/,2026-11-03,,A official
+apple one,KR,Individual,14900,,KRW,no,,,1,no,https://www.apple.com/kr/apple-one/,2026-11-03,,A official
+apple one,KR,Family,20900,,KRW,no,,,6,no,https://www.apple.com/kr/apple-one/,2026-11-03,,A official
+apple music,KR,Individual,8900,,KRW,no,,,1,no,https://www.apple.com/kr/apple-one/,2026-11-03,,A official
+apple tv+,KR,Monthly,6500,,KRW,no,,,1,no,https://www.apple.com/kr/apple-one/,2026-11-03,,A official
+apple arcade,KR,Monthly,6500,,KRW,no,,,1,no,https://www.apple.com/kr/apple-one/,2026-11-03,,A official
+apple one,TW,Individual,390,,TWD,no,,,1,no,https://www.apple.com/tw/apple-one/,2026-11-03,,A official
+apple one,TW,Family,490,,TWD,no,,,6,no,https://www.apple.com/tw/apple-one/,2026-11-03,,A official
+apple music,TW,Individual,165,,TWD,no,,,1,no,https://www.apple.com/tw/apple-one/,2026-11-03,,A official
+apple tv+,TW,Monthly,250,,TWD,no,,,1,no,https://www.apple.com/tw/apple-one/,2026-11-03,,A official
+apple arcade,TW,Monthly,220,,TWD,no,,,1,no,https://www.apple.com/tw/apple-one/,2026-11-03,,A official
+apple one,TH,Individual,369,,THB,no,,,1,no,https://www.apple.com/th/apple-one/,2026-11-03,,A official
+apple one,TH,Family,449,,THB,no,,,6,no,https://www.apple.com/th/apple-one/,2026-11-03,,A official
+apple music,TH,Individual,149,,THB,no,,,1,no,https://www.apple.com/th/apple-one/,2026-11-03,,A official
+apple tv+,TH,Monthly,249,,THB,no,,,1,no,https://www.apple.com/th/apple-one/,2026-11-03,,A official
+apple arcade,TH,Monthly,149,,THB,no,,,1,no,https://www.apple.com/th/apple-one/,2026-11-03,,A official
+apple one,MY,Individual,34.90,,MYR,no,,,1,no,https://www.apple.com/my/apple-one/,2026-11-03,,A official
+apple one,MY,Family,44.90,,MYR,no,,,6,no,https://www.apple.com/my/apple-one/,2026-11-03,,A official
+apple music,MY,Individual,17.90,,MYR,no,,,1,no,https://www.apple.com/my/apple-one/,2026-11-03,,A official
+apple tv+,MY,Monthly,29.90,,MYR,no,,,1,no,https://www.apple.com/my/apple-one/,2026-11-03,,A official
+apple arcade,MY,Monthly,29.90,,MYR,no,,,1,no,https://www.apple.com/my/apple-one/,2026-11-03,,A official
+apple one,PH,Individual,499,,PHP,no,,,1,no,https://www.apple.com/ph/apple-one/,2026-11-03,,A official
+apple one,PH,Family,629,,PHP,no,,,6,no,https://www.apple.com/ph/apple-one/,2026-11-03,,A official
+apple music,PH,Individual,169,,PHP,no,,,1,no,https://www.apple.com/ph/apple-one/,2026-11-03,,A official
+apple tv+,PH,Monthly,369,,PHP,no,,,1,no,https://www.apple.com/ph/apple-one/,2026-11-03,,A official
+apple arcade,PH,Monthly,369,,PHP,no,,,1,no,https://www.apple.com/ph/apple-one/,2026-11-03,,A official
+apple one,VN,Individual,239000,,VND,no,,,1,no,https://www.apple.com/vn/apple-one/,2026-11-03,,A official
+apple one,VN,Family,279000,,VND,no,,,6,no,https://www.apple.com/vn/apple-one/,2026-11-03,,A official
+apple music,VN,Individual,65000,,VND,no,,,1,no,https://www.apple.com/vn/apple-one/,2026-11-03,,A official
+apple tv+,VN,Monthly,179000,,VND,no,,,1,no,https://www.apple.com/vn/apple-one/,2026-11-03,,A official
+apple arcade,VN,Monthly,179000,,VND,no,,,1,no,https://www.apple.com/vn/apple-one/,2026-11-03,,A official
+apple one,BR,Individual,47.90,,BRL,no,,,1,no,https://www.apple.com/br/apple-one/,2026-11-03,,A official
+apple one,BR,Family,64.90,,BRL,no,,,6,no,https://www.apple.com/br/apple-one/,2026-11-03,,A official
+apple music,BR,Individual,23.90,,BRL,no,,,1,no,https://www.apple.com/br/apple-one/,2026-11-03,,A official
+apple tv+,BR,Monthly,34.90,,BRL,no,,,1,no,https://www.apple.com/br/apple-one/,2026-11-03,,A official
+apple arcade,BR,Monthly,14.90,,BRL,no,,,1,no,https://www.apple.com/br/apple-one/,2026-11-03,,A official
+apple one,MX,Individual,279,,MXN,no,,,1,no,https://www.apple.com/mx/apple-one/,2026-11-03,,A official
+apple one,MX,Family,359,,MXN,no,,,6,no,https://www.apple.com/mx/apple-one/,2026-11-03,,A official
+apple music,MX,Individual,139,,MXN,no,,,1,no,https://www.apple.com/mx/apple-one/,2026-11-03,,A official
+apple tv+,MX,Monthly,199,,MXN,no,,,1,no,https://www.apple.com/mx/apple-one/,2026-11-03,,A official
+apple arcade,MX,Monthly,99,,MXN,no,,,1,no,https://www.apple.com/mx/apple-one/,2026-11-03,,A official
+apple one,CL,Individual,10390,,CLP,no,,,1,no,https://www.apple.com/cl/apple-one/,2026-11-03,,A official
+apple one,CL,Family,12990,,CLP,no,,,6,no,https://www.apple.com/cl/apple-one/,2026-11-03,,A official
+apple music,CL,Individual,4990,,CLP,no,,,1,no,https://www.apple.com/cl/apple-one/,2026-11-03,,A official
+apple tv+,CL,Monthly,6990,,CLP,no,,,1,no,https://www.apple.com/cl/apple-one/,2026-11-03,,A official
+apple arcade,CL,Monthly,4990,,CLP,no,,,1,no,https://www.apple.com/cl/apple-one/,2026-11-03,,A official
+apple one,CO,Individual,45900,,COP,no,,,1,no,https://www.apple.com/co/apple-one/,2026-11-03,,A official
+apple one,CO,Family,62900,,COP,no,,,6,no,https://www.apple.com/co/apple-one/,2026-11-03,,A official
+apple music,CO,Individual,18500,,COP,no,,,1,no,https://www.apple.com/co/apple-one/,2026-11-03,,A official
+apple tv+,CO,Monthly,29900,,COP,no,,,1,no,https://www.apple.com/co/apple-one/,2026-11-03,,A official
+apple arcade,CO,Monthly,29900,,COP,no,,,1,no,https://www.apple.com/co/apple-one/,2026-11-03,,A official
+apple one,LU,Individual,19.95,,EUR,no,,,1,no,https://www.apple.com/lu/apple-one/,2026-11-03,,A official
+apple one,LU,Family,27.95,,EUR,no,,,6,no,https://www.apple.com/lu/apple-one/,2026-11-03,,A official
+apple music,LU,Individual,11.99,,EUR,no,,,1,no,https://www.apple.com/lu/apple-one/,2026-11-03,,A official
+apple tv+,LU,Monthly,9.99,,EUR,no,,,1,no,https://www.apple.com/lu/apple-one/,2026-11-03,,A official
+apple arcade,LU,Monthly,6.99,,EUR,no,,,1,no,https://www.apple.com/lu/apple-one/,2026-11-03,,A official
+chatgpt,BA,Plus,22.99,229,EUR,no,,,1,no,https://apps.apple.com/ba/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,BA,Go,5.99,,EUR,no,,,1,no,https://apps.apple.com/ba/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,RS,Plus,22.99,229,EUR,no,,,1,no,https://apps.apple.com/rs/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,RS,Go,5.99,,EUR,no,,,1,no,https://apps.apple.com/rs/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,HR,Plus,22.99,229,EUR,no,,,1,no,https://apps.apple.com/hr/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,HR,Go,7.99,,EUR,no,,,1,no,https://apps.apple.com/hr/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,SI,Plus,22.99,229,EUR,no,,,1,no,https://apps.apple.com/si/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,SI,Go,7.99,,EUR,no,,,1,no,https://apps.apple.com/si/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,ME,Plus,19.99,200,EUR,no,,,1,no,https://apps.apple.com/me/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,ME,Go,7.0,,EUR,no,,,1,no,https://apps.apple.com/me/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,MK,Plus,19.99,200,USD,no,,,1,no,https://apps.apple.com/mk/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,MK,Go,5.99,,USD,no,,,1,no,https://apps.apple.com/mk/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,AL,Plus,22.99,250,USD,no,,,1,no,https://apps.apple.com/al/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,AL,Go,6.99,,USD,no,,,1,no,https://apps.apple.com/al/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,DE,Plus,22.99,229,EUR,no,,,1,no,https://apps.apple.com/de/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,DE,Go,7.99,,EUR,no,,,1,no,https://apps.apple.com/de/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,AT,Plus,22.99,229,EUR,no,,,1,no,https://apps.apple.com/at/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,AT,Go,7.99,,EUR,no,,,1,no,https://apps.apple.com/at/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,CH,Plus,20,200,CHF,no,,,1,no,https://apps.apple.com/ch/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,CH,Go,7,,CHF,no,,,1,no,https://apps.apple.com/ch/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,US,Plus,19.99,200,USD,no,,,1,no,https://apps.apple.com/us/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,US,Go,8,,USD,no,,,1,no,https://apps.apple.com/us/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,UK,Plus,19.99,200,GBP,no,,,1,no,https://apps.apple.com/gb/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+chatgpt,UK,Go,6.99,,GBP,no,,,1,no,https://apps.apple.com/gb/app/chatgpt/id6448311069,2026-11-03,,A app store (iPhone price)
+canva,BA,Pro,12.0,109.99,EUR,no,,,1,no,https://apps.apple.com/ba/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,RS,Pro,12.0,109.99,EUR,no,,,1,no,https://apps.apple.com/rs/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,HR,Pro,12.0,109.99,EUR,no,,,1,no,https://apps.apple.com/hr/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,SI,Pro,12.0,109.99,EUR,no,,,1,no,https://apps.apple.com/si/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,ME,Pro,12.0,109.99,EUR,no,,,1,no,https://apps.apple.com/me/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,DE,Pro,12.0,109.99,EUR,no,,,1,no,https://apps.apple.com/de/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,AT,Pro,12.0,109.99,EUR,no,,,1,no,https://apps.apple.com/at/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,MK,Pro,13.0,119.99,USD,no,,,1,no,https://apps.apple.com/mk/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,AL,Pro,13.0,119.99,USD,no,,,1,no,https://apps.apple.com/al/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+canva,UK,Pro,13.0,100.0,GBP,no,,,1,no,https://apps.apple.com/gb/app/canva-ai-photo-video-editor/id897446215,2026-11-03,,A app store (iPhone price)
+hbo max,BA,Standard,7.99,79.90,EUR,no,,,1,yes,https://apps.apple.com/ba/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,BA,Premium,9.99,99.90,EUR,no,,,1,yes,https://apps.apple.com/ba/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,ME,Standard,7.99,79.90,EUR,no,,,1,yes,https://apps.apple.com/me/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,ME,Premium,9.99,99.90,EUR,no,,,1,yes,https://apps.apple.com/me/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,MK,Standard,8.99,89.90,USD,no,,,1,yes,https://apps.apple.com/mk/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,MK,Premium,10.99,109.00,USD,no,,,1,yes,https://apps.apple.com/mk/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,AL,Standard,9.19,91.90,USD,no,,,1,yes,https://apps.apple.com/al/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,AL,Premium,11.49,113.99,USD,no,,,1,yes,https://apps.apple.com/al/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,CH,Basic with ads,9.90,,CHF,no,,,1,yes,https://apps.apple.com/ch/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,CH,Standard,16.90,,CHF,no,,,1,yes,https://apps.apple.com/ch/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,CH,Premium,23.90,,CHF,no,,,1,yes,https://apps.apple.com/ch/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,NO,Basic with ads,89,,NOK,no,,,1,yes,https://apps.apple.com/no/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,NO,Standard,149,1490,NOK,no,,,1,yes,https://apps.apple.com/no/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,NO,Premium,189,,NOK,no,,,1,yes,https://apps.apple.com/no/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,US,Basic with ads,10.99,109.99,USD,no,,,1,yes,https://apps.apple.com/us/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,US,Standard,18.49,184.99,USD,no,,,1,yes,https://apps.apple.com/us/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,US,Premium,22.99,229.99,USD,no,,,1,yes,https://apps.apple.com/us/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,BR,Basic with ads,29.90,274.90,BRL,no,,,1,yes,https://apps.apple.com/br/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,BR,Standard,44.90,419.90,BRL,no,,,1,yes,https://apps.apple.com/br/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,MX,Basic with ads,149,1429,MXN,no,,,1,yes,https://apps.apple.com/mx/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,MX,Standard,239,2149,MXN,no,,,1,yes,https://apps.apple.com/mx/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,AU,Basic with ads,11.99,119.99,AUD,no,,,1,yes,https://apps.apple.com/au/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,AU,Standard,15.99,159.99,AUD,no,,,1,yes,https://apps.apple.com/au/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+hbo max,AU,Premium,21.99,219.99,AUD,no,,,1,yes,https://apps.apple.com/au/app/hbo-max/id1666653815,2026-11-03,,A app store (iPhone price)
+disney+,XK,Premium,13.99,139.99,EUR,no,,,1,yes,https://apps.apple.com/xk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+disney+,XK,Standard,9.99,,EUR,no,,,1,yes,https://apps.apple.com/xk/app/disney/id1446075923,2026-11-03,,A app store (iPhone price)
+spotify,PT,Premium Individual,8.99,,EUR,no,,,1,no,https://www.spotify.com/pt-en/premium/,2026-11-03,,A official
+spotify,PT,Premium Student,4.99,,EUR,no,,,1,no,https://www.spotify.com/pt-en/premium/,2026-11-03,,A official
+spotify,PT,Premium Duo,11.99,,EUR,no,,,1,yes,https://www.spotify.com/pt-en/premium/,2026-11-03,,A official
+spotify,PT,Premium Family,16.99,,EUR,no,,,6,yes,https://www.spotify.com/pt-en/premium/,2026-11-03,,A official
+spotify,MD,Premium Individual,5.49,,USD,no,,,1,no,https://www.spotify.com/md-en/premium/,2026-11-03,,A official
+spotify,MD,Premium Student,2.99,,USD,no,,,1,no,https://www.spotify.com/md-en/premium/,2026-11-03,,A official
+spotify,MD,Premium Duo,7.49,,USD,no,,,1,yes,https://www.spotify.com/md-en/premium/,2026-11-03,,A official
+spotify,MD,Premium Family,9.49,,USD,no,,,6,yes,https://www.spotify.com/md-en/premium/,2026-11-03,,A official

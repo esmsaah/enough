@@ -321,7 +321,7 @@ export function scoreItem(item: Item, ctx: Context): Recommendation {
   if (item.category === 'membership' && typeof item.visitsPerMonth === 'number') {
     const monthly = monthlyEquivalent(item);
     const visits = item.visitsPerMonth;
-    if (typeof item.singleVisitPrice === 'number') {
+    if (typeof item.singleVisitPrice === 'number' && item.singleVisitPrice > 0) {
       const payGo = item.singleVisitPrice * visits;
       if (payGo < monthly) {
         const saving = round2((monthly - payGo) * 12);

@@ -1,0 +1,128 @@
+service,country,plan,monthly,yearly,currency,ads,streams,accounts,same_address,source,tier
+spotify,CO,Premium Individual,18500,,COP,no,,1,no,https://www.spotify.com/co/premium/,A official
+spotify,CO,Premium Student,10100,,COP,no,,1,no,https://www.spotify.com/co/premium/,A official
+spotify,CO,Premium Duo,24500,,COP,no,,2,yes,https://www.spotify.com/co/premium/,A official
+spotify,CO,Premium Family,30500,,COP,no,,6,yes,https://www.spotify.com/co/premium/,A official
+spotify,ID,Premium Standard,59900,,IDR,no,,1,no,https://www.spotify.com/id/premium/,A official
+spotify,ID,Premium Platinum,119900,,IDR,no,,3,yes,https://www.spotify.com/id/premium/,A official
+spotify,ID,Premium Student,29900,,IDR,no,,1,no,https://www.spotify.com/id/premium/,A official
+spotify,IS,Premium Individual,12.99,,EUR,no,,1,no,https://www.spotify.com/is/premium/,A official
+spotify,IS,Premium Student,7.49,,EUR,no,,1,no,https://www.spotify.com/is/premium/,A official
+spotify,IS,Premium Duo,18.49,,EUR,no,,2,yes,https://www.spotify.com/is/premium/,A official
+spotify,IS,Premium Family,21.99,,EUR,no,,6,yes,https://www.spotify.com/is/premium/,A official
+spotify,JO,Premium Individual,5.49,,USD,no,,1,no,https://www.spotify.com/jo/premium/,A official
+spotify,JO,Premium Student,2.99,,USD,no,,1,no,https://www.spotify.com/jo/premium/,A official
+spotify,JO,Premium Duo,7.49,,USD,no,,2,yes,https://www.spotify.com/jo/premium/,A official
+spotify,JO,Premium Family,9.49,,USD,no,,6,yes,https://www.spotify.com/jo/premium/,A official
+spotify,KZ,Premium Individual,4.99,,USD,no,,1,no,https://www.spotify.com/kz/premium/,A official
+spotify,KZ,Premium Student,2.49,,USD,no,,1,no,https://www.spotify.com/kz/premium/,A official
+spotify,KZ,Premium Duo,6.49,,USD,no,,2,yes,https://www.spotify.com/kz/premium/,A official
+spotify,KZ,Premium Family,7.99,,USD,no,,6,yes,https://www.spotify.com/kz/premium/,A official
+spotify,SG,Premium Individual,11.98,,SGD,no,,1,no,https://www.spotify.com/sg/premium/,A official
+spotify,SG,Premium Student,6.48,,SGD,no,,1,no,https://www.spotify.com/sg/premium/,A official
+spotify,SG,Premium Duo,16.98,,SGD,no,,2,yes,https://www.spotify.com/sg/premium/,A official
+spotify,SG,Premium Family,20.98,,SGD,no,,6,yes,https://www.spotify.com/sg/premium/,A official
+disney+,BE,Premium,15.99,159.99,EUR,no,4,1,yes,https://apps.apple.com/be/app/disney/id1446075923,A app store (iPhone price)
+disney+,BE,Standard,10.99,,EUR,no,2,1,yes,https://apps.apple.com/be/app/disney/id1446075923,A app store (iPhone price)
+disney+,BG,Premium,13.99,139.99,EUR,no,4,1,yes,https://apps.apple.com/bg/app/disney/id1446075923,A app store (iPhone price)
+disney+,BG,Standard,9.99,99.99,EUR,no,2,1,yes,https://apps.apple.com/bg/app/disney/id1446075923,A app store (iPhone price)
+disney+,CZ,Premium,359,3590,CZK,no,4,1,yes,https://apps.apple.com/cz/app/disney/id1446075923,A app store (iPhone price)
+disney+,CZ,Standard,219,,CZK,no,2,1,yes,https://apps.apple.com/cz/app/disney/id1446075923,A app store (iPhone price)
+disney+,DK,Premium,169,1690,DKK,no,4,1,yes,https://apps.apple.com/dk/app/disney/id1446075923,A app store (iPhone price)
+disney+,DK,Standard,119,,DKK,no,2,1,yes,https://apps.apple.com/dk/app/disney/id1446075923,A app store (iPhone price)
+disney+,DK,Standard with ads,79,,DKK,yes,2,1,yes,https://apps.apple.com/dk/app/disney/id1446075923,A app store (iPhone price)
+disney+,EE,Premium,13.99,139.99,EUR,no,4,1,yes,https://apps.apple.com/ee/app/disney/id1446075923,A app store (iPhone price)
+disney+,EE,Standard,9.99,,EUR,no,2,1,yes,https://apps.apple.com/ee/app/disney/id1446075923,A app store (iPhone price)
+disney+,ES,Premium,15.99,159.99,EUR,no,4,1,yes,https://apps.apple.com/es/app/disney/id1446075923,A app store (iPhone price)
+disney+,ES,Standard with ads,6.99,,EUR,yes,2,1,yes,https://apps.apple.com/es/app/disney/id1446075923,A app store (iPhone price)
+disney+,ES,Standard,10.99,,EUR,no,2,1,yes,https://apps.apple.com/es/app/disney/id1446075923,A app store (iPhone price)
+disney+,FI,Premium,16.99,169.99,EUR,no,4,1,yes,https://apps.apple.com/fi/app/disney/id1446075923,A app store (iPhone price)
+disney+,FI,Standard,11.99,,EUR,no,2,1,yes,https://apps.apple.com/fi/app/disney/id1446075923,A app store (iPhone price)
+disney+,FI,Standard with ads,7.99,,EUR,yes,2,1,yes,https://apps.apple.com/fi/app/disney/id1446075923,A app store (iPhone price)
+disney+,FR,Premium,15.99,159.99,EUR,no,4,1,yes,https://apps.apple.com/fr/app/disney/id1446075923,A app store (iPhone price)
+disney+,FR,Standard,10.99,,EUR,no,2,1,yes,https://apps.apple.com/fr/app/disney/id1446075923,A app store (iPhone price)
+disney+,FR,Standard with ads,6.99,,EUR,yes,2,1,yes,https://apps.apple.com/fr/app/disney/id1446075923,A app store (iPhone price)
+disney+,GR,Premium,15.99,159.99,EUR,no,4,1,yes,https://apps.apple.com/gr/app/disney/id1446075923,A app store (iPhone price)
+disney+,GR,Standard,10.99,,EUR,no,2,1,yes,https://apps.apple.com/gr/app/disney/id1446075923,A app store (iPhone price)
+disney+,HU,Premium,3090,30900,HUF,no,4,1,yes,https://apps.apple.com/hu/app/disney/id1446075923,A app store (iPhone price)
+disney+,IE,Premium,15.99,159.99,EUR,no,4,1,yes,https://apps.apple.com/ie/app/disney/id1446075923,A app store (iPhone price)
+disney+,IE,Standard,11.99,,EUR,no,2,1,yes,https://apps.apple.com/ie/app/disney/id1446075923,A app store (iPhone price)
+disney+,IT,Premium,15.99,159.99,EUR,no,4,1,yes,https://apps.apple.com/it/app/disney/id1446075923,A app store (iPhone price)
+disney+,IT,Standard,10.99,,EUR,no,2,1,yes,https://apps.apple.com/it/app/disney/id1446075923,A app store (iPhone price)
+disney+,IT,Standard with ads,6.99,,EUR,yes,2,1,yes,https://apps.apple.com/it/app/disney/id1446075923,A app store (iPhone price)
+disney+,LT,Premium,13.99,139.99,EUR,no,4,1,yes,https://apps.apple.com/lt/app/disney/id1446075923,A app store (iPhone price)
+disney+,LT,Standard,9.99,,EUR,no,2,1,yes,https://apps.apple.com/lt/app/disney/id1446075923,A app store (iPhone price)
+disney+,LU,Premium,15.99,159.99,EUR,no,4,1,yes,https://apps.apple.com/lu/app/disney/id1446075923,A app store (iPhone price)
+disney+,LU,Standard,10.99,,EUR,no,2,1,yes,https://apps.apple.com/lu/app/disney/id1446075923,A app store (iPhone price)
+disney+,LV,Premium,13.99,139.99,EUR,no,4,1,yes,https://apps.apple.com/lv/app/disney/id1446075923,A app store (iPhone price)
+disney+,LV,Standard,9.99,,EUR,no,2,1,yes,https://apps.apple.com/lv/app/disney/id1446075923,A app store (iPhone price)
+disney+,AU,Premium,24.99,249.99,AUD,no,4,1,yes,https://apps.apple.com/au/app/disney/id1446075923,A app store (iPhone price)
+disney+,AU,Standard,17.99,,AUD,no,2,1,yes,https://apps.apple.com/au/app/disney/id1446075923,A app store (iPhone price)
+disney+,CA,Premium,16.99,169.99,CAD,no,4,1,yes,https://apps.apple.com/ca/app/disney/id1446075923,A app store (iPhone price)
+disney+,CA,Standard,15.99,,CAD,no,2,1,yes,https://apps.apple.com/ca/app/disney/id1446075923,A app store (iPhone price)
+disney+,CA,Standard with ads,8.99,,CAD,yes,2,1,yes,https://apps.apple.com/ca/app/disney/id1446075923,A app store (iPhone price)
+disney+,US,Premium,21.49,214.99,USD,no,4,1,yes,https://apps.apple.com/us/app/disney/id1446075923,A app store (iPhone price)
+disney+,US,Basic (with ads),12.49,,USD,yes,2,1,yes,https://apps.apple.com/us/app/disney/id1446075923,A app store (iPhone price)
+disney+,UK,Premium,15.99,159.99,GBP,no,4,1,yes,https://apps.apple.com/gb/app/disney/id1446075923,A app store (iPhone price)
+disney+,UK,Standard,11.99,,GBP,no,2,1,yes,https://apps.apple.com/gb/app/disney/id1446075923,A app store (iPhone price)
+disney+,UK,Standard with ads,6.99,,GBP,yes,2,1,yes,https://apps.apple.com/gb/app/disney/id1446075923,A app store (iPhone price)
+disney+,NZ,Premium,25.99,259.99,NZD,no,4,1,yes,https://apps.apple.com/nz/app/disney/id1446075923,A app store (iPhone price)
+disney+,NZ,Standard,18.99,,NZD,no,2,1,yes,https://apps.apple.com/nz/app/disney/id1446075923,A app store (iPhone price)
+disney+,JP,Premium,1670,16800,JPY,no,4,1,yes,https://apps.apple.com/jp/app/disney/id1446075923,A app store (iPhone price)
+disney+,JP,Standard,1250,12500,JPY,no,2,1,yes,https://apps.apple.com/jp/app/disney/id1446075923,A app store (iPhone price)
+disney+,KR,Premium,13900,139000,KRW,no,4,1,yes,https://apps.apple.com/kr/app/disney/id1446075923,A app store (iPhone price)
+disney+,KR,Standard,9900,99000,KRW,no,2,1,yes,https://apps.apple.com/kr/app/disney/id1446075923,A app store (iPhone price)
+disney+,SG,Premium,22.98,189.98,SGD,no,4,1,yes,https://apps.apple.com/sg/app/disney/id1446075923,A app store (iPhone price)
+disney+,SG,Standard,18.98,159.98,SGD,no,2,1,yes,https://apps.apple.com/sg/app/disney/id1446075923,A app store (iPhone price)
+disney+,HK,Premium,108,1080,HKD,no,4,1,yes,https://apps.apple.com/hk/app/disney/id1446075923,A app store (iPhone price)
+disney+,HK,Standard,88,880,HKD,no,2,1,yes,https://apps.apple.com/hk/app/disney/id1446075923,A app store (iPhone price)
+disney+,TW,Premium,335,3280,TWD,no,4,1,yes,https://apps.apple.com/tw/app/disney/id1446075923,A app store (iPhone price)
+disney+,TW,Standard,285,2790,TWD,no,2,1,yes,https://apps.apple.com/tw/app/disney/id1446075923,A app store (iPhone price)
+disney+,TH,Premium,219,2100,THB,no,4,1,yes,https://apps.apple.com/th/app/disney/id1446075923,A app store (iPhone price)
+disney+,PH,Premium,369,3690,PHP,no,4,1,yes,https://apps.apple.com/ph/app/disney/id1446075923,A app store (iPhone price)
+disney+,PH,Standard,289,2290,PHP,no,2,1,yes,https://apps.apple.com/ph/app/disney/id1446075923,A app store (iPhone price)
+disney+,ID,Premium,99000,989000,IDR,no,4,1,yes,https://apps.apple.com/id/app/disney/id1446075923,A app store (iPhone price)
+disney+,ID,Standard,65000,,IDR,no,2,1,yes,https://apps.apple.com/id/app/disney/id1446075923,A app store (iPhone price)
+disney+,BR,Premium,69.90,589.00,BRL,no,4,1,yes,https://apps.apple.com/br/app/disney/id1446075923,A app store (iPhone price)
+disney+,BR,Standard,49.90,,BRL,no,2,1,yes,https://apps.apple.com/br/app/disney/id1446075923,A app store (iPhone price)
+hbo max,ES,Basic with ads,6.99,69.90,EUR,yes,2,1,yes,https://www.hbomax.com/es/es,A official
+hbo max,ES,Standard,10.99,109.00,EUR,no,2,1,yes,https://www.hbomax.com/es/es,A official
+hbo max,ES,Premium,15.99,159.00,EUR,no,4,1,yes,https://www.hbomax.com/es/es,A official
+hbo max,PT,Basic with ads,5.99,59.90,EUR,yes,2,1,yes,https://www.hbomax.com/pt/pt,A official
+hbo max,PT,Standard,9.99,99.90,EUR,no,2,1,yes,https://www.hbomax.com/pt/pt,A official
+hbo max,PT,Premium,13.99,139.00,EUR,no,4,1,yes,https://www.hbomax.com/pt/pt,A official
+hbo max,NL,Basic with ads,5.99,59.90,EUR,yes,2,1,yes,https://www.hbomax.com/nl/nl,A official
+hbo max,NL,Standard,11.99,119.00,EUR,no,2,1,yes,https://www.hbomax.com/nl/nl,A official
+hbo max,NL,Premium,16.99,169.00,EUR,no,4,1,yes,https://www.hbomax.com/nl/nl,A official
+hbo max,BE,Basic with ads,6.99,69.90,EUR,yes,2,1,yes,https://www.hbomax.com/be/nl,A official
+hbo max,BE,Standard,10.99,109.00,EUR,no,2,1,yes,https://www.hbomax.com/be/nl,A official
+hbo max,BE,Premium,15.99,159.00,EUR,no,4,1,yes,https://www.hbomax.com/be/nl,A official
+hbo max,DK,Basic with ads,79,,DKK,yes,2,1,yes,https://www.hbomax.com/dk/da,A official
+hbo max,DK,Standard,129,,DKK,no,2,1,yes,https://www.hbomax.com/dk/da,A official
+hbo max,DK,Premium,169,,DKK,no,4,1,yes,https://www.hbomax.com/dk/da,A official
+hbo max,SE,Basic with ads,89,890,SEK,yes,2,1,yes,https://www.hbomax.com/se/sv,A official
+hbo max,SE,Standard,149,1490,SEK,no,2,1,yes,https://www.hbomax.com/se/sv,A official
+hbo max,SE,Premium,189,1890,SEK,no,4,1,yes,https://www.hbomax.com/se/sv,A official
+hbo max,FI,Basic with ads,6.99,69.90,EUR,yes,2,1,yes,https://www.hbomax.com/fi/fi,A official
+hbo max,FI,Standard,11.99,119.00,EUR,no,2,1,yes,https://www.hbomax.com/fi/fi,A official
+hbo max,FI,Premium,16.99,169.00,EUR,no,4,1,yes,https://www.hbomax.com/fi/fi,A official
+hbo max,PL,Basic with ads,29.99,,PLN,yes,2,1,yes,https://www.hbomax.com/pl/pl,A official
+hbo max,PL,Standard,39.99,399.00,PLN,no,2,1,yes,https://www.hbomax.com/pl/pl,A official
+hbo max,PL,Premium,49.99,499.00,PLN,no,4,1,yes,https://www.hbomax.com/pl/pl,A official
+hbo max,CZ,Standard,259,2590,CZK,no,2,1,yes,https://www.hbomax.com/cz/cs,A official
+hbo max,CZ,Premium,349,3490,CZK,no,4,1,yes,https://www.hbomax.com/cz/cs,A official
+hbo max,HU,Standard,3490,34900,HUF,no,2,1,yes,https://www.hbomax.com/hu/hu,A official
+hbo max,HU,Premium,4590,45900,HUF,no,4,1,yes,https://www.hbomax.com/hu/hu,A official
+hbo max,RO,Basic with ads,4.99,49.90,EUR,yes,2,1,yes,https://www.hbomax.com/ro/ro,A official
+hbo max,RO,Standard,8.99,89.90,EUR,no,2,1,yes,https://www.hbomax.com/ro/ro,A official
+hbo max,RO,Premium,11.99,119.00,EUR,no,4,1,yes,https://www.hbomax.com/ro/ro,A official
+hbo max,BG,Standard,7.99,79.90,EUR,no,2,1,yes,https://www.hbomax.com/bg/bg,A official
+hbo max,BG,Premium,9.99,99.90,EUR,no,4,1,yes,https://www.hbomax.com/bg/bg,A official
+hbo max,SK,Standard,9.99,99.90,EUR,no,2,1,yes,https://www.hbomax.com/sk/sk,A official
+hbo max,SK,Premium,11.99,119.00,EUR,no,4,1,yes,https://www.hbomax.com/sk/sk,A official
+hbo max,FR,Basic with ads,6.99,69.90,EUR,yes,2,1,yes,https://www.hbomax.com/fr/fr,A official
+hbo max,FR,Standard,10.99,109.00,EUR,no,2,1,yes,https://www.hbomax.com/fr/fr,A official
+hbo max,FR,Premium,15.99,159.00,EUR,no,4,1,yes,https://www.hbomax.com/fr/fr,A official
+hbo max,IT,Basic with ads,6.99,,EUR,yes,2,1,yes,https://www.hbomax.com/it/it,A official
+hbo max,IT,Standard,11.99,,EUR,no,2,1,yes,https://www.hbomax.com/it/it,A official
+hbo max,IT,Premium,16.99,,EUR,no,4,1,yes,https://www.hbomax.com/it/it,A official

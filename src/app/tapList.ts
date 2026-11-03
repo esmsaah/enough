@@ -11,7 +11,7 @@
 
 import { CATALOG, catalogCategory, type CatalogEntry } from '../engine/catalog';
 import { pickFromCatalog, type QuickPick } from './catalog';
-import { withLocalPrice } from './localPrices';
+import { plansFor, withLocalPrice } from './localPrices';
 import globalCoreData from './globalCore.data.json';
 import localCoreData from './localCore.data.json';
 
@@ -49,8 +49,8 @@ export const GLOBAL_CORE: QuickPick[] = [
   // offered in Serbia or BiH). These come only from verified LOCAL research.
   // Adult (18+) — real recurring spend people forget. Discreet labels; these can
   // be hidden from the share card and report.
-  { merchantKey: 'onlyfans', name: 'OnlyFans', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 15, currency: 'USD', frequency: 'monthly' },
-  { merchantKey: 'fansly', name: 'Fansly', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 10, currency: 'USD', frequency: 'monthly' },
+  { merchantKey: 'onlyfans', name: 'OnlyFans', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, priceUnknown: true },
+  { merchantKey: 'fansly', name: 'Fansly', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 0, currency: 'USD', frequency: 'monthly', askPrice: true, priceUnknown: true },
   { merchantKey: 'pornhub premium', name: 'Pornhub Premium', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 9.99, currency: 'USD', frequency: 'monthly' },
   { merchantKey: 'brazzers', name: 'Brazzers', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 17.99, currency: 'USD', frequency: 'monthly' },
   { merchantKey: 'xhamster', name: 'xHamster', group: 'Adult', displayCategory: 'Other', category: 'digital', price: 9.99, currency: 'USD', frequency: 'monthly' },
@@ -104,10 +104,56 @@ function keepLocal(e: CatalogEntry): boolean {
 // Researched local layer (research/local_*.csv → scripts/buildLocalCore.ts).
 // For a country we have researched, these replace the noisy catalog locals.
 const LOCAL_RESEARCHED = localCoreData as Array<QuickPick & { region: string }>;
+
+/** Bills whose amount depends on the household or the plan (power, water, gas,
+ *  insurance, phone and internet plans, gyms, transport passes). There is no
+ *  single true price, so we never guess one. The person types what they pay. */
+export const ASK_GROUPS = new Set(['Utilities', 'Insurance', 'Phone & Internet', 'Fitness & Health', 'Transport', 'Housing']);
+const TV_FEE = /\b(tv licen[cs]e|licen[cs]e fee|taksa|rtv|rundfunk|utvarpsgjald|reception fee|canone|pretplata)\b/i;
+
+/** Round numbers left over from the first data pass, never verified. */
+export const PLACEHOLDER_PRICES = new Set([12, 15, 30, 70, 80]);
+
+export function honestPrice(p: QuickPick): QuickPick {
+  const variable = ASK_GROUPS.has(p.group ?? '') || (p.billingModel === 'usage' && !TV_FEE.test(p.name)) || PLACEHOLDER_PRICES.has(p.price);
+  if (!variable && !p.priceUnknown) return p;
+  return { ...p, askPrice: true, priceUnknown: true, defaultCadence: p.defaultCadence ?? 'month' };
+}
+
+/** Global services whose one price is the same everywhere, checked on the
+ *  official pricing page (research/verified/plans_verified.csv, country "*"). */
+const FLAT_VERIFIED = new Set(['chatgpt', 'claude', 'notion', 'grammarly']);
+
+/** A global service shows a price only when it is verified for this country
+ *  (researched plan) or is a verified flat price. Otherwise the person types it. */
+function verifiedOrAsk(p: QuickPick, country: string): QuickPick {
+  if (p.askPrice || p.priceUnknown) return p;
+  const plans = plansFor(p.merchantKey, country) as { verified?: boolean } | undefined;
+  // iCloud+ plans all come from Apple's own price table, so they count as verified.
+  if (plans?.verified || (plans && /^icloud/.test(p.merchantKey)) || FLAT_VERIFIED.has(p.merchantKey)) return p;
+  if (!CORE_KEYS.has(p.merchantKey)) return p; // local items were handled by honestLocal
+  return { ...p, askPrice: true, priceUnknown: true, defaultCadence: p.defaultCadence ?? 'month' };
+}
+
+/** Local prices confirmed by an official page or two independent sources
+ *  (research/verified/plans_verified.csv). Every other local item asks the
+ *  person what they pay instead of showing an unconfirmed number. */
+export const VERIFIED_LOCAL: Record<string, { price: number; currency: string }> = {
+  'RS:rts taksa': { price: 349, currency: 'RSD' }, // danas.rs + n1info.rs, from Aug 2024
+  'DE:rundfunkbeitrag': { price: 18.36, currency: 'EUR' }, // stuttgarter-zeitung.de + ms-aktuell.de, 2026
+  'NO:viaplay norge': { price: 109, currency: 'NOK' }, // viaplay.no, 2026-11-03
+};
+
+function honestLocal(p: QuickPick, region: string): QuickPick {
+  const v = VERIFIED_LOCAL[`${region}:${p.merchantKey}`];
+  if (v) return { ...p, price: v.price, currency: v.currency, askPrice: false, priceUnknown: false };
+  return { ...p, askPrice: true, priceUnknown: true, defaultCadence: p.defaultCadence ?? 'month' };
+}
+
 const RESEARCHED_BY_COUNTRY = new Map<string, QuickPick[]>();
 for (const p of LOCAL_RESEARCHED) {
   const { region, ...pick } = p;
-  RESEARCHED_BY_COUNTRY.set(region, [...(RESEARCHED_BY_COUNTRY.get(region) ?? []), pick]);
+  RESEARCHED_BY_COUNTRY.set(region, [...(RESEARCHED_BY_COUNTRY.get(region) ?? []), honestLocal(pick, region)]);
 }
 
 // ---------------------------------------------------------------------------
@@ -131,7 +177,7 @@ export function tapListForCountry(country: string): QuickPick[] {
     if (seen.has(p.merchantKey)) continue;
     seen.add(p.merchantKey);
     // Verified per-country prices (e.g. Netflix) override the generic default.
-    out.push(withLocalPrice(p, code));
+    out.push(verifiedOrAsk(withLocalPrice(p, code), code));
   }
   return out;
 }
