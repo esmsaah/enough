@@ -14,6 +14,7 @@ export type Plan = {
   sameAddress: boolean;
   requires?: 'student' | 'family';
   source: string;
+  checked?: string;
 };
 export type Market = { market: string; currency: string; verified: string; plans: Plan[] };
 
@@ -32,7 +33,7 @@ export type Sub = {
   importance: Importance;
   rotatable?: boolean; // video, used sometimes, the person keeps it
   pinned?: boolean; // the person wants it on all year
-  needs?: { viewersAtOnce?: number; adsOk?: boolean; needs4K?: boolean; storageUsedGb?: number; student?: boolean };
+  needs?: { viewersAtOnce?: number; adsOk?: boolean; needs4K?: boolean; minQuality?: number; storageUsedGb?: number; student?: boolean };
   // Other people at the SAME address paying their own account of this service.
   household?: Array<{ id: string; monthly: number; storageUsedGb?: number; sameAddress: boolean }>;
   membership?: { visitsPerMonth: number; singleVisit?: number };
@@ -54,6 +55,10 @@ export type Option = {
   sources: string[];
   confidence: 'high' | 'medium';
   schedule?: Array<{ service: string; on: string; off: string; steps: string[] }>;
+  /** Money freed per item of the person (household accounts count on their own item). */
+  perItem: Record<string, number>;
+  /** The plan to switch to, for planFit and householdPlan. */
+  newPlan?: { name: string; monthly: number };
 };
 export type Conditional = { itemId: string; question: string; ifYes: string; saving12IfYes: number };
 export type Exposure = { freeNow: number; locked: Array<{ name: string; monthly: number; until: string }>; fixed: number; total: number };
@@ -87,13 +92,15 @@ const earliestChange = (s: Sub, today: string) => {
   const first = slots(s, today)[0]!;
   return s.lockedUntil && s.lockedUntil > first ? slots(s, today).find((d) => d >= s.lockedUntil!) ?? '9999-12-31' : first;
 };
+/** 'BA' → 'Bosnia & Herzegovina'. */
+const countryName = (code: string) => { try { return new Intl.DisplayNames(['en'], { type: 'region' }).of(code === 'UK' ? 'GB' : code) ?? code; } catch { return code; } };
 const fmt = (n: number, cur: string) => new Intl.NumberFormat('en', { style: 'currency', currency: cur }).format(n);
 
 // ---------- 1. plan fit ----------
 /** Plans of the same service that still cover every need. Unknown need = keep today's level. */
 function fittingPlans(s: Sub, m: Market): { fits: Plan[]; current?: Plan; unknown: string[] } {
   const all = m.plans.filter((p) => p.service === s.service);
-  const current = all.find((p) => p.plan === s.plan) ?? all.find((p) => Math.abs(p.monthly - s.monthly) < 0.01);
+  const current = all.find((p) => p.plan === s.plan) ?? all.find((p) => Math.abs(p.monthly - s.monthly) <= Math.max(0.06, s.monthly * 0.02));
   const n = s.needs ?? {};
   const unknown: string[] = [];
   const fits = all.filter((p) => {
@@ -107,8 +114,8 @@ function fittingPlans(s: Sub, m: Market): { fits: Plan[]; current?: Plan; unknow
     }
     if (f.ads) { if (n.adsOk !== true) { if (n.adsOk === undefined) unknown.push('ads'); return false; } }
     if (f.quality !== undefined) {
-      const need = n.needs4K === true ? 2160 : n.needs4K === false ? 0 : (c.quality ?? 0);
-      if (n.needs4K === undefined) unknown.push('4k');
+      const need = n.minQuality ?? (n.needs4K === true ? 2160 : n.needs4K === false ? 0 : (c.quality ?? 0));
+      if (n.minQuality === undefined && n.needs4K === undefined) unknown.push('4k');
       if (f.quality < need) return false;
     }
     if (f.storageGb !== undefined) {
@@ -131,7 +138,7 @@ function planFitOption(s: Sub, m: Market, today: string): Option | undefined {
   if (after >= base) return undefined;
   const lost: string[] = [];
   if (current?.features.streams && best.features.streams && best.features.streams < current.features.streams) lost.push(`${current.features.streams - best.features.streams} screens you don't use`);
-  if (current?.features.quality === 2160 && best.features.quality !== 2160) lost.push('4K');
+  if (current?.features.quality && best.features.quality && best.features.quality < current.features.quality) lost.push(best.features.quality >= 1080 ? '4K' : best.features.quality >= 720 ? 'Full HD (720p instead)' : 'HD picture');
   if (current?.features.storageGb && best.features.storageGb && best.features.storageGb < current.features.storageGb) lost.push('storage you don\'t use');
   if (best.features.ads && !current?.features.ads) lost.push('ad-free (you said ads are OK)');
   const n = s.needs ?? {};
@@ -140,14 +147,16 @@ function planFitOption(s: Sub, m: Market, today: string): Option | undefined {
     startsOn: from, deadline: dayBefore(from),
     title: `${s.name}: switch ${current?.plan ?? 'your plan'} to ${best.plan}`,
     evidence: [
-      `You pay ${fmt(s.monthly, m.currency)} a month (${s.priceSource === 'statement' ? 'from your statement' : 'as you entered it'}).`,
+      `You pay ${fmt(s.monthly, m.currency)} a month (${s.priceSource === 'statement' ? 'from your statement' : 'from your answers, change it in Check if yours differs'}).`,
       ...(n.viewersAtOnce !== undefined ? [`Up to ${n.viewersAtOnce} ${n.viewersAtOnce === 1 ? 'person watches' : 'people watch'} at once, ${best.plan} allows ${best.features.streams}.`] : []),
       ...(n.storageUsedGb !== undefined ? [`You use ${n.storageUsedGb} GB, ${best.plan} holds ${best.features.storageGb} GB (we keep 10% room to grow).`] : []),
-      `${best.plan} is ${fmt(best.monthly, m.currency)} a month in ${m.market}.`,
+      `${best.plan} is ${fmt(best.monthly, m.currency)} a month in ${countryName(m.market)}.`,
       ...(lost.length ? [`You give up ${lost.join(', ')}.`] : []),
     ],
-    sources: [`${best.source} (checked ${m.verified})`],
+    sources: [`${best.source} (checked ${best.checked ?? m.verified})`],
     confidence: s.priceSource === 'statement' ? 'high' : 'medium',
+    perItem: { [s.id]: r2(base - after) },
+    newPlan: { name: best.plan, monthly: best.monthly },
   };
 }
 
@@ -176,7 +185,9 @@ function householdOption(s: Sub, m: Market, today: string): Option | undefined {
       ...(shared.sameAddress ? ['Everyone on it must live at the same address (provider rule).'] : []),
       ...(storageNeed ? [`Together you use ${storageNeed} GB, ${shared.plan} holds ${shared.features.storageGb} GB.`] : []),
     ],
-    sources: [`${shared.source} (checked ${m.verified})`], confidence: 'medium',
+    sources: [`${shared.source} (checked ${shared.checked ?? m.verified})`], confidence: 'medium',
+    perItem: { [s.id]: r2(base - after) },
+    newPlan: { name: shared.plan, monthly: shared.monthly },
   };
 }
 
@@ -193,6 +204,7 @@ function rotationOption(subs: Sub[], m: Market, today: string, useFitted: Map<st
   // Each block starts the day after the previous one ends. Subscribing again sets a
   // new billing day, so the next charges follow the restart date, not the old one.
   let cursor = '';
+  const perItem: Record<string, number> = {};
   for (const [i, s] of ordered.entries()) {
     const sl = slots(s, today);
     const start = i * block, end = i === n - 1 ? 12 : (i + 1) * block; // last one takes the remainder
@@ -204,6 +216,7 @@ function rotationOption(subs: Sub[], m: Market, today: string, useFitted: Map<st
     base += s.monthly * 12;
     const steps: string[] = [];
     let on: string, paidUntil: string;
+    const afterBefore = after;
     if (i === 0) {
       after += count * keepPrice;
       on = today; paidUntil = sl[end]!;
@@ -217,6 +230,7 @@ function rotationOption(subs: Sub[], m: Market, today: string, useFitted: Map<st
       steps.push(`cancel before ${dayBefore(sl[0]!)} (paid until then)`, `subscribe again on ${on}`);
       if (i < n - 1) steps.push(`cancel before ${dayBefore(paidUntil)}`);
     }
+    perItem[s.id] = r2(s.monthly * 12 - (after - afterBefore));
     cursor = paidUntil;
     schedule.push({ service: s.name, on, off: dayBefore(paidUntil), steps });
   }
@@ -233,9 +247,10 @@ function rotationOption(subs: Sub[], m: Market, today: string, useFitted: Map<st
       ...evidence,
       'You wait for a show until its service is on. Nothing is lost, you keep your account and profile.',
     ],
-    sources: [...new Set(ordered.flatMap((s) => m.plans.filter((p) => p.service === s.service).map((p) => `${p.source} (checked ${m.verified})`)))],
+    sources: [...new Set(ordered.flatMap((s) => m.plans.filter((p) => p.service === s.service).map((p) => `${p.source} (checked ${p.checked ?? m.verified})`)))],
     confidence: ordered.every((s) => s.nextCharge) ? 'high' : 'medium',
     schedule,
+    perItem,
   };
 }
 
@@ -257,6 +272,7 @@ function payPerVisitOption(s: Sub, m: Market, today: string): Option | undefined
       ...(s.lockedUntil ? [`Your contract runs until ${s.lockedUntil}, so the saving starts on ${from}. Check the notice period in your contract, it can be a month or more.`] : []),
     ],
     sources: ['your own prices'], confidence: 'medium',
+    perItem: { [s.id]: r2(base - after) },
   };
 }
 
@@ -270,6 +286,7 @@ function cancelOption(s: Sub, _m: Market, today: string): Option | undefined {
     id: `cancel:${s.id}`, kind: 'cancel', affects: [s.id], loss: 2, baseline12: base, after12: after, saving12: r2(base - after), startsOn: from, deadline: dayBefore(from),
     title: `${s.name}: cancel`, evidence: [`You said you can live without it.`, ...(s.lockedUntil ? [`Paid or contracted until ${s.lockedUntil}.`] : [])],
     sources: [s.priceSource === 'statement' ? 'your statement' : 'your price'], confidence: s.priceSource === 'statement' ? 'high' : 'medium',
+    perItem: { [s.id]: r2(base - after) },
   };
 }
 
@@ -283,7 +300,8 @@ function conditionals(s: Sub, m: Market, today: string): Conditional[] {
     const now = planFitOption(s, m, today);
     if (o && o.saving12 > (now?.saving12 ?? 0)) out.push({ itemId: s.id, question: q, ifYes: `${label}: ${o.title.split(': ')[1]}`, saving12IfYes: r2(o.saving12 - (now?.saving12 ?? 0)) });
   };
-  if (unknown.includes('viewers') || unknown.includes('4k')) tryWith({ viewersAtOnce: s.needs?.viewersAtOnce ?? 2, needs4K: s.needs?.needs4K ?? false }, `Do no more than 2 people watch ${s.name} at once, without needing 4K?`, 'If yes');
+  if (unknown.includes('4k')) tryWith({ viewersAtOnce: s.needs?.viewersAtOnce ?? 1, minQuality: 720 }, s.needs?.viewersAtOnce !== undefined ? `Would HD (720p) picture be enough on ${s.name}?` : `Does one person watch ${s.name} at a time, and is HD (720p) picture enough?`, 'If yes');
+  else if (unknown.includes('viewers')) tryWith({ viewersAtOnce: 1 }, `Does only one person watch ${s.name} at a time?`, 'If yes');
   if (unknown.includes('ads')) tryWith({ adsOk: true }, `Would ads on ${s.name} be OK?`, 'If yes');
   if (unknown.includes('storage')) out.push({ itemId: s.id, question: `How much of your ${s.name} storage do you use? (Settings shows it)`, ifYes: 'We can check if a smaller plan fits', saving12IfYes: 0 });
   return out;

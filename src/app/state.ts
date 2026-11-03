@@ -90,6 +90,7 @@ export type Action =
   | { type: 'setSingleVisit'; id: string; price: number }
   | { type: 'setWatchAtOnce'; id: string; n: number }
   | { type: 'setHouseholdOwn'; id: string; value: boolean }
+  | { type: 'setNeeds'; id: string; patch: Partial<Pick<Item, 'needs4K' | 'minQuality' | 'adsOk' | 'storageUsedGb'>> }
   | { type: 'setContract'; id: string; contract: 'none' | 'contract' | 'unsure'; contractEnds?: string }
   | { type: 'setCompareState'; id: string; compareState: Item['compareState'] }
   | { type: 'setPreferredInOverlap'; id: string; preferred: string } // item id to keep, or 'same'
@@ -263,6 +264,8 @@ export function reducer(state: State, action: Action): State {
       return { ...state, items: patch(state.items, action.id, { visitsPerMonth: action.visits }) };
     case 'setWatchAtOnce':
       return { ...state, items: patch(state.items, action.id, { watchAtOnce: action.n }) };
+    case 'setNeeds':
+      return { ...state, items: patch(state.items, action.id, action.patch) };
     case 'setHouseholdOwn':
       return { ...state, items: patch(state.items, action.id, { householdOwn: action.value }) };
     case 'setContract':

@@ -6,7 +6,7 @@ import type { Item } from '../engine/types';
 
 const KEEP = ['name', 'merchantKey', 'category', 'displayCategory', 'price', 'currency', 'frequency', 'overlapGroup', 'cancelUrl', 'yearlyPrice',
   'planName', 'billingModel', 'usage', 'wouldMiss', 'visitsPerMonth', 'singleVisitPrice', 'compareState', 'contract', 'contractEnds', 'watchAtOnce',
-  'householdOwn', 'renewalMonth', 'trialEndsOn', 'userPriced', 'catalogPrice', 'source', 'estimate', 'priceConfirmed'] as const;
+  'householdOwn', 'needs4K', 'minQuality', 'adsOk', 'storageUsedGb', 'renewalMonth', 'trialEndsOn', 'userPriced', 'catalogPrice', 'source', 'estimate', 'priceConfirmed'] as const;
 
 type Carried = Partial<Pick<Item, (typeof KEEP)[number]>>;
 

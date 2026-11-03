@@ -48,6 +48,12 @@ function cancelSteps(item: Item): string[] {
       'Pausing is not offered for yearly plans or when you pay through Apple. Then cancel instead.',
     ];
   }
+  if (item.category === 'membership') {
+    return [
+      `Tell ${item.name} at the desk or in writing that you are cancelling, and ask for a confirmation.`,
+      'Stopping the bank payment alone does not end a membership.',
+    ];
+  }
   return [
     ...(item.frequency === 'yearly' ? ['Yearly plan: cancel now so it does not renew. You keep it until the paid year ends.'] : []),
     link ? `Open your ${item.name} account page (link below) and choose Cancel.` : `Open ${item.name} in a browser, go to Account, then Subscription or Billing, and choose Cancel.`,
@@ -87,7 +93,39 @@ export function howToFor(rec: Recommendation, item: Item, audit: Audit, money: (
           : 'Save anything you would lose first.';
       return withLink({ steps: [save, ...cancelSteps(item)], deadline: deadlineFor(item, money, audit.createdAt) });
     }
+    case 'changePlan': {
+      const np = rec.opp?.newPlan;
+      return withLink({
+        steps: [
+          np ? `In your ${item.name} account, choose Change plan and pick ${np.name}.` : `In your ${item.name} account, choose Change plan.`,
+          'The change starts with your next payment, so nothing you already paid is lost.',
+          'Paying through the App Store or Google Play? Change the plan there instead.',
+        ],
+        ...(rec.opp?.deadline ? { deadline: `Before ${humanDate(rec.opp.deadline)}.` } : {}),
+      });
+    }
+    case 'sharePlan': {
+      const np = rec.opp?.newPlan;
+      return withLink({
+        steps: [
+          np ? `One of you switches to ${np.name} and invites the other from the account page.` : 'One of you switches to the shared plan and invites the other.',
+          'The other person cancels their own plan once they are in, before their next payment.',
+          'Everyone on the plan must live at the same address.',
+        ],
+        ...(rec.opp?.deadline ? { deadline: `Before ${humanDate(rec.opp.deadline)}.` } : {}),
+      });
+    }
     case 'rotate': {
+      const mine = rec.opp?.schedule?.find((x) => x.service === item.name);
+      if (mine) {
+        return withLink({
+          steps: [
+            ...mine.steps.map((st) => st.charAt(0).toUpperCase() + st.slice(1).replace(/(\d{4}-\d{2}-\d{2})/g, (d) => humanDate(d)) + '.'),
+            'Your account and profiles stay when you cancel a monthly plan, so restarting takes a minute.',
+            'The calendar file below reminds you of every date.',
+          ],
+        });
+      }
       const months = (rec.pauseMonths ?? []).map((ym) => new Intl.DateTimeFormat('en', { month: 'long', timeZone: 'UTC' }).format(new Date(`${ym}-01T00:00:00Z`)));
       return withLink({
         steps: [
@@ -201,8 +239,25 @@ export function calendarEvents(audit: Audit, money: (n: number) => string): Cale
     const notice = noticeDate(item.contractEnds);
     if (notice >= audit.createdAt) out.push({ date: minusDays(notice, 7), title: `Give notice: ${item.name}`, note: `Your contract ends ${item.contractEnds}. Send written notice before ${humanDate(notice)} so it doesn't renew.` });
   }
+  const seenSchedules = new Set<string>();
   for (const r of audit.recommendations) {
-    if (r.action !== 'rotate' || !r.pauseMonths?.length) continue;
+    if ((r.action === 'changePlan' || r.action === 'sharePlan') && r.opp?.deadline) {
+      const item = byId.get(r.itemId);
+      if (item) out.push({ date: minusDays(r.opp.deadline, 2), title: `${item.name}: switch to ${r.opp.newPlan?.name ?? 'the cheaper plan'}`, note: `${r.reason} Saves about ${money(r.potentialYearlySaving)} in the next 12 months.` });
+    }
+    if (r.action !== 'rotate' || !r.opp?.schedule) continue;
+    const key = r.opp.schedule.map((x) => x.service).join('+');
+    if (seenSchedules.has(key)) continue;
+    seenSchedules.add(key);
+    for (const block of r.opp.schedule) {
+      const cancel = block.steps.map((st) => st.match(/cancel before (\d{4}-\d{2}-\d{2})/)?.[1]).filter((d): d is string => !!d);
+      for (const d of cancel) out.push({ date: minusDays(d, 2), title: `Cancel ${block.service}`, note: `Your streaming rotation: cancel ${block.service} before ${humanDate(d)}. You keep access until then.` });
+      const restart = block.steps.map((st) => st.match(/subscribe again on (\d{4}-\d{2}-\d{2})/)?.[1]).find((d) => !!d);
+      if (restart) out.push({ date: restart, title: `Restart ${block.service}`, note: `Your streaming rotation: ${block.service} is on from today until ${humanDate(block.off)}.` });
+    }
+  }
+  for (const r of audit.recommendations) {
+    if (r.action !== 'rotate' || r.opp || !r.pauseMonths?.length) continue;
     const item = byId.get(r.itemId);
     if (!item) continue;
     const first = `${r.pauseMonths[0]}-01`;

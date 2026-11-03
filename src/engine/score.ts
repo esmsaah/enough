@@ -7,6 +7,7 @@
 // rotate), so scoring takes the whole item list, precomputes those
 // relationships once, then decides each item against the ordered rules.
 
+import type { Option as OppOption, Result as OppResult } from './opportunity/engine';
 import { cheapestCloudPlan } from './cloudPlans';
 import { computeHiddenCosts } from './hidden';
 import { convert } from './rates';
@@ -91,7 +92,7 @@ type Context = {
   byId: Map<string, Item>;
 };
 
-function buildContext(items: Item[]): Context {
+function buildContext(items: Item[], consolidateCloud = true): Context {
   const byId = new Map(items.map((i) => [i.id, i]));
   const duplicateExtras = new Set<string>();
   const overlapKeptName = new Map<string, string>();
@@ -155,7 +156,7 @@ function buildContext(items: Item[]): Context {
   //     otherwise fall back to the same keep-most-used-cut-other rule. ---
   const cloudMembers = items.filter((i) => i.overlapGroup === 'cloud' && !duplicateExtras.has(i.id) && !overlapLosers.has(i.id));
   let cloudConsolidation: CloudConsolidation | undefined;
-  if (cloudMembers.length >= 2 && cloudMembers.every((i) => typeof i.storageUsedGb === 'number')) {
+  if (consolidateCloud && cloudMembers.length >= 2 && cloudMembers.every((i) => typeof i.storageUsedGb === 'number')) {
     const combinedStorage = cloudMembers.reduce((s, i) => s + (i.storageUsedGb ?? 0), 0);
     const currentMonthly = cloudMembers.reduce((s, i) => s + monthlyEquivalent(i), 0);
     const plan = cheapestCloudPlan(combinedStorage, cloudMembers[0]!.currency);
@@ -212,6 +213,18 @@ function addGenericOverlap(
         : usageRank(m) === usageRank(kept) ? `You use ${m.name} and ${kept.name} about the same, and they do the same job. Keeping the cheaper one covers you.`
           : `Overlaps with ${kept.name}, which you use more.`) + icloudNote);
   }
+}
+
+/** Why an item stays, in the person's own answers. Never a claim about value we didn't ask. */
+export function keepReason(item: Item): string {
+  if (item.category === 'membership' && typeof item.visitsPerMonth === 'number' && item.visitsPerMonth > 0) {
+    const per = monthlyEquivalent(item) / item.visitsPerMonth;
+    return `${item.visitsPerMonth} ${item.visitsPerMonth === 1 ? 'visit' : 'visits'} a month, about ${fmt(per, item.currency)} a visit.`;
+  }
+  if (item.preferredInOverlap === item.id) return 'You chose this one over the service that does the same job.';
+  if (item.usage === 'always') return `You use it every week, about ${fmt(monthlyEquivalent(item) / 4.33, item.currency)} a week. No cheaper plan we know of fits what you told us.`;
+  if (item.usage === 'sometimes' && item.wouldMiss) return 'You use it sometimes and said you would miss it.';
+  return 'Nothing in your answers points to a change.';
 }
 
 /** Power, water, heating and similar: fixed costs with (usually) one provider. */
@@ -401,6 +414,8 @@ export function runAudit(
     sharePlan?: (item: Item) => { name: string; monthly: number; currency: string; people: number } | undefined;
     /** Months the statement covers, to turn spending totals into a year. */
     spendingMonths?: number;
+    /** Opportunity engine over verified plans (app layer). Items are already in the display currency. */
+    opportunities?: (items: Item[], today: string, overlapLosers: Set<string>) => OppResult;
   } = {},
 ): Audit {
   const currency = opts.displayCurrency ?? mostCommonCurrency(items) ?? 'EUR';
@@ -426,7 +441,7 @@ export function runAudit(
   const subscriptions = convertedItems.filter((item) => (item.category === 'digital' || item.category === 'membership') && item.billingModel !== 'usage' && item.billingModel !== 'oneTime' && item.frequency !== 'oneTime');
   const bills = convertedItems.filter((item) => item.category === 'bill');
   const habits = convertedItems.filter((item) => !subscriptions.includes(item) && !bills.includes(item));
-  const ctx = buildContext(subscriptions);
+  const ctx = buildContext(subscriptions, !opts.opportunities);
   const today = opts.createdAt ?? new Date().toISOString().slice(0, 10);
   const scored = subscriptions.map((i) => adjustForContract(scoreItem(i, ctx), i, today));
 
@@ -452,7 +467,7 @@ export function runAudit(
   const keptOn = sometimes.length >= 2 ? pickKept(sometimes) : undefined;
   const toRotate = keptOn ? sometimes.filter((i) => i.id !== keptOn.id).sort((a, b) => yearlyCost(b) - yearlyCost(a)) : [];
   const start = opts.createdAt ?? new Date().toISOString().slice(0, 10);
-  const recommendations = scored.map((r) => {
+  const legacyRecs = scored.map((r) => {
     const k = toRotate.findIndex((i) => i.id === r.itemId);
     if (k === -1) return r;
     const item = toRotate[k]!;
@@ -467,6 +482,54 @@ export function runAudit(
       reason: `You watch it sometimes, like ${keptOn!.name}. Pause it 4 months a year (${label(pauseMonths[0]!)} to ${label(pauseMonths[3]!)}) while ${keptOn!.name} stays on.`,
     };
   });
+  // The opportunity engine (when the app passes verified plan data) decides the money:
+  // the best compatible set of changes over the next 12 billing periods, never dropping
+  // what the person said they'd miss. One action per item, so nothing is counted twice.
+  let opportunities: Audit['opportunities'];
+  let recommendations: Recommendation[] = legacyRecs;
+  if (opts.opportunities) {
+    const losers = new Set(legacyRecs.filter((r) => r.action === 'removeOverlap').map((r) => r.itemId));
+    const res = opts.opportunities(subscriptions, today, losers);
+    opportunities = { levels: res.levels, conditionals: res.conditionals, exposure: res.exposure, noOpportunity: res.noOpportunity };
+    const top = res.levels[res.levels.length - 1]!;
+    const byItem = new Map<string, { o: OppOption; saving: number }>();
+    for (const id of top.chosen) {
+      const o = res.options.find((x) => x.id === id);
+      if (o) for (const [itemId, saving] of Object.entries(o.perItem)) byItem.set(itemId, { o, saving });
+    }
+    recommendations = legacyRecs.map((r) => {
+      const item = subscriptions.find((i) => i.id === r.itemId)!;
+      const hit = byItem.get(r.itemId);
+      if (!hit) {
+        // Money now comes only from the engine. Duplicates, refunds, offers and yearly billing stay as they were.
+        if (['cancel', 'removeOverlap', 'rotate', 'payPerVisit'].includes(r.action) && r.potentialYearlySaving > 0) {
+          return r.action === 'rotate' || r.action === 'payPerVisit'
+            ? { ...r, verdict: 'keep' as Verdict, action: 'keep' as ActionType, potentialYearlySaving: 0, reason: keepReason(item) }
+            : { ...r, verdict: 'lookAgain' as Verdict, potentialYearlySaving: 0 };
+        }
+        return r.action === 'keep' ? { ...r, reason: keepReason(item) } : r;
+      }
+      const o = hit.o;
+      const action: ActionType = o.kind === 'planFit' ? 'changePlan' : o.kind === 'householdPlan' ? 'sharePlan' : o.kind === 'rotation' ? 'rotate'
+        : o.kind === 'payPerVisit' ? 'payPerVisit' : r.action === 'removeOverlap' ? 'removeOverlap' : 'cancel';
+      const verdict: Verdict = o.kind === 'cancel' || o.kind === 'payPerVisit' ? 'cut' : 'lookAgain';
+      const what = o.title.includes(': ') ? o.title.slice(o.title.indexOf(': ') + 2) : o.title;
+      const reason = o.kind === 'cancel' ? r.reason : `${what.charAt(0).toUpperCase()}${what.slice(1)}.`;
+      const dated = !!item.nextCharge || o.kind === 'payPerVisit';
+      return {
+        ...r,
+        action,
+        verdict,
+        potentialYearlySaving: round2(hit.saving),
+        reason,
+        opp: {
+          title: o.title, evidence: o.kind === 'cancel' ? [] : o.evidence, sources: o.kind === 'cancel' ? [] : o.sources, confidence: o.confidence,
+          ...(dated && o.deadline ? { deadline: o.deadline } : {}), ...(o.startsOn ? { startsOn: o.startsOn } : {}),
+          ...(o.newPlan ? { newPlan: o.newPlan } : {}), ...(o.schedule ? { schedule: o.schedule } : {}),
+        },
+      };
+    });
+  }
   const potentialYearlySaving = round2(recommendations.reduce((sum, rec) => sum + rec.potentialYearlySaving, 0));
   const spendCategories: SpendingCategory[] = ['Groceries', 'Shopping', 'Cafes & eating out', 'Transport', 'Travel', 'Delivery'];
   const spendingByCategory = Object.fromEntries(spendCategories.map((category) => {
@@ -498,7 +561,9 @@ export function runAudit(
   const hiddenCostYearlyTotal = round2(hiddenCosts.reduce((s, h) => s + (h.yearly ?? 0), 0));
   // Yearly bills (insurance) renew too, so they get reminders as well.
   const reminders = buildReminders([...subscriptions, ...bills], opts.profile, createdAt);
-  const advice = buildAdvice(subscriptions, bills, habits, recommendations, currency, { ...opts, spendingByCategory });
+  const advice = buildAdvice(subscriptions, bills, habits, recommendations, currency, { ...opts, spendingByCategory })
+    // The engine already turned plan and household findings into counted actions.
+    .filter((a) => !opts.opportunities || (a.kind !== 'cheaperPlan' && a.kind !== 'sharePlan'));
   // Statement "habits" are everyday spending (groceries, cafes, rides), not recurring
   // costs: they appear as spending advice, never in the year's recurring total.
   const toldHabits = habits.filter((h) => h.source !== 'statement');
@@ -510,6 +575,7 @@ export function runAudit(
     billYearlyTotal,
     spendingByCategory,
     ...(rotationPlan ? { rotationPlan } : {}),
+    ...(opportunities ? { opportunities } : {}),
     habits,
     recommendations,
     yearlyTotal,

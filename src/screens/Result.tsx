@@ -14,13 +14,15 @@ import type { ActionType } from '../engine/types';
 const ACTION_LABEL: Record<ActionType, string> = {
   keep: 'Keep',
   cancel: 'Cancel',
-  rotate: 'Pause 4 months a year',
+  rotate: 'Take turns with your other streaming',
   switchYearly: 'Switch to yearly',
   payPerVisit: 'Pay per visit',
   removeOverlap: 'Drop the overlap',
   familyPlan: 'One or family plan',
   compareOffers: 'Compare offers',
   checkRefund: 'Check for a refund',
+  changePlan: 'A cheaper plan that fits',
+  sharePlan: 'One plan for your home',
 };
 
 export function Result() {

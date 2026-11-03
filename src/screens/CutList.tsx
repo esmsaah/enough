@@ -18,8 +18,9 @@ import { yearlyCost } from '../engine/score';
 
 const GROUPS: Array<{ label: string; actions: ActionType[] }> = [
   { label: 'Cancel', actions: ['cancel'] },
+  { label: 'Same thing, cheaper', actions: ['changePlan', 'sharePlan'] },
   { label: 'Change', actions: ['payPerVisit', 'removeOverlap', 'switchYearly', 'familyPlan', 'compareOffers'] },
-  { label: 'Rotate', actions: ['rotate'] },
+  { label: 'Take turns', actions: ['rotate'] },
   { label: 'Get back', actions: ['checkRefund'] },
 ];
 
@@ -60,6 +61,8 @@ export function CutList() {
       </section>
 
       <div className="flow-body flow-col" style={{ padding: '28px 20px 32px', display: 'flex', flexDirection: 'column', gap: 32 }}>
+        <Levels />
+
         <TargetTool />
 
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', fontSize: 12, color: 'var(--muted)', alignItems: 'baseline' }}>
@@ -207,6 +210,11 @@ function Row({ rec, item, reason, cur, audit }: { rec: Recommendation; item?: It
       <span style={{ fontSize: 14, lineHeight: 1.5, color: 'var(--muted)' }}>
         {reason}
       </span>
+      {rec.opp && rec.opp.evidence.length > 0 && (
+        <ul style={{ margin: '4px 0 0', paddingLeft: 18, fontSize: 13, lineHeight: 1.5, color: 'var(--muted)', display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {rec.opp.evidence.map((e, n) => <li key={n}>{e}</li>)}
+        </ul>
+      )}
       {how && how.steps.length > 0 && (
         <ol style={{ margin: '6px 0 0', paddingLeft: 18, fontSize: 14, lineHeight: 1.5, display: 'flex', flexDirection: 'column', gap: 4 }}>
           {how.steps.map((s, n) => <li key={n}>{s}</li>)}
@@ -214,11 +222,54 @@ function Row({ rec, item, reason, cur, audit }: { rec: Recommendation; item?: It
       )}
       {how?.link && <a href={how.link} target="_blank" rel="noreferrer" style={{ fontSize: 14, fontWeight: 600 }}>Open the {item?.name} account page</a>}
       {how?.deadline && <span style={{ fontSize: 13, color: 'var(--ink)' }}><strong>When:</strong> {how.deadline}</span>}
+      {rec.opp && rec.opp.sources.some((x) => x.startsWith('http')) && (
+        <span style={{ fontSize: 12, color: 'var(--muted)' }}>
+          Price source: {rec.opp.sources.filter((x) => x.startsWith('http')).filter((x, n, all) => all.findIndex((y) => new URL(y.split(' ')[0]!).hostname === new URL(x.split(' ')[0]!).hostname) === n).slice(0, 2).map((x, n) => {
+            const [url, rest] = [x.split(' ')[0]!, x.slice(x.indexOf(' ') + 1)];
+            return <span key={n}>{n > 0 ? ', ' : ''}<a href={url} target="_blank" rel="noreferrer">{new URL(url).hostname.replace(/^www\./, '')}</a> {rest}</span>;
+          })}
+        </span>
+      )}
       {item && (
         <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, color: 'var(--muted)', marginTop: 4, cursor: 'pointer' }}>
           <input type="checkbox" checked={!!item.done} onChange={() => dispatch({ type: 'toggleDone', id: item.id })} /> Done
         </label>
       )}
     </div>
+  );
+}
+
+/** Three honest totals: what you free without giving anything up, with waiting for shows, and in full. */
+function Levels() {
+  const { audit } = useStore();
+  const o = audit.opportunities;
+  if (!o) return null;
+  const cur = audit.currency;
+  const labels = ['Without giving anything up', 'If you also take turns with streaming', 'If you also drop what you said you can live without'];
+  const shown: Array<{ label: string; v: number }> = [];
+  for (const l of o.levels) if (!shown.length || l.saving12 > shown[shown.length - 1]!.v + 0.004) shown.push({ label: labels[l.maxLoss]!, v: l.saving12 });
+  const e = o.exposure;
+  return (
+    <section style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <span className="lab">Your next 12 months</span>
+      {shown.filter((x) => x.v > 0).map((x) => (
+        <div key={x.label} className="r" style={{ padding: '10px 0', borderTop: '1px solid var(--line)' }}>
+          <span style={{ fontSize: 15 }}>{x.label}</span>
+          <span className="m" style={{ fontSize: 17, fontWeight: 700 }}>{formatMoney(x.v, cur)}</span>
+        </div>
+      ))}
+      {shown.every((x) => x.v <= 0) && <span style={{ fontSize: 15, color: 'var(--muted)' }}>We found no change that saves money without giving up something you value. That is a good result.</span>}
+      <span style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.5 }}>
+        Counted over your next 12 payments, and only after a contract ends. Of the {formatMoney(e.total, cur)} a month you pay for subscriptions and memberships, {formatMoney(e.freeNow, cur)} you can change now
+        {e.locked.length ? `, ${e.locked.map((l) => `${l.name} is under contract until ${new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${l.until}T00:00:00Z`))}`).join(', ')}` : ''}.
+      </span>
+      {o.conditionals.length > 0 && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: 13, color: 'var(--ink)' }}>
+          {o.conditionals.filter((c) => c.saving12IfYes > 0).map((c) => (
+            <span key={c.itemId + c.question}>{c.question} If yes, about {formatMoney(c.saving12IfYes, cur)} more. Change your answer in Check.</span>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }

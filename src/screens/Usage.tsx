@@ -233,6 +233,35 @@ function ItemCard({ item: i, group, country, passed, onPass, onComplete }: {
     if (keeps && shape.shared) qs.push({ key: 'home', title: `Does someone at home pay for their own ${i.name}?`, answer: i.householdOwn === undefined ? undefined : i.householdOwn ? 'Yes' : 'No',
       body: <List value={i.householdOwn === undefined ? undefined : i.householdOwn ? 'yes' : 'no'} options={[{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }]}
         onPick={(v) => answer(() => dispatch({ type: 'setHouseholdOwn', id: i.id, value: v === 'yes' }))} /> });
+    // Questions that unlock a cheaper plan, asked only when such a plan exists for this person.
+    const mk = i.merchantKey ?? '';
+    const isVideo = ['netflix', 'disney+', 'hbo max', 'max'].includes(mk);
+    const current = plans.find((p) => p.name === planShown);
+    const adsPlan = plans.find((p) => (p.type === 'basic_with_ads' || (p as { ads?: boolean }).ads) && inItemCur(p) < i.price - 0.01);
+    // Picture quality: asked only when a cheaper plan with lower quality would otherwise fit.
+    const qualityOf = (t?: string) => (t === 'premium' ? 2160 : t === 'basic' || t === 'mobile' ? 720 : 1080);
+    const lowerCheaper = plans.some((p) => qualityOf(p.type) < qualityOf(current?.type) && inItemCur(p) < i.price - 0.01 && p.type !== 'mobile');
+    if (keeps && isVideo && current && lowerCheaper) qs.push({ key: 'quality', title: 'What picture quality do you need?', answer: i.minQuality === undefined ? undefined : i.minQuality >= 2160 ? '4K (Ultra HD)' : i.minQuality >= 1080 ? 'Full HD' : 'HD is fine',
+      body: <List value={i.minQuality === undefined ? undefined : String(i.minQuality)} options={[
+        ...(qualityOf(current.type) >= 2160 ? [{ value: '2160', label: '4K (Ultra HD)', note: 'needs a 4K TV' }] : []),
+        { value: '1080', label: 'Full HD' }, { value: '720', label: 'HD is fine', note: 'phone, laptop or a small TV' }]}
+        onPick={(v) => answer(() => dispatch({ type: 'setNeeds', id: i.id, patch: { minQuality: Number(v) } }))} /> });
+    if (keeps && isVideo && adsPlan && !(current as { ads?: boolean } | undefined)?.ads) qs.push({ key: 'ads', title: `Would short ads on ${i.name} be OK if it saved money?`, answer: i.adsOk === undefined ? undefined : i.adsOk ? 'Yes' : 'No',
+      body: <List value={i.adsOk === undefined ? undefined : i.adsOk ? 'yes' : 'no'} options={[{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }]}
+        onPick={(v) => answer(() => dispatch({ type: 'setNeeds', id: i.id, patch: { adsOk: v === 'yes' } }))} /> });
+    const cheapest = plans.length ? Math.min(...plans.map(inItemCur)) : Infinity;
+    const sk = `${i.id}:storage`;
+    if (/^(icloud|google one)/.test(mk) && plans.length >= 2 && i.price > cheapest * 1.02) {
+      const gbLabel = (gb: number) => gb === 45 ? 'Under 50 GB' : gb === 180 ? 'Under 200 GB' : gb === 1800 ? 'Under 2 TB' : 'More than 2 TB';
+      qs.push({ key: 'storage', title: `How much of your ${i.name} storage do you use?`, answer: i.storageUsedGb !== undefined ? gbLabel(i.storageUsedGb) : passed.has(sk) ? 'Not sure' : undefined,
+        body: (
+          <>
+            <List value={i.storageUsedGb === undefined ? undefined : String(i.storageUsedGb)} options={[{ value: '45', label: 'Under 50 GB' }, { value: '180', label: 'Under 200 GB' }, { value: '1800', label: 'Under 2 TB' }, { value: '2500', label: 'More than 2 TB' }, { value: 'skip', label: 'Not sure' }]}
+              onPick={(v) => answer(() => { if (v === 'skip') onPass(sk); else dispatch({ type: 'setNeeds', id: i.id, patch: { storageUsedGb: Number(v) } }); })} />
+            <span style={{ fontSize: 13, color: 'var(--muted)' }}>Your phone shows it under Settings, your name, iCloud (or in the Google One app).</span>
+          </>
+        ) });
+    }
   }
   if (i.category === 'membership') {
     qs.push({ key: 'visits', title: 'How many times a month do you go?', answer: typeof i.visitsPerMonth === 'number' ? `${i.visitsPerMonth} a month` : undefined,

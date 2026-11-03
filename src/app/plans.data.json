@@ -19660,6 +19660,37 @@
         }
       ],
       "verified": true
+    },
+    "UK": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 9.99,
+          "currency": "GBP",
+          "people": 1,
+          "source": "https://apps.apple.com/gb/app/audible-audiobooks-podcasts/id379693831"
+        }
+      ],
+      "verified": true
+    },
+    "US": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 15.99,
+          "currency": "USD",
+          "yearly": 159.99,
+          "people": 1,
+          "source": "https://apps.apple.com/us/app/audible-audiobooks-podcasts/id379693831"
+        }
+      ],
+      "verified": true
     }
   },
   "dazn": {
@@ -21201,6 +21232,251 @@
           "yearly": 100.0,
           "people": 1,
           "source": "https://apps.apple.com/gb/app/canva-ai-photo-video-editor/id897446215"
+        }
+      ],
+      "verified": true
+    }
+  },
+  "claude": {
+    "BA": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 22.0,
+          "currency": "EUR",
+          "yearly": 249.99,
+          "people": 1,
+          "source": "https://apps.apple.com/ba/app/claude-by-anthropic/id6473753684"
+        }
+      ],
+      "verified": true
+    },
+    "RS": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 22.0,
+          "currency": "EUR",
+          "yearly": 249.99,
+          "people": 1,
+          "source": "https://apps.apple.com/rs/app/claude-by-anthropic/id6473753684"
+        }
+      ],
+      "verified": true
+    },
+    "HR": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 22.0,
+          "currency": "EUR",
+          "yearly": 249.99,
+          "people": 1,
+          "source": "https://apps.apple.com/hr/app/claude-by-anthropic/id6473753684"
+        }
+      ],
+      "verified": true
+    },
+    "DE": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 22.0,
+          "currency": "EUR",
+          "yearly": 249.99,
+          "people": 1,
+          "source": "https://apps.apple.com/de/app/claude-by-anthropic/id6473753684"
+        }
+      ],
+      "verified": true
+    },
+    "AT": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 22.0,
+          "currency": "EUR",
+          "yearly": 249.99,
+          "people": 1,
+          "source": "https://apps.apple.com/at/app/claude-by-anthropic/id6473753684"
+        }
+      ],
+      "verified": true
+    },
+    "CH": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 18.0,
+          "currency": "CHF",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ch/app/claude-by-anthropic/id6473753684"
+        }
+      ],
+      "verified": true
+    },
+    "UK": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 20.0,
+          "currency": "GBP",
+          "yearly": 199.99,
+          "people": 1,
+          "source": "https://apps.apple.com/gb/app/claude-by-anthropic/id6473753684"
+        }
+      ],
+      "verified": true
+    }
+  },
+  "perplexity": {
+    "BA": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 22.0,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ba/app/perplexity-ask-anything/id1668000334"
+        }
+      ],
+      "verified": true
+    },
+    "HR": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 22.0,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/hr/app/perplexity-ask-anything/id1668000334"
+        }
+      ],
+      "verified": true
+    },
+    "DE": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 22.0,
+          "currency": "EUR",
+          "yearly": 229.0,
+          "people": 1,
+          "source": "https://apps.apple.com/de/app/perplexity-ask-anything/id1668000334"
+        }
+      ],
+      "verified": true
+    },
+    "CH": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 18.0,
+          "currency": "CHF",
+          "yearly": 180.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ch/app/perplexity-ask-anything/id1668000334"
+        }
+      ],
+      "verified": true
+    },
+    "UK": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Pro",
+          "type": "pro",
+          "monthly": 20.0,
+          "currency": "GBP",
+          "yearly": 200.0,
+          "people": 1,
+          "source": "https://apps.apple.com/gb/app/perplexity-ask-anything/id1668000334"
+        }
+      ],
+      "verified": true
+    }
+  },
+  "strava": {
+    "DE": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Monthly",
+          "type": "monthly",
+          "monthly": 6.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/de/app/strava-run-bike-hike/id426826309"
+        }
+      ],
+      "verified": true
+    },
+    "HR": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Monthly",
+          "type": "monthly",
+          "monthly": 6.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/hr/app/strava-run-bike-hike/id426826309"
+        }
+      ],
+      "verified": true
+    }
+  },
+  "paramount+": {
+    "US": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Essential",
+          "type": "monthly",
+          "monthly": 8.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://apps.apple.com/us/app/paramount/id530168168"
         }
       ],
       "verified": true

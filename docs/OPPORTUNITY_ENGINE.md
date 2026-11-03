@@ -163,3 +163,14 @@ New questions, all conditional, each asked only when it unlocks a found opportun
 - **It is dated.** Every change has the day it can happen and a reminder, so the € is realistic, not theoretical.
 - **It shows its work.** Every € lists the plan, price, country and check date it came from.
 - **It knows when to stay silent.** No verified alternative, no € figure.
+
+---
+
+## Implemented (2026-11-04)
+
+- `src/engine/opportunity/engine.ts` generates options (cheaper plan that fits, one plan for the home, rotation with dates, pay per visit, cancel) and picks the best compatible set per loss level. Every option carries its per-item money, evidence, sources and deadline.
+- `src/app/opportunities.ts` maps the person's items and the verified plans (`plans.data.json`, `verified: true` only) to the engine, in the display currency.
+- `runAudit` takes the engine's top level as the money: one action per item, nothing counted twice. Old rotation and plan tips are replaced. Duplicates, refunds, offers and yearly billing stay.
+- Check asks three new questions only when they unlock a verified cheaper plan: picture quality, ads, storage used.
+- Cut list shows the three levels (nothing given up, take turns, drop what you can live without), what is free to change now, each card's evidence and price source, and rotation dates in the calendar file.
+- Tests: `src/engine/opportunity/poc.test.ts` (Germany), `src/app/opportunities.test.ts` (Bosnia, end to end).

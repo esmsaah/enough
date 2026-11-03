@@ -1263,3 +1263,20 @@ spotify,MD,Premium Individual,5.49,,USD,no,,,1,no,https://www.spotify.com/md-en/
 spotify,MD,Premium Student,2.99,,USD,no,,,1,no,https://www.spotify.com/md-en/premium/,2026-11-03,,A official
 spotify,MD,Premium Duo,7.49,,USD,no,,,1,yes,https://www.spotify.com/md-en/premium/,2026-11-03,,A official
 spotify,MD,Premium Family,9.49,,USD,no,,,6,yes,https://www.spotify.com/md-en/premium/,2026-11-03,,A official
+claude,BA,Pro,22.00,249.99,EUR,no,,,1,no,https://apps.apple.com/ba/app/claude-by-anthropic/id6473753684,2026-11-03,,A app store (iPhone price)
+claude,RS,Pro,22.00,249.99,EUR,no,,,1,no,https://apps.apple.com/rs/app/claude-by-anthropic/id6473753684,2026-11-03,,A app store (iPhone price)
+claude,HR,Pro,22.00,249.99,EUR,no,,,1,no,https://apps.apple.com/hr/app/claude-by-anthropic/id6473753684,2026-11-03,,A app store (iPhone price)
+claude,DE,Pro,22.00,249.99,EUR,no,,,1,no,https://apps.apple.com/de/app/claude-by-anthropic/id6473753684,2026-11-03,,A app store (iPhone price)
+claude,AT,Pro,22.00,249.99,EUR,no,,,1,no,https://apps.apple.com/at/app/claude-by-anthropic/id6473753684,2026-11-03,,A app store (iPhone price)
+claude,CH,Pro,18.00,200.00,CHF,no,,,1,no,https://apps.apple.com/ch/app/claude-by-anthropic/id6473753684,2026-11-03,,A app store (iPhone price)
+claude,UK,Pro,20.00,199.99,GBP,no,,,1,no,https://apps.apple.com/gb/app/claude-by-anthropic/id6473753684,2026-11-03,,A app store (iPhone price)
+perplexity,BA,Pro,22.00,229.00,EUR,no,,,1,no,https://apps.apple.com/ba/app/perplexity-ask-anything/id1668000334,2026-11-03,,A app store (iPhone price)
+perplexity,HR,Pro,22.00,229.00,EUR,no,,,1,no,https://apps.apple.com/hr/app/perplexity-ask-anything/id1668000334,2026-11-03,,A app store (iPhone price)
+perplexity,DE,Pro,22.00,229.00,EUR,no,,,1,no,https://apps.apple.com/de/app/perplexity-ask-anything/id1668000334,2026-11-03,,A app store (iPhone price)
+perplexity,CH,Pro,18.00,180.00,CHF,no,,,1,no,https://apps.apple.com/ch/app/perplexity-ask-anything/id1668000334,2026-11-03,,A app store (iPhone price)
+perplexity,UK,Pro,20.00,200.00,GBP,no,,,1,no,https://apps.apple.com/gb/app/perplexity-ask-anything/id1668000334,2026-11-03,,A app store (iPhone price)
+strava,DE,Monthly,6.99,,EUR,no,,,1,no,https://apps.apple.com/de/app/strava-run-bike-hike/id426826309,2026-11-03,,A app store (iPhone price)
+strava,HR,Monthly,6.99,,EUR,no,,,1,no,https://apps.apple.com/hr/app/strava-run-bike-hike/id426826309,2026-11-03,,A app store (iPhone price)
+audible,UK,Premium,9.99,,GBP,no,,,1,no,https://apps.apple.com/gb/app/audible-audiobooks-podcasts/id379693831,2026-11-03,,A app store (iPhone price)
+audible,US,Premium,15.99,159.99,USD,no,,,1,no,https://apps.apple.com/us/app/audible-audiobooks-podcasts/id379693831,2026-11-03,,A app store (iPhone price)
+paramount+,US,Essential,8.99,,USD,no,,,1,no,https://apps.apple.com/us/app/paramount/id530168168,2026-11-03,,A app store (iPhone price)

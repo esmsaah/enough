@@ -1,4 +1,5 @@
 // Enough — app store (context + reducer + persistence + derived audit).
+import { opportunitiesFor } from './opportunities';
 import { createContext, useContext, useEffect, useReducer, useRef, type ReactNode } from 'react';
 import { runAudit } from '../engine/score';
 import type { Audit } from '../engine/types';
@@ -74,6 +75,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     profile: state.profile,
     cheaperPlan: (item) => cheaperPlanFor(item.merchantKey, item.planName, monthlyEquivalent(item), state.currency, state.country ?? guessCountry(), item.watchAtOnce),
     sharePlan: (item) => sharePlanFor(item.merchantKey, monthlyEquivalent(item), state.currency, state.country ?? guessCountry()),
+    opportunities: (items, today, losers) => opportunitiesFor(items, state.country ?? guessCountry(), state.currency, today, losers),
     ...(state.statement ? { spendingMonths: state.statement.meta.monthsSpan } : {}),
     ...(state.statement?.fees ? {
       ...(state.statement.fees.fxYearly !== undefined ? { statementFxFeeYearly: state.statement.fees.fxYearly } : {}),

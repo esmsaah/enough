@@ -97,6 +97,9 @@ export type Item = {
   trialEndsOn?: string; // ISO date a free/intro trial turns into a paid charge (reminder)
   watchAtOnce?: number; // how many people use it at the same time (screen-tier plans)
   householdOwn?: boolean; // someone else at home pays for their own account of the same service
+  needs4K?: boolean; // video: watches in 4K (Ultra HD) (older answers)
+  minQuality?: number; // video: lowest picture quality that is enough (720, 1080, 2160); asked only when a cheaper plan with less fits
+  adsOk?: boolean; // video: fine with an ad-supported plan; asked only when one fits and is cheaper
   planName?: string; // which plan the person has (from researched plans), e.g. "Standard"
   userPriced?: boolean; // the person typed the amount themselves (gym, habits)
   catalogPrice?: number; // typical monthly price from the catalog, in this item's currency (price-above-catalog warning)
@@ -119,7 +122,9 @@ export type ActionType =
   | 'removeOverlap'
   | 'familyPlan'
   | 'compareOffers'
-  | 'checkRefund';
+  | 'checkRefund'
+  | 'changePlan'
+  | 'sharePlan';
 
 export type Verdict = 'keep' | 'lookAgain' | 'cut';
 
@@ -133,6 +138,8 @@ export type Recommendation = {
   potentialYearlySaving: number; // 0 for keep
   approx?: boolean; // saving relies on a converted (approximate) figure
   pauseMonths?: string[]; // rotate: the four months (YYYY-MM) to pause this service
+  /** From the opportunity engine: the evidence, dates and source behind this action. */
+  opp?: { title: string; evidence: string[]; sources: string[]; deadline?: string; startsOn?: string; confidence: 'high' | 'medium'; newPlan?: { name: string; monthly: number }; schedule?: Array<{ service: string; on: string; off: string; steps: string[] }> };
 };
 
 /**
@@ -187,6 +194,8 @@ export type Audit = {
   billYearlyTotal: number;
   spendingByCategory: Record<SpendingCategory, number>;
   rotationPlan?: StreamingRotationPlan;
+  /** The opportunity engine's view: savings per loss level, open questions, how much is free to change. */
+  opportunities?: { levels: import('./opportunity/engine').Result['levels']; conditionals: import('./opportunity/engine').Conditional[]; exposure: import('./opportunity/engine').Exposure; noOpportunity: Array<{ itemId: string; why: string }> };
   habits: Item[];
   recommendations: Recommendation[];
   yearlyTotal: number;
