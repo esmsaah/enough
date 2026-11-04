@@ -9,20 +9,25 @@ The app only uses verified plans (plus iCloud+, which comes from Apple's own tab
 country without a verified price asks the person what they pay. No guessed price is shown.
 
 ## Coverage (countries with a verified price)
-Spotify 82, Netflix 81 (Kosovo has no Netflix price page), Google One 79, ChatGPT 78, Disney+ 54,
-Microsoft 365 54, HBO Max 42, Apple One / Music / TV+ / Arcade 34, Canva 10, Claude 7,
-YouTube Premium 6 (US, DE, ES, NL, CH, HR), Perplexity 5, Audible 3, Amazon Prime 3 (DE, FR, AT),
-Strava 2, Deezer 1 (US), Paramount+ 1 (US), iCloud+ all (Apple table). Flat-price: Claude, Notion, Grammarly.
+Spotify 82, Netflix 81 (Kosovo has no Netflix price page), Google One 79, ChatGPT 78, Disney+ 56,
+Microsoft 365 59, HBO Max 42, Apple One / Music / TV+ / Arcade 34, YouTube Premium 15, Canva 10,
+Claude 7, PlayStation Plus 6, Perplexity 5, Amazon Prime 4 (US, DE, FR, AT), Audible 3,
+Xbox Game Pass 2 (US, DE), Strava 2, Deezer 1 (US), Paramount+ 1 (US), iCloud+ all (Apple table).
+Flat-price: Claude, Notion, Grammarly.
+
+YouTube Premium in GB, FR, IT, PL, SE, CA, AU, IN, TR is the iPhone (App Store) price. Paying on the
+web is usually cheaper, and the app always lets the person correct it.
 
 ## Still asks the person (no verified price yet)
-- YouTube Premium elsewhere. IT and PT figures (20.99) came only from user reports, not used.
-  GB, FR, BE, IE, Nordics, PL, LatAm, IN, TR, JP, AU only have blog conversions.
-- Amazon Prime outside DE, FR, AT. US is unclear (Amazon help page and 2026 articles disagree).
+- YouTube Premium in BE, IE, NO, DK, AT, MX, BR, JP, RS and the Balkans. Student plans everywhere.
+- Amazon Prime outside US, DE, FR, AT (GB, CA, AU have only one source each).
+- PlayStation Plus Extra/Premium in the eurozone, yearly plans, and everything outside US, GB, DE, FR, ES, NL.
+- Xbox Game Pass outside US and DE. Eurozone tiers other than Ultimate and PC have only one source.
+- Disney+ in IL, AE, SA, ZA (App Store lists are unclear, no news source).
+- Microsoft 365 in BA, ME, MK, AL, XK, MA, KE, GH, BD.
 - Deezer outside US (its site shows prices by visitor location).
-- PlayStation Plus, Xbox Game Pass, Nintendo Switch Online (prices behind sign-in).
 - Duolingo, Tinder, Bumble, Hinge (no clear monthly price, varies by age or offer).
-- Disney+ in IL, AE, SA, ZA, MY, IN. Microsoft 365 in the Balkans, Middle East and Africa.
-- Paramount+, DAZN, Crunchyroll, VPNs, Headspace, Calm and the rest of the global list.
+- Paramount+, DAZN, Crunchyroll, Nintendo, VPNs, Headspace, Calm and the rest of the global list.
 - All local items except RTS taksa (RS), Rundfunkbeitrag (DE), Viaplay (NO). Bills, insurance, phone,
   internet, gyms and pay-TV depend on the person, so the app always asks for those.
 - Gyms. The hint shows the Numbeo country average (research/gyms.csv), the person types their own price.

@@ -1,0 +1,82 @@
+service,country,plan,monthly,yearly,currency,ads,streams,accounts,same_address,source,tier,note
+disney+,IN,Mobile,79,499,INR,yes,1,1,yes,https://www.jiostar.com/news/jiohotstar-introduces-monthly-plans-across-tiers-giving-viewers-more-choice-in-how-they-watch/,A official,"JioHotstar, new subscribers from Jan 2026"
+disney+,IN,Super,149,1099,INR,yes,2,1,yes,https://www.jiostar.com/news/jiohotstar-introduces-monthly-plans-across-tiers-giving-viewers-more-choice-in-how-they-watch/,A official,"JioHotstar, new subscribers from Jan 2026"
+disney+,IN,Premium,299,2199,INR,no,4,1,yes,https://www.jiostar.com/news/jiohotstar-introduces-monthly-plans-across-tiers-giving-viewers-more-choice-in-how-they-watch/,A official,"JioHotstar, new subscribers from Jan 2026"
+disney+,MY,Basic,29.90,214.90,MYR,no,,1,yes,https://nextrift.com/202542282/ ; https://says.com/my/seismik/pakej-langganan-disney-di-malaysia-naik-harga-bermula-disember-ini-apa-yang-anda-perlu-tahu,"B news, 2 sources",from Dec 2025
+disney+,MY,Premium,49.90,289.90,MYR,no,,1,yes,https://nextrift.com/202542282/ ; https://says.com/my/seismik/pakej-langganan-disney-di-malaysia-naik-harga-bermula-disember-ini-apa-yang-anda-perlu-tahu,"B news, 2 sources",from Dec 2025
+microsoft 365,ZA,Personal,159,1599,ZAR,no,,1,no,https://www.microsoft.com/en-za/microsoft-365/buy/compare-all-microsoft-365-products ; https://apps.apple.com/za/app/microsoft-365-copilot/id541164041,A official,
+microsoft 365,ZA,Family,199,1999,ZAR,no,,6,no,https://www.microsoft.com/en-za/microsoft-365/buy/compare-all-microsoft-365-products ; https://apps.apple.com/za/app/microsoft-365-copilot/id541164041,A official,
+microsoft 365,ZA,Premium,429,4299,ZAR,no,,6,no,https://www.microsoft.com/en-za/microsoft-365/buy/compare-all-microsoft-365-products ; https://apps.apple.com/za/app/microsoft-365-copilot/id541164041,A official,
+microsoft 365,IL,Personal,43,429,ILS,no,,1,no,https://www.microsoft.com/he-il/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,IL,Family,53,549,ILS,no,,6,no,https://www.microsoft.com/he-il/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,IL,Premium,75,749,ILS,no,,6,no,https://www.microsoft.com/he-il/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,VN,Personal,210000,2099000,VND,no,,1,no,https://www.microsoft.com/vi-vn/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,VN,Family,260000,2599000,VND,no,,6,no,https://www.microsoft.com/vi-vn/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,VN,Premium,510000,5099000,VND,no,,6,no,https://www.microsoft.com/vi-vn/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,SA,Personal,42.99,429.99,SAR,no,,1,no,https://www.microsoft.com/ar-sa/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,SA,Family,55.99,559.99,SAR,no,,6,no,https://www.microsoft.com/ar-sa/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,SA,Premium,85.99,859.99,SAR,no,,6,no,https://www.microsoft.com/ar-sa/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,RS,Personal,1089,10899,RSD,no,,1,no,https://www.microsoft.com/sr-latn-rs/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,RS,Family,1329,13499,RSD,no,,6,no,https://www.microsoft.com/sr-latn-rs/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,RS,Premium,2499,24999,RSD,no,,6,no,https://www.microsoft.com/sr-latn-rs/microsoft-365/buy/compare-all-microsoft-365-products,A official,
+microsoft 365,NG,Personal,7200,71900,NGN,no,,1,no,https://apps.apple.com/ng/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,NG,Family,8900,89000,NGN,no,,6,no,https://apps.apple.com/ng/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,NG,Premium,17000,,NGN,no,,6,no,https://apps.apple.com/ng/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,NG,Basic,1200,,NGN,no,,1,no,https://apps.apple.com/ng/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,EG,Personal,239,2399,EGP,no,,1,no,https://apps.apple.com/eg/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,EG,Family,289,2899,EGP,no,,6,no,https://apps.apple.com/eg/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,EG,Premium,699,6999,EGP,no,,6,no,https://apps.apple.com/eg/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,EG,Basic,59,,EGP,no,,1,no,https://apps.apple.com/eg/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,QA,Personal,35.99,359.99,QAR,no,,1,no,https://apps.apple.com/qa/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,QA,Family,46.99,,QAR,no,,6,no,https://apps.apple.com/qa/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,QA,Premium,74.99,,QAR,no,,6,no,https://apps.apple.com/qa/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,QA,Basic,7.99,,QAR,no,,1,no,https://apps.apple.com/qa/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,PK,Personal,2299,22999,PKR,no,,1,no,https://apps.apple.com/pk/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,PK,Family,2899,28999,PKR,no,,6,no,https://apps.apple.com/pk/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,PK,Premium,5599,,PKR,no,,6,no,https://apps.apple.com/pk/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,PK,Basic,549,,PKR,no,,1,no,https://apps.apple.com/pk/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+microsoft 365,ZA,Basic,39,,ZAR,no,,1,no,https://apps.apple.com/za/app/microsoft-365-copilot/id541164041,A app store (iPhone price),
+youtube premium,GB,Individual,16.99,,GBP,no,,1,no,https://apps.apple.com/gb/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,GB,Family,25.99,,GBP,no,,6,yes,https://apps.apple.com/gb/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,GB,Lite,10.49,,GBP,no,,1,no,https://apps.apple.com/gb/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,FR,Individual,16.99,,EUR,no,,1,no,https://apps.apple.com/fr/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,FR,Family,38.99,,EUR,no,,6,yes,https://apps.apple.com/fr/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,FR,Lite,9.99,,EUR,no,,1,no,https://apps.apple.com/fr/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,IT,Individual,20.99,,EUR,no,,1,no,https://apps.apple.com/it/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,IT,Family,38.99,,EUR,no,,6,yes,https://apps.apple.com/it/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,IT,Lite,11.99,,EUR,no,,1,no,https://apps.apple.com/it/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,PL,Individual,38.99,,PLN,no,,1,no,https://apps.apple.com/pl/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,PL,Family,77.99,,PLN,no,,6,yes,https://apps.apple.com/pl/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,PL,Lite,22.99,,PLN,no,,1,no,https://apps.apple.com/pl/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,SE,Individual,219,,SEK,no,,1,no,https://apps.apple.com/se/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,SE,Family,399,,SEK,no,,6,yes,https://apps.apple.com/se/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,SE,Lite,129,,SEK,no,,1,no,https://apps.apple.com/se/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,CA,Individual,16.99,,CAD,no,,1,no,https://apps.apple.com/ca/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,CA,Family,29.99,,CAD,no,,6,yes,https://apps.apple.com/ca/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,CA,Lite,10.49,,CAD,no,,1,no,https://apps.apple.com/ca/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,AU,Individual,22.99,,AUD,no,,1,no,https://apps.apple.com/au/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,AU,Family,51.99,,AUD,no,,6,yes,https://apps.apple.com/au/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,AU,Lite,11.99,,AUD,no,,1,no,https://apps.apple.com/au/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,IN,Individual,195,,INR,no,,1,no,https://apps.apple.com/in/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,IN,Family,389,,INR,no,,6,yes,https://apps.apple.com/in/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,IN,Lite,119,,INR,no,,1,no,https://apps.apple.com/in/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,TR,Individual,159.99,,TRY,no,,1,no,https://apps.apple.com/tr/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,TR,Family,319.99,,TRY,no,,6,yes,https://apps.apple.com/tr/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+youtube premium,TR,Lite,99.99,,TRY,no,,1,no,https://apps.apple.com/tr/app/youtube/id544007664,A app store (iPhone price),"iPhone price, paying on the web is usually cheaper"
+amazon prime,US,Prime,14.99,139,USD,no,,1,no,https://www.dealnews.com/features/amazon-prime/cost/ ; https://www.lilachbullock.com/amazon-prime-cost/,"B news, 2 sources",
+xbox game pass,US,Essential,9.99,,USD,no,,1,no,https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026 ; https://tech-insider.org/xbox-game-pass-tiers-2026/,"B news, 2 sources",
+xbox game pass,US,Premium,14.99,,USD,no,,1,no,https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026 ; https://tech-insider.org/xbox-game-pass-tiers-2026/,"B news, 2 sources",
+xbox game pass,US,Ultimate,22.99,,USD,no,,1,no,https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026 ; https://tech-insider.org/xbox-game-pass-tiers-2026/,"B news, 2 sources",
+xbox game pass,US,PC Game Pass,13.99,,USD,no,,1,no,https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026 ; https://tech-insider.org/xbox-game-pass-tiers-2026/,"B news, 2 sources",
+xbox game pass,DE,Ultimate,20.99,,EUR,no,,1,no,https://news.xbox.com/de-de/2026/04/21/xbox-game-pass-ultimate-preisupdate/ ; https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026,"B news, 2 sources",
+xbox game pass,DE,PC Game Pass,12.99,,EUR,no,,1,no,https://news.xbox.com/de-de/2026/04/21/xbox-game-pass-ultimate-preisupdate/ ; https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026,"B news, 2 sources",
+playstation plus,US,Essential,10.99,,USD,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.nme.com/news/gaming-news/playstation-plus-essential-premium-price-hike-3947485,"B news, 2 sources",1-month price
+playstation plus,US,Extra,16.99,,USD,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.nme.com/news/gaming-news/playstation-plus-essential-premium-price-hike-3947485,"B news, 2 sources",1-month price
+playstation plus,US,Premium,19.99,,USD,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.nme.com/news/gaming-news/playstation-plus-essential-premium-price-hike-3947485,"B news, 2 sources",1-month price
+playstation plus,GB,Essential,7.99,,GBP,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.nme.com/news/gaming-news/playstation-plus-essential-premium-price-hike-3947485,"B news, 2 sources",1-month price
+playstation plus,GB,Extra,11.99,,GBP,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.nme.com/news/gaming-news/playstation-plus-essential-premium-price-hike-3947485,"B news, 2 sources",1-month price
+playstation plus,GB,Premium,14.99,,GBP,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.nme.com/news/gaming-news/playstation-plus-essential-premium-price-hike-3947485,"B news, 2 sources",1-month price
+playstation plus,DE,Essential,9.99,,EUR,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.shacknews.com/article/149181/ps-plus-price-increase-may-2026,"B news, 2 sources",1-month price
+playstation plus,FR,Essential,9.99,,EUR,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.shacknews.com/article/149181/ps-plus-price-increase-may-2026,"B news, 2 sources",1-month price
+playstation plus,ES,Essential,9.99,,EUR,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.shacknews.com/article/149181/ps-plus-price-increase-may-2026,"B news, 2 sources",1-month price
+playstation plus,NL,Essential,9.99,,EUR,no,,1,no,https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices ; https://www.shacknews.com/article/149181/ps-plus-price-increase-may-2026,"B news, 2 sources",1-month price

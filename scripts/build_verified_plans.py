@@ -7,7 +7,7 @@ Run: python3 scripts/build_verified_plans.py
 import csv, json, re
 
 ALIASES = {'hbo max': ['hbo max', 'max'], 'icloud+': ['icloud+', 'icloud']}
-DEFAULT_ORDER = ['standard', 'individual', 'personal', 'plus', '200gb', '100gb', 'premium', 'basic', 'monthly']
+DEFAULT_ORDER = ['standard', 'individual', 'personal', 'plus', '200gb', '100gb', 'ultimate', 'essential', 'premium', 'basic', 'monthly']
 
 def ptype(service, plan):
     p = plan.lower()
@@ -16,7 +16,7 @@ def ptype(service, plan):
     for k in ('student', 'duo', 'family', 'mobile', 'platinum'):
         if k in p: return k
     if 'ads' in p or 'advert' in p: return 'basic_with_ads'
-    for k in ('basic', 'standard', 'premium', 'individual', 'personal', 'plus', 'pro', 'go', 'lite'):
+    for k in ('basic', 'standard', 'premium', 'individual', 'personal', 'plus', 'pro', 'go', 'lite', 'essential', 'extra', 'ultimate'):
         if k in p: return k
     return 'monthly'
 

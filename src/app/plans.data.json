@@ -75,6 +75,22 @@
         }
       ],
       "verified": true
+    },
+    "US": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Prime",
+          "type": "monthly",
+          "monthly": 14.99,
+          "currency": "USD",
+          "yearly": 139.0,
+          "people": 1,
+          "source": "https://www.dealnews.com/features/amazon-prime/cost/"
+        }
+      ],
+      "verified": true
     }
   },
   "apple music": {
@@ -3833,6 +3849,67 @@
           "yearly": 139.99,
           "people": 1,
           "source": "https://apps.apple.com/xk/app/disney/id1446075923"
+        }
+      ],
+      "verified": true
+    },
+    "IN": {
+      "checked": "2026-11-03",
+      "default": 2,
+      "plans": [
+        {
+          "name": "Mobile",
+          "type": "mobile",
+          "monthly": 79.0,
+          "currency": "INR",
+          "yearly": 499.0,
+          "people": 1,
+          "ads": true,
+          "source": "https://www.jiostar.com/news/jiohotstar-introduces-monthly-plans-across-tiers-giving-viewers-more-choice-in-how-they-watch/"
+        },
+        {
+          "name": "Super",
+          "type": "monthly",
+          "monthly": 149.0,
+          "currency": "INR",
+          "yearly": 1099.0,
+          "people": 2,
+          "ads": true,
+          "source": "https://www.jiostar.com/news/jiohotstar-introduces-monthly-plans-across-tiers-giving-viewers-more-choice-in-how-they-watch/"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 299.0,
+          "currency": "INR",
+          "yearly": 2199.0,
+          "people": 4,
+          "source": "https://www.jiostar.com/news/jiohotstar-introduces-monthly-plans-across-tiers-giving-viewers-more-choice-in-how-they-watch/"
+        }
+      ],
+      "verified": true
+    },
+    "MY": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic",
+          "type": "basic",
+          "monthly": 29.9,
+          "currency": "MYR",
+          "yearly": 214.9,
+          "people": 1,
+          "source": "https://nextrift.com/202542282/"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 49.9,
+          "currency": "MYR",
+          "yearly": 289.9,
+          "people": 1,
+          "source": "https://nextrift.com/202542282/"
         }
       ],
       "verified": true
@@ -17301,6 +17378,285 @@
         }
       ],
       "verified": true
+    },
+    "GB": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 10.49,
+          "currency": "GBP",
+          "people": 1,
+          "source": "https://apps.apple.com/gb/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 16.99,
+          "currency": "GBP",
+          "people": 1,
+          "source": "https://apps.apple.com/gb/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 25.99,
+          "currency": "GBP",
+          "people": 6,
+          "source": "https://apps.apple.com/gb/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
+    },
+    "FR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/fr/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 16.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/fr/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 38.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/fr/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
+    },
+    "IT": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 11.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/it/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 20.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://apps.apple.com/it/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 38.99,
+          "currency": "EUR",
+          "people": 6,
+          "source": "https://apps.apple.com/it/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
+    },
+    "PL": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 22.99,
+          "currency": "PLN",
+          "people": 1,
+          "source": "https://apps.apple.com/pl/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 38.99,
+          "currency": "PLN",
+          "people": 1,
+          "source": "https://apps.apple.com/pl/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 77.99,
+          "currency": "PLN",
+          "people": 6,
+          "source": "https://apps.apple.com/pl/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
+    },
+    "SE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 129.0,
+          "currency": "SEK",
+          "people": 1,
+          "source": "https://apps.apple.com/se/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 219.0,
+          "currency": "SEK",
+          "people": 1,
+          "source": "https://apps.apple.com/se/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 399.0,
+          "currency": "SEK",
+          "people": 6,
+          "source": "https://apps.apple.com/se/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
+    },
+    "CA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 10.49,
+          "currency": "CAD",
+          "people": 1,
+          "source": "https://apps.apple.com/ca/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 16.99,
+          "currency": "CAD",
+          "people": 1,
+          "source": "https://apps.apple.com/ca/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 29.99,
+          "currency": "CAD",
+          "people": 6,
+          "source": "https://apps.apple.com/ca/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
+    },
+    "AU": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 11.99,
+          "currency": "AUD",
+          "people": 1,
+          "source": "https://apps.apple.com/au/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 22.99,
+          "currency": "AUD",
+          "people": 1,
+          "source": "https://apps.apple.com/au/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 51.99,
+          "currency": "AUD",
+          "people": 6,
+          "source": "https://apps.apple.com/au/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
+    },
+    "IN": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 119.0,
+          "currency": "INR",
+          "people": 1,
+          "source": "https://apps.apple.com/in/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 195.0,
+          "currency": "INR",
+          "people": 1,
+          "source": "https://apps.apple.com/in/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 389.0,
+          "currency": "INR",
+          "people": 6,
+          "source": "https://apps.apple.com/in/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
+    },
+    "TR": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Lite",
+          "type": "lite",
+          "monthly": 99.99,
+          "currency": "TRY",
+          "people": 1,
+          "source": "https://apps.apple.com/tr/app/youtube/id544007664"
+        },
+        {
+          "name": "Individual",
+          "type": "individual",
+          "monthly": 159.99,
+          "currency": "TRY",
+          "people": 1,
+          "source": "https://apps.apple.com/tr/app/youtube/id544007664"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 319.99,
+          "currency": "TRY",
+          "people": 6,
+          "source": "https://apps.apple.com/tr/app/youtube/id544007664"
+        }
+      ],
+      "verified": true
     }
   },
   "apple one": {
@@ -20158,6 +20514,15 @@
           "yearly": 2599000.0,
           "people": 6,
           "source": "https://www.microsoft.com/vi-vn/microsoft-365/buy/compare-all-microsoft-365-products"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 510000.0,
+          "currency": "VND",
+          "yearly": 5099000.0,
+          "people": 6,
+          "source": "https://www.microsoft.com/vi-vn/microsoft-365/buy/compare-all-microsoft-365-products"
         }
       ],
       "verified": true
@@ -20358,6 +20723,15 @@
           "yearly": 549.0,
           "people": 6,
           "source": "https://www.microsoft.com/he-il/microsoft-365/buy/compare-all-microsoft-365-products"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 75.0,
+          "currency": "ILS",
+          "yearly": 749.0,
+          "people": 6,
+          "source": "https://www.microsoft.com/he-il/microsoft-365/buy/compare-all-microsoft-365-products"
         }
       ],
       "verified": true
@@ -20383,14 +20757,31 @@
           "yearly": 559.99,
           "people": 6,
           "source": "https://www.microsoft.com/ar-sa/microsoft-365/buy/compare-all-microsoft-365-products"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 85.99,
+          "currency": "SAR",
+          "yearly": 859.99,
+          "people": 6,
+          "source": "https://www.microsoft.com/ar-sa/microsoft-365/buy/compare-all-microsoft-365-products"
         }
       ],
       "verified": true
     },
     "ZA": {
       "checked": "2026-11-03",
-      "default": 0,
+      "default": 1,
       "plans": [
+        {
+          "name": "Basic",
+          "type": "basic",
+          "monthly": 39.0,
+          "currency": "ZAR",
+          "people": 1,
+          "source": "https://apps.apple.com/za/app/microsoft-365-copilot/id541164041"
+        },
         {
           "name": "Personal",
           "type": "personal",
@@ -20406,6 +20797,15 @@
           "monthly": 199.0,
           "currency": "ZAR",
           "yearly": 1999.0,
+          "people": 6,
+          "source": "https://www.microsoft.com/en-za/microsoft-365/buy/compare-all-microsoft-365-products"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 429.0,
+          "currency": "ZAR",
+          "yearly": 4299.0,
           "people": 6,
           "source": "https://www.microsoft.com/en-za/microsoft-365/buy/compare-all-microsoft-365-products"
         }
@@ -20458,6 +20858,204 @@
           "yearly": 3399.0,
           "people": 6,
           "source": "https://www.microsoft.com/uk-ua/microsoft-365/buy/compare-all-microsoft-365-products"
+        }
+      ],
+      "verified": true
+    },
+    "RS": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Personal",
+          "type": "personal",
+          "monthly": 1089.0,
+          "currency": "RSD",
+          "yearly": 10899.0,
+          "people": 1,
+          "source": "https://www.microsoft.com/sr-latn-rs/microsoft-365/buy/compare-all-microsoft-365-products"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 1329.0,
+          "currency": "RSD",
+          "yearly": 13499.0,
+          "people": 6,
+          "source": "https://www.microsoft.com/sr-latn-rs/microsoft-365/buy/compare-all-microsoft-365-products"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 2499.0,
+          "currency": "RSD",
+          "yearly": 24999.0,
+          "people": 6,
+          "source": "https://www.microsoft.com/sr-latn-rs/microsoft-365/buy/compare-all-microsoft-365-products"
+        }
+      ],
+      "verified": true
+    },
+    "NG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic",
+          "type": "basic",
+          "monthly": 1200.0,
+          "currency": "NGN",
+          "people": 1,
+          "source": "https://apps.apple.com/ng/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Personal",
+          "type": "personal",
+          "monthly": 7200.0,
+          "currency": "NGN",
+          "yearly": 71900.0,
+          "people": 1,
+          "source": "https://apps.apple.com/ng/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 8900.0,
+          "currency": "NGN",
+          "yearly": 89000.0,
+          "people": 6,
+          "source": "https://apps.apple.com/ng/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 17000.0,
+          "currency": "NGN",
+          "people": 6,
+          "source": "https://apps.apple.com/ng/app/microsoft-365-copilot/id541164041"
+        }
+      ],
+      "verified": true
+    },
+    "EG": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic",
+          "type": "basic",
+          "monthly": 59.0,
+          "currency": "EGP",
+          "people": 1,
+          "source": "https://apps.apple.com/eg/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Personal",
+          "type": "personal",
+          "monthly": 239.0,
+          "currency": "EGP",
+          "yearly": 2399.0,
+          "people": 1,
+          "source": "https://apps.apple.com/eg/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 289.0,
+          "currency": "EGP",
+          "yearly": 2899.0,
+          "people": 6,
+          "source": "https://apps.apple.com/eg/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 699.0,
+          "currency": "EGP",
+          "yearly": 6999.0,
+          "people": 6,
+          "source": "https://apps.apple.com/eg/app/microsoft-365-copilot/id541164041"
+        }
+      ],
+      "verified": true
+    },
+    "QA": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic",
+          "type": "basic",
+          "monthly": 7.99,
+          "currency": "QAR",
+          "people": 1,
+          "source": "https://apps.apple.com/qa/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Personal",
+          "type": "personal",
+          "monthly": 35.99,
+          "currency": "QAR",
+          "yearly": 359.99,
+          "people": 1,
+          "source": "https://apps.apple.com/qa/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 46.99,
+          "currency": "QAR",
+          "people": 6,
+          "source": "https://apps.apple.com/qa/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 74.99,
+          "currency": "QAR",
+          "people": 6,
+          "source": "https://apps.apple.com/qa/app/microsoft-365-copilot/id541164041"
+        }
+      ],
+      "verified": true
+    },
+    "PK": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "Basic",
+          "type": "basic",
+          "monthly": 549.0,
+          "currency": "PKR",
+          "people": 1,
+          "source": "https://apps.apple.com/pk/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Personal",
+          "type": "personal",
+          "monthly": 2299.0,
+          "currency": "PKR",
+          "yearly": 22999.0,
+          "people": 1,
+          "source": "https://apps.apple.com/pk/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Family",
+          "type": "family",
+          "monthly": 2899.0,
+          "currency": "PKR",
+          "yearly": 28999.0,
+          "people": 6,
+          "source": "https://apps.apple.com/pk/app/microsoft-365-copilot/id541164041"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 5599.0,
+          "currency": "PKR",
+          "people": 6,
+          "source": "https://apps.apple.com/pk/app/microsoft-365-copilot/id541164041"
         }
       ],
       "verified": true
@@ -25325,11 +25923,199 @@
       "plans": [
         {
           "name": "Essential",
-          "type": "monthly",
+          "type": "essential",
           "monthly": 8.99,
           "currency": "USD",
           "people": 1,
           "source": "https://apps.apple.com/us/app/paramount/id530168168"
+        }
+      ],
+      "verified": true
+    }
+  },
+  "xbox game pass": {
+    "US": {
+      "checked": "2026-11-03",
+      "default": 3,
+      "plans": [
+        {
+          "name": "Essential",
+          "type": "essential",
+          "monthly": 9.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026"
+        },
+        {
+          "name": "PC Game Pass",
+          "type": "monthly",
+          "monthly": 13.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 14.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026"
+        },
+        {
+          "name": "Ultimate",
+          "type": "ultimate",
+          "monthly": 22.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://www.purexbox.com/news/2026/04/heres-a-breakdown-of-the-new-prices-for-xbox-game-pass-as-of-april-2026"
+        }
+      ],
+      "verified": true
+    },
+    "DE": {
+      "checked": "2026-11-03",
+      "default": 1,
+      "plans": [
+        {
+          "name": "PC Game Pass",
+          "type": "monthly",
+          "monthly": 12.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://news.xbox.com/de-de/2026/04/21/xbox-game-pass-ultimate-preisupdate/"
+        },
+        {
+          "name": "Ultimate",
+          "type": "ultimate",
+          "monthly": 20.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://news.xbox.com/de-de/2026/04/21/xbox-game-pass-ultimate-preisupdate/"
+        }
+      ],
+      "verified": true
+    }
+  },
+  "playstation plus": {
+    "US": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Essential",
+          "type": "essential",
+          "monthly": 10.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        },
+        {
+          "name": "Extra",
+          "type": "extra",
+          "monthly": 16.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 19.99,
+          "currency": "USD",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        }
+      ],
+      "verified": true
+    },
+    "GB": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Essential",
+          "type": "essential",
+          "monthly": 7.99,
+          "currency": "GBP",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        },
+        {
+          "name": "Extra",
+          "type": "extra",
+          "monthly": 11.99,
+          "currency": "GBP",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        },
+        {
+          "name": "Premium",
+          "type": "premium",
+          "monthly": 14.99,
+          "currency": "GBP",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        }
+      ],
+      "verified": true
+    },
+    "DE": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Essential",
+          "type": "essential",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        }
+      ],
+      "verified": true
+    },
+    "FR": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Essential",
+          "type": "essential",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        }
+      ],
+      "verified": true
+    },
+    "ES": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Essential",
+          "type": "essential",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
+        }
+      ],
+      "verified": true
+    },
+    "NL": {
+      "checked": "2026-11-03",
+      "default": 0,
+      "plans": [
+        {
+          "name": "Essential",
+          "type": "essential",
+          "monthly": 9.99,
+          "currency": "EUR",
+          "people": 1,
+          "source": "https://www.pushsquare.com/news/2026/05/ps-plus-price-increases-also-hit-extra-premium-tiers-here-are-all-the-new-prices"
         }
       ],
       "verified": true
